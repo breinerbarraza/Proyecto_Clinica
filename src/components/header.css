@@ -1,0 +1,21 @@
+.header{
+    float: left;
+    background: rgb(17, 17, 51);
+    padding-top: 65%;
+    padding-right: 14px;
+}
+.header button{
+    border: none;
+    background: rgb(17, 17, 51);
+    
+}
+.header i{
+    color: white;
+    cursor: pointer;
+    
+}
+
+.container-page {
+    display: flex;
+    flex-direction: row;
+}
