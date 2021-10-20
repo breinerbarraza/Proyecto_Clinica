@@ -1,61 +1,45 @@
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import './referir.css'
+import React from 'react'
+import { HeaderComponent } from './HeaderComponent'
+import './referir.css';
 
 export const ReferirComponent = () => {
     return (
-        <div className="formulario-container">
-            <h2>Referir paciente</h2>
-            <div className="formulario" style={{display: 'block'}}>
+        <>
+            <HeaderComponent /> 
+            <div className="formulario-container">
+                
+            <form>
+                <h3>Referir paciente</h3>
+                <label htmlFor="nombre">Nombre</label>
+                <input type="text" className="form-control w-50" placeholder="Nombre"/>
+                <label htmlFor="apellido">Apellidos</label>
+                <input type="text" className="form-control w-50" placeholder="Apellidos"/>
+                <label htmlFor="fecha">Fecha de nacimiento</label>
+                <input type="date" className="form-control w-50" placeholder="Fecha de naciemiento"/>
 
-                <TextField  
-                label="Nombre"
-                variant="outlined"
-                 />
-                <TextField  
-                className="apellidos"
-                label="Apellidos" 
-                variant="outlined" 
-                />
-                <Stack component="form" noValidate spacing={3}>
-                    <TextField
-                        label="Fecha de nacimiento"
-                        type="date"
-                        defaultValue="2017-05-24"
-                        sx={{ width: 220 }}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                </Stack>
-                <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                <Select
-                    
-                    value={''}
-                    label="Tipo de Identificación"
-                    onChange={''}
-                >
-                    <MenuItem value={10}>Cédula de Ciudadanía</MenuItem>
-                    <MenuItem value={20}>Cédula Extranjera</MenuItem>
-                    <MenuItem value={30}>Registro Civil</MenuItem>
-                    <MenuItem value={40}>Targeta de Identidad</MenuItem>
-                </Select>
-                <TextField  label="Numero de Identidad" variant="outlined" />
-                <TextField  label="Celular" variant="outlined" />
-                <TextField  label="Email" variant="outlined" />
+                <div className="contenedor">
+                    <div className="documento">
+                        <label htmlFor="tipo">Tipo de Documento</label>
+                        <select className="form-select" aria-label="Default select example">
+                            <option defaultValue>Tipo de documeto</option>
+                            <option value="1">Cedula de Ciudadania</option>
+                            <option value="2">Cedula Extrangera</option>
+                            <option value="3">Targeta de Identidad</option>
+                            <option value="4">Registro Civil</option>
+                        </select>
+                        <label htmlFor="identidad">Numero de identidad</label>
+                        <input type="text" className="form-control" placeholder="Numero de identidad"/>
+                    </div>
+                    <div className="container-ce">
+                        <label htmlFor="celular">Celular</label>
+                        <input type="text" className="form-control" placeholder="Celular"/>
+                        <label htmlFor="email">Email</label>
+                        <input type="email" className="form-control" placeholder="email"/>
+                        <button type="submit">Referir</button>
+                    </div>
+                </div>
+            </form>
             </div>
-        </div>
-
+        </>
     )
 }
-
-
-
-
-
-
-

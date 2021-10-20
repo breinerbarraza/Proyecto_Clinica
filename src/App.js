@@ -1,6 +1,4 @@
 import { HeaderComponent } from "./components/HeaderComponent";
-import { LoginComponent } from "./components/LoginComponent";
-import ComponentPrueva from "./components/ComponentPrueva";
 import  { ReferirComponent } from "./components/ReferirComponent"
 import{
   BrowserRouter as Router,
@@ -8,17 +6,21 @@ import{
   Link,
   Route
 }from 'react-router-dom'
+import { LoginComponent } from "./components/LoginComponent";
+import { LsitadoComponent } from "./components/LsitadoComponent";
 
 function App() {
   return (
     <div>
       <Router>
-        <HeaderComponent/>
-     
+
+
         <Switch>
-          <Route  path="/registro" component={ ReferirComponent } />
+          <Route  path="/referir_paciente" component={ ReferirComponent } />
+          <Route path ="/login" component={LoginComponent} />
+          <Route path="/tabla" component={LsitadoComponent}/>
         </Switch>
-      </Router>
+      </Router> 
       
     </div>
   );

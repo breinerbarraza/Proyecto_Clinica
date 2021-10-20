@@ -1,12 +1,16 @@
 .header{
-    float: left;
-    background: rgb(17, 17, 51);
-    padding-top: 65%;
-    padding-right: 14px;
+    background: rgb(33, 61, 104); 
 }
+
+.header .nav-header{
+    width: 120px;
+    float: left;
+    padding-top: 100%;
+}
+
 .header button{
     border: none;
-    background: rgb(17, 17, 51);
+    background: rgb(33, 61, 104); 
     
 }
 .header i{
@@ -14,8 +18,33 @@
     cursor: pointer;
     
 }
-
-.container-page {
+/*.container-page {
     display: flex;
     flex-direction: row;
+}*/
+.header nav{
+    background: rgb(33, 61, 104); 
+}
+
+.container-ce{
+
+    width: 50%;
+    
+}
+.documento{
+
+    width: 50%;
+    
+}
+.container-ce, .documento {
+	height: 300px;
+	margin: 0;
+	border: 0;
+	display: inline-block;
+}
+
+.img{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
 }
