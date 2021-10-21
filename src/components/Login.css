@@ -1,46 +1,63 @@
 
+body{
+    background-image: url("https://thumbs.dreamstime.com/b/modelo-de-la-pared-piedra-grande-para-el-fondo-y-dise%C3%B1o-140270041.jpg");
+}
 .login-container {
     display: flex;
     flex-direction: row;
+    border-radius: 10px;
+    box-shadow: 0px 0px 1px 1px rgb(231, 227, 227), 0px 0px 2px 2px rgb(223, 219, 219), 0px 0px 2px 2px #fff;
 }
-
 .page-container {
     display: flex;
     height: 100vh;
     align-items: center;
     justify-content: center;
     border: 1px solid black;
+    padding: 250px;
+}
+.container-logo{
+    width: 50%;  
+    background: #424ca8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background-image: url("http://1.bp.blogspot.com/-i-hGUN7IhFM/UM3xJcfEQJI/AAAAAAAACIM/Vdqf46nlQ6k/s1600/efecto+bokeh.jpg");
+}
+.logo{
+    width: 100%;
+    margin: auto;
+}
+.logo img{
+    margin-left: 60px;
+    width: 70%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgb(22, 24, 43);
+    opacity: 2;    
+}
+
+
+.formulario{
+    width: 50%; 
+    padding: 5em; 
+    background: white; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    
+}
+.formulario button{
+    width: 100%;
+    background: rgb(26, 4, 105);
+}
+.formulario img {
+    padding: 30px;
     
 }
 
-  .logo{
-      width: 50%; 
-      padding: 1em; 
-      background: white; 
-      border-radius: 10px;
-      background: rgb(26, 4, 105);
-      display: flex;
-      align-items: center;
-      justify-content: center;
- 
-  }
-  .logo img{
-      border-radius: 10px;
-      box-shadow: 2px 2px 5px rgb(80, 8, 175);
-      width: 60%;
-      
-  }
-  .formulario{
-      width: 50%; 
-      padding: 1em; 
-      background: white; 
-
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
-  .formulario button{
-      width: 100%;
-      background: rgb(26, 4, 105);
-  }

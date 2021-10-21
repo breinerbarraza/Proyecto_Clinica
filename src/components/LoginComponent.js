@@ -2,8 +2,8 @@ import React from 'react'
 //import Box from '@mui/material/Box'
 //import TextField from '@mui/material/TextField';
 import './Login.css'
-import logo2 from '.././image/logo2.PNG'
-import logo1 from '.././image/logo1.PNG'
+import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
+import liberate from '../image/Recursos-Femto/Liberate.png';
 
 
 export const LoginComponent = () => {
@@ -13,7 +13,7 @@ export const LoginComponent = () => {
             <div className="login-container">
                 <div className="formulario">
                     <form>
-                        <img src={logo1} />
+                        <img className="logo_clinica" src={logo_clinica} />
 
                         <label >Usuario</label><br />
                         <input
@@ -33,8 +33,10 @@ export const LoginComponent = () => {
                     </form>
 
                 </div>
-                <div className="logo">
-                    <img src={logo2} />
+                <div className="container-logo">
+                    <div className="logo">
+                        <img src={liberate} />
+                    </div>
                 </div>
             </div>
         </div>
