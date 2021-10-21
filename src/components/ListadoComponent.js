@@ -2,7 +2,7 @@ import React from 'react'
 import { HeaderComponent } from './HeaderComponent'
 import { MDBDataTable } from 'mdbreact';
 
-export const LsitadoComponent = () => {
+export const ListadoComponent = () => {
     
     const data = {
         columns: [

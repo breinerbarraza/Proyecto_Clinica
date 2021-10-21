@@ -1,18 +1,43 @@
-import React from 'react'
+import React, {useState } from 'react'
 //import Box from '@mui/material/Box'
 //import TextField from '@mui/material/TextField';
 import './Login.css'
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
 
+ const login = {
+        usuario:"",
+        password:""
+    }
 
 export const LoginComponent = () => {
+
+    const [datos, setDatos] = useState(login)
+
+    const handleInputChange = (e)=>{
+        setDatos({
+            ...datos,
+        [e.target.name] : e.target.value
+        })
+
+    }
+    const enviarDatos = async(e) => {
+        e.preventDefault() 
+        const obj = {
+            nombre: datos.usuario,
+            password: datos.password
+        }
+        /*const resp = await fetch(url, { method:'POST', headers: { 'Content-type':'application/json' }, body: JSON.stringify(obj) });
+        const dato = await resp.json();
+        console.log(dato);*/
+    }
+
     return (
 
         <div className="page-container">
             <div className="login-container">
                 <div className="formulario">
-                    <form>
+                    <form onClick={enviarDatos}>
                         <img className="logo_clinica" src={logo_clinica} />
 
                         <label >Usuario</label><br />
@@ -21,6 +46,7 @@ export const LoginComponent = () => {
                             name="usuario"
                             placeholder="Usuario"
                             className="form-control"
+                            onChange={handleInputChange}
                         /><br />
                         <label >Contraseña</label><br />
                         <input
@@ -28,6 +54,7 @@ export const LoginComponent = () => {
                             name="password"
                             placeholder="Contraseña"
                             className="form-control"
+                            onChange={handleInputChange}
                         /><br /><br />
                         <button type="submit" className="btn btn-primary">INICIAR SESIÓN</button>
                     </form>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './header.css';
-import { Link, NavLink } from 'react-router-dom'
-import logo3 from '../image/logo3.PNG'
+import { Link } from 'react-router-dom'
 import useradd from '../image/Recursos-Femto/user-add.svg';
 import chart_line_white from '../image/Recursos-Femto/chart-line-up-White.svg';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
