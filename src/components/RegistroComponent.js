@@ -1,5 +1,5 @@
 import React from 'react'
-import './registro.css'
+import './registro.css';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
 export const RegistroComponent = () => {

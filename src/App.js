@@ -15,11 +15,11 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route  path="/referir_paciente" component={ ReferirComponent } />
+          <Route path="/referir_paciente" component={ ReferirComponent } />
           <Route exact path ="/" component={LoginComponent} />
           <Route path="/listadoReferido" component={ListadoComponent}/>
           <Route path="/registro" component={RegistroComponent}/>
-          <Route path="/confiEmail" component={ConfirEmailComponent}/>
+          <Route path="/confirmarEmail" component={ConfirEmailComponent}/>
         </Switch>
       </Router> 
 

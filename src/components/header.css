@@ -1,23 +1,37 @@
 .header{
-    background: rgb(33, 61, 104); 
+    background: rgb(33, 61, 104);
+    float: left;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .header .nav-header{
     width: 120px;
-    float: left;
     padding-top: 100%;
 }
 
 .header button{
     border: none;
     background: rgb(33, 61, 104); 
+    width: 100%;
+    padding: 0 !important;
     
 }
 .header i{
     color: white;
     cursor: pointer;
-    
 }
+
+.header img {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.header a {
+    width: 100%;
+}
+
 /*.container-page {
     display: flex;
     flex-direction: row;
@@ -46,5 +60,6 @@
 .img{
     background-color: white;
     padding: 10px;
-    border-radius: 10px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
