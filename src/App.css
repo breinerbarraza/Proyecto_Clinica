@@ -267,7 +267,7 @@ body{
 }
 
 .table thead {
-    background-color: aqua;
+    background-color: rgb(0, 81, 255);
 }
 
 [data-test=table-foot] {
@@ -276,6 +276,9 @@ body{
 
 [data-test=datatable-select] {
     display: none;
+}
+[data-test=table]{
+    border-radius: 10px;
 }
 
 @media (max-width : 800px) and (max-height: 900px){
@@ -290,6 +293,8 @@ body{
 }
 .h3-lista{
     margin-bottom: 100%;
+    color: blue;
+    border: blue !important;
 }
 
 /*Confirma Email*/
