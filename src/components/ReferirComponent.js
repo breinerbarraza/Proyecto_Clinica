@@ -1,15 +1,15 @@
 import React from 'react'
 import { HeaderComponent } from './HeaderComponent'
-import './referir.css';
+
 
 export const ReferirComponent = () => {
     return (
         <>
             <HeaderComponent /> 
-            <div className="formulario-container">
+            <div className="referir-container">
                 
-            <form>
-                <h3>Referir paciente</h3>
+            <form className="formulario-referir">
+                <h3 className="h3-referir"> Referir paciente</h3>
                 <label htmlFor="nombre">Nombre</label>
                 <input type="text" className="form-control w-50" placeholder="Nombre"/>
                 <label htmlFor="apellido">Apellidos</label>
@@ -17,7 +17,7 @@ export const ReferirComponent = () => {
                 <label htmlFor="fecha">Fecha de nacimiento</label>
                 <input type="date" className="form-control w-50" placeholder="Fecha de naciemiento"/>
 
-                <div className="contenedor">
+                <div className="contenedor-referir">
                     <div className="documento">
                         <label htmlFor="tipo">Tipo de Documento</label>
                         <select className="form-select" aria-label="Default select example">

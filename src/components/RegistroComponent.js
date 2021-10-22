@@ -1,16 +1,15 @@
 import React from 'react'
-import './registro.css';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
 export const RegistroComponent = () => {
     return (
-        <div className="page-container">
-            <div className="login-container">
-                <div className="formulario">
+        <div className="page-registro">
+            <div className="registro-container">
+                <div className="formulario-registro">
                     <form >
-                        <img className="logo_clinica" src={logo_clinica} />
-                        <h3>¡Hola,</h3>
-                        <p><b>Alberto Hernandez</b> quieres que haga parate de tu red de referidos!                </p>
+                        <img className="logo_clinica-registro" src={logo_clinica} />
+                        <h3 className="h3-registro">¡Hola,</h3>
+                        <p className="p-registro"><b>Alberto Hernandez</b> quieres que haga parate de tu red de referidos!                </p>
                         <input
                             type="text"
                             name="nombre"
@@ -39,7 +38,7 @@ export const RegistroComponent = () => {
                             type="password"
                             name="password"
                             placeholder="Contraseña..."
-                            className="form-control"
+                            className="form-control registro"
                         />
 
                         <input
@@ -51,8 +50,8 @@ export const RegistroComponent = () => {
                         <button type="submit" className="btn btn-primary">REGISTRARSE</button>
                     </form>
                 </div>
-                <div className="container-logo">
-                    <div className="logo">
+                <div className="container-logo-registro">
+                    <div className="logo-registro">
                         <img src={liberate} />
                     </div>
                 </div>

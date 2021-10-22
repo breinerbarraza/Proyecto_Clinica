@@ -7,88 +7,93 @@ export const ListadoComponent = () => {
     const data = {
         columns: [
           {
-            label: 'Name',
-            field: 'name',
+            label: 'Paciente',
+            field: 'paciente',
             sort: 'asc',
             width: 150
           },
           {
-            label: 'Position',
-            field: 'position',
+            label: 'Documento de identidad',
+            field: 'identidad',
             sort: 'asc',
             width: 270
           },
           {
-            label: 'Office',
-            field: 'office',
+            label: 'Correo',
+            field: 'emali',
             sort: 'asc',
             width: 200
           },
           {
-            label: 'Age',
-            field: 'age',
+            label: 'Celular',
+            field: 'celular',
             sort: 'asc',
             width: 100
           },
           {
-            label: 'Start date',
-            field: 'date',
+            label: 'Estado',
+            field: 'estado',
             sort: 'asc',
             width: 150
           },
           {
-            label: 'Salary',
-            field: 'salary',
+            label: 'Comisiòn',
+            field: 'comision',
             sort: 'asc',
             width: 100
           }
         ],
         rows: [
           {
-            name: 'Tiger Nixon',
-            position: 'System Architect',
-            office: 'Edinburgh',
-            age: '61',
-            date: '2011/04/25',
-            salary: '$320'
+            paciente: 'Tiger Nixon',
+            identidad: '12398712987389',
+            emali: 'Edintiger@email.com',
+            celular: '23827221',
+            estado: 'Operado',
+            comision: '$320'
           },
           {
-            name: 'Garrett Winters',
-            position: 'Accountant',
-            office: 'Tokyo',
-            age: '63',
-            date: '2011/07/25',
-            salary: '$170'
+            paciente: 'Garrett Winters',
+            identidad: '12398712987389',
+            emali: 'garrett@email.com',
+            celular: '2134213432',
+            estado: 'En gestiòn',
+            comision: '$170'
           },
           {
-            name: 'Ashton Cox',
-            position: 'Junior Technical Author',
-            office: 'San Francisco',
-            age: '66',
-            date: '2009/01/12',
-            salary: '$86'
+            paciente: 'Ashton Cox',
+            identidad: '12398712987389',
+            emali: 'ashton@email.com',
+            celular: '234234',
+            estado: 'Operado',
+            comision: '$86'
           },
           {
-            name: 'Cedric Kelly',
-            position: 'Senior Javascript Developer',
-            office: 'Edinburgh',
-            age: '22',
-            date: '2012/03/29',
-            salary: '$433'
+            paciente: 'Cedric Kelly',
+            identidad: '12398712987389',
+            emali: 'cedric@email.com',
+            celular: '345634654',
+            estado: 'Operado',
+            comision: '$433'
           },
         ]
       };
     
       return (
-          <div>  
-        <HeaderComponent/>
-        <h3>Listado de referido</h3>
-        <MDBDataTable
-          striped
-          bordered
-          hover
-          data={data}
-        />
+        <div className="listaRefe">  
+          <HeaderComponent/>
+          
+          <div className="lista-container">
+          <h3 className="h3-Lista">listado</h3>
+          <div className="tabla-lista">
+            <MDBDataTable
+              striped
+              bordered
+              hover
+              data={data}
+            />
+          </div>
+          </div>
         </div>
 
       );

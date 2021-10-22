@@ -1,13 +1,14 @@
-
-import  { ReferirComponent } from "./components/ReferirComponent"
+import './App.css'
 import{
   BrowserRouter as Router,
   Switch,
   Route
 }from 'react-router-dom'
 import { LoginComponent } from "./components/LoginComponent";
-import { ListadoComponent } from "./components/ListadoComponent";
-import { RegistroComponent } from "./components/RegistroComponent";
+import { HeaderComponent } from "./components/HeaderComponent";
+import { RegistroComponent } from './components/RegistroComponent';
+import { ReferirComponent } from './components/ReferirComponent';
+import { ListadoComponent } from './components/ListadoComponent';
 import { ConfirEmailComponent } from "./components/ConfirEmailComponent";
 
 function App() {
@@ -15,13 +16,14 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route path="/referir_paciente" component={ ReferirComponent } />
-          <Route exact path ="/" component={LoginComponent} />
-          <Route path="/listadoReferido" component={ListadoComponent}/>
-          <Route path="/registro" component={RegistroComponent}/>
-          <Route path="/confirmarEmail" component={ConfirEmailComponent}/>
-        </Switch>
-      </Router> 
+        <Route path ="/email" component={ConfirEmailComponent}/>
+        <Route path ="/listado" component={ListadoComponent}/>
+        <Route path ="/referir" component={ReferirComponent}/>
+        <Route path ="/registro" component={RegistroComponent}/>
+        <Route path ="/header" component={HeaderComponent} />
+        <Route path ="/login" component={LoginComponent} />
+      </Switch> 
+      </Router>   
 
     </div>
   );

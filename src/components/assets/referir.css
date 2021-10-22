@@ -1,4 +1,4 @@
-.formulario-container{
+.referir-container{
     margin-top: 50px;
     margin-right: 40px;
     margin: auto;
@@ -6,21 +6,21 @@
     margin-left: 70px;
 }
 
-.formulario-container form{
+.referir-container .formulario-referir{
     box-sizing: border-box;
 }
 
-.formulario-container h3{
+.Referir-container .h3-referir{
     margin-bottom: 22px;
     color: rgb(33, 61, 104);
 }
 
-.contenedor{
+.contenedor-referir{
     width: 50%;
     margin-top: 12px;
 }
 
-.formulario-container form  .contenedor button[type="submit"]{
+.referir-container .formulario-referir  .contenedor-referir button[type="submit"]{
     border: none;
     background: rgb(33, 61, 104);
     font-size: 12px;

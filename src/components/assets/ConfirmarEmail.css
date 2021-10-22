@@ -1,15 +1,10 @@
-
-body{
-    background-image: url("../image/Recursos-Femto2/Background.png");
-}
 .login-container {
     display: flex;
     flex-direction: row;
     border-radius: 10px;
-    box-shadow: 0px 0px 1px 1px rgb(231, 227, 227), 0px 0px 2px 2px rgb(223, 219, 219), 0px 0px 2px 2px #fff;
-    height: 600px;
+    box-shadow: 0px 0px 2px 2px rgb(214, 211, 211), 0px 0px 3px 3px rgb(223, 219, 219), 0px 0px 2px 2px #fff, 0px 3px 3px 3px rgb(214, 211, 211);
 }
-.page-container {
+.email-container {
     display: flex;
     height: 100vh;
     align-items: center;
@@ -17,13 +12,7 @@ body{
     border: 1px solid black;
     padding: 250px;
 }
-
-.page-container .login-container .formulario .logo_clinica{
-    width: 200px;
-    display: block;
-}
-
-.container-logo{
+.container-logo-email{
     width: 50%;  
     background: #424ca8;
     display: flex;
@@ -33,9 +22,8 @@ body{
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
     background-image: url("../image/Recursos-Femto2/FondoLogin.png");
-    
 }
-.logo{
+.logo-email{
     width: 100%;
     margin: auto;
 }
@@ -45,41 +33,37 @@ body{
     padding: 20px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgb(22, 24, 43);
-    opacity: 5;    
+    opacity: 10 !important;    
 }
 
 
-.formulario{
-    width: 50%; 
-    padding: 2em; 
+.formulario-email{
+    width: 60%; 
+    padding: 4em; 
     background: white; 
     display: flex;
     align-items: center;
     justify-content: center;
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
+    padding-bottom: 50%;
     
 }
-.formulario button[type="submit"]{
+.formulario-email button[type="submit"]{
     width: 100%;
-    background: rgb(26, 4, 105);
-    font-size: 15px;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    padding: 5px;
-    margin-bottom: 50px;
+    background: #e1ddf0;
 }
-.formulario img {
+.formulario-email .email-form .logo_clinica-email {
     padding: 30px;
-    
-}
-input{
-    padding: 10px;
-    margin-bottom: 8px;
-    border: 1px solid rgb(26, 4, 105) !important;
-}
-p , h3{
-    color: rgb(26, 4, 105);
+    float: right;
+    margin-right: 50%;
+
 }
 
+.formulario-email .email-form {
+    width: 220%;
+}
+
+.formulario-email .email {
+    margin-top: 50px
+}
