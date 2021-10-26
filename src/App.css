@@ -138,6 +138,108 @@ body{
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
 }
+/*Registrar Referido*/
+
+.registrarefe-container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    box-shadow: 0px 0px 1px 1px rgb(231, 227, 227), 0px 0px 2px 2px rgb(223, 219, 219), 0px 0px 2px 2px #fff;
+    height: 600px;
+}
+.page-registrarefe {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    padding: 250px;
+}
+
+.page-registrarefe .registrarefe-container .formulario-registrarefe .logo_clinica-registrarefe{
+    width: 200px;
+    display: block;
+}
+.logo_clinica-registrarefe{
+    margin-right: 10%;
+}
+.container-logo-registrarefe{
+    width: 50%;  
+    background: #424ca8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background-image: url("./image/Recursos-Femto2/FondoLogin.png");
+    
+}
+.logo-registrarefe{
+    width: 100%;
+    margin: auto;
+}
+.logo-registrarefe img{
+    margin-left: 60px;
+    width: 70%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgb(22, 24, 43);
+    opacity: 5;    
+}
+
+
+.formulario-registrarefe{
+    width: 50%; 
+    padding: 2em; 
+    background: white; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    
+}
+.formulario-registrarefe button[type="submit"]{
+    width: 100%;
+    background: rgb(26, 4, 105);
+    font-size: 15px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    margin-bottom: 50px;
+}
+.formulario-registrarefe img {
+    padding: 30px;
+}
+._form-registro .form-control{
+    margin-top: 10px;
+}
+.registrregistrarefeo{
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid rgb(26, 4, 105) !important;
+}
+.p-registrarefe , .h3-registrarefe{
+    color: rgb(26, 4, 105);
+}
+
+._container-referidos{
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.container-Select-cedula{
+    margin-top: 10px;
+    width: 48%;
+}
+.container-identidad-email{
+    width: 48%;
+    margin-left: 4%;
+
+}
 /*Regitro*/
 .registro-container {
     display: flex;
@@ -236,6 +338,10 @@ body{
 .Referir-container .h3-referir{
     margin-bottom: 22px;
     color: rgb(33, 61, 104);
+}
+
+.contenedor{
+    width: 50%;
 }
 
 .contenedor-referir{
@@ -395,3 +501,92 @@ body{
 .formulario-email .email {
     margin-top: 50px
 }
+/*Componente ConfirEmail*/
+.email1-container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    box-shadow: 0px 0px 1px 1px rgb(231, 227, 227), 0px 0px 2px 2px rgb(223, 219, 219), 0px 0px 2px 2px #fff;
+    height: 600px;
+}
+.page-email1 {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    padding: 250px;
+}
+
+.page-email1 .email1-container .formulario-email1 .logo_clinica-email1{
+    width: 200px;
+    display: block;
+    
+}
+.logo_clinica-email1{
+    margin-right: 10%;
+}
+.container-logo-email1{
+    width: 50%;  
+    background: #424ca8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background-image: url("./image/Recursos-Femto2/FondoLogin.png");
+    
+}
+.logo-email1{
+    width: 100%;
+    margin: auto;
+}
+.logo-email1 img{
+    margin-left: 60px;
+    width: 70%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgb(22, 24, 43);
+    opacity: 5;    
+}
+
+
+.formulario-email1{
+    width: 50%; 
+    padding: 2em; 
+    background: white; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    
+}
+.formulario-email1 button[type="submit"]{
+    width: 100%;
+    background: rgb(26, 4, 105);
+    font-size: 15px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    margin-bottom: 50px;
+}
+.formulario-email1 img {
+    padding: 30px;
+}
+._form-email1 .form-control{
+    margin-top: 10px;
+}
+
+.p-email1{
+    color: rgb(26, 4, 105);
+}
+
+._container-email1{
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+}
+

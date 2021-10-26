@@ -10,6 +10,8 @@ import { RegistroComponent } from './components/RegistroComponent';
 import { ReferirComponent } from './components/ReferirComponent';
 import { ListadoComponent } from './components/ListadoComponent';
 import { ConfirEmailComponent } from "./components/ConfirEmailComponent";
+import { RegistrarReferidoComponent } from './components/RegistrarReferidoComponent';
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path ="/registro" component={RegistroComponent}/>
         <Route path ="/header" component={HeaderComponent} />
         <Route path ="/login" component={LoginComponent} />
+        <Route path ="/registrar_referido" component={RegistrarReferidoComponent}/>
       </Switch> 
       </Router>   
 
