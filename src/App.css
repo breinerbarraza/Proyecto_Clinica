@@ -266,6 +266,34 @@ body{
     
 }
 
+.tabla-pacientes table{
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-collapse: collapse;
+}
+
+.tabla-pacientes td{
+    background-color: #fff !important;
+    text-align: center;
+    color: #1c3678 !important;
+    font-weight: bold;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #1c3678;
+}
+
+.tabla-pacientes tr {
+    height: 30px !important;
+}
+
+.tabla-pacientes th {
+    background-color: #5179bd;
+    color: #fff;
+    text-align: center;
+    border: 0;
+    border-bottom: 0;
+}
+
 .table thead {
     background-color: rgb(0, 81, 255);
 }

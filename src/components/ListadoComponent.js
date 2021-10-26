@@ -88,7 +88,9 @@ export const ListadoComponent = () => {
           <div className="tabla-lista">
             <MDBDataTable
               striped
+              className="tabla-pacientes"
               bordered
+              entrieslabel={[]}
               hover
               data={data}
             />
