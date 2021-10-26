@@ -55,7 +55,7 @@ export const HeaderComponent = ({users, dashboard}) => {
                     )}
                     { !imagen1 && (
                         <button onClick={() => handleButtonClick1()}><Link to="/listado"><img src={chart_line_white}/></Link></button>
-                    ) }
+                    )}
                     { imagen1 && (
                         <ButtonListar />
                     )}
