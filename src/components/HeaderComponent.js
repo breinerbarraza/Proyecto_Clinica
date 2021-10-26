@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
+import ClinicaBlanco from '../image/Recursos-Femto2/ClinicaBlanco.svg';
 import useradd from '../image/Recursos-Femto/user-add.svg';
 import chart_line_white from '../image/Recursos-Femto/chart-line-up-White.svg';
 import user_add_blue from '../image/Recursos-Femto/user-add-Blue.svg';
@@ -45,7 +45,7 @@ export const HeaderComponent = ({users, dashboard}) => {
         <div className="header">
             <nav className="nav-header">
                     <a className="navbar-brand" href="">
-                    <img src={logo_clinica} width="100" height="40" style={{'color': '#fff'}}/>
+                    <img src={ClinicaBlanco} width="100" height="40" style={{'color': '#fff'}}/>
                     </a>
                     { !imagen && (
                         <button onClick={() => handleButtonClick()}><Link to="/referir"><img src={useradd}/></Link></button>

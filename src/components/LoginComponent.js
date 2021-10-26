@@ -39,7 +39,7 @@ export const LoginComponent = () => {
                 
                     <form onClick={enviarDatos}>
                        <img className="logo_clinica" src={logo_clinica} /> 
-                        <label >Usuario</label><br />
+                       
                         <input
                             type="text"
                             name="usuario"
@@ -47,7 +47,7 @@ export const LoginComponent = () => {
                             className="form-control"
                             onChange={handleInputChange}
                         /><br />
-                        <label >Contraseña</label><br />
+              
                         <input
                             type="password"
                             name="password"

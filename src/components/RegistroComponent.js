@@ -38,7 +38,7 @@ export const RegistroComponent = () => {
                             type="password"
                             name="password"
                             placeholder="Contraseña..."
-                            className="form-control registro"
+                            className="form-control"
                         />
 
                         <input

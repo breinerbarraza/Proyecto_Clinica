@@ -9,18 +9,12 @@ export const ConfirEmailComponent = () => {
                     <form className="_form-email1">
                         <img className="logo_clinica-email1" src={logo_clinica} />
                         <p className="p-email1">Confirma tu E-amil</p>
-                        
-                                   
-                                   
-                                    <input
-                                        type="email1"
-                                        name="email1"
-                                        placeholder="Email..."
-                                        className="form-control"
-                                    /><br />
-                       
-                     
-                        
+                            <input
+                                type="email1"
+                                name="email1"
+                                placeholder="Email..."
+                                className="form-control"
+                            /><br />
                         <button type="submit" className="btn btn-primary">REGISTRARSE</button>
                     </form>
                 </div>
