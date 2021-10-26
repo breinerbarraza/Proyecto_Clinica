@@ -5,7 +5,7 @@ import { HeaderComponent } from './HeaderComponent'
 export const ReferirComponent = () => {
     return (
         <>
-            <HeaderComponent /> 
+            <HeaderComponent users={true} dashboard={false}/> 
             <div className="referir-container">
                 
             <form className="formulario-referir">

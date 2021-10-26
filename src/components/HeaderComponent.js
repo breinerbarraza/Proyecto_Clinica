@@ -25,12 +25,12 @@ function ButtonListar(){
     )
 }
 
-export const HeaderComponent = () => {
+export const HeaderComponent = ({users, dashboard}) => {
 
-    let estado = false;
+    let estado = users;
     const [imagen, setImagen] = useState(estado);
 
-    let estado1 = false;
+    let estado1 = dashboard;
     const [imagen1, setImagen1] = useState(estado1);
 
     const handleButtonClick = (e)=>{

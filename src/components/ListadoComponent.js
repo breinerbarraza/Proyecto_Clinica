@@ -81,7 +81,7 @@ export const ListadoComponent = () => {
     
       return (
         <div className="listaRefe">  
-          <HeaderComponent/>
+          <HeaderComponent users={false} dashboard={true}/>
           
           <div className="lista-container">
           <h3 className="h3-Lista">listado</h3>
