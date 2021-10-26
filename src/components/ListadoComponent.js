@@ -1,6 +1,7 @@
 import React from 'react'
 import { HeaderComponent } from './HeaderComponent'
 import { MDBDataTable } from 'mdbreact';
+import { Link } from 'react-router-dom'
 
 export const ListadoComponent = () => {
     
@@ -20,7 +21,7 @@ export const ListadoComponent = () => {
           },
           {
             label: 'Correo',
-            field: 'emali',
+            field: 'email',
             sort: 'asc',
             width: 200
           },
@@ -45,9 +46,9 @@ export const ListadoComponent = () => {
         ],
         rows: [
           {
-            paciente: 'Tiger Nixon',
+            paciente: <Link to="/pre_quirurgico" style={{textDecoration:"none"}}>{}Breiner Barraza</Link>,
             identidad: '12398712987389',
-            emali: 'Edintiger@email.com',
+            email: 'Edintiger@email.com',
             celular: '23827221',
             estado: 'Operado',
             comision: '$320'
@@ -55,7 +56,7 @@ export const ListadoComponent = () => {
           {
             paciente: 'Garrett Winters',
             identidad: '12398712987389',
-            emali: 'garrett@email.com',
+            email: 'garrett@email.com',
             celular: '2134213432',
             estado: 'En gestiòn',
             comision: '$170'
@@ -63,7 +64,7 @@ export const ListadoComponent = () => {
           {
             paciente: 'Ashton Cox',
             identidad: '12398712987389',
-            emali: 'ashton@email.com',
+            email: 'ashton@email.com',
             celular: '234234',
             estado: 'Operado',
             comision: '$86'
@@ -71,7 +72,7 @@ export const ListadoComponent = () => {
           {
             paciente: 'Cedric Kelly',
             identidad: '12398712987389',
-            emali: 'cedric@email.com',
+            email: 'cedric@email.com',
             celular: '345634654',
             estado: 'Operado',
             comision: '$433'
