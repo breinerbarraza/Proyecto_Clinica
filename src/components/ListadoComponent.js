@@ -1,27 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { HeaderComponent } from './HeaderComponent'
 import { MDBDataTable } from 'mdbreact';
 import { Link } from 'react-router-dom'
-
+import API from '../Utils/API';
 export const ListadoComponent = () => {
-    
+
+  const [data_listado, setData_listado] = useState([])
+
+  useEffect(() => {
+    API.get('api/referidos/')
+    .then( resp => {
+      const item = resp.data
+      console.log(item)
+      setData_listado(item)
+    } )
+  },[])
     const data = {
         columns: [
           {
+
             label: 'Paciente',
-            field: 'paciente',
+            field: 'get_nombreCompleto',
+            //field: <Link to="/pre_quirurgico" style={{textDecoration:"none"}}>omar</Link>,
             sort: 'asc',
             width: 150
           },
           {
             label: 'Documento de identidad',
-            field: 'identidad',
+            field: 'numeroIdentificacion',
             sort: 'asc',
             width: 270
           },
           {
             label: 'Correo',
-            field: 'email',
+            field: 'correo_electronico',
             sort: 'asc',
             width: 200
           },
@@ -33,7 +45,7 @@ export const ListadoComponent = () => {
           },
           {
             label: 'Estado',
-            field: 'estado',
+            field: 'estadoReferido',
             sort: 'asc',
             width: 150
           },
@@ -44,40 +56,8 @@ export const ListadoComponent = () => {
             width: 100
           }
         ],
-        rows: [
-          {
-            paciente: <Link to="/pre_quirurgico" style={{textDecoration:"none"}}>{}Breiner Barraza</Link>,
-            identidad: '12398712987389',
-            email: 'Edintiger@email.com',
-            celular: '23827221',
-            estado: 'Operado',
-            comision: '$320'
-          },
-          {
-            paciente: 'Garrett Winters',
-            identidad: '12398712987389',
-            email: 'garrett@email.com',
-            celular: '2134213432',
-            estado: 'En gestiòn',
-            comision: '$170'
-          },
-          {
-            paciente: 'Ashton Cox',
-            identidad: '12398712987389',
-            email: 'ashton@email.com',
-            celular: '234234',
-            estado: 'Operado',
-            comision: '$86'
-          },
-          {
-            paciente: 'Cedric Kelly',
-            identidad: '12398712987389',
-            email: 'cedric@email.com',
-            celular: '345634654',
-            estado: 'Operado',
-            comision: '$433'
-          },
-        ]
+        rows: data_listado
+          
       };
     
       return (
