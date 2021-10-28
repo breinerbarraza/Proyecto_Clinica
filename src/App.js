@@ -2,7 +2,9 @@ import './App.css'
 import{
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
+
 }from 'react-router-dom'
 import { LoginComponent } from "./components/LoginComponent";
 import { HeaderComponent } from "./components/HeaderComponent";
@@ -13,6 +15,11 @@ import { ConfirEmailComponent } from "./components/ConfirEmailComponent";
 import { RegistrarReferidoComponent } from './components/RegistrarReferidoComponent';
 import { DashboarComponent } from './components/DashboarComponent';
 import { PreQuirugicoComponent } from './components/PreQuirugicoComponent';
+import { CrearUsuarioComponent } from './components/CrearUsuarioComponent';
+import { ListadoReferidoComponent } from './components/ListadoReferidoComponent';
+import { ProgramadoComponent } from './components/ProgramadoComponent';
+import { DescartadoComponent } from './components/DescartadoComponent';
+import { GestionComponent } from './components/GestionComponent';
 
 
 function App() {
@@ -20,15 +27,21 @@ function App() {
     <div>
       <Router>
         <Switch>
-        <Route path ="/email" component={ConfirEmailComponent}/>
-        <Route path ="/listado" component={ListadoComponent}/>
-        <Route path ="/referir" component={ReferirComponent}/>
-        <Route path ="/registro" component={RegistroComponent}/>
-        <Route path ="/header" component={HeaderComponent} />
-        <Route path ="/login" component={LoginComponent} />
-        <Route path ="/registrar_referido" component={RegistrarReferidoComponent}/>
-        <Route path ="/dashboar" component={DashboarComponent}/>
-        <Route path ="/pre_quirurgico" component={PreQuirugicoComponent}/>
+        <Route exact  path ="/email" component={ConfirEmailComponent}/>
+        <Route exact  path ="/listado" component={ListadoComponent}/>
+        <Route exact  path ="/listado/pre_quirurgico/:id" component={PreQuirugicoComponent}/>
+        <Route exact  path ="/referir" component={ReferirComponent}/>
+        <Route exact  path ="/registro" component={RegistroComponent}/>
+        <Route exact  path ="/header" component={HeaderComponent} />
+        <Route exact  path ="/login" component={LoginComponent} />
+        <Route exact  path ="/registrar_referido" component={RegistrarReferidoComponent}/>
+        <Route exact  path ="/dashboar" component={DashboarComponent}/>
+        <Route exact  path ="/crear_usuario" component={CrearUsuarioComponent}/>
+        <Route exact  path ="/listado_referido" component={ListadoReferidoComponent}/>
+        <Route exact  path ="/listado/programado/:id" component={ProgramadoComponent}/>
+        <Route exact  path ="/Listado/descartado/:id" component={DescartadoComponent}/>
+        <Route exact  path="/lista/gestion/:id" component={GestionComponent}/> 
+        <Redirect to="/listado"/>
       </Switch> 
       </Router>   
 

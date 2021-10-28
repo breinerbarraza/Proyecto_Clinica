@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { HeaderComponent } from './HeaderComponent'
 import { MDBDataTable } from 'mdbreact';
 import API from '../Utils/API';
+import { Link } from 'react-router-dom';
 
-
-export const ListadoComponent = () => {
+export const ListadoReferidoComponent = () => {
 
 
   const [data_listado, setData_listado] = useState([])
@@ -19,14 +19,15 @@ export const ListadoComponent = () => {
   },[])
   console.log(data_listado)
     const data = {
+      
         columns: [
           {
 
             label: 'Paciente',
-            field: 'get_nombreCompleto',
-            //field: <Link to="/pre_quirurgico" style={{textDecoration:"none"}}></Link>,
+            field:"get_nombreCompleto",
             sort: 'asc',
-            width: 150
+            width: 150,
+            render: x => `<a href="/listado_referido"><i class="icon-fontello-edit"></i></a>`,
           },
           {
             label: 'Documento de identidad',
@@ -52,12 +53,6 @@ export const ListadoComponent = () => {
             sort: 'asc',
             width: 150
           },
-          {
-            label: 'Comisiòn',
-            field:'comision',
-            sort: 'asc',
-            width: 100
-          }
         ],
         rows: data_listado
           
