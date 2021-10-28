@@ -24,10 +24,10 @@ export const PreQuirugicoComponent = () => {
                 </div>
                 <div className="infomacion">
                     <div className ="nacimiento">
-                    <label className="label-info"><b>Fecha de nacimiento: </b>{data_preQuirugico.fechaNacimiento}</label>
+                    <div className ="nacimiento">
+                    <p><b>Fecha de nacimiento: </b>{data_preQuirugico.fechaNacimiento} <b className="edad">Edad: </b>{data_preQuirugico.edad}</p>
+    
                     </div>
-                    <div className="edad">
-                    <label className="label-info-edad"><b>Edad: </b>{data_preQuirugico.edad}</label><b/>
                     </div>
                     <label className="label-info"><b>C.C: </b>{data_preQuirugico.numeroIdentificacion}</label><br/>
                     <label className="label-info"><b>Correo: </b>{data_preQuirugico.correo_electronico}</label><br/>

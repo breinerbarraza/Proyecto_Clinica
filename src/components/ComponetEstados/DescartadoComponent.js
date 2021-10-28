@@ -12,7 +12,7 @@ export const DescartadoComponent = () => {
     useEffect(() => {
         API.get("api/referidos/"+id)
         .then(item =>  setData_descartado(item.data) )
-    })
+    }, [id])
 
 
     return (

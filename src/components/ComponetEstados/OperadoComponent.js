@@ -4,14 +4,14 @@ import { Link, useParams } from 'react-router-dom'
 import API from '../../Utils/API'
 
 export const OperadoComponent = () => {
-    const [data_gestion, setData_gestion] = useState({})
+    const [data_operado, setData_operado] = useState({})
   
 
     const {id} = useParams();
     console.log(id)
     useEffect(() => {
         API.get("api/referidos/"+id)
-        .then(item =>  setData_gestion(item.data) )
+        .then(item =>  setData_operado(item.data) )
     })
 
 
@@ -19,18 +19,18 @@ export const OperadoComponent = () => {
         <>
             <div className="contendor-prequi">
                 <div className="link-p">
-                    <Link to="/listado" style={{textDecoration:"none"}}><h3 className="h3-prequi"><i className="fas fa-angle-left" style={{marginRight:"10px"}}></i>{data_gestion.get_nombreCompleto}</h3></Link>
-                    <p className="estado-p">{data_gestion.estadoReferido}</p>
+                    <Link to="/listado" style={{textDecoration:"none"}}><h3 className="h3-prequi"><i className="fas fa-angle-left" style={{marginRight:"10px"}}></i>{data_operado.get_nombreCompleto}</h3></Link>
+                    <p className="estado-p">{data_operado.estadoReferido}</p>
                 </div>
                 <div className="infomacion">
                     <div className ="nacimiento">
-                    <label className="label-info"><b>Fecha de nacimiento: </b>{data_gestion.fechaNacimiento}</label>
+                    <div className ="nacimiento">
+                    <p><b>Fecha de nacimiento: </b>{data_operado.fechaNacimiento} <b className="edad">Edad: </b>{data_operado.edad}</p>
+    
                     </div>
-                    <div className="edad">
-                    <label className="label-info-edad"><b>Edad: </b>{data_gestion.edad}</label><b/>
                     </div>
-                    <label className="label-info"><b>C.C: </b>{data_gestion.numeroIdentificacion}</label><br/>
-                    <label className="label-info"><b>Correo: </b>{data_gestion.correo_electronico}</label><br/>
+                    <label className="label-info"><b>C.C: </b>{data_operado.numeroIdentificacion}</label><br/>
+                    <label className="label-info"><b>Correo: </b>{data_operado.correo_electronico}</label><br/>
                     <label className="label-info"><b>Referio por: </b></label><br/>
                 </div>
                 <h5 className="prequi-p"><b>· Comentarios</b></h5>

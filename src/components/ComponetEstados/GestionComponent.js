@@ -24,10 +24,7 @@ export const GestionComponent = () => {
                 </div>
                 <div className="infomacion">
                     <div className ="nacimiento">
-                    <label className="label-info"><b>Fecha de nacimiento: </b>{data_gestion.fechaNacimiento}</label>
-                    </div>
-                    <div className="edad">
-                    <label className="label-info-edad"><b>Edad: </b>{data_gestion.edad}</label><b/>
+                    <p><b>Fecha de nacimiento: </b>{data_gestion.fechaNacimiento} <b className="edad">Edad: </b>{data_gestion.edad}</p>
                     </div>
                     <label className="label-info"><b>C.C: </b>{data_gestion.numeroIdentificacion}</label><br/>
                     <label className="label-info"><b>Correo: </b>{data_gestion.correo_electronico}</label><br/>

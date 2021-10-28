@@ -655,6 +655,7 @@ button[type="submit"]{
 }
 .form-f-h{
     display: flex;
+    width: 150%;
 }
 .form-prequi{
     width: 100%;
@@ -684,6 +685,13 @@ button[type="submit"]{
     height: 7%;
     width: 15%;
     text-align: center;
+}
+.prequi-button{
+    margin-left: 150%;
+}
+/*Programado*/
+.form-medico{
+    width: 150%;
 }
 /*gestion*/
 .label-info-gestion{

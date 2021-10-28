@@ -11,7 +11,7 @@ export const ProgramadoComponent = () => {
     useEffect(() => {
         API.get("api/referidos/"+id)
         .then(item =>  setData_programado(item.data) )
-    })
+    }, [id])
 
 
     return (
@@ -23,10 +23,8 @@ export const ProgramadoComponent = () => {
                 </div>
                 <div className="infomacion">
                     <div className ="nacimiento">
-                    <label className="label-info"><b>Fecha de nacimiento: </b>{data_prorgramado.fechaNacimiento}</label>
-                    </div>
-                    <div className="edad">
-                    <label className="label-info-edad"><b>Edad: </b>{data_prorgramado.edad}</label><b/>
+                    <p><b>Fecha de nacimiento: </b>{data_prorgramado.fechaNacimiento} <b className="edad">Edad: </b>{data_prorgramado.edad}</p>
+    
                     </div>
                     <label className="label-info"><b>C.C: </b>{data_prorgramado.numeroIdentificacion}</label><br/>
                     <label className="label-info"><b>Correo: </b>{data_prorgramado.correo_electronico}</label><br/>
