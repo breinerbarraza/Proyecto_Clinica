@@ -6,6 +6,7 @@ import{
   Redirect
 
 }from 'react-router-dom'
+import ComponentPrueva from "./components/ComponentPrueva";
 import { LoginComponent } from "./components/LoginComponent";
 import { HeaderComponent } from "./components/HeaderComponent";
 import { RegistroComponent } from './components/RegistroComponent';
@@ -28,6 +29,7 @@ function App() {
     <div>
       <Router>
           <Switch>
+            <Route exact  path="/prueva" component={ComponentPrueva}/>
             <Route exact  path ="/email" component={ConfirEmailComponent}/>
             <Route exact  path ="/listado" component={ListadoComponent}/>
             <Route exact  path ="/listado/pre_quirurgico/:id" component={PreQuirugicoComponent}/>

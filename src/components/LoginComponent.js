@@ -26,9 +26,7 @@ export const LoginComponent = () => {
             nombre: datos.usuario,
             password: datos.password
         }
-        /*const resp = await fetch(url, { method:'POST', headers: { 'Content-type':'application/json' }, body: JSON.stringify(obj) });
-        const dato = await resp.json();
-        console.log(dato);*/
+       
     }
 
     return (

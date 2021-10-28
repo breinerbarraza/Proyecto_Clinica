@@ -342,6 +342,9 @@ body{
     box-sizing: border-box;
 }
 
+.textfile{
+    width: 50%;
+}
 .Referir-container .h3-referir{
     margin-bottom: 22px;
     color: rgb(33, 61, 104);
