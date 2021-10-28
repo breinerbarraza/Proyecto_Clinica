@@ -40,6 +40,10 @@ body{
     opacity: 10 !important;    
 }
 
+.css-1kty9di-MuiFormLabel-root-MuiInputLabel-root {
+    background-color: #fff !important;
+    padding: 0 5px !important;
+}
 
 .formulario{
     width: 50%; 

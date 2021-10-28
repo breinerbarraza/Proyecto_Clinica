@@ -1,6 +1,6 @@
 import React, {useState } from 'react'
 //import Box from '@mui/material/Box'
-//import TextField from '@mui/material/TextField';
+import TextField from '@mui/material/TextField';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
 
@@ -40,18 +40,21 @@ export const LoginComponent = () => {
                     <form onClick={enviarDatos}>
                        <img className="logo_clinica" src={logo_clinica} /> 
                        
-                        <input
+                        <TextField
+                            key={true}
                             type="text"
                             name="usuario"
-                            placeholder="Usuario"
+                            label="Usuario"
                             className="form-control"
+                            style={{marginBottom: "30px"}}
                             onChange={handleInputChange}
                         /><br />
               
-                        <input
+                        <TextField
+                            key={true}
                             type="password"
                             name="password"
-                            placeholder="Contraseña"
+                            label="Contraseña"
                             className="form-control"
                             onChange={handleInputChange}
                         /><br /><br />
