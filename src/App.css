@@ -691,3 +691,13 @@ button[type="submit"]{
     margin-bottom: 10px;
 }
 
+/*Pendiente*/
+.form-fecha-pendiente{
+    width: 55%
+}
+.pendiente-button{
+    margin-right: 45%;
+}
+.fecha{
+    margin-bottom: 10px;
+}

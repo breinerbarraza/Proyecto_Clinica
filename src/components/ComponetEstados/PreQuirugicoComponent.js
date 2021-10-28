@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import API from '../Utils/API'
+import API from '../../Utils/API'
 
 export const PreQuirugicoComponent = () => {
     const [data_preQuirugico, setData_preQuirugico] = useState({})
