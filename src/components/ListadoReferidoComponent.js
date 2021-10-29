@@ -27,7 +27,6 @@ export const ListadoReferidoComponent = () => {
             field:"get_nombreCompleto",
             sort: 'asc',
             width: 150,
-            render: x => `<a href="/listado_referido"><i class="icon-fontello-edit"></i></a>`,
           },
           {
             label: 'Documento de identidad',

@@ -1,7 +1,7 @@
 /*Login de la pagina*/
 body{
     background-image: url("./image/Recursos-Femto2/Background.png");
-    
+    background-size: 99% 100%;
 }
 .login-container {
     display: flex;

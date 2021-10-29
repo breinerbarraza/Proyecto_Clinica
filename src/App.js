@@ -29,10 +29,109 @@ function App() {
     <div>
       <Router>
           <Switch>
+          {/*
+            <Route exact path="/">
+              {localStorage.getItem('token') !== null ? (
+                <HeaderComponent />
+              ) : (
+                <LoginComponent />
+              )}
+            </Route>
+              <Route exact path="/listado">
+                {localStorage.getItem('token') !== null ? (
+                  <ListadoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/email">
+                {localStorage.getItem('token') !== null ? (
+                  <ConfirEmailComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/listado/pre_quirurgico/:id">
+                {localStorage.getItem('token') !== null ? (
+                  <PreQuirugicoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+
+              <Route exact path="/referir">
+                {localStorage.getItem('token') !== null ? (
+                  <ReferirComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/registrar_referido">
+                {localStorage.getItem('token') !== null ? (
+                  <RegistrarReferidoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/dashboar">
+                {localStorage.getItem('token') !== null ? (
+                  <DashboarComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/crear_usuario">
+                {localStorage.getItem('token') !== null ? (
+                  <CrearUsuarioComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/listado_referido">
+                {localStorage.getItem('token') !== null ? (
+                  <ListadoReferidoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/listado/programado/:id">
+                {localStorage.getItem('token') !== null ? (
+                  <ProgramadoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/Listado/descartado/:id">
+                {localStorage.getItem('token') !== null ? (
+                  <DescartadoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/listlista/gestion/:idado">
+                {localStorage.getItem('token') !== null ? (
+                  <GestionComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="//lista/pendiente/:id">
+                {localStorage.getItem('token') !== null ? (
+                  <PendienteComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="//lista/operado/:id">
+                {localStorage.getItem('token') !== null ? (
+                  <OperadoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>*/}
             <Route exact  path="/prueva" component={ComponentPrueva}/>
             <Route exact  path ="/email" component={ConfirEmailComponent}/>
             <Route exact  path ="/listado" component={ListadoComponent}/>
-            <Route exact  path ="/listado/pre_quirurgico/:id" component={PreQuirugicoComponent}/>
             <Route exact  path ="/referir" component={ReferirComponent}/>
             <Route exact  path ="/registro" component={RegistroComponent}/>
             <Route exact  path ="/header" component={HeaderComponent} />
@@ -41,12 +140,12 @@ function App() {
             <Route exact  path ="/dashboar" component={DashboarComponent}/>
             <Route exact  path ="/crear_usuario" component={CrearUsuarioComponent}/>
             <Route exact  path ="/listado_referido" component={ListadoReferidoComponent}/>
+            <Route exact  path ="/listado/pre_quirurgico/:id" component={PreQuirugicoComponent}/>
             <Route exact  path ="/listado/programado/:id" component={ProgramadoComponent}/>
             <Route exact  path ="/Listado/descartado/:id" component={DescartadoComponent}/>
             <Route exact  path ="/lista/gestion/:id" component={GestionComponent}/> 
             <Route exact  path ="/lista/pendiente/:id" component={PendienteComponent}/>
             <Route exact  path ="/lista/operado/:id" component={OperadoComponent}/>
-            <Redirect to="/listado"/>
         </Switch> 
       </Router>   
 
