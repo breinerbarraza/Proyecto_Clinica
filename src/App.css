@@ -1,6 +1,7 @@
 /*Login de la pagina*/
 body{
     background-image: url("./image/Recursos-Femto2/Background.png");
+    
 }
 .login-container {
     display: flex;
@@ -41,7 +42,7 @@ body{
 }
 
 .css-1kty9di-MuiFormLabel-root-MuiInputLabel-root {
-    background-color: #fff !important;
+    background-color:#fff !important;
     padding: 0 5px !important;
 }
 
@@ -204,6 +205,26 @@ body{
     border-bottom-left-radius: 12px;
     
 }
+.RegistrarReferido {
+    padding: 2px !important;
+    
+}
+
+.form-control input{
+    height: 10px !important;
+    margin-bottom: 0px !important;
+
+}
+
+.form-control {
+    height: 10px !important;
+    margin-top: 15px !important;
+}
+
+.MuiSelect-select {
+    height: 10px !important;
+}
+
 .formulario-registrarefe button[type="submit"]{
     width: 100%;
     background: rgb(26, 4, 105);
@@ -232,7 +253,7 @@ body{
 ._container-referidos{
     display: flex;
     width: 100%;
-    margin-top: 5px;
+   
 }
 
 .container-Select-cedula{
@@ -242,7 +263,10 @@ body{
 .container-identidad-email{
     width: 48%;
     margin-left: 4%;
-
+    margin-top: 10px;
+}
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
+    min-height: 0% !important;
 }
 /*Regitro*/
 .registro-container {
@@ -343,7 +367,8 @@ body{
 }
 
 .textfile{
-    width: 50%;
+    width: 60%;
+ 
 }
 .Referir-container .h3-referir{
     margin-bottom: 22px;
@@ -359,7 +384,7 @@ body{
 }
 
 .contenedor-referir{
-    width: 50%;
+    width: 60%;
     margin-top: 12px;
 }
 
@@ -373,7 +398,7 @@ body{
     border-radius: 5px;
     padding: 7px;
     float: right;
-    margin-top: 30px;
+    margin-top: 5px;
 }
 
 .documento{
@@ -712,6 +737,7 @@ button[type="submit"]{
 }
 .pendiente-button{
     margin-right: 45%;
+    margin-top: 65px;
 }
 .fecha{
     margin-bottom: 10px;
