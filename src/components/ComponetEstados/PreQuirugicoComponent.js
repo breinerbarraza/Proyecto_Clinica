@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import API from '../../Utils/API'
+import { FormularioEstado } from './FormularioEstado/FormularioEstado';
 
 export const PreQuirugicoComponent = () => {
     const [data_preQuirugico, setData_preQuirugico] = useState({})
@@ -26,7 +27,6 @@ export const PreQuirugicoComponent = () => {
                     <div className ="nacimiento">
                     <div className ="nacimiento">
                     <p><b>Fecha de nacimiento: </b>{data_preQuirugico.fechaNacimiento} <b className="edad">Edad: </b>{data_preQuirugico.edad}</p>
-    
                     </div>
                     </div>
                     <label className="label-info"><b>C.C: </b>{data_preQuirugico.numeroIdentificacion}</label><br/>
@@ -36,16 +36,7 @@ export const PreQuirugicoComponent = () => {
                 <p className="prequi-p"><b>· Definir fecha de pre-quirùgico</b></p>
                 <div className="form-prequi">
                     <form>
-                        <div className="form-f-h">
-                            <div className="form-fecha">
-                                <label htmlFor="fecha">Fecha</label>
-                                <input type="date" className="form-control fecha"/>
-                            </div>
-                            <div className="form-hora">
-                                <label htmlFor="hora">Hora</label>
-                                <input type="text" className="form-control hora" placeholder="Digite la hora..."/>
-                            </div>
-                        </div>
+                        <FormularioEstado/>
                         <div className="prequi-button">
                             <button type="submit" className="prequi-b">ASIGNAR</button>
                         </div>

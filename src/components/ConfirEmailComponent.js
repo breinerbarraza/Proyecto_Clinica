@@ -1,4 +1,5 @@
 import React from 'react';
+import TextField from '@mui/material/TextField';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
 export const ConfirEmailComponent = () => {
@@ -9,12 +10,16 @@ export const ConfirEmailComponent = () => {
                     <form className="_form-email1">
                         <img className="logo_clinica-email1" src={logo_clinica} />
                         <p className="p-email1">Confirma tu E-amil</p>
-                            <input
-                                type="email1"
-                                name="email1"
-                                placeholder="Email..."
-                                className="form-control"
-                            /><br />
+                        <TextField
+                            key={true}
+                            type="email"
+                            name="email"
+                            placeholder="Escribe..."
+                            label="Email"
+                            className="form-control"
+                            style={{marginBottom: "30px"}}
+                            onChange={""}
+                        />
                         <button type="submit" className="btn btn-primary">REGISTRARSE</button>
                     </form>
                 </div>

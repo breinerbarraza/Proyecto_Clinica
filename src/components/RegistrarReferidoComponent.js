@@ -1,65 +1,104 @@
 import React from 'react'
+import TextField from '@mui/material/TextField';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
 export const RegistrarReferidoComponent = () => {
     return (
+
         <div className="page-registrarefe">
             <div className="registrarefe-container">
                 <div className="formulario-registrarefe">
                     <form className="_form-registro">
                         <img className="logo_clinica-registrarefe" src={logo_clinica} />
                         <h3 className="h3-registrarefe">¡Hola,</h3>
-                        <p className="p-registrarefe">a contianuaciòn ingresaràs tus datos para ser un candidato mas y liberarte de tus gafas! </p>
-                        <input
+                        <p className="p-registrarefe">a continuación ingresarás tus datos para ser un candidato más y liberarte de tus gafas! </p>
+                        <TextField
+                            key={true}
                             type="text"
                             name="nombre"
-                            placeholder="Nombre..."
+                            placeholder="Escribe..."
+                            label="Nombre"
                             className="form-control"
+                            style={{ marginBottom: "30px" }}
+                            onChange={""}
                         />
-                         <input
+                        <TextField
+                            key={true}
                             type="text"
-                            name="apellidos"
-                            placeholder="Apellidos.."
-                            className="form-control"
+                            name="apellido"
+                            placeholder="Escribe..."
+                            label="Apellidos"
+                            className="form-control RegistrarReferido"
+                            style={{ marginBottom: "30px" }}
+                            onChange={""}
                         />
-                         <input
-                            type="date"
-                            name="date"
-                            className="form-control"
+                        <TextField
+                            key={true}
+                            type="text"
+                            name="fecha"
+                            placeholder="Escribe..."
+                            label="Fecha de nacimiento"
+                            className="form-control RegistrarReferido"
+                            style={{ marginBottom: "30px" }}
+                            onChange={""}
                         />
                         <div className="_container-referidos">
                             <div className="container-Select-cedula">
-                                    <select className="form-select" aria-label="Default select example">
-                                        <option defaultValue>Tipo de documeto</option>
-                                        <option value="1">Cedula de Ciudadania</option>
-                                        <option value="2">Cedula Extrangera</option>
-                                        <option value="3">Targeta de Identidad</option>
-                                        <option value="4">Registro Civil</option>
-                                    </select>
-                                    
-                                    <input
-                                        type="celular"
-                                        name="text"
-                                        placeholder="Nuemero de celular..."
-                                        className="form-control"
-                                    />
+                                <div className="select">
+                                <TextField
+                                    key={true}
+                                    select
+                                    name="identidad"
+                                    placeholder="Escribe..."
+                                    label="Tipo de Documento"
+                                    className="form-control "
+                                    style={{ marginBottom: "30px"}}
+                                    onChange={""}
+                                >
+                                    <option value="">Choose one option</option>
+                                    <option value="3">03</option>
+                                    <option value="6">06</option>
+                                    <option value="9">09</option>
+                                    <option value="12">12</option>
+                                    <option value="16">16</option>
+                                    <option value="18">18</option>
+                                </TextField></div>
+                                <TextField
+                                    key={true}
+                                    type="text"
+                                    name="celular"
+                                    placeholder="Escribe..."
+                                    label="Celular"
+                                    className="form-control RegistrarReferido"
+                                    style={{ marginBottom: "30px" }}
+                                    onChange={""}
+                                />
+                                
                             </div>
-                                    <div className="container-identidad-email">
-                                    <input
-                                        type="identidad"
-                                        name="text"
-                                        placeholder="Numero de identidad..."
-                                        className="form-control"
-                                    />
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        placeholder="Email..."
-                                        className="form-control"
-                                    /><br />
+                            <div className="container-identidad-email">
+                                <TextField
+                                    key={true}
+                                    type="text"
+                                    name="identidad"
+                                    placeholder="Escribe..."
+                                    label="Numero de identidad"
+                                    className="form-control RegistrarReferido"
+                                    style={{ marginBottom: "30px" }}
+                                    onChange={""}
+                                />
+                                <TextField
+                                    key={true}
+                                    type="email"
+                                    name="email"
+                                    placeholder="Escribe..."
+                                    label="Email"
+                                    className="form-control RegistrarReferido"
+                                    style={{ marginBottom: "30px" }}
+                                    onChange={""}
+                                />
                             </div>
                         </div>
-                        
+
                         <button type="submit" className="btn btn-primary">REGISTRARSE</button>
                     </form>
                 </div>

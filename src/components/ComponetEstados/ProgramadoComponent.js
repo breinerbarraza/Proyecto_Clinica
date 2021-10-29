@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import TextField from '@mui/material/TextField';
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import API from '../../Utils/API'
+import { FormularioEstado } from './FormularioEstado/FormularioEstado'
+
 
 export const ProgramadoComponent = () => {
     const [data_prorgramado, setData_programado] = useState({})
@@ -33,25 +36,25 @@ export const ProgramadoComponent = () => {
                 <p className="prequi-p"><b>· Definir fecha de procedimiento</b></p>
                 <div className="form-prequi">
                     <form>
-                        <div className="form-f-h">
-                            <div className="form-fecha">
-                                <label htmlFor="fecha">Fecha</label>
-                                <input type="date" className="form-control fecha"/>
-                            </div>
-                            <div className="form-hora">
-                                <label htmlFor="hora">Hora</label>
-                                <input type="text" className="form-control hora" placeholder="Digite la hora..."/>
-                            </div>
-                        </div>
+                        <FormularioEstado/>
                         <div className="form-medico">
-                                <label htmlFor="tipo">Medico</label>
-                                    <select className="form-select" aria-label="Default select example">
-                                        <option defaultValue> Medico</option>
-                                        <option value="1"></option>
-                                        <option value="2"></option>
-                                        <option value="3"></option>
-                                        <option value="4"></option>
-                                    </select>
+                            <TextField
+                                        key={true}
+                                        select
+                                        name="mdico"
+                                        label="Medico"
+                                        className="form-control "
+                                        style={{ marginBottom: "30px"}}
+                                        onChange={""}
+                                    >
+                                        <option value="">Choose one option</option>
+                                        <option value="3">03</option>
+                                        <option value="6">06</option>
+                                        <option value="9">09</option>
+                                        <option value="12">12</option>
+                                        <option value="16">16</option>
+                                        <option value="18">18</option>
+                            </TextField>
                         </div>
 
                         <div className="prequi-button">

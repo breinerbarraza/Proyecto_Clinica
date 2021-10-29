@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import TextField from '@mui/material/TextField';
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import API from '../../Utils/API'
@@ -38,9 +39,29 @@ export const PendienteComponent = () => {
                     <form>
                         <div className="form-f-pendiente">
                             <div className="form-fecha-pendiente">
-                                <label htmlFor="fecha">Fecha</label>
-                                <input type="date" className="form-control fecha"/>
-                                <textarea className="form-control" placeholder="Escribe..."/>
+                                <TextField
+                                    key={true}
+                                    type="date"
+                                    name="fecha"
+                                    placeholder="Escribe..."
+                                    label="Fecha de nacimiento"
+                                    className="form-control RegistrarReferido"
+                                    style={{ marginBottom: "30px" }}
+                                    onChange={""}
+                                />
+                                <TextField
+                                    key={true}
+                                    textarea
+                                    type="text"
+                                    name="comentario"
+                                    placeholder="Escribe..."
+                                    label="Comentario"
+                                    multiline
+                                    rows={4}
+                                    className="form-control"
+                                    style={{ marginBottom: "30px" }}
+                                    onChange={""}
+                                />
                             </div>
                         </div>
                         <div className="pendiente-button">
