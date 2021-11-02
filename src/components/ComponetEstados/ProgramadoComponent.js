@@ -39,7 +39,6 @@ export const ProgramadoComponent = () => {
                         <FormularioEstado/>
                         <div className="form-medico">
                             <TextField
-                                        key={true}
                                         select
                                         name="mdico"
                                         label="Medico"

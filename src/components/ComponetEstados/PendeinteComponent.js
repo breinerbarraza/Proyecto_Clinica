@@ -40,7 +40,6 @@ export const PendienteComponent = () => {
                         <div className="form-f-pendiente">
                             <div className="form-fecha-pendiente">
                                 <TextField
-                                    key={true}
                                     type="date"
                                     name="fecha"
                                     placeholder="Escribe..."
@@ -50,7 +49,6 @@ export const PendienteComponent = () => {
                                     onChange={""}
                                 />
                                 <TextField
-                                    key={true}
                                     textarea
                                     type="text"
                                     name="comentario"

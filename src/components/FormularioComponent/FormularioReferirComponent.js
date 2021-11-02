@@ -1,95 +1,147 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import TextField from '@mui/material/TextField';
-import Select from "@material-ui/core/Select";
+import { MenuItem, Select } from '@mui/material';
+import API from '../../Utils/API';
+import Swal from 'sweetalert2';
+
 export const FormularioReferirComponent = () => {
+
+    const [identificacion, setIdentificacion] = useState([])
+
+    const [select_state, setSelect_state] = useState([])
+
+    useEffect(() => {
+        API.get('api/configuracion/tipoIdentificacion')
+        .then(({data}) => {
+            const item = data;
+            setIdentificacion(item)
+        } )
+    }, [])
+
+    const handleSelect = (e)=>{
+        setSelect_state({
+            ...select_state,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    const enviarDatos = async(e) => {
+        e.preventDefault();
+        console.log(select_state)
+        API.post('api/referidos/register-referidos/', JSON.stringify(select_state))
+        .then( item =>{
+            const resp = item.data;
+            console.log(resp)
+            if(resp.mensage){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: resp.mensaje,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }else{
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: resp.error,
+                  })
+            }
+        })
+
+
+    }
+
     return (
         <div>
-            <form className="formulario-referir">
+            <form className="formulario-referir" onSubmit={enviarDatos}>
                 <div className="textfile">
                 <h3 className="h3-referir"> Referir paciente</h3>
-                <TextField
-                            key={true}
+                        <TextField
                             type="text"
-                            name="nombre"
+                            name="nombres"
                             placeholder="Escribe..."
                             label="Nombre"
                             className="form-control"
                             style={{marginBottom: "30px"}}
-                            onChange={""}
+                            onChange={handleSelect}
                         />
                         <TextField
-                            key={true}
                             type="text"
-                            name="apellido"
+                            name="apellidos"
                             placeholder="Escribe..."
                             label="Apellidos"
                             className="form-control"
                             style={{marginBottom: "30px"}}
-                            onChange={""}
+                            onChange={handleSelect}
                         />
                         <TextField
-                            key={true}
                             type="text"
-                            name="fecha"
+                            name="fechaNacimiento"
                             placeholder="Escribe..."
                             label="Fecha de nacimiento"
                             className="form-control"
                             style={{marginBottom: "30px"}}
-                            onChange={""}
+                            onChange={handleSelect}
                         />
                 </div>
 
                 <div className="contenedor-referir">
                     <div className="documento">
+                        <Select
+                                name="tipoIdentificacion"
+                                placeholder="Escribe..."
+                                label="Tipo de Documento"
+                                className="form-control"
+                                onChange={handleSelect}
+                                style={{"padding":"20px", "border":"none"}}
+                        >
+                           
+                           { 
+                            identificacion.map( data => {
+                                return <MenuItem key={data.id} values={data.id}>{data.descripcion}</MenuItem>
+                            } )
+                           }
+                        </Select>
+                    {/*
+                        <select>
+                            <option value="selected">--Seleccione--</option>
+                            {
+                                identificacion.map(item =>{
+                                    return<option value="{item.id}">{item.descripcion}</option>
+                                })
+                            }
+                            
+                        </select> */}
                     <TextField
-                            key={true}
-                            select
-                            name="identidad"
-                            placeholder="Escribe..."
-                            label="Tipo de Documento"
-                            className="form-control"
-                            style={{marginBottom: "30px"}}
-                            onChange={""}
-                    >
-                            <option value="">Choose one option</option>
-                            <option value="3">03</option>
-                            <option value="6">06</option>
-                            <option value="9">09</option>
-                            <option value="12">12</option>
-                            <option value="16">16</option>
-                            <option value="18">18</option>
-                    </TextField>
-                    <TextField
-                            key={true}
                             type="text"
-                            name="identidad"
+                            name="numeroIdentificacion"
                             placeholder="Escribe..."
                             label="Numero de identidad"
                             className="form-control"
                             style={{marginBottom: "30px"}}
-                            onChange={""}
+                            onChange={handleSelect}
                         />
                     </div>
                     <div className="container-ce">
                     <TextField
-                            key={true}
                             type="text"
                             name="celular"
                             placeholder="Escribe..."
                             label="Celular"
                             className="form-control"
                             style={{marginBottom: "30px"}}
-                            onChange={""}
+                            onChange={handleSelect}
                         />
                      <TextField
-                            key={true}
                             type="email"
-                            name="email"
+                            name="correo_electronico"
                             placeholder="Escribe..."
                             label="Email"
                             className="form-control"
                             style={{marginBottom: "30px"}}
-                            onChange={""}
+                            onChange={handleSelect}
                         />
                        
                         <button type="submit">Referir</button>

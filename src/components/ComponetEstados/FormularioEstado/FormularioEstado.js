@@ -6,7 +6,6 @@ export const FormularioEstado = () => {
             <div className="form-f-h">
                             <div className="form-fecha">
                                 <TextField
-                                    key={true}
                                     type="date"
                                     name="fecha"
                                     placeholder="Escribe..."
@@ -18,7 +17,6 @@ export const FormularioEstado = () => {
                             </div>
                             <div className="form-hora">
                                 <TextField
-                                    key={true}
                                     type="text"
                                     name="hola"
                                     placeholder="Escribe..."

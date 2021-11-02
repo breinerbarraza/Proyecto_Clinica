@@ -3,6 +3,8 @@ import TextField from '@mui/material/TextField';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
 import API from '../Utils/API';
+import Swal from 'sweetalert2';
+
 export const RegistroComponent = () => {
 
 
@@ -28,7 +30,14 @@ export const RegistroComponent = () => {
             if(resp.data){
                 alert(resp.data)
             }else{
-                alert(resp.mensaje  )
+                const mensaje = resp.mensaje;
+                return Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: mensaje,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
             }
         })
     }
@@ -45,11 +54,10 @@ export const RegistroComponent = () => {
             <div className="registro-container">
                 <div className="formulario-registro">
                     <form onSubmit={handleSubmit}>
-                        <img className="logo_clinica-registro" src={logo_clinica} />
+                        <img alt="clinica" className="logo_clinica-registro" src={logo_clinica} />
                         <h3 className="h3-registro">¡Hola,</h3>
                         <p className="p-registro"><b>Alberto Hernandez</b> quieres que haga parate de tu red de referidos!                </p>
                        <TextField
-                            key={true}
                             type="text"
                             name="first_name"
                             placeholder="Escribe..."
@@ -59,7 +67,6 @@ export const RegistroComponent = () => {
                             onChange={handleInputChange}
                         />
                         <TextField
-                            key={true}
                             type="text"
                             name="last_name"
                             placeholder="Escribe..."
@@ -69,7 +76,6 @@ export const RegistroComponent = () => {
                             onChange={handleInputChange}
                         />
                         <TextField
-                            key={true}
                             type="text"
                             name="email"
                             placeholder="Escribe..."
@@ -79,7 +85,6 @@ export const RegistroComponent = () => {
                             onChange={handleInputChange}
                         />
                         <TextField
-                            key={true}
                             type="text"
                             name="username"
                             placeholder="Escribe..."
@@ -89,7 +94,6 @@ export const RegistroComponent = () => {
                             onChange={handleInputChange}
                         />
                         <TextField
-                            key={true}
                             type="password"
                             name="password"
                             placeholder="Escribe..."
@@ -99,7 +103,6 @@ export const RegistroComponent = () => {
                             onChange={handleInputChange}
                         />
                         <TextField
-                            key={true}
                             type="password"
                             name="password"
                             placeholder="Escribe..."
@@ -114,7 +117,7 @@ export const RegistroComponent = () => {
                 </div>
                 <div className="container-logo-registro">
                     <div className="logo-registro">
-                        <img src={liberate} />
+                        <img alt="clinica" src={liberate} />
                     </div>
                 </div>
             </div>

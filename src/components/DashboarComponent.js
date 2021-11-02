@@ -1,11 +1,12 @@
 import React from "react";
 import { Link  } from "react-router-dom";
 import { HeaderComponent } from "./HeaderComponent";
-
+import { PerfilComponent } from "./perfil/PerfilComponent";
 export const DashboarComponent = () => {
   return (
     <>
         <HeaderComponent/>
+        <PerfilComponent/>
         <div className="container-dashboar">
         <Link to="/listado" style={{textDecoration:"none"}}><h3 className="h3-dashboar"><i class="fas fa-angle-left" style={{marginRight:"10px"}}></i>Dashboard</h3></Link>
         <div className="_conatiner-dashboar">

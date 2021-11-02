@@ -8,10 +8,9 @@ export const ConfirEmailComponent = () => {
             <div className="email1-container">
                 <div className="formulario-email1">
                     <form className="_form-email1">
-                        <img className="logo_clinica-email1" src={logo_clinica} />
+                        <img className="logo_clinica-email1" src={logo_clinica} alt="clinica"/>
                         <p className="p-email1">Confirma tu E-amil</p>
                         <TextField
-                            key={true}
                             type="email"
                             name="email"
                             placeholder="Escribe..."
@@ -24,8 +23,8 @@ export const ConfirEmailComponent = () => {
                     </form>
                 </div>
                 <div className="container-logo-email1">
-                    <div className="logo-email1">
-                        <img src={liberate} />
+                    <div className="logo-email1" alt="logo">
+                        <img alt="clinica" src={liberate} />
                     </div>
                 </div>
             </div>

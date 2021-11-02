@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { HeaderComponent } from './HeaderComponent'
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable } from 'mdbreact'
+import { PerfilComponent } from './perfil/PerfilComponent';
 import API from '../Utils/API';
+
 
 
 export const ListadoComponent = () => {
@@ -65,6 +67,7 @@ export const ListadoComponent = () => {
     
       return (
         <div className="listaRefe">  
+        <PerfilComponent/>
           <HeaderComponent users={false} dashboard={true}/>
           
           <div className="lista-container">

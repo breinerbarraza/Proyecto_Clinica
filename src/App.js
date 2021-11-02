@@ -2,11 +2,9 @@ import './App.css'
 import{
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect
+  Route
 
 }from 'react-router-dom'
-import ComponentPrueva from "./components/ComponentPrueva";
 import { LoginComponent } from "./components/LoginComponent";
 import { HeaderComponent } from "./components/HeaderComponent";
 import { RegistroComponent } from './components/RegistroComponent';
@@ -29,14 +27,30 @@ function App() {
     <div>
       <Router>
           <Switch>
-          {/*
+     
             <Route exact path="/">
               {localStorage.getItem('token') !== null ? (
-                <HeaderComponent />
+                <ListadoReferidoComponent />
               ) : (
                 <LoginComponent />
               )}
             </Route>
+            <Route exact path="/login">
+              {
+                (localStorage.getItem('token') !== null)
+                ? <HeaderComponent />
+                : <LoginComponent />
+              }
+            </Route>
+
+            <Route exact path="/registro">
+              {
+                (localStorage.getItem('token') !== null)
+                ? <HeaderComponent />
+                : <RegistroComponent />
+              }
+            </Route>
+
               <Route exact path="/listado">
                 {localStorage.getItem('token') !== null ? (
                   <ListadoComponent />
@@ -62,13 +76,6 @@ function App() {
               <Route exact path="/referir">
                 {localStorage.getItem('token') !== null ? (
                   <ReferirComponent />
-                ) : (
-                  <LoginComponent />
-                )}
-              </Route>
-              <Route exact path="/registrar_referido">
-                {localStorage.getItem('token') !== null ? (
-                  <RegistrarReferidoComponent />
                 ) : (
                   <LoginComponent />
                 )}
@@ -115,27 +122,40 @@ function App() {
                   <LoginComponent />
                 )}
               </Route>
-              <Route exact path="//lista/pendiente/:id">
+              <Route exact path="/lista/pendiente/:id">
                 {localStorage.getItem('token') !== null ? (
                   <PendienteComponent />
                 ) : (
                   <LoginComponent />
                 )}
               </Route>
-              <Route exact path="//lista/operado/:id">
+              <Route exact path="/registrar_referido">
                 {localStorage.getItem('token') !== null ? (
                   <OperadoComponent />
                 ) : (
                   <LoginComponent />
                 )}
-              </Route>*/}
-            <Route exact  path="/prueva" component={ComponentPrueva}/>
+              </Route>
+              <Route exact path="/lista/operado/:id">
+                {localStorage.getItem('token') !== null ? (
+                  <OperadoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/registrar_referido">
+                {localStorage.getItem('token') !== null ? (
+                  <RegistrarReferidoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>     {/*
             <Route exact  path ="/email" component={ConfirEmailComponent}/>
             <Route exact  path ="/listado" component={ListadoComponent}/>
             <Route exact  path ="/referir" component={ReferirComponent}/>
             <Route exact  path ="/registro" component={RegistroComponent}/>
-            <Route exact  path ="/header" component={HeaderComponent} />
-            <Route exact  path ="/login" component={LoginComponent} />
+            <Route exact  path ="/header" component={HeaderComponent}/>
+            <Route exact  path ="/login" component={LoginComponent}/>
             <Route exact  path ="/registrar_referido" component={RegistrarReferidoComponent}/>
             <Route exact  path ="/dashboar" component={DashboarComponent}/>
             <Route exact  path ="/crear_usuario" component={CrearUsuarioComponent}/>
@@ -145,7 +165,7 @@ function App() {
             <Route exact  path ="/Listado/descartado/:id" component={DescartadoComponent}/>
             <Route exact  path ="/lista/gestion/:id" component={GestionComponent}/> 
             <Route exact  path ="/lista/pendiente/:id" component={PendienteComponent}/>
-            <Route exact  path ="/lista/operado/:id" component={OperadoComponent}/>
+            <Route exact  path ="/lista/operado/:id" component={OperadoComponent}/>*/}
         </Switch> 
       </Router>   
 

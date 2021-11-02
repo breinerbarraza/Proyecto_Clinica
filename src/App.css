@@ -74,24 +74,20 @@ body{
     display: flex;
     flex-direction: column;
 }
-
 .header .nav-header{
     width: 120px;
     padding-top: 100%;
 }
-
 .header button{
     border: none;
     background: rgb(33, 61, 104); 
     width: 100%;
     padding: 0 !important;
-    
 }
 .header i{
     color: white;
     cursor: pointer;
 }
-
 .header img {
     width: 100%;
     margin-bottom: 30px;
@@ -100,29 +96,17 @@ body{
     width: 100%;
     margin-bottom: 30px;
 }
-
-
 .header a {
     width: 100%;
 }
-
-/*.container-page {
-    display: flex;
-    flex-direction: row;
-}*/
 .header nav{
     background: rgb(33, 61, 104); 
 }
-
 .container-ce{
-
     width: 50%;
-    
 }
 .documento{
-
     width: 50%;
-    
 }
 .container-ce, .documento {
 	height: 300px;
@@ -130,7 +114,6 @@ body{
 	border: 0;
 	display: inline-block;
 }
-
 .img{
     background-color: white;
     padding: 10px;
@@ -143,6 +126,7 @@ body{
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
 }
+
 /*Registrar Referido*/
 
 .registrarefe-container {
@@ -741,4 +725,23 @@ button[type="submit"]{
 }
 .fecha{
     margin-bottom: 10px;
+}
+/*Perfil*/
+
+.container-perfil{
+    float: right;
+    padding: 30px;
+    margin-top: 10px;  
+}
+.dropdown-toggle{
+    background: white;
+    color: rgb(9, 36, 110);
+    border: none;
+}
+.dropdown-toggle::after {
+    display: flex;
+    width: 10px;
+    float: left;
+    margin-top: 10px;
+    margin-right: 8px;
 }

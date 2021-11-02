@@ -10,7 +10,7 @@ function ButtonReferir(){
     return(
         <button>
             <Link to="/referir">
-                <img className="img" src={user_add_blue}/>
+                <img alt="clinica" className="img" src={user_add_blue}/>
             </Link>
         </button>
     ) 
@@ -19,7 +19,7 @@ function ButtonListar(){
     return(
         <button >
             <Link to="/listado">
-                <img className="imglista" src={chart_line_up_white  }/>
+                <img alt="clinica" className="imglista" src={chart_line_up_white  }/>
             </Link>
         </button>
     )
@@ -44,17 +44,17 @@ export const HeaderComponent = ({users, dashboard}) => {
     return (
         <div className="header">
             <nav className="nav-header">
-                    <a className="navbar-brand" href="">
-                    <img src={ClinicaBlanco} width="100" height="40" style={{'color': '#fff'}}/>
+                    <a className="navbar-brand" href="/">
+                    <img alt="clinica" src={ClinicaBlanco} width="100" height="40" style={{'color': '#fff'}}/>
                     </a>
                     { !imagen && (
-                        <button onClick={() => handleButtonClick()}><Link to="/referir"><img src={useradd}/></Link></button>
+                        <button onClick={() => handleButtonClick()}><Link to="/referir"><img alt="clinica" src={useradd}/></Link></button>
                     ) }
                     { imagen && (
                         <ButtonReferir />
                     )}
                     { !imagen1 && (
-                        <button onClick={() => handleButtonClick1()}><Link to="/listado"><img src={chart_line_white}/></Link></button>
+                        <button onClick={() => handleButtonClick1()}><Link to="/listado"><img alt="clinica" src={chart_line_white}/></Link></button>
                     )}
                     { imagen1 && (
                         <ButtonListar />

@@ -9,11 +9,10 @@ export const RegistrarReferidoComponent = () => {
             <div className="registrarefe-container">
                 <div className="formulario-registrarefe">
                     <form className="_form-registro">
-                        <img className="logo_clinica-registrarefe" src={logo_clinica} />
+                        <img alt="clinica" className="logo_clinica-registrarefe" src={logo_clinica} />
                         <h3 className="h3-registrarefe">¡Hola,</h3>
                         <p className="p-registrarefe">a continuación ingresarás tus datos para ser un candidato más y liberarte de tus gafas! </p>
                         <TextField
-                            key={true}
                             type="text"
                             name="nombre"
                             placeholder="Escribe..."
@@ -23,7 +22,6 @@ export const RegistrarReferidoComponent = () => {
                             onChange={""}
                         />
                         <TextField
-                            key={true}
                             type="text"
                             name="apellido"
                             placeholder="Escribe..."
@@ -33,7 +31,6 @@ export const RegistrarReferidoComponent = () => {
                             onChange={""}
                         />
                         <TextField
-                            key={true}
                             type="text"
                             name="fecha"
                             placeholder="Escribe..."
@@ -46,7 +43,6 @@ export const RegistrarReferidoComponent = () => {
                             <div className="container-Select-cedula">
                                 <div className="select">
                                 <TextField
-                                    key={true}
                                     select
                                     name="identidad"
                                     placeholder="Escribe..."
@@ -64,7 +60,6 @@ export const RegistrarReferidoComponent = () => {
                                     <option value="18">18</option>
                                 </TextField></div>
                                 <TextField
-                                    key={true}
                                     type="text"
                                     name="celular"
                                     placeholder="Escribe..."
@@ -77,7 +72,6 @@ export const RegistrarReferidoComponent = () => {
                             </div>
                             <div className="container-identidad-email">
                                 <TextField
-                                    key={true}
                                     type="text"
                                     name="identidad"
                                     placeholder="Escribe..."
@@ -87,7 +81,6 @@ export const RegistrarReferidoComponent = () => {
                                     onChange={""}
                                 />
                                 <TextField
-                                    key={true}
                                     type="email"
                                     name="email"
                                     placeholder="Escribe..."
@@ -104,7 +97,7 @@ export const RegistrarReferidoComponent = () => {
                 </div>
                 <div className="container-logo-registrarefe">
                     <div className="logo-registrarefe">
-                        <img src={liberate} />
+                        <img alt="clinica" src={liberate} />
                     </div>
                 </div>
             </div>

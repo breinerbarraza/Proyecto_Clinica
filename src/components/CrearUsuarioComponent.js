@@ -1,13 +1,14 @@
 import React from 'react'
 import TextField from '@mui/material/TextField';
+import { PerfilComponent } from './perfil/PerfilComponent';
 export const CrearUsuarioComponent = () => {
     return (
         <>
+        <PerfilComponent/>
             <div className="usuario-container">
                 <form className="formulario-usuario">
                     <h3 className="h3-usuario"> Crear Usuario</h3>
                         <TextField
-                            key={true}
                             select
                             name="identidad"
                             placeholder="Escribe..."
@@ -25,7 +26,6 @@ export const CrearUsuarioComponent = () => {
                             <option value="18">18</option>
                         </TextField>
                         <TextField
-                            key={true}
                             type="text"
                             name="nombre"
                             placeholder="Escribe..."
@@ -35,7 +35,6 @@ export const CrearUsuarioComponent = () => {
                             onChange={""}
                         />
                         <TextField
-                            key={true}
                             type="text"
                             name="apellido"
                             placeholder="Escribe..."
@@ -47,7 +46,6 @@ export const CrearUsuarioComponent = () => {
                     <div className="E-C_usuraio">
                         <div className="container-ce-usuario">
                         <TextField
-                                    key={true}
                                     type="text"
                                     name="celular"
                                     placeholder="Escribe..."
@@ -60,7 +58,6 @@ export const CrearUsuarioComponent = () => {
                     
                         <div className="container-e-usuario">
                         <TextField
-                                    key={true}
                                     type="email"
                                     name="email"
                                     placeholder="Escribe..."
@@ -73,7 +70,6 @@ export const CrearUsuarioComponent = () => {
                     </div>
                         <div className="cargo_usuario">
                         <TextField
-                                    key={true}
                                     type="text"
                                     name="cargo"
                                     placeholder="Escribe..."
