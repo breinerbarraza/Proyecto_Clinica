@@ -73,6 +73,7 @@ export const HeaderComponent = ({users, dashboard}) => {
                 </div>
                 <div className="cerrarSesion">
                     <img className="img-cerrar" onClick={()=>cerrarSesion('token', 'idUser', 'nombres', 'apellidos')} alt="cerrar" src={Logout} style={{"width":"50px","cursor":"pointer"}}/>
+            
                 </div>
             </nav>
         </div>

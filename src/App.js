@@ -17,6 +17,7 @@ import { DashboarComponent } from './components/DashboarComponent';
 import { CrearUsuarioComponent } from './components/CrearUsuarioComponent';
 import { ListadoReferidoComponent } from './components/ListadoReferidoComponent';
 import { PendienteComponent } from './components/ComponetEstados/PendeinteComponent';
+import { DatosPerfilComonent } from './components/perfil/DatosPerfilComonent';
 
 
 function App() {
@@ -24,7 +25,6 @@ function App() {
     <div>
       <Router>
           <Switch>
-     
             <Route exact path="/">
               {localStorage.getItem('token') !== null ? (
                 <ListadoReferidoComponent />
@@ -102,6 +102,13 @@ function App() {
                   <RegistrarReferidoComponent />
                 ) : (
                   <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/datos_perfil">
+                {localStorage.getItem('token') !== null ? (
+                  <DatosPerfilComonent/>
+                ) : (
+                  <LoginComponent/>
                 )}
               </Route> 
               <Redirect to="/"/>    {/*

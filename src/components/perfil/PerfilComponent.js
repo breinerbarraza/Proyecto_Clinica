@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import ClinicaBlanco from '../../image/Recursos-Femto/logo.png';
 export const PerfilComponent = () => {
 
@@ -36,7 +37,7 @@ export const PerfilComponent = () => {
                 </button>
                 <img alt="clinica" src={ClinicaBlanco} width="50" height="50"/>
                 <ul className="dropdown-menu dropdown-menu-end">
-                    <li><button className="dropdown-item" type="button">Perfil</button></li>
+                    <li><Link to="/datos_perfil"><button className="dropdown-item" type="button">Perfil</button></Link></li>
                     <li><button onClick={() => cerrarSesion('token', 'id_user', 'nombres', 'apellidos')} className="dropdown-item" type="button">Cerrar Sesiòn</button></li>
                     {/*<li><button className="dropdown-item" type="button">Something else here</button></li>*/}
                 </ul>
