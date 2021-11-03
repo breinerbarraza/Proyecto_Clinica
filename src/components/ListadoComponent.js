@@ -8,15 +8,14 @@ import { Link } from 'react-router-dom'
 export const ListadoComponent = () => {
 
   const [data_listado, setData_listado] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const load = async () => {
+    setLoading(true)
     await API.get('api/referidos/')
       .then(resp => {
-        // const item = resp.data
-        // console.log(item)
-        // setData_listado(item)
         resp.data.map((item) => (
-          data.rows.push({
+          setData_listado(data_listado => [...data_listado, {
             "id": item.id,
             "get_nombreCompleto": <Link to={`lista/pendiente/${item.id}`}>{item.get_nombreCompleto}</Link>,
             "numeroIdentificacion": item.numeroIdentificacion,
@@ -24,9 +23,24 @@ export const ListadoComponent = () => {
             "celular": item.celular,
             "estadoReferido": item.estadoReferido,
             "comision": item.comision
-          })
+          }]),
+          console.log(data_listado)
         ))
       })
+    setLoading(false)
+  }
+
+  const showTable = () => {
+    return (
+      <MDBDataTable
+        striped
+        className="tabla-pacientes"
+        bordered
+        entrieslabel={[]}
+        hover
+        data={data}
+      />
+    )
   }
 
   useEffect(() => {
@@ -87,17 +101,7 @@ export const ListadoComponent = () => {
       <div className="lista-container">
         <h3 className="h3-Lista">listado de referido</h3>
         <div className="tabla-lista">
-          <MDBDataTable
-            striped
-            className="tabla-pacientes"
-            bordered
-            entrieslabel={[]}
-            hover
-            data={data}
-          />
-          {
-
-          }
+          {!loading && showTable()}
         </div>
       </div>
     </div>
