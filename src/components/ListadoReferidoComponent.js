@@ -8,31 +8,43 @@ import { Link } from 'react-router-dom'
 export const ListadoReferidoComponent = () => {
 
   const [data_listado, setData_listado] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const load = async () => {
+    setLoading(true)
     await API.get('api/referidos/')
       .then(resp => {
-        // const item = resp.data
-        // console.log(item)
-        // setData_listado(item)
         resp.data.map((item) => (
-          data.rows.push({
+          setData_listado(data_listado.concat({
             "id": item.id,
             "get_nombreCompleto": <Link to={`lista/pendiente/${item.id}`}>{item.get_nombreCompleto}</Link>,
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
             "estadoReferido": item.estadoReferido
-          })
+          }))
         ))
       })
+    setLoading(false)
+  }
+
+  const showTable = () => {
+      return (
+        <MDBDataTable
+          striped
+          className="tabla-pacientes"
+          bordered
+          entrieslabel={[]}
+          hover
+          data={data}
+        />
+      )
   }
 
   useEffect(() => {
     load()
   }, [])
 
-  console.log(data_listado)
   const data = {
 
     columns: [
@@ -68,7 +80,7 @@ export const ListadoReferidoComponent = () => {
         width: 150
       },
     ],
-    rows: []
+    rows: data_listado
 
   };
 
@@ -79,19 +91,7 @@ export const ListadoReferidoComponent = () => {
       <div className="lista-container">
         <h3 className="h3-Lista">listado de referido</h3>
         <div className="tabla-lista">
-          {data.rows !== [] && (
-            <MDBDataTable
-              striped
-              className="tabla-pacientes"
-              bordered
-              entrieslabel={[]}
-              hover
-              data={data}
-            />
-          )}
-          {
-
-          }
+            {!loading && showTable()}
         </div>
       </div>
     </div>
