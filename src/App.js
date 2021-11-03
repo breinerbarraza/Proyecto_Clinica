@@ -2,7 +2,8 @@ import './App.css'
 import{
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 
 }from 'react-router-dom'
 import { LoginComponent } from "./components/LoginComponent";
@@ -149,7 +150,8 @@ function App() {
                 ) : (
                   <LoginComponent />
                 )}
-              </Route>     {/*
+              </Route> 
+              <Redirect path="/"/>    {/*
             <Route exact  path ="/email" component={ConfirEmailComponent}/>
             <Route exact  path ="/listado" component={ListadoComponent}/>
             <Route exact  path ="/referir" component={ReferirComponent}/>

@@ -33,7 +33,6 @@ export const PerfilComponent = () => {
             <div className="btn-group">
                 <button type="button" className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     { datos_perfil.nombres} {datos_perfil.apellidos}
-                   
                 </button>
                 <img alt="clinica" src={ClinicaBlanco} width="80" height="50"/>
                 <ul className="dropdown-menu dropdown-menu-end">

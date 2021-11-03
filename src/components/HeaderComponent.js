@@ -5,6 +5,7 @@ import useradd from '../image/Recursos-Femto/user-add.svg';
 import chart_line_white from '../image/Recursos-Femto/chart-line-up-White.svg';
 import user_add_blue from '../image/Recursos-Femto/user-add-Blue.svg';
 import chart_line_up_white from '../image/Recursos-Femto/chart-line-up.svg';
+import Logout from '../image/Recursos-Femto2/Logout.svg'
 
 function ButtonReferir(){
     return(
@@ -19,13 +20,20 @@ function ButtonListar(){
     return(
         <button >
             <Link to="/listado">
-                <img alt="clinica" className="imglista" src={chart_line_up_white  }/>
+                <img alt="clinica" className="imglista" src={chart_line_up_white}/>
             </Link>
         </button>
     )
 }
-
 export const HeaderComponent = ({users, dashboard}) => {
+
+    const cerrarSesion = (token, idUser, nombres, apellidos)=>{
+        localStorage.removeItem(token);
+        localStorage.removeItem(idUser);
+        localStorage.removeItem(nombres);
+        localStorage.removeItem(apellidos);
+        window.location = "/";
+    }
 
     let estado = users;
     const [imagen, setImagen] = useState(estado);
@@ -44,9 +52,12 @@ export const HeaderComponent = ({users, dashboard}) => {
     return (
         <div className="header">
             <nav className="nav-header">
+                <div className="imgLogo">
                     <a className="navbar-brand" href="/">
-                    <img alt="clinica" src={ClinicaBlanco} width="100" height="40" style={{'color': '#fff'}}/>
+                    <img alt="clinica" src={ClinicaBlanco} style={{'color': '#fff'}}/>
                     </a>
+                </div>
+                <div className="lista-regitro">
                     { !imagen && (
                         <button onClick={() => handleButtonClick()}><Link to="/referir"><img alt="clinica" src={useradd}/></Link></button>
                     ) }
@@ -59,7 +70,10 @@ export const HeaderComponent = ({users, dashboard}) => {
                     { imagen1 && (
                         <ButtonListar />
                     )}
-                    
+                </div>
+                <div className="cerrarSesion">
+                    <img className="img-cerrar" onClick={()=>cerrarSesion('token', 'idUser', 'nombres', 'apellidos')} alt="cerrar" src={Logout} style={{"width":"50px","cursor":"pointer"}}/>
+                </div>
             </nav>
         </div>
     )

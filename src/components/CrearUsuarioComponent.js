@@ -1,5 +1,6 @@
 import React from 'react'
 import TextField from '@mui/material/TextField';
+import { MenuItem, Select } from '@mui/material';
 import { PerfilComponent } from './perfil/PerfilComponent';
 export const CrearUsuarioComponent = () => {
     return (
@@ -8,23 +9,15 @@ export const CrearUsuarioComponent = () => {
             <div className="usuario-container">
                 <form className="formulario-usuario">
                     <h3 className="h3-usuario"> Crear Usuario</h3>
-                        <TextField
-                            select
-                            name="identidad"
-                            placeholder="Escribe..."
-                            label="Tipo de Documento"
+                        <Select
+                            name="tipoUser"
+                            label="Tipo de usuario"
                             className="form-control "
                             style={{ marginBottom: "30px"}}
                             onChange={""}
                         >
-                            <option value="">Choose one option</option>
-                            <option value="3">03</option>
-                            <option value="6">06</option>
-                            <option value="9">09</option>
-                            <option value="12">12</option>
-                            <option value="16">16</option>
-                            <option value="18">18</option>
-                        </TextField>
+                            <MenuItem>medico</MenuItem>
+                        </Select>
                         <TextField
                             type="text"
                             name="nombre"
