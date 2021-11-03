@@ -75,7 +75,7 @@ body{
     flex-direction: column;
 }
 .header .nav-header{
-    width: 120px;
+    width: 80px;
     padding-top: 100%;
 }
 .header button{
@@ -89,11 +89,11 @@ body{
     cursor: pointer;
 }
 .header img {
-    width: 100%;
+    width: 50%;
     margin-bottom: 30px;
 }
 .header .imglista {
-    width: 100%;
+    width: 50%;
     margin-bottom: 30px;
 }
 .header a {
@@ -125,6 +125,9 @@ body{
     padding: 10px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
+}
+.imgLogo{
+    width: 10;
 }
 
 /*Registrar Referido*/
