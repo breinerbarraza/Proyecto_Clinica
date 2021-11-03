@@ -17,7 +17,7 @@ export const ListadoComponent = () => {
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
-            "get_nombreCompleto": <Link to={`lista/pendiente/${item.id}`}>{item.get_nombreCompleto}</Link>,
+            "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
