@@ -1,78 +1,122 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
-import { MenuItem, Select } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { PerfilComponent } from './perfil/PerfilComponent';
+import API from '../Utils/API';
+import { HeaderComponent } from './HeaderComponent'
 export const CrearUsuarioComponent = () => {
+
+    const [group, setGroup] = useState([])
+    const [dato, setDatos] = useState([])
+
+    useEffect(() => {
+        API.get('api/usuarios/asesor/list_grupos')
+            .then(({ data }) => {
+                setGroup(data)
+                console.log(data)
+                document.getElementById("login-form").reset();
+            })
+
+    }, [])
+
+    const handleInput = (e) => {
+        setDatos({
+            ...dato,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const enviarDatos = async (e) => {
+        e.preventDefault();
+        console.log(dato)
+        document.getElementById("login-form").reset();
+
+    }
     return (
+
         <>
-        <PerfilComponent/>
+            <HeaderComponent />
+            <PerfilComponent />
+
             <div className="usuario-container">
-                <form className="formulario-usuario">
-                    <h3 className="h3-usuario"> Crear Usuario</h3>
+                <h3 className="h3-usuario"> Crear Usuario</h3>
+                <form id="login-form" onSubmit={enviarDatos}>
+                    <FormControl fullWidth  >
+                        <InputLabel id="demo-simple-select-standard-label">Tipo Usuario</InputLabel>
                         <Select
-                            name="tipoUser"
-                            label="Tipo de usuario"
-                            className="form-control "
-                            style={{ marginBottom: "30px"}}
-                            onChange={""}
+                            name="tipo_usuario"
+                            labelId="demo-simple-select-standard-label"
+                            id="demo-simple-select-standard"
+                            onChange={handleInput}
+                            label="Tipo Usuario"
                         >
-                            <MenuItem>medico</MenuItem>
+                            {
+                                group.map(data => {
+                                    return <MenuItem key={data.id} value={data.id}>{data.name}</MenuItem>
+                                })
+                            }
                         </Select>
                         <TextField
                             type="text"
-                            name="nombre"
+                            name="nombres"
                             placeholder="Escribe..."
                             label="Nombre"
                             className="form-control"
                             style={{ marginBottom: "30px" }}
-                            onChange={""}
+                            onChange={handleInput}
                         />
                         <TextField
                             type="text"
-                            name="apellido"
+                            name="apellidos"
                             placeholder="Escribe..."
                             label="Apellidos"
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
-                            onChange={""}
+                            onChange={handleInput}
                         />
-                    <div className="E-C_usuraio">
-                        <div className="container-ce-usuario">
-                        <TextField
+                        <div className="E-C_usuraio">
+                            <div className="container-ce-usuario">
+                                <TextField
                                     type="text"
                                     name="celular"
                                     placeholder="Escribe..."
                                     label="Celular"
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
-                                    onChange={""}
+                                    onChange={handleInput}
                                 />
-                        </div>
-                    
-                        <div className="container-e-usuario">
-                        <TextField
+                            </div>
+
+                            <div className="container-e-usuario">
+                                <TextField
                                     type="email"
-                                    name="email"
+                                    name="correo"
                                     placeholder="Escribe..."
                                     label="E-mail"
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
-                                    onChange={""}
+                                    onChange={handleInput}
                                 />
+                            </div>
                         </div>
-                    </div>
                         <div className="cargo_usuario">
-                        <TextField
-                                    type="text"
-                                    name="cargo"
-                                    placeholder="Escribe..."
-                                    label="Cargo"
-                                    className="form-control RegistrarReferido"
-                                    style={{ marginBottom: "30px" }}
-                                    onChange={""}
-                                />
+                            <TextField
+                                type="text"
+                                name="cargo"
+                                placeholder="Escribe..."
+                                label="Cargo"
+                                className="form-control RegistrarReferido"
+                                style={{ marginBottom: "30px" }}
+                                onChange={handleInput}
+                            />
                         </div>
-                    
+
+
+
+                    </FormControl>
                     <button type="submit" className="button_usuario">Crear Usario</button>
                 </form>
             </div>

@@ -9,7 +9,7 @@ export const FormularioEstado = () => {
                                     type="date"
                                     name="fecha"
                                     placeholder="Escribe..."
-                                    label="Fecha de nacimiento"
+                                    label="Fecha"
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
                                     onChange={""}

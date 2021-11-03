@@ -666,6 +666,11 @@ a {
 .usuario-container{
     padding: 100px;
     width: 60%;
+    margin-top: 50px;
+    margin-right: 40px;
+    margin: auto;
+    padding: 100px;
+    margin-left: 70px;
 }
 .usuario-container .h3-usuario{
     margin-bottom: 22px;

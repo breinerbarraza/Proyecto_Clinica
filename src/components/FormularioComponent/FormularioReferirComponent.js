@@ -1,6 +1,9 @@
 import React,{useEffect, useState} from 'react'
 import TextField from '@mui/material/TextField';
-import { MenuItem, Select } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import API from '../../Utils/API';
 import Swal from 'sweetalert2';
 
@@ -32,17 +35,19 @@ export const FormularioReferirComponent = () => {
         .then( item =>{
             const resp = item.data;
             console.log(resp)
-            if(resp.mensage){
-                Swal.fire({
+            document.getElementById("login-form").reset();
+            if(resp.mensaje){
+                return Swal.fire({
                     position: 'top-end',
                     icon: 'success',
                     title: resp.mensaje,
                     showConfirmButton: false,
                     timer: 1500
                   });
+                  
             }else{
 
-                Swal.fire({
+                return Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: resp.error,
@@ -55,7 +60,8 @@ export const FormularioReferirComponent = () => {
 
     return (
         <div>
-            <form className="formulario-referir" onSubmit={enviarDatos}>
+            <form id="login-form" className="formulario-referir" onSubmit={enviarDatos}>
+            <FormControl fullWidth  >
                 <div className="textfile">
                 <h3 className="h3-referir"> Referir paciente</h3>
                         <TextField
@@ -89,31 +95,22 @@ export const FormularioReferirComponent = () => {
 
                 <div className="contenedor-referir">
                     <div className="documento">
+                    <FormControl fullWidth  >
+                    <InputLabel id="demo-simple-select-standard-label">Tipo de Documento</InputLabel>
                         <Select
                                 name="tipoIdentificacion"
-                                placeholder="Escribe..."
                                 label="Tipo de Documento"
-                                className="form-control"
+                                id="demo-simple-select-standard"
                                 onChange={handleSelect}
-                                style={{"padding":"20px", "border":"none"}}
                         >
                            
                            { 
                             identificacion.map( data => {
-                                return <MenuItem key={data.id} values={data.id}>{data.descripcion}</MenuItem>
+                                return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
                             } )
                            }
                         </Select>
-                    {/*
-                        <select>
-                            <option value="selected">--Seleccione--</option>
-                            {
-                                identificacion.map(item =>{
-                                    return<option value="{item.id}">{item.descripcion}</option>
-                                })
-                            }
-                            
-                        </select> */}
+                        </FormControl>
                     <TextField
                             type="text"
                             name="numeroIdentificacion"
@@ -147,6 +144,7 @@ export const FormularioReferirComponent = () => {
                         <button type="submit">Referir</button>
                     </div>
                 </div>
+                </FormControl>
             </form>
         </div>
     )
