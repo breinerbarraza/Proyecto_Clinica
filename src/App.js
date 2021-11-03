@@ -16,12 +16,8 @@ import { RegistrarReferidoComponent } from './components/RegistrarReferidoCompon
 import { DashboarComponent } from './components/DashboarComponent';
 import { CrearUsuarioComponent } from './components/CrearUsuarioComponent';
 import { ListadoReferidoComponent } from './components/ListadoReferidoComponent';
-import { ProgramadoComponent } from './components/ComponetEstados/ProgramadoComponent';
-import { DescartadoComponent } from './components/ComponetEstados/DescartadoComponent';
-import { GestionComponent } from './components/ComponetEstados/GestionComponent';
 import { PendienteComponent } from './components/ComponetEstados/PendeinteComponent';
-import { PreQuirugicoComponent } from './components/ComponetEstados/PreQuirugicoComponent';
-import { OperadoComponent } from './components/ComponetEstados/OperadoComponent';
+
 
 function App() {
   return (
@@ -66,14 +62,6 @@ function App() {
                   <LoginComponent />
                 )}
               </Route>
-              <Route exact path="/listado/pre_quirurgico/:id">
-                {localStorage.getItem('token') !== null ? (
-                  <PreQuirugicoComponent />
-                ) : (
-                  <LoginComponent />
-                )}
-              </Route>
-
               <Route exact path="/referir">
                 {localStorage.getItem('token') !== null ? (
                   <ReferirComponent />
@@ -102,44 +90,9 @@ function App() {
                   <LoginComponent />
                 )}
               </Route>
-              <Route exact path="/listado/programado/:id">
-                {localStorage.getItem('token') !== null ? (
-                  <ProgramadoComponent />
-                ) : (
-                  <LoginComponent />
-                )}
-              </Route>
-              <Route exact path="/Listado/descartado/:id">
-                {localStorage.getItem('token') !== null ? (
-                  <DescartadoComponent />
-                ) : (
-                  <LoginComponent />
-                )}
-              </Route>
-              <Route exact path="/listlista/gestion/:idado">
-                {localStorage.getItem('token') !== null ? (
-                  <GestionComponent />
-                ) : (
-                  <LoginComponent />
-                )}
-              </Route>
-              <Route exact path="/lista/pendiente/:id">
+              <Route exact path="/lista/estado/:id">
                 {localStorage.getItem('token') !== null ? (
                   <PendienteComponent />
-                ) : (
-                  <LoginComponent />
-                )}
-              </Route>
-              <Route exact path="/registrar_referido">
-                {localStorage.getItem('token') !== null ? (
-                  <OperadoComponent />
-                ) : (
-                  <LoginComponent />
-                )}
-              </Route>
-              <Route exact path="/lista/operado/:id">
-                {localStorage.getItem('token') !== null ? (
-                  <OperadoComponent />
                 ) : (
                   <LoginComponent />
                 )}
@@ -151,7 +104,7 @@ function App() {
                   <LoginComponent />
                 )}
               </Route> 
-              <Redirect path="/"/>    {/*
+              <Redirect to="/"/>    {/*
             <Route exact  path ="/email" component={ConfirEmailComponent}/>
             <Route exact  path ="/listado" component={ListadoComponent}/>
             <Route exact  path ="/referir" component={ReferirComponent}/>
