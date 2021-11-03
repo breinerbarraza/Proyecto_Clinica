@@ -46,6 +46,10 @@ body{
     padding: 0 5px !important;
 }
 
+a {
+    text-decoration: none;
+}
+
 .formulario{
     width: 50%; 
     padding: 5em; 
