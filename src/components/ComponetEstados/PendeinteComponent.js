@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { FormularioEstado } from './FormularioEstado/FormularioEstado'
 import API from '../../Utils/API'
-
+import { HeaderComponent } from '../HeaderComponent'
 
 export const PendienteComponent = () => {
     const [data_pendiente, setData_pendiente] = useState({})
@@ -18,6 +18,7 @@ export const PendienteComponent = () => {
     }, [])
     return (
         <>
+            <HeaderComponent users={false} dashboard={true} />
             <div className="contendor-prequi">
                 <div className="link-p">
                     <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-prequi"><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>{data_pendiente.get_nombreCompleto}</h3></Link>
@@ -45,7 +46,6 @@ export const PendienteComponent = () => {
                                         <TextField
                                             type="date"
                                             name="fecha"
-                                            placeholder="Escribe..."
                                             label="Pròxima gestiòn"
                                             className="form-control RegistrarReferido"
                                             style={{ marginBottom: "30px" }}

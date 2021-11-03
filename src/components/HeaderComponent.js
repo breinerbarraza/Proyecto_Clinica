@@ -20,7 +20,7 @@ function ButtonListar(){
     return(
         <button >
             <Link to="/listado">
-                <img alt="clinica" className="imgInactiva" src={chart_line_up_white}/>
+                <img alt="clinica" className="imgActiva" src={chart_line_up_white}/>
             </Link>
         </button>
     )
