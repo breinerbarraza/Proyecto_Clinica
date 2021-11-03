@@ -2,6 +2,7 @@ import React from 'react'
 import TextField from '@mui/material/TextField';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
+
 export const RegistrarReferidoComponent = () => {
     return (
 
@@ -31,7 +32,7 @@ export const RegistrarReferidoComponent = () => {
                             onChange={""}
                         />
                         <TextField
-                            type="text"
+                            type="date"
                             name="fecha"
                             placeholder="Escribe..."
                             label="Fecha de nacimiento"

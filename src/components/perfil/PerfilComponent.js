@@ -34,7 +34,7 @@ export const PerfilComponent = () => {
                 <button type="button" className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     { datos_perfil.nombres} {datos_perfil.apellidos}
                 </button>
-                <img alt="clinica" src={ClinicaBlanco} width="80" height="50"/>
+                <img alt="clinica" src={ClinicaBlanco} width="50" height="50"/>
                 <ul className="dropdown-menu dropdown-menu-end">
                     <li><button className="dropdown-item" type="button">Perfil</button></li>
                     <li><button onClick={() => cerrarSesion('token', 'id_user', 'nombres', 'apellidos')} className="dropdown-item" type="button">Cerrar Sesiòn</button></li>

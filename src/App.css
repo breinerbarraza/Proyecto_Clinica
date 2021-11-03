@@ -48,6 +48,7 @@ body{
 
 a {
     text-decoration: none;
+    color: #1c3678;
 }
 
 .formulario{
@@ -450,6 +451,8 @@ a {
     text-align: center;
     border: 0;
     border-bottom: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .table thead {
@@ -463,6 +466,10 @@ a {
 [data-test=datatable-select] {
     display: none;
 }
+
+[data-test=datatable-search] {
+    display: none !important;
+}
 [data-test=table]{
     border-radius: 10px;
 }
@@ -475,7 +482,7 @@ a {
 .lista-container{
     align-items: center;
     justify-content: center;
-    padding:10%;
+    padding:20vh 10vh 0vh 30vh;
 }
 .h3-Lista{
     color: #424ca8;

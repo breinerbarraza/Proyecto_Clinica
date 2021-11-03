@@ -90,7 +90,7 @@ export const ListadoReferidoComponent = () => {
       <HeaderComponent users={false} dashboard={true} />
       <PerfilComponent />
       <div className="lista-container">
-        <h3 className="h3-Lista">listado de referido</h3>
+        <h3 className="h3-Lista">Listado de referidos</h3>
         <div className="tabla-lista">
             {!loading && showTable()}
         </div>
