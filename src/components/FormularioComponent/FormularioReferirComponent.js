@@ -141,7 +141,7 @@ export const FormularioReferirComponent = () => {
                             onChange={handleSelect}
                         />
                        
-                        <button type="submit">Referir</button>
+                        <button style={{"marginTop":"20px"}} type="submit">Referir</button>
                     </div>
                 </div>
                 </FormControl>
