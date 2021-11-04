@@ -22,7 +22,7 @@ export const ListadoComponent = () => {
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
-            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{backgroundColor: 'red'}}/>,
+            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{backgroundColor: item.color_estado}}/>,
             "comision": item.comision
           }]),
           console.log(data_listado)
