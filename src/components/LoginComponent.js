@@ -83,6 +83,9 @@ export const LoginComponent = () => {
                             className="form-control"
                             style={{marginBottom: "30px"}}
                             onChange={handleInputChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         /><br />
               
                         <TextField
@@ -91,6 +94,9 @@ export const LoginComponent = () => {
                             label="Contraseña"
                             className="form-control"
                             onChange={handleInputChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         /><br /><br />
                         <button type="submit" className="btn btn-primary">INICIAR SESIÓN</button>
                     </form>

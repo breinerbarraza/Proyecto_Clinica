@@ -4,6 +4,7 @@ import { MDBDataTable } from 'mdbreact'
 import { PerfilComponent } from './perfil/PerfilComponent';
 import API from '../Utils/API';
 import { Link } from 'react-router-dom'
+import Chip from '@mui/material/Chip';
 
 export const ListadoComponent = () => {
 
@@ -21,7 +22,7 @@ export const ListadoComponent = () => {
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
-            "estadoReferido": item.estadoReferido,
+            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{backgroundColor: 'red'}}/>,
             "comision": item.comision
           }]),
           console.log(data_listado)

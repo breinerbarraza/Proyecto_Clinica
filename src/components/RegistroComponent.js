@@ -56,7 +56,7 @@ export const RegistroComponent = () => {
                     <form onSubmit={handleSubmit}>
                         <img alt="clinica" className="logo_clinica-registro" src={logo_clinica} />
                         <h3 className="h3-registro">¡Hola,</h3>
-                        <p className="p-registro"><b>Alberto Hernandez</b> quieres que haga parate de tu red de referidos!                </p>
+                        <p className="p-registro"><b>Alberto Hernandez</b> quiere que hagas parte de su red de referidos!                </p>
                        <TextField
                             type="text"
                             name="first_name"
@@ -65,6 +65,9 @@ export const RegistroComponent = () => {
                             className="form-control"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <TextField
                             type="text"
@@ -74,15 +77,21 @@ export const RegistroComponent = () => {
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <TextField
-                            type="text"
+                            type="email"
                             name="email"
                             placeholder="Escribe..."
                             label="E-mail"
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <TextField
                             type="text"
@@ -92,6 +101,9 @@ export const RegistroComponent = () => {
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <TextField
                             type="password"
@@ -101,6 +113,9 @@ export const RegistroComponent = () => {
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <TextField
                             type="password"
@@ -110,6 +125,9 @@ export const RegistroComponent = () => {
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         
                         <button type="submit" className="btn btn-primary">REGISTRARSE</button>

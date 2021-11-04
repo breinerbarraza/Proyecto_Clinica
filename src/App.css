@@ -48,7 +48,7 @@ body{
 
 a {
     text-decoration: none;
-    color: #1c3678;
+    color: #131d52;
 }
 
 .formulario{
@@ -73,19 +73,19 @@ a {
 /*Header Lateral*/
 
 .header{
-    background: rgb(33, 61, 104);
+    background: #10305b;
     float: left;
     height: 100vh;
 }
 .header .nav-header{
-    width: 127px;
+    width: 147px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .header button{
     border: none;
-    background: rgb(33, 61, 104); 
+    background: #10305b; 
     width: 100%;
     padding: 0 !important;
 }
@@ -98,13 +98,14 @@ a {
 }
 .header img {
     margin-bottom: 50px;
+    margin-left: 20px;
 }
 .header .imglista {
     width: 100%;
     margin-bottom: 30px;
 }
 .header nav{
-    background: rgb(33, 61, 104); 
+    background: #10305b; 
 }
 
 .imgLogo {
@@ -133,6 +134,11 @@ a {
 .documento{
     width: 50%;
 }
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border-color: #6b8dd6 !important;
+}
+
 .container-ce, .documento {
 	height: 300px;
 	margin: 0;
@@ -142,14 +148,14 @@ a {
 .imgActiva{
     background-color: white;
     padding: 40px;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
 }
 .imgInactiva{
-    background-color: white;
+    background-color: rgb(33, 61, 104);
     padding: 40px;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
 }
 .imgLogo{
     width: 80%;
@@ -241,7 +247,7 @@ a {
 
 .formulario-registrarefe button[type="submit"]{
     width: 100%;
-    background: rgb(26, 4, 105);
+    background: #02305b;
     font-size: 15px;
     color: white;
     border-radius: 5px;
@@ -261,7 +267,7 @@ a {
     border: 1px solid rgb(26, 4, 105) !important;
 }
 .p-registrarefe , .h3-registrarefe{
-    color: rgb(26, 4, 105);
+    color: #02305b;
 }
 
 ._container-referidos{
@@ -301,6 +307,8 @@ a {
 
 .page-registro .registro-container .formulario-registro .logo_clinica-registro{
     width: 200px;
+    padding-bottom: 10px;
+    padding-right: 20px;
     display: block;
 }
 .container-logo-registro{
@@ -342,7 +350,7 @@ a {
 }
 .formulario-registro button[type="submit"]{
     width: 100%;
-    background: rgb(26, 4, 105);
+    background: #02305b;
     font-size: 15px;
     color: white;
     border-radius: 5px;
@@ -363,7 +371,7 @@ a {
     border: 1px solid rgb(26, 4, 105) !important;
 }
 .p-registro , .h3-registro{
-    color: rgb(26, 4, 105);
+    color: #02305b;
 }
 
 /*Referir*/
@@ -372,7 +380,7 @@ a {
     margin-top: 50px;
     margin-right: 40px;
     margin: auto;
-    padding: 100px;
+    padding: 30px 0px 20px 150px;
     margin-left: 70px;
 }
 
@@ -426,7 +434,7 @@ a {
 }
 
 .tabla-pacientes table{
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: -2px -2px 10px 5px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     border-collapse: collapse;
 }
@@ -434,7 +442,7 @@ a {
 .tabla-pacientes td{
     background-color: #fff !important;
     text-align: center;
-    color: #1c3678 !important;
+    color: #131d52 !important;
     font-weight: bold;
     border-left: 0;
     border-right: 0;
@@ -459,6 +467,10 @@ a {
     background-color: rgb(87 130 222);
 }
 
+.table-striped>tbody>tr:nth-of-type(odd)>*{
+    --bs-table-accent-bg: #FFF
+}
+
 [data-test=table-foot] {
     display:none;
 }
@@ -470,8 +482,15 @@ a {
 [data-test=datatable-search] {
     display: none !important;
 }
+
+
 [data-test=table]{
     border-radius: 10px;
+}
+
+label {
+    color: #6b8dd6 !important;
+    font-weight: 400 !important;
 }
 
 @media (max-width : 800px) and (max-height: 900px){
@@ -482,7 +501,7 @@ a {
 .lista-container{
     align-items: center;
     justify-content: center;
-    padding:20vh 10vh 0vh 30vh;
+    padding:12vh 10vh 0vh 30vh;
 }
 .h3-Lista{
     color: #424ca8;
@@ -664,13 +683,13 @@ a {
 }
 /*Crear Usuario*/
 .usuario-container{
-    padding: 100px;
+    padding: 50px 0px 20px 150px;
     width: 60%;
     margin-top: 50px;
     margin-right: 40px;
     margin: auto;
     padding: 100px;
-    margin-left: 70px;
+    margin-left: 200px;
 }
 .usuario-container .h3-usuario{
     margin-bottom: 22px;
@@ -691,7 +710,7 @@ a {
 }
 button[type="submit"]{
     border: none;
-    background: rgb(33, 61, 104);
+    background: #02305b;
     font-size: 12px;
     color: white;
     width: 150px;
@@ -704,8 +723,9 @@ button[type="submit"]{
 
 /*prequirugico*/
 .contendor-prequi{
-    padding: 6%;
-    color: #29426d;
+    align-items: center;
+    justify-content: center;
+    padding:10vh 10vh 0vh 30vh;
 }
 .infomacion{
     margin-bottom:20px;
@@ -771,7 +791,7 @@ button[type="submit"]{
 
 .container-perfil{
     float: right;
-    padding: 30px;
+    padding: 20px;
     margin-top: 10px;  
 }
 .dropdown-toggle{
