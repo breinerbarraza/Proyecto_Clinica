@@ -846,3 +846,30 @@ button[type="submit"]{
     display: flex;
     justify-content: right;
 }
+
+/*Datos perfil*/
+
+.datos{
+    margin-left: 20%;
+    padding: 10px;
+    margin-bottom: 50%;
+}
+.datos-personales{
+    border: lawngreen !important;
+    padding: 10%;
+    color: rgb(49, 49, 105);
+    margin-right: 20%;
+}
+.h4-datos{
+    padding: 20px;
+}
+.actualizar-cambiar{
+    float: right;
+}
+.salir{
+    margin-top: 20px;
+
+}
+.actualizar{
+    margin-right: 10px;
+}
