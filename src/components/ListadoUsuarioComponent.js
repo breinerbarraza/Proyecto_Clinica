@@ -5,6 +5,7 @@ import { MDBDataTable } from 'mdbreact';
 import API from '../Utils/API';
 import { PerfilComponent } from './perfil/PerfilComponent';
 import { Link } from 'react-router-dom'
+import TextField from '@mui/material/TextField';
 
 export const ListadoUsuarioComponent = () => {
 
@@ -31,16 +32,16 @@ export const ListadoUsuarioComponent = () => {
   }
 
   const showTable = () => {
-      return (
-        <MDBDataTable
-          striped
-          className="tabla-pacientes"
-          bordered
-          entrieslabel={[]}
-          hover
-          data={data}
-        />
-      )
+    return (
+      <MDBDataTable
+        striped
+        className="tabla-pacientes"
+        bordered
+        entrieslabel={[]}
+        hover
+        data={data}
+      />
+    )
   }
 
   useEffect(() => {
@@ -84,12 +85,38 @@ export const ListadoUsuarioComponent = () => {
     <div className="listaRefe">
       <HeaderComponent users={false} dashboard={true} />
       <PerfilComponent />
-      
+
       <div className="lista-container">
         <h3 className="h3-Lista">Listado de usuario</h3>
-        <Link to="/crear_usuario"><button className="btn btn-primary-outline crear-usuario">Crear usario <img style={{width:"20%"}}src={user_add_blue}/></button></Link>
+        <div className="subtitle-header">
+          <div className="select-mes">
+            <TextField
+              select
+              name="identidad"
+              placeholder="Escribe..."
+              label="Mes"
+              className="form-control "
+              style={{ marginBottom: "30px" }}
+              onChange={""}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            >
+              <option value="">Choose one option</option>
+            </TextField></div>
+            <div style={{flex: 5}}>
+
+            </div>
+            <div className="link-crearusuario">
+              <Link to="/crear_usuario">
+                <button className="btn btn-primary-outline crear-usuario">
+                  Crear usuario <img style={{ width: "20%" }} src={user_add_blue} />
+                </button>
+              </Link>
+            </div>
+        </div>
         <div className="tabla-lista">
-            {!loading && showTable()}
+          {!loading && showTable()}
         </div>
       </div>
     </div>

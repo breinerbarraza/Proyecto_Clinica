@@ -3,6 +3,7 @@ body{
     background-image: url("./image/Recursos-Femto2/Background.png");
     background-size: 99% 100%;
 }
+
 .login-container {
     display: flex;
     flex-direction: row;
@@ -151,6 +152,22 @@ a {
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
 }
+.imgActiva ::after, .imgActiva::before {
+    border-right:1px solid dodgerblue;
+  content:'';
+  height:32px;
+  right:-2px;
+  position:absolute;
+  width:80px;
+}
+.imgActiva:after {
+    border-bottom-right-radius: 5px;
+    transform:translateY(-100%);
+  }
+  .imgActiva:before {
+    border-top-right-radius:5px;
+    transform:translateY(100%);
+  }
 .imgInactiva{
     background-color: rgb(33, 61, 104);
     padding: 40px;
@@ -504,7 +521,7 @@ label {
     padding:12vh 10vh 0vh 30vh;
 }
 .h3-Lista{
-    color: #424ca8;
+    color: #02305b;
 }
 
 /*Confirma Email*/
@@ -810,6 +827,21 @@ button[type="submit"]{
 .crear-usuario{
     color: #252b61;
     border: none;
-    margin-left: 84%;
     margin-bottom: 10px;    
+}
+
+.subtitle-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2vh;
+}
+
+.select-mes {
+    width: 40vh;
+}
+
+.link-crearusuario {
+    display: flex;
+    justify-content: right;
 }
