@@ -6,24 +6,15 @@ import API from '../../Utils/API';
 
 export const DatosPerfilComonent = () => {
 
-    const datosUser = {
-        nombres:"",
-        apellidos:"",
-        username:""
+    const estado_inicial = {
+        id_user: "",
+        nombres: "",
+        apellidos: "",
+        username: ""
     }
-    const [userData, setUserData] = useState(datosUser);
 
-    const handleInput = (e) =>{
-        e.preventDeafault()
-        API.post('',JSON.stringify(userData))
-    }
-    const handleInputChange =  (e)=> {
-        setUserData({
-            ...userData,
-            [e.target.name] : e.target.value
-        })
-    }
-    const [datos, setDatos] = useState({});
+    const [estadoStorage, set_estadoStorage] = useState(estado_inicial)
+    
     useEffect(() => {
         const nombres = JSON.parse(localStorage.getItem('nombres'));
         const apellidos = JSON.parse(localStorage.getItem('apellidos'));
@@ -35,27 +26,46 @@ export const DatosPerfilComonent = () => {
             apellidos,
             username
         }
-        setDatos(objeto);
+        set_estadoStorage(objeto)
+        
     }, []);
+
+    const handleSubmit = (e) =>{
+        e.preventDefault()
+        console.log(estadoStorage)
+        API.put('api/',JSON.stringify(estadoStorage))
+        .then( item => {
+            const resp = item.data;
+            console.log(resp);
+        })
+    }
+
+    const handleInputChange =  (e)=> {
+        set_estadoStorage({
+            ...estadoStorage,
+            [e.target.name] : e.target.value
+        })
+    }
+
     return (
         <>
             <div className="datos">
                 <div className="datos-personales">
                 <div className="salir">
                         <Link to="/">
-                             <button className="btn btn-primary-outline inicio"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i><i class="fas fa-home"></i> Inicio</button>
+                             <button className="btn btn-primary-outline inicio"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i><i className="fas fa-home"></i> Inicio</button>
                         </Link>
                     <h4 className="h4-datos">Datos personales</h4></div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                     <FormControl fullWidth >
                         <TextField
                             type="text"
-                            name="nombre"
+                            name="nombres"
                             placeholder="Escribe..."
                             label="Nombre"
                             className="form-control"
                             style={{ marginBottom: "30px" }}
-                            value={datos.nombres}
+                            value={estadoStorage.nombres}
                             onChange={handleInputChange}
                             InputLabelProps={{
                                 shrink: true,
@@ -68,21 +78,23 @@ export const DatosPerfilComonent = () => {
                             label="Apellidos"
                             className="form-control"
                             style={{ marginBottom: "30px" }}
-                            value={datos.apellidos}
+                            value={estadoStorage.apellidos}
                             onChange={handleInputChange}
+                        
                             InputLabelProps={{
                                 shrink: true,
                             }}
                         />
                         <TextField
                             type="text"
-                            name="usuario"
+                            name="username"
                             placeholder="Escribe..."
                             label="Usuario"
                             className="form-control"
                             style={{ marginBottom: "30px" }}
-                            value={datos.username}
+                            value={estadoStorage.username}
                             onChange={handleInputChange}
+                            
                             InputLabelProps={{
                                 shrink: true,
                             }}
