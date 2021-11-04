@@ -19,6 +19,7 @@ import { ListadoReferidoComponent } from './components/ListadoReferidoComponent'
 import { PendienteComponent } from './components/ComponetEstados/PendeinteComponent';
 import { DatosPerfilComonent } from './components/perfil/DatosPerfilComonent';
 import { ListadoUsuarioComponent } from './components/ListadoUsuarioComponent';
+import { CambioContraseña } from './components/perfil/CambioContraseña';
 
 
 function App() {
@@ -108,6 +109,13 @@ function App() {
               <Route exact path="/datos_perfil">
                 {localStorage.getItem('token') !== null ? (
                   <DatosPerfilComonent/>
+                ) : (
+                  <LoginComponent/>
+                )}
+              </Route> 
+              <Route exact path="/cambio_contraseña">
+                {localStorage.getItem('token') !== null ? (
+                  <CambioContraseña/>
                 ) : (
                   <LoginComponent/>
                 )}

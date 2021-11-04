@@ -81,7 +81,7 @@ export const DatosPerfilComonent = () => {
                             value={estadoStorage.apellidos}
                             onChange={handleInputChange}
                         
-                            InputLabelProps={{
+                            InputLabelProps={{  
                                 shrink: true,
                             }}
                         />
@@ -103,7 +103,9 @@ export const DatosPerfilComonent = () => {
 
                         <div className="actualizar-cambiar">
                             <button className="btn btn-primary actualizar"><i className="far fa-edit" style={{ marginRight: "10px" }}></i>Actulizar datos</button>
-                            <button className="btn btn-primary cambiar"><i className="fas fa-key" style={{ marginRight: "10px" }}></i>Cambiar contraseña</button>
+                            <Link to="/cambio_contraseña">
+                                <button className="btn btn-primary cambiar"><i className="fas fa-key" style={{ marginRight: "10px" }}></i>Cambiar contraseña</button>
+                            </Link>
                         </div>
                         </form>
                 </div>
