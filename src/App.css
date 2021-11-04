@@ -4,6 +4,10 @@ body{
     background-size: 99% 100%;
 }
 
+p {
+    color: #02305b;
+}
+
 .login-container {
     display: flex;
     flex-direction: row;
@@ -104,7 +108,7 @@ a {
     cursor: pointer;
 }
 .logo-clinica {
-    width: 100% !important;
+    width: 85% !important;
 }
 .header img {
     margin-bottom: 50px;
@@ -162,7 +166,7 @@ a {
     border-bottom-left-radius: 50px;
 }
 .imgActiva ::after, .imgActiva::before {
-    border-right:1px solid dodgerblue;
+    border-right:1px solid #FFF;
   content:'';
   height:32px;
   right:-2px;

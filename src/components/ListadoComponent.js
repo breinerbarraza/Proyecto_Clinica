@@ -15,6 +15,7 @@ export const ListadoComponent = () => {
     setLoading(true)
     await API.get('api/referidos/')
       .then(resp => {
+        console.log(resp.data)
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -22,10 +23,9 @@ export const ListadoComponent = () => {
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
-            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{backgroundColor: 'red'}}/>,
+            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{backgroundColor: item.color_estado}}/>,
             "comision": item.comision
-          }]),
-          console.log(data_listado)
+          }])
         ))
       })
     setLoading(false)

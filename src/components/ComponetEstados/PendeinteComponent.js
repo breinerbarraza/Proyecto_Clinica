@@ -9,6 +9,7 @@ import { Link, useParams } from 'react-router-dom'
 import { FormularioEstado } from './FormularioEstado/FormularioEstado'
 import API from '../../Utils/API'
 import { HeaderComponent } from '../HeaderComponent'
+import Chip from '@mui/material/Chip';
 
 export const PendienteComponent = () => {
     const [data_pendiente, setData_pendiente] = useState({})
@@ -17,6 +18,7 @@ export const PendienteComponent = () => {
     useEffect(() => {
         API.get("api/referidos/" + id)
             .then(item => {
+                console.log(item.data)
                 setData_pendiente(item.data)
             })
     }, [])
@@ -26,7 +28,13 @@ export const PendienteComponent = () => {
             <div className="contendor-prequi">
                 <div className="link-p">
                     <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-prequi"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i>{data_pendiente.get_nombreCompleto}</h3></Link>
-                    <p className="estado-p">{data_pendiente.estadoReferido}</p>
+                    <Chip 
+                        label={`• ${data_pendiente.estadoReferido}`}
+                        style={{
+                            marginLeft: "20px",
+                            backgroundColor: data_pendiente.color_estado
+                        }}
+                    />
                 </div>
                 <div className="infomacion">
                     <div className="nacimiento">
@@ -35,9 +43,9 @@ export const PendienteComponent = () => {
 
                         </div>
                     </div>
-                    <label className="label-info"><b>C.C: </b>{data_pendiente.numeroIdentificacion}</label><br />
-                    <label className="label-info"><b>Correo: </b>{data_pendiente.correo_electronico}</label><br />
-                    <label className="label-info"><b>Referio por: </b></label><br />
+                    <p><b>C.C: </b>{data_pendiente.numeroIdentificacion}</p>
+                    <p><b>Correo: </b>{data_pendiente.correo_electronico}</p>
+                    <p><b>Referido por: </b></p>
                 </div>
 
                 {data_pendiente.estadoReferido === "Pendiente" && (
