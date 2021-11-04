@@ -111,9 +111,7 @@ export const FormularioReferirComponent = () => {
                                     label="Tipo de Documento"
                                     id="demo-simple-select-standard"
                                     onChange={handleSelect}
-                                    SelectDisplayProps={{
-                                        shrink: true,
-                                    }}
+                                    
                                 >
 
                                     {

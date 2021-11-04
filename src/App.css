@@ -786,6 +786,7 @@ button[type="submit"]{
 /*Programado*/
 .form-medico{
     width: 150%;
+    margin-top: 20px;
 }
 /*gestion*/
 .label-info-gestion{

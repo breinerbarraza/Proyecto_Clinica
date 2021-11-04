@@ -14,7 +14,9 @@ export const FormularioEstado = () => {
                         label="Fecha"
                         className="form-control RegistrarReferido"
                         style={{ marginBottom: "30px" }}
-                        onChange={""}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                 </div>
                 <div className="form-hora">
@@ -25,7 +27,9 @@ export const FormularioEstado = () => {
                         label="Hora"
                         className="form-control RegistrarReferido"
                         style={{ marginBottom: "30px" }}
-                        onChange={""}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                 </div>
 

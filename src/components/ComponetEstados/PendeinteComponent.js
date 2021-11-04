@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { FormularioEstado } from './FormularioEstado/FormularioEstado'
@@ -21,7 +25,7 @@ export const PendienteComponent = () => {
             <HeaderComponent users={false} dashboard={true} />
             <div className="contendor-prequi">
                 <div className="link-p">
-                    <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-prequi"><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>{data_pendiente.get_nombreCompleto}</h3></Link>
+                    <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-prequi"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i>{data_pendiente.get_nombreCompleto}</h3></Link>
                     <p className="estado-p">{data_pendiente.estadoReferido}</p>
                 </div>
                 <div className="infomacion">
@@ -50,6 +54,9 @@ export const PendienteComponent = () => {
                                             className="form-control RegistrarReferido"
                                             style={{ marginBottom: "30px" }}
                                             onChange={""}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
                                         />
                                         <TextField
                                             textarea
@@ -62,6 +69,9 @@ export const PendienteComponent = () => {
                                             className="form-control"
                                             style={{ marginBottom: "30px" }}
                                             onChange={""}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -96,31 +106,27 @@ export const PendienteComponent = () => {
                     <>
                         <p className="prequi-p"><b>· Definir fecha de procedimiento</b></p>
                         <div className="form-prequi">
-                            <form>
+                            <div>
                                 <FormularioEstado />
                                 <div className="form-medico">
-                                    <TextField
-                                        select
-                                        name="mdico"
-                                        label="Medico"
-                                        className="form-control "
-                                        style={{ marginBottom: "30px" }}
-                                        onChange={""}
-                                    >
-                                        <option value="">Choose one option</option>
-                                        <option value="3">03</option>
-                                        <option value="6">06</option>
-                                        <option value="9">09</option>
-                                        <option value="12">12</option>
-                                        <option value="16">16</option>
-                                        <option value="18">18</option>
-                                    </TextField>
+                                    <FormControl fullWidth >
+                                        <InputLabel shrink id="demo-simple-select-standard-label">Medico</InputLabel>
+                                        <Select
+                                            name="medico"
+                                            labelId="demo-simple-select-standard-label"
+                                            id="demo-simple-select-standard"
+                                            label="Medico"
+                                        >
+                                            <MenuItem >dsfgdsf</MenuItem>
+
+                                        </Select>
+                                    </FormControl>
                                 </div>
 
                                 <div className="prequi-button">
                                     <button type="submit" className="prequi-b">ASIGNAR</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </>
                 )}
