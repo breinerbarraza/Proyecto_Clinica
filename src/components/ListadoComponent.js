@@ -5,6 +5,7 @@ import { PerfilComponent } from './perfil/PerfilComponent';
 import API from '../Utils/API';
 import { Link } from 'react-router-dom'
 import Chip from '@mui/material/Chip';
+import TextField from '@mui/material/TextField';
 
 export const ListadoComponent = () => {
 
@@ -23,7 +24,7 @@ export const ListadoComponent = () => {
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
-            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{backgroundColor: item.color_estado}}/>,
+            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />,
             "comision": item.comision
           }])
         ))
@@ -98,9 +99,24 @@ export const ListadoComponent = () => {
     <div className="listaRefe">
       <PerfilComponent />
       <HeaderComponent users={false} dashboard={true} />
-      
+
       <div className="lista-container">
         <h3 className="h3-Lista">Listado de referidos</h3>
+        <div className="select-mes">
+          <TextField
+            select
+            name="identidad"
+            placeholder="Escribe..."
+            label="Mes"
+            className="form-control "
+            style={{ marginBottom: "30px" }}
+            onChange={""}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          >
+            <option value="">Choose one option</option>
+          </TextField></div>
         <div className="tabla-lista">
           {!loading && showTable()}
         </div>
