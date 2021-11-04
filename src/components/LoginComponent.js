@@ -37,13 +37,14 @@ export const LoginComponent = () => {
                     title: 'Oops...',
                     text: error_msg,
                   })
-                document.getElementById("login-form").reset();
+                document.querySelector(".login-form").reset();
             }else{
                 const token = data.token;
                 const id_user = data.user_id;
                 const nombres = data.firstname;
                 const apellidos = data.lastname;
-                guardarDataLocalStorage(token, id_user, nombres, apellidos);
+                const username = data.username
+                guardarDataLocalStorage(token, id_user, nombres, apellidos,username);
                 const token_guardado = obtenerLocalStorageToken('token')
                 if(token_guardado !== "null"){
                     window.location = "/"
@@ -60,11 +61,12 @@ export const LoginComponent = () => {
         return dato;
     }
 
-    const guardarDataLocalStorage = (nombre_token, idUser,nombres, apellidos)=>{
+    const guardarDataLocalStorage = (nombre_token, idUser,nombres, apellidos,username)=>{
         localStorage.setItem('token', JSON.stringify(nombre_token))
         localStorage.setItem('id_user', JSON.stringify(idUser));
         localStorage.setItem('nombres', JSON.stringify(nombres));
         localStorage.setItem('apellidos', JSON.stringify(apellidos));
+        localStorage.setItem('username', JSON.stringify(username));
     }
 
     return (
