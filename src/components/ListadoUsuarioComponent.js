@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { HeaderComponent } from './HeaderComponent'
-import { MDBDataTable } from 'mdbreact'
-import { PerfilComponent } from './perfil/PerfilComponent';
+import user_add_blue from '../image/Recursos-Femto/user-add-Blue.svg';
+import { MDBDataTable } from 'mdbreact';
 import API from '../Utils/API';
+import { PerfilComponent } from './perfil/PerfilComponent';
 import { Link } from 'react-router-dom'
 
-export const ListadoComponent = () => {
+export const ListadoUsuarioComponent = () => {
 
   const [data_listado, setData_listado] = useState([])
   const [loading, setLoading] = useState(false)
@@ -21,8 +22,7 @@ export const ListadoComponent = () => {
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
-            "estadoReferido": item.estadoReferido,
-            "comision": item.comision
+            "estadoReferido": item.estadoReferido
           }]),
           console.log(data_listado)
         ))
@@ -31,32 +31,31 @@ export const ListadoComponent = () => {
   }
 
   const showTable = () => {
-    return (
-      <MDBDataTable
-        striped
-        className="tabla-pacientes"
-        bordered
-        entrieslabel={[]}
-        hover
-        data={data}
-      />
-    )
+      return (
+        <MDBDataTable
+          striped
+          className="tabla-pacientes"
+          bordered
+          entrieslabel={[]}
+          hover
+          data={data}
+        />
+      )
   }
 
   useEffect(() => {
     load()
   }, [])
 
-  console.log(data_listado)
   const data = {
+
     columns: [
       {
 
-        label: 'Paciente',
-        field: 'get_nombreCompleto',
-        //field: <Link to="/pre_quirurgico" style={{textDecoration:"none"}}></Link>,
+        label: 'Asesor',
+        field: "asesor",
         sort: 'asc',
-        width: 150
+        width: 150,
       },
       {
         label: 'Documento de identidad',
@@ -71,23 +70,11 @@ export const ListadoComponent = () => {
         width: 200
       },
       {
-        label: 'Celular',
-        field: 'celular',
+        label: 'Referidos',
+        field: 'referido',
         sort: 'asc',
         width: 100
       },
-      {
-        label: 'Estado',
-        field: 'estadoReferido',
-        sort: 'asc',
-        width: 150
-      },
-      {
-        label: 'Comisiòn',
-        field: 'comision',
-        sort: 'asc',
-        width: 100
-      }
     ],
     rows: data_listado
 
@@ -95,13 +82,14 @@ export const ListadoComponent = () => {
 
   return (
     <div className="listaRefe">
-      <PerfilComponent />
       <HeaderComponent users={false} dashboard={true} />
+      <PerfilComponent />
       
       <div className="lista-container">
-        <h3 className="h3-Lista">Listado de referidos</h3>
+        <h3 className="h3-Lista">Listado de usuario</h3>
+        <Link to="/crear_usuario"><button className="btn btn-primary-outline crear-usuario">Crear usario <img style={{width:"20%"}}src={user_add_blue}/></button></Link>
         <div className="tabla-lista">
-          {!loading && showTable()}
+            {!loading && showTable()}
         </div>
       </div>
     </div>

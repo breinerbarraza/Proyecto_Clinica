@@ -786,3 +786,10 @@ button[type="submit"]{
     margin-top: 10px;
     margin-right: 8px;
 }
+
+.crear-usuario{
+    color: #252b61;
+    border: none;
+    margin-left: 84%;
+    margin-bottom: 10px;    
+}

@@ -18,6 +18,7 @@ import { CrearUsuarioComponent } from './components/CrearUsuarioComponent';
 import { ListadoReferidoComponent } from './components/ListadoReferidoComponent';
 import { PendienteComponent } from './components/ComponetEstados/PendeinteComponent';
 import { DatosPerfilComonent } from './components/perfil/DatosPerfilComonent';
+import { ListadoUsuarioComponent } from './components/ListadoUsuarioComponent';
 
 
 function App() {
@@ -111,6 +112,13 @@ function App() {
                   <LoginComponent/>
                 )}
               </Route> 
+              <Route exact path="/listado_usuario">
+                {localStorage.getItem('token') !== null ?(
+                  <ListadoUsuarioComponent/>
+                ) : (
+                  <LoginComponent/>
+                )}
+              </Route>
               <Redirect to="/"/>    {/*
             <Route exact  path ="/email" component={ConfirEmailComponent}/>
             <Route exact  path ="/listado" component={ListadoComponent}/>
