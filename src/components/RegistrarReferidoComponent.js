@@ -21,6 +21,9 @@ export const RegistrarReferidoComponent = () => {
                             className="form-control"
                             style={{ marginBottom: "30px" }}
                             onChange={""}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <TextField
                             type="text"
@@ -30,6 +33,9 @@ export const RegistrarReferidoComponent = () => {
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={""}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <TextField
                             type="date"
@@ -39,6 +45,9 @@ export const RegistrarReferidoComponent = () => {
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={""}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <div className="_container-referidos">
                             <div className="container-Select-cedula">
@@ -51,6 +60,9 @@ export const RegistrarReferidoComponent = () => {
                                     className="form-control "
                                     style={{ marginBottom: "30px"}}
                                     onChange={""}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                 >
                                     <option value="">Choose one option</option>
                                     <option value="3">03</option>
@@ -68,6 +80,9 @@ export const RegistrarReferidoComponent = () => {
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
                                     onChange={""}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                 />
                                 
                             </div>
@@ -80,6 +95,9 @@ export const RegistrarReferidoComponent = () => {
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
                                     onChange={""}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                 />
                                 <TextField
                                     type="email"
@@ -89,6 +107,9 @@ export const RegistrarReferidoComponent = () => {
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
                                     onChange={""}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                 />
                             </div>
                         </div>

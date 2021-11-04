@@ -247,7 +247,7 @@ a {
 
 .formulario-registrarefe button[type="submit"]{
     width: 100%;
-    background: rgb(26, 4, 105);
+    background: #02305b;
     font-size: 15px;
     color: white;
     border-radius: 5px;
@@ -267,7 +267,7 @@ a {
     border: 1px solid rgb(26, 4, 105) !important;
 }
 .p-registrarefe , .h3-registrarefe{
-    color: rgb(26, 4, 105);
+    color: #02305b;
 }
 
 ._container-referidos{
@@ -689,7 +689,7 @@ label {
     margin-right: 40px;
     margin: auto;
     padding: 100px;
-    margin-left: 100px;
+    margin-left: 200px;
 }
 .usuario-container .h3-usuario{
     margin-bottom: 22px;
