@@ -855,9 +855,8 @@ button[type="submit"]{
     margin-bottom: 50%;
 }
 .datos-personales{
-    border: lawngreen !important;
     padding: 10%;
-    color: rgb(49, 49, 105);
+    color: rgb(33, 61, 104);
     margin-right: 20%;
 }
 .h4-datos{
@@ -865,11 +864,18 @@ button[type="submit"]{
 }
 .actualizar-cambiar{
     float: right;
-}
-.salir{
-    margin-top: 20px;
-
+    margin-top: 15px;
 }
 .actualizar{
     margin-right: 10px;
+    background:rgb(33, 61, 104);
+    border: none;
 }
+.cambiar{
+    background:rgb(33, 61, 104);
+    border: none;
+}
+.inicio{
+    color: rgb(33, 61, 104);
+}
+

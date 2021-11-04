@@ -1,15 +1,15 @@
 import React from 'react'
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
+import { Link } from 'react-router-dom';
 
 export const DatosPerfilComonent = () => {
     return (
         <>
-            
             <div className="datos">
                 <div className="datos-personales">
                 <div className="salir">
-                        <button className="btn btn-primary-outline"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i><i class="fas fa-home"></i>Inicio</button>
+                         <Link to="/"><button className="btn btn-primary-outline inicio"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i><i class="fas fa-home"></i> Inicio</button></Link>
                         
                     <h4 className="h4-datos">Datos personales</h4></div>
                     <FormControl fullWidth  >
@@ -50,15 +50,12 @@ export const DatosPerfilComonent = () => {
                             }}
                         />
                     </FormControl>
-                    
                         <div className="actualizar-cambiar">
                             <button className="btn btn-primary actualizar"><i className="far fa-edit" style={{ marginRight: "10px" }}></i>Actulizar datos</button>
                             <button className="btn btn-primary cambiar"><i className="fas fa-key" style={{ marginRight: "10px" }}></i>Cambiar contraseña</button>
                         </div>
-                    
                 </div>
             </div>
-
         </>
     )
 }
