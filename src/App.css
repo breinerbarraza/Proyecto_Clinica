@@ -693,10 +693,11 @@ label {
 .container-dashboar{
     width: 40%;
     padding: 10%;
+    padding-left: 15%;
 }
 .select-dashboar{
     margin-top: 5%;
-    width: 30%;
+    width: 100%;
     margin-bottom: 10%;
 }
 .select-dashboar{
@@ -704,12 +705,15 @@ label {
 }
 .h3-dashboar{
     display: flex;
-    margin-bottom: 10%;
+    margin-bottom: 20%;
     color: #1c3678;
 }
 .table-hover{
-    border-radius: 10px;
-
+    border-radius: 10px !important;
+}
+.grafica{
+    width: 100%;
+    margin-left: 300%;
 }
 /*Crear Usuario*/
 .usuario-container{
