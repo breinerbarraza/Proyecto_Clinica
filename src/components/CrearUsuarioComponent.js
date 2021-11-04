@@ -45,7 +45,7 @@ export const CrearUsuarioComponent = () => {
                 <h3 className="h3-usuario"> Crear Usuario</h3>
                 <form id="login-form" onSubmit={enviarDatos}>
                     <FormControl fullWidth  >
-                        <InputLabel id="demo-simple-select-standard-label">Tipo Usuario</InputLabel>
+                        <InputLabel shrink id="demo-simple-select-standard-label">Tipo Usuario</InputLabel>
                         <Select
                             name="tipo_usuario"
                             labelId="demo-simple-select-standard-label"
@@ -67,6 +67,9 @@ export const CrearUsuarioComponent = () => {
                             className="form-control"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInput}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <TextField
                             type="text"
@@ -76,6 +79,9 @@ export const CrearUsuarioComponent = () => {
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInput}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <div className="E-C_usuraio">
                             <div className="container-ce-usuario">
@@ -87,6 +93,9 @@ export const CrearUsuarioComponent = () => {
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
                                     onChange={handleInput}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                 />
                             </div>
 
@@ -99,6 +108,9 @@ export const CrearUsuarioComponent = () => {
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
                                     onChange={handleInput}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                 />
                             </div>
                         </div>
@@ -111,6 +123,9 @@ export const CrearUsuarioComponent = () => {
                                 className="form-control RegistrarReferido"
                                 style={{ marginBottom: "30px" }}
                                 onChange={handleInput}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                             />
                         </div>
 

@@ -307,6 +307,8 @@ a {
 
 .page-registro .registro-container .formulario-registro .logo_clinica-registro{
     width: 200px;
+    padding-bottom: 10px;
+    padding-right: 20px;
     display: block;
 }
 .container-logo-registro{
@@ -348,7 +350,7 @@ a {
 }
 .formulario-registro button[type="submit"]{
     width: 100%;
-    background: rgb(26, 4, 105);
+    background: #02305b;
     font-size: 15px;
     color: white;
     border-radius: 5px;
@@ -369,7 +371,7 @@ a {
     border: 1px solid rgb(26, 4, 105) !important;
 }
 .p-registro , .h3-registro{
-    color: rgb(26, 4, 105);
+    color: #02305b;
 }
 
 /*Referir*/
@@ -487,7 +489,8 @@ a {
 }
 
 label {
-    color: rgb(33, 61, 104) !important;
+    color: #6b8dd6 !important;
+    font-weight: 400 !important;
 }
 
 @media (max-width : 800px) and (max-height: 900px){
@@ -680,13 +683,13 @@ label {
 }
 /*Crear Usuario*/
 .usuario-container{
-    padding: 100px;
+    padding: 50px 0px 20px 150px;
     width: 60%;
     margin-top: 50px;
     margin-right: 40px;
     margin: auto;
     padding: 100px;
-    margin-left: 70px;
+    margin-left: 100px;
 }
 .usuario-container .h3-usuario{
     margin-bottom: 22px;
@@ -707,7 +710,7 @@ label {
 }
 button[type="submit"]{
     border: none;
-    background: rgb(33, 61, 104);
+    background: #02305b;
     font-size: 12px;
     color: white;
     width: 150px;
