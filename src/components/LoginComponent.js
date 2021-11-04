@@ -73,7 +73,7 @@ export const LoginComponent = () => {
             <div className="login-container">
                 <div className="formulario">
                 
-                    <form onSubmit={enviarDatos} id="login-form">
+                    <form onSubmit={enviarDatos} className="login-form">
                        <img alt="clinica"className="logo_clinica" src={logo_clinica} /> 
                        
                         <TextField
@@ -98,7 +98,7 @@ export const LoginComponent = () => {
                                 shrink: true,
                             }}
                         /><br /><br />
-                        <button type="submit" className="btn btn-primary">INICIAR SESIÓN</button>
+                        <button type="submit" style={{width: "100%"}} className="btn btn-primary">INICIAR SESIÓN</button>
                     </form>
 
                 </div>
