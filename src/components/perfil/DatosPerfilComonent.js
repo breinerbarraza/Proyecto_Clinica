@@ -15,7 +15,7 @@ export const DatosPerfilComonent = () => {
     }
 
     const [estadoStorage, set_estadoStorage] = useState(estado_inicial)
-
+    const [temporal, setTemporal] = useState({})
     useEffect(() => {
         const first_name = JSON.parse(localStorage.getItem('nombres'));
         const last_name = JSON.parse(localStorage.getItem('apellidos'));
@@ -28,6 +28,7 @@ export const DatosPerfilComonent = () => {
             username
         }
         set_estadoStorage(objeto)
+        setTemporal(objeto)
 
     }, []);
 
@@ -46,12 +47,9 @@ export const DatosPerfilComonent = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                }else if(estadoStorage.first_name === first_name.value || 
-                         estadoStorage.last_name === last_name.value || 
-                         estadoStorage.username === username.value ){
-                             
-                    console.log(typeof estadoStorage.first_name);
-                    console.log(typeof first_name.value);
+                }else if(temporal.first_name === first_name.value ){
+                    console.log(estadoStorage.first_name);
+                    console.log(first_name.value);
                     return Swal.fire({
                         icon: 'error',
                         title: 'Cambia los campos',

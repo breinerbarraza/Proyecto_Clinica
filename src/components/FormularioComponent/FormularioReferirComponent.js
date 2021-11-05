@@ -89,7 +89,7 @@ export const FormularioReferirComponent = () => {
                             }}
                         />
                         <TextField
-                            type="text"
+                            type="date"
                             name="fechaNacimiento"
                             placeholder="Escribe..."
                             label="Fecha de nacimiento"
@@ -123,20 +123,6 @@ export const FormularioReferirComponent = () => {
                             </FormControl>
                             <TextField
                                 type="text"
-                                name="numeroIdentificacion"
-                                placeholder="Escribe..."
-                                label="Numero de identidad"
-                                className="form-control"
-                                style={{ marginBottom: "30px" }}
-                                onChange={handleSelect}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                        </div>
-                        <div className="container-ce">
-                            <TextField
-                                type="text"
                                 name="celular"
                                 placeholder="Escribe..."
                                 label="Celular"
@@ -147,6 +133,21 @@ export const FormularioReferirComponent = () => {
                                     shrink: true,
                                 }}
                             />
+                        </div>
+                        <div className="container-ce">
+                        <TextField
+                                type="text"
+                                name="numeroIdentificacion"
+                                placeholder="Escribe..."
+                                label="Numero de identidad"
+                                className="form-control"
+                                style={{ marginBottom: "30px" }}
+                                onChange={handleSelect}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            
                             <TextField
                                 type="email"
                                 name="correo_electronico"
