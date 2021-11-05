@@ -46,19 +46,34 @@ export const DatosPerfilComonent = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                } 
-                console.log(item)
-                const resp = item.data;
-                console.log(resp);
-                borrarDatos('nombres', 'apellidos', 'username')
-                guardarDatos(resp.first_name, resp.last_name, resp.username);
-                return Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Usuario actualizado correctamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                }else if(estadoStorage.first_name === first_name.value || 
+                         estadoStorage.last_name === last_name.value || 
+                         estadoStorage.username === username.value ){
+                             
+                    console.log(typeof estadoStorage.first_name);
+                    console.log(typeof first_name.value);
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Cambia los campos',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    
+                }else{
+                    console.log(item)
+                    const resp = item.data;
+                    console.log(resp);
+                    borrarDatos('nombres', 'apellidos', 'username')
+                    guardarDatos(resp.first_name, resp.last_name, resp.username);
+                    return Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Usuario actualizado correctamente',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }); 
+                }
+                
             })
     }
     const guardarDatos = (first_name, last_name, username) => {

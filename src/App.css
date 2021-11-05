@@ -690,31 +690,34 @@ label {
 }
 
 /*Dashboar*/
-.container-dashboar{
-    width: 40%;
-    padding: 10%;
-    padding-left: 15%;
+.container-dashboard{
+    padding: 12vh 0vh 0vh 30vh;
+}
+.dashboard-flexbox {
+    display: flex;
+    flex-direction: row;
+}
+.table-dashboard {
+    width: 45%;
+    margin: 30px 50px 0px 0px;
 }
 .select-dashboar{
-    margin-top: 5%;
+    margin-top: 5px;
     width: 100%;
-    margin-bottom: 10%;
+    margin-bottom: 10px;
 }
 .select-dashboar{
     margin-top: 10px;
 }
 .h3-dashboar{
     display: flex;
-    margin-bottom: 20%;
+    margin-bottom: 6vh;
     color: #1c3678;
 }
 .table-hover{
     border-radius: 10px !important;
 }
-.grafica{
-    width: 100%;
-    margin-left: 300%;
-}
+
 /*Crear Usuario*/
 .usuario-container{
     padding: 50px 0px 20px 150px;
