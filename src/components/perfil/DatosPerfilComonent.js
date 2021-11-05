@@ -1,8 +1,9 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import { Link } from 'react-router-dom';
 import API from '../../Utils/API';
+import Swal from 'sweetalert2';
 
 export const DatosPerfilComonent = () => {
 
@@ -14,36 +15,67 @@ export const DatosPerfilComonent = () => {
     }
 
     const [estadoStorage, set_estadoStorage] = useState(estado_inicial)
-    
+
     useEffect(() => {
-        const nombres = JSON.parse(localStorage.getItem('nombres'));
-        const apellidos = JSON.parse(localStorage.getItem('apellidos'));
+        const first_name = JSON.parse(localStorage.getItem('nombres'));
+        const last_name = JSON.parse(localStorage.getItem('apellidos'));
         const id_user = JSON.parse(localStorage.getItem('id_user'));
         const username = JSON.parse(localStorage.getItem('username'));
         const objeto = {
             id_user,
-            nombres,
-            apellidos,
+            first_name,
+            last_name,
             username
         }
         set_estadoStorage(objeto)
-        
+
     }, []);
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(estadoStorage)
-        API.put('api/',JSON.stringify(estadoStorage))
-        .then( item => {
-            const resp = item.data;
-            console.log(resp);
-        })
+        API.put(`api/usuarios/user/${estadoStorage.id_user}/`, JSON.stringify(estadoStorage))
+            .then(item => {
+                const first_name = document.getElementById('first_name');
+                const last_name = document.getElementById('last_name');
+                const username = document.getElementById('username');
+                if (first_name.value === '' || last_name.value === '' || username.value === '') {
+                    return Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Favor rellenar los campos',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } 
+                console.log(item)
+                const resp = item.data;
+                console.log(resp);
+                borrarDatos('nombres', 'apellidos', 'username')
+                guardarDatos(resp.first_name, resp.last_name, resp.username);
+                return Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Usuario actualizado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+    }
+    const guardarDatos = (first_name, last_name, username) => {
+        localStorage.setItem('nombres', JSON.stringify(first_name))
+        localStorage.setItem('apellidos', JSON.stringify(last_name))
+        localStorage.setItem('username', JSON.stringify(username))
+    }
+    const borrarDatos = (first_name, last_name, username) => {
+        localStorage.removeItem(first_name);
+        localStorage.removeItem(last_name);
+        localStorage.removeItem(username);
     }
 
-    const handleInputChange =  (e)=> {
+    const handleInputChange = (e) => {
         set_estadoStorage({
             ...estadoStorage,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
@@ -51,63 +83,69 @@ export const DatosPerfilComonent = () => {
         <>
             <div className="datos">
                 <div className="datos-personales">
-                <div className="salir">
+                    <div className="salir">
                         <Link to="/">
-                             <button className="btn btn-primary-outline inicio"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i><i className="fas fa-home"></i> Inicio</button>
+                            <button className="btn btn-primary-outline inicio"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i><i className="fas fa-home"></i> Inicio</button>
                         </Link>
-                    <h4 className="h4-datos">Datos personales</h4></div>
+                        <h4 className="h4-datos">Datos personales</h4></div>
                     <form onSubmit={handleSubmit}>
-                    <FormControl fullWidth >
-                        <TextField
-                            type="text"
-                            name="nombres"
-                            placeholder="Escribe..."
-                            label="Nombre"
-                            className="form-control"
-                            style={{ marginBottom: "30px" }}
-                            value={estadoStorage.nombres}
-                            onChange={handleInputChange}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                        <TextField
-                            type="text"
-                            name="apellidos"
-                            placeholder="Escribe..."
-                            label="Apellidos"
-                            className="form-control"
-                            style={{ marginBottom: "30px" }}
-                            value={estadoStorage.apellidos}
-                            onChange={handleInputChange}
-                        
-                            InputLabelProps={{  
-                                shrink: true,
-                            }}
-                        />
-                        <TextField
-                            type="text"
-                            name="username"
-                            placeholder="Escribe..."
-                            label="Usuario"
-                            className="form-control"
-                            style={{ marginBottom: "30px" }}
-                            value={estadoStorage.username}
-                            onChange={handleInputChange}
-                            
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                    </FormControl>
+                        <FormControl fullWidth >
+                            <TextField
+                                type="text"
+                                id="first_name"
+                                name="first_name"
+                                placeholder="Escribe..."
+                                label="Nombre"
+                                className="form-control"
+                                style={{ marginBottom: "30px" }}
+                                value={estadoStorage.first_name}
+                                onChange={handleInputChange}
+                                required
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            <TextField
+                                type="text"
+                                id="last_name"
+                                name="last_name"
+                                placeholder="Escribe..."
+                                label="Apellidos"
+                                className="form-control"
+                                style={{ marginBottom: "30px" }}
+                                value={estadoStorage.last_name}
+                                onChange={handleInputChange}
+                                required
+
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            <TextField
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Escribe..."
+                                label="Usuario"
+                                className="form-control"
+                                style={{ marginBottom: "30px" }}
+                                value={estadoStorage.username}
+                                onChange={handleInputChange}
+                                required
+
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                        </FormControl>
 
                         <div className="actualizar-cambiar">
-                            <button className="btn btn-primary actualizar"><i className="far fa-edit" style={{ marginRight: "10px" }}></i>Actulizar datos</button>
+                            <button className="btn btn-primary actualizar"><i className="far fa-edit" style={{ marginRight: "10px" }}></i>Actualizar datos</button>
                             <Link to="/cambio_contraseña">
                                 <button className="btn btn-primary cambiar"><i className="fas fa-key" style={{ marginRight: "10px" }}></i>Cambiar contraseña</button>
                             </Link>
                         </div>
-                        </form>
+                    </form>
                 </div>
             </div>
         </>
