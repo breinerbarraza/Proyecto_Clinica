@@ -114,10 +114,6 @@ a {
     margin-bottom: 50px;
     margin-left: 20px;
 }
-.header .imglista {
-    width: 100%;
-    margin-bottom: 30px;
-}
 .header nav{
     background: #10305b; 
 }
@@ -256,7 +252,6 @@ a {
 }
 .RegistrarReferido {
     padding: 2px !important;
-    
 }
 
 .form-control input{
@@ -306,9 +301,14 @@ a {
 }
 
 .container-Select-cedula{
-    margin-top: 10px;
+    margin-top: 26px;
     width: 48%;
 }
+
+.element.style {
+    margin-top: 10px !important;
+}
+
 .container-identidad-email{
     width: 48%;
     margin-left: 4%;

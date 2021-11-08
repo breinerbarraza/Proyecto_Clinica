@@ -107,6 +107,7 @@ export const RegistrarReferidoComponent = () => {
                                             label="Tipo de Documento"
                                             required
                                             id="demo-simple-select-standard"
+                                            style={{ marginBottom: "-3px" }}
                                             onChange={handleInput}
                                         >
                                             {
@@ -124,7 +125,7 @@ export const RegistrarReferidoComponent = () => {
                                     label="Celular"
                                     required
                                     className="form-control RegistrarReferido"
-                                    style={{ marginBottom: "30px" }}
+                                    style={{marginTop: "10px !important ", marginBottom: "30px" }}
                                     onChange={handleInput}
                                     InputLabelProps={{
                                         shrink: true,
