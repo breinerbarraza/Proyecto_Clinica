@@ -102,21 +102,42 @@ export const ListadoComponent = () => {
 
       <div className="lista-container">
         <h3 className="h3-Lista">Listado de referidos</h3>
-        <div className="select-mes">
-          <TextField
-            select
-            name="identidad"
-            placeholder="Escribe..."
-            label="Mes"
-            className="form-control "
-            style={{ marginBottom: "30px" }}
-            onChange={""}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          >
-            <option value="">Choose one option</option>
-          </TextField></div>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: 20
+        }}>
+          <div className="select-mes">
+            <TextField
+              select
+              name="mes"
+              placeholder="Escribe..."
+              label="Mes"
+              className="form-control "
+              style={{ marginBottom: "30px" }}
+              onChange={""}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            >
+              <option value="">Choose one option</option>
+            </TextField></div>
+          <div className="select-mes">
+            <TextField
+              select
+              name="estado"
+              placeholder="Escribe..."
+              label="Estado"
+              className="form-control "
+              style={{ marginBottom: "30px" }}
+              onChange={""}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            >
+              <option value="">Choose one option</option>
+            </TextField></div>
+        </div>
         <div className="tabla-lista">
           {!loading && showTable()}
         </div>
