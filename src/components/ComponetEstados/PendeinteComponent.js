@@ -101,15 +101,15 @@ export const PendienteComponent = () => {
                 {data_pendiente.estadoReferido === "En Gestion" && (
                     <>
                         <h5 className="prequi-p"><b>· Comentarios</b></h5>
-                        <label className="label-info-gestion"><b>Pròxima gestion:</b></label>
-                        <p>El referido no tenìa disponibilidad para la gestiòn, pidìo que se le contrate en 1 semana para recibir la</p>
-                        <p> infromaciòn con respecto al procedimiento refractivo. </p>
+                        <label className="label-info-gestion"><b>Próxima gestion:</b></label>
+                        <p>El referido no tenìa disponibilidad para la gestión, pidìo que se le contrate en 1 semana para recibir la</p>
+                        <p> infromación con respecto al procedimiento refractivo. </p>
                     </>
                 )}
                 {data_pendiente.estadoReferido === "Descartado" && (
                     <>
                         <h5 className="prequi-p"><b>· Comentarios</b></h5>
-                        <p>Despuès de realizados los pre-quirùgicos el paciente no es apto para realizar el procedimiento</p>
+                        <p>Despuós de realizados los pre-quirúgicos el paciente no es apto para realizar el procedimiento</p>
                     </>
                 )}
                 {data_pendiente.estadoReferido === "Programado" && (
@@ -123,11 +123,12 @@ export const PendienteComponent = () => {
                                         <InputLabel shrink id="demo-simple-select-standard-label">Medico</InputLabel>
                                         <Select
                                             name="medico"
+                                            required
                                             labelId="demo-simple-select-standard-label"
                                             id="demo-simple-select-standard"
                                             label="Medico"
                                         >
-                                            <MenuItem >dsfgdsf</MenuItem>
+                                            <MenuItem >medico</MenuItem>
 
                                         </Select>
                                     </FormControl>
@@ -142,7 +143,7 @@ export const PendienteComponent = () => {
                 )}
                 {data_pendiente.estadoReferido === "Pre-quirúrgico" && (
                     <>
-                        <p className="prequi-p"><b>· Definir fecha de pre-quirùgico</b></p>
+                        <p className="prequi-p"><b>· Definir fecha de pre-quirógico</b></p>
                         <div className="form-prequi">
                             <form>
                                 <FormularioEstado />
