@@ -58,7 +58,7 @@ export const PendienteComponent = () => {
                                         <TextField
                                             type="date"
                                             name="fecha"
-                                            label="Pròxima gestiòn"
+                                            label="Próxima gestión"
                                             required
                                             className="form-control RegistrarReferido"
                                             style={{ marginBottom: "30px" }}
@@ -102,14 +102,14 @@ export const PendienteComponent = () => {
                     <>
                         <h5 className="prequi-p"><b>· Comentarios</b></h5>
                         <label className="label-info-gestion"><b>Próxima gestion:</b></label>
-                        <p>El referido no tenìa disponibilidad para la gestión, pidìo que se le contrate en 1 semana para recibir la</p>
+                        <p>El referido no tenía disponibilidad para la gestión, pidío que se le contrate en 1 semana para recibir la</p>
                         <p> infromación con respecto al procedimiento refractivo. </p>
                     </>
                 )}
                 {data_pendiente.estadoReferido === "Descartado" && (
                     <>
                         <h5 className="prequi-p"><b>· Comentarios</b></h5>
-                        <p>Despuós de realizados los pre-quirúgicos el paciente no es apto para realizar el procedimiento</p>
+                        <p>Después de realizados los pre-quirúgicos el paciente no es apto para realizar el procedimiento</p>
                     </>
                 )}
                 {data_pendiente.estadoReferido === "Programado" && (

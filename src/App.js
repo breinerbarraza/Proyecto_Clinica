@@ -20,6 +20,7 @@ import { PendienteComponent } from './components/ComponetEstados/PendeinteCompon
 import { DatosPerfilComonent } from './components/perfil/DatosPerfilComonent';
 import { ListadoUsuarioComponent } from './components/ListadoUsuarioComponent';
 import { CambioContraseña } from './components/perfil/CambioContraseña';
+import { RegistrarAsesorComponent } from './components/RegistrarAsesorComponent';
 
 
 function App() {
@@ -123,6 +124,13 @@ function App() {
               <Route exact path="/listado_usuario">
                 {localStorage.getItem('token') !== null ?(
                   <ListadoUsuarioComponent/>
+                ) : (
+                  <LoginComponent/>
+                )}
+              </Route>
+              <Route exact path="/registrar_asesor">
+                {localStorage.getItem('token') !== null ?(
+                  <RegistrarAsesorComponent/>
                 ) : (
                   <LoginComponent/>
                 )}
