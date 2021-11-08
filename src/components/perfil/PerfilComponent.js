@@ -38,7 +38,7 @@ export const PerfilComponent = () => {
                 <img alt="clinica" src={ClinicaBlanco} width="50" height="50"/>
                 <ul className="dropdown-menu dropdown-menu-end">
                     <li><Link to="/datos_perfil"><button className="dropdown-item" type="button">Perfil</button></Link></li>
-                    <li><button onClick={() => cerrarSesion('token', 'id_user', 'nombres', 'apellidos', 'username')} className="dropdown-item" type="button">Cerrar Sesiòn</button></li>
+                    <li><button onClick={() => cerrarSesion('token', 'id_user', 'nombres', 'apellidos', 'username')} className="dropdown-item" type="button">Cerrar Sesión</button></li>
                     {/*<li><button className="dropdown-item" type="button">Something else here</button></li>*/}
                 </ul>
             </div>
