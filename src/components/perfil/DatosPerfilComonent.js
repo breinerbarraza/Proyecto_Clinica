@@ -15,7 +15,6 @@ export const DatosPerfilComonent = () => {
     }
 
     const [estadoStorage, set_estadoStorage] = useState(estado_inicial)
-    const [temporal, setTemporal] = useState({})
     useEffect(() => {
         const first_name = JSON.parse(localStorage.getItem('nombres'));
         const last_name = JSON.parse(localStorage.getItem('apellidos'));
@@ -28,8 +27,6 @@ export const DatosPerfilComonent = () => {
             username
         }
         set_estadoStorage(objeto)
-        setTemporal(objeto)
-
     }, []);
 
     const handleSubmit = (e) => {
@@ -46,17 +43,7 @@ export const DatosPerfilComonent = () => {
                         title: 'Favor rellenar los campos',
                         showConfirmButton: false,
                         timer: 1500
-                    });
-                }else if(temporal.first_name === first_name.value ){
-                    console.log(estadoStorage.first_name);
-                    console.log(first_name.value);
-                    return Swal.fire({
-                        icon: 'error',
-                        title: 'Cambia los campos',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    
+                    });   
                 }else{
                     console.log(item)
                     const resp = item.data;
