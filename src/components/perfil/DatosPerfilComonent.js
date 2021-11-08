@@ -4,17 +4,20 @@ import FormControl from '@mui/material/FormControl';
 import { Link } from 'react-router-dom';
 import API from '../../Utils/API';
 import Swal from 'sweetalert2';
+import defecto_perfil from '../../image/Recursos-Femto/logo.png';
 
 export const DatosPerfilComonent = () => {
-
+    
     const estado_inicial = {
         id_user: "",
         nombres: "",
         apellidos: "",
         username: ""
     }
-
     const [estadoStorage, set_estadoStorage] = useState(estado_inicial)
+    
+
+
     useEffect(() => {
         const first_name = JSON.parse(localStorage.getItem('nombres'));
         const last_name = JSON.parse(localStorage.getItem('apellidos'));
@@ -79,6 +82,7 @@ export const DatosPerfilComonent = () => {
         })
     }
 
+
     return (
         <>
             <div className="datos">
@@ -87,7 +91,8 @@ export const DatosPerfilComonent = () => {
                         <Link to="/">
                             <button className="btn btn-primary-outline inicio"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i><i className="fas fa-home"></i> Inicio</button>
                         </Link>
-                        <h4 className="h4-datos">Datos personales</h4></div>
+                    </div>
+                    <h4 className="h4-datos">Datos personales</h4>             
                     <form onSubmit={handleSubmit}>
                         <FormControl fullWidth >
                             <TextField

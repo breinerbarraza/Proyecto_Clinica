@@ -5,6 +5,10 @@ import { PerfilComponent } from './perfil/PerfilComponent';
 import API from '../Utils/API';
 import { Link } from 'react-router-dom'
 import Chip from '@mui/material/Chip';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 
 export const ListadoComponent = () => {
@@ -108,20 +112,23 @@ export const ListadoComponent = () => {
           gap: 20
         }}>
           <div className="select-mes">
-            <TextField
-              select
-              name="mes"
-              placeholder="Escribe..."
-              label="Mes"
-              className="form-control "
-              style={{ marginBottom: "30px" }}
-              onChange={""}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            >
-              <option value="">Choose one option</option>
-            </TextField></div>
+
+          <FormControl fullWidth  >
+            <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+              <Select
+                  name="mes"
+                  label="Mes"
+                  id="demo-simple-select-standard"
+                  onChange={""}
+              >
+                <MenuItem >01</MenuItem>
+                <MenuItem >02</MenuItem>
+                <MenuItem >03</MenuItem>
+                <MenuItem >04</MenuItem>
+                <MenuItem >05</MenuItem> 
+              </Select>
+          </FormControl>
+            </div>
           <div className="select-mes">
             <TextField
               select
