@@ -1,14 +1,32 @@
-import React from 'react'
+import React,{useState} from 'react'
 import TextField from '@mui/material/TextField';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
-
 import liberate from '../image/Recursos-Femto/Liberate.png';
+import API from '../Utils/API'
 export const RegistrarAsesorComponent = () => {
+    const [asesor, setAsesor] = useState([])
+
+    const hendleinput = (e) => {
+        setAsesor({
+            ...asesor,
+            [e.target.name] : e.target.value
+        })
+    }
+    console.log(asesor)
+
+    const enviarDatos = (e) =>{
+        e.preventDefault();
+        API.post('api/', JSON.stringify(asesor))
+        .then(item =>{
+            const resp = item.data;
+            console.log(resp)
+        })
+    }
     return (
         <div className="page-registrarefe">
             <div className="registrarefe-container">
                 <div className="formulario-registrarefe">
-                    <form onSubmit={""} className="_form-registro" id="login-form">
+                    <form onSubmit={enviarDatos} className="_form-registro" id="login-form">
                         <img alt="clinica" className="logo_clinica-registrarefe" src={logo_clinica} />
                         <h3 className="h3-registrarefe">¡Hola,</h3>
                         <p className="p-registrarefe"><b>Alberto Hernandez</b> quiere que hagas parte de su red de referidos! </p>
@@ -20,7 +38,7 @@ export const RegistrarAsesorComponent = () => {
                             required
                             className="form-control"
                             style={{ marginBottom: "30px" }}
-                            onChange={""}
+                            onChange={hendleinput}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -33,7 +51,7 @@ export const RegistrarAsesorComponent = () => {
                             required
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
-                            onChange={""}
+                            onChange={hendleinput}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -46,7 +64,7 @@ export const RegistrarAsesorComponent = () => {
                             required
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
-                            onChange={""}
+                            onChange={hendleinput}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -59,33 +77,33 @@ export const RegistrarAsesorComponent = () => {
                             required
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
-                            onChange={""}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                        <TextField
-                            type="text"
-                            name="password"
-                            placeholder="Escribe..."
-                            label="Contraseña"
-                            required
-                            className="form-control RegistrarReferido"
-                            style={{ marginBottom: "30px" }}
-                            onChange={""}
+                            onChange={hendleinput}
                             InputLabelProps={{
                                 shrink: true,
                             }}
                         />
                         <TextField
                             type="password"
-                            name="correo_electronico"
+                            name="password"
+                            placeholder="Escribe..."
+                            label="Contraseña"
+                            required
+                            className="form-control RegistrarReferido"
+                            style={{ marginBottom: "30px" }}
+                            onChange={hendleinput}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
+                            type="password"
+                            name="password"
                             placeholder="Escribe..."
                             label="Confirmar contraseña"
                             required
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
-                            onChange={""}
+                            onChange={hendleinput}
                             InputLabelProps={{
                                 shrink: true,
                             }}
