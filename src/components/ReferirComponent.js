@@ -7,7 +7,6 @@ import { PerfilComponent } from './perfil/PerfilComponent';
 export const ReferirComponent = () => {
     return (
         <>
-
             <HeaderComponent users={true} dashboard={false}/> 
             <PerfilComponent/>
             <div className="referir-container">
