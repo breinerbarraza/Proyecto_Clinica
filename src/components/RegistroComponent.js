@@ -28,16 +28,25 @@ export const RegistroComponent = () => {
             const resp = item.data;
             console.log(resp);
             if(resp.data){
-                alert(resp.data)
+                return Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: resp.data,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
             }else{
                 const mensaje = resp.mensaje;
-                return Swal.fire({
+                Swal.fire({
                     position: 'top-end',
                     icon: 'success',
                     title: mensaje,
                     showConfirmButton: false,
                     timer: 1500
-                  });
+                });
+                setTimeout(()=>{
+                    window.location = "/";
+                }, 2000);
             }
         })
     }
