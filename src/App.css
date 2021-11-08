@@ -689,7 +689,7 @@ label {
     margin-top: 5px;
 }
 
-/*Dashboar*/
+/*Dashboard*/
 .container-dashboard{
     padding: 12vh 0vh 0vh 30vh;
 }
@@ -706,10 +706,10 @@ label {
     width: 100%;
     margin-bottom: 10px;
 }
-.select-dashboar{
+.select-dashboard{
     margin-top: 10px;
 }
-.h3-dashboar{
+.h3-dashboard{
     display: flex;
     margin-bottom: 6vh;
     color: #1c3678;

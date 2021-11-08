@@ -10,9 +10,7 @@ import Swal from 'sweetalert2';
 export const FormularioReferirComponent = () => {
 
     const [identificacion, setIdentificacion] = useState([])
-
     const [select_state, setSelect_state] = useState([])
-
     useEffect(() => {
         API.get('api/configuracion/tipoIdentificacion')
             .then(({ data }) => {
@@ -20,14 +18,12 @@ export const FormularioReferirComponent = () => {
                 setIdentificacion(item)
             })
     }, [])
-
     const handleSelect = (e) => {
         setSelect_state({
             ...select_state,
             [e.target.name]: e.target.value
         })
     }
-
     const enviarDatos = async (e) => {
         e.preventDefault();
         console.log(select_state)
@@ -44,9 +40,7 @@ export const FormularioReferirComponent = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-
                 } else {
-
                     return Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
@@ -54,10 +48,7 @@ export const FormularioReferirComponent = () => {
                     })
                 }
             })
-
-
     }
-
     return (
         <div>
             <form id="login-form" className="formulario-referir" onSubmit={enviarDatos}>
@@ -70,6 +61,7 @@ export const FormularioReferirComponent = () => {
                             placeholder="Escribe..."
                             label="Nombre"
                             className="form-control"
+                            required
                             style={{ marginBottom: "30px" }}
                             onChange={handleSelect}
                             InputLabelProps={{
@@ -82,6 +74,7 @@ export const FormularioReferirComponent = () => {
                             placeholder="Escribe..."
                             label="Apellidos"
                             className="form-control"
+                            required
                             style={{ marginBottom: "30px" }}
                             onChange={handleSelect}
                             InputLabelProps={{
@@ -94,6 +87,7 @@ export const FormularioReferirComponent = () => {
                             placeholder="Escribe..."
                             label="Fecha de nacimiento"
                             className="form-control"
+                            required
                             style={{ marginBottom: "30px" }}
                             onChange={handleSelect}
                             InputLabelProps={{
@@ -127,6 +121,7 @@ export const FormularioReferirComponent = () => {
                                 placeholder="Escribe..."
                                 label="Celular"
                                 className="form-control"
+                                required
                                 style={{ marginBottom: "30px" }}
                                 onChange={handleSelect}
                                 InputLabelProps={{
@@ -141,6 +136,7 @@ export const FormularioReferirComponent = () => {
                                 placeholder="Escribe..."
                                 label="Numero de identidad"
                                 className="form-control"
+                                required
                                 style={{ marginBottom: "30px" }}
                                 onChange={handleSelect}
                                 InputLabelProps={{
@@ -154,6 +150,7 @@ export const FormularioReferirComponent = () => {
                                 placeholder="Escribe..."
                                 label="Email"
                                 className="form-control"
+                                required
                                 style={{ marginBottom: "30px" }}
                                 onChange={handleSelect}
                                 InputLabelProps={{

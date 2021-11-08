@@ -13,7 +13,7 @@ import { ReferirComponent } from './components/ReferirComponent';
 import { ListadoComponent } from './components/ListadoComponent';
 import { ConfirEmailComponent } from "./components/ConfirEmailComponent";
 import { RegistrarReferidoComponent } from './components/RegistrarReferidoComponent';
-import { DashboarComponent } from './components/DashboarComponent';
+import { DashboardComponent } from './components/DashboardComponent';
 import { CrearUsuarioComponent } from './components/CrearUsuarioComponent';
 import { ListadoReferidoComponent } from './components/ListadoReferidoComponent';
 import { PendienteComponent } from './components/ComponetEstados/PendeinteComponent';
@@ -71,9 +71,9 @@ function App() {
                   <LoginComponent />
                 )}
               </Route>
-              <Route exact path="/dashboar">
+              <Route exact path="/dashboard">
                 {localStorage.getItem('token') !== null ? (
-                  <DashboarComponent />
+                  <DashboardComponent />
                 ) : (
                   <LoginComponent />
                 )}
@@ -135,7 +135,7 @@ function App() {
             <Route exact  path ="/header" component={HeaderComponent}/>
             <Route exact  path ="/login" component={LoginComponent}/>
             <Route exact  path ="/registrar_referido" component={RegistrarReferidoComponent}/>
-            <Route exact  path ="/dashboar" component={DashboarComponent}/>
+            <Route exact  path ="/dashboard" component={DashboardComponent}/>
             <Route exact  path ="/crear_usuario" component={CrearUsuarioComponent}/>
             <Route exact  path ="/listado_referido" component={ListadoReferidoComponent}/>
             <Route exact  path ="/listado/pre_quirurgico/:id" component={PreQuirugicoComponent}/>

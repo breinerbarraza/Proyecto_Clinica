@@ -21,6 +21,7 @@ export const CambioContraseña = () => {
                             placeholder="Escribe..."
                             label="Contraseña antigua"
                             className="form-control"
+                            required
                             style={{ marginBottom: "30px" }}
                             InputLabelProps={{
                                 shrink: true,
@@ -32,6 +33,7 @@ export const CambioContraseña = () => {
                             placeholder="Escribe..."
                             label="Nueva contraseña"
                             className="form-control"
+                            required
                             style={{ marginBottom: "30px" }}
                             InputLabelProps={{  
                                 shrink: true,
@@ -43,6 +45,7 @@ export const CambioContraseña = () => {
                             placeholder="Escribe..."
                             label="Confirmar contraseña"
                             className="form-control"
+                            required
                             style={{ marginBottom: "30px" }}
                             InputLabelProps={{
                                 shrink: true,

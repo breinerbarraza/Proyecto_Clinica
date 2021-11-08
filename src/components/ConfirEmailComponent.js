@@ -15,6 +15,7 @@ export const ConfirEmailComponent = () => {
                             name="email"
                             placeholder="Escribe..."
                             label="Email"
+                            required
                             className="form-control"
                             style={{marginBottom: "30px"}}
                             onChange={""}

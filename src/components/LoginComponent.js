@@ -82,6 +82,7 @@ export const LoginComponent = () => {
                             type="text"
                             name="username"
                             label="Usuario"
+                            required
                             className="form-control"
                             style={{marginBottom: "30px"}}
                             onChange={handleInputChange}
@@ -94,6 +95,7 @@ export const LoginComponent = () => {
                             type="password"
                             name="password"
                             label="Contraseña"
+                            required
                             className="form-control"
                             onChange={handleInputChange}
                             InputLabelProps={{

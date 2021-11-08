@@ -62,6 +62,7 @@ export const RegistroComponent = () => {
                             name="first_name"
                             placeholder="Escribe..."
                             label="Nombre"
+                            required
                             className="form-control"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}
@@ -74,6 +75,7 @@ export const RegistroComponent = () => {
                             name="last_name"
                             placeholder="Escribe..."
                             label="Apellidos"
+                            required
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}
@@ -86,6 +88,7 @@ export const RegistroComponent = () => {
                             name="email"
                             placeholder="Escribe..."
                             label="E-mail"
+                            required
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}
@@ -98,6 +101,7 @@ export const RegistroComponent = () => {
                             name="username"
                             placeholder="Escribe..."
                             label="Usuario"
+                            required
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}
@@ -110,6 +114,7 @@ export const RegistroComponent = () => {
                             name="password"
                             placeholder="Escribe..."
                             label="Contraseña"
+                            required
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}
@@ -122,6 +127,7 @@ export const RegistroComponent = () => {
                             name="password"
                             placeholder="Escribe..."
                             label="Confirmar Contraseña"
+                            required
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInputChange}

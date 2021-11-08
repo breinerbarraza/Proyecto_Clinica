@@ -48,6 +48,7 @@ export const CrearUsuarioComponent = () => {
                         <InputLabel shrink id="demo-simple-select-standard-label">Tipo Usuario</InputLabel>
                         <Select
                             name="tipo_usuario"
+                            required
                             labelId="demo-simple-select-standard-label"
                             id="demo-simple-select-standard"
                             onChange={handleInput}
@@ -62,6 +63,7 @@ export const CrearUsuarioComponent = () => {
                         <TextField
                             type="text"
                             name="nombres"
+                            required
                             placeholder="Escribe..."
                             label="Nombre"
                             className="form-control"
@@ -74,6 +76,7 @@ export const CrearUsuarioComponent = () => {
                         <TextField
                             type="text"
                             name="apellidos"
+                            required
                             placeholder="Escribe..."
                             label="Apellidos"
                             className="form-control RegistrarReferido"
@@ -88,6 +91,7 @@ export const CrearUsuarioComponent = () => {
                                 <TextField
                                     type="text"
                                     name="celular"
+                                    required
                                     placeholder="Escribe..."
                                     label="Celular"
                                     className="form-control RegistrarReferido"
@@ -103,6 +107,7 @@ export const CrearUsuarioComponent = () => {
                                 <TextField
                                     type="email"
                                     name="correo"
+                                    required
                                     placeholder="Escribe..."
                                     label="E-mail"
                                     className="form-control RegistrarReferido"
@@ -118,6 +123,7 @@ export const CrearUsuarioComponent = () => {
                             <TextField
                                 type="text"
                                 name="cargo"
+                                required
                                 placeholder="Escribe..."
                                 label="Cargo"
                                 className="form-control RegistrarReferido"

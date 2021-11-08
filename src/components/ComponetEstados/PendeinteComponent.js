@@ -59,6 +59,7 @@ export const PendienteComponent = () => {
                                             type="date"
                                             name="fecha"
                                             label="Pròxima gestiòn"
+                                            required
                                             className="form-control RegistrarReferido"
                                             style={{ marginBottom: "30px" }}
                                             onChange={""}
@@ -72,6 +73,7 @@ export const PendienteComponent = () => {
                                             name="comentario"
                                             placeholder="Escribe..."
                                             label="Comentario"
+                                            required
                                             multiline
                                             rows={4}
                                             className="form-control"

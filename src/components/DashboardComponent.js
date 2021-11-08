@@ -7,7 +7,7 @@ import API from "../Utils/API";
 
 var _ = require('lodash')
 
-export const DashboarComponent = () => {
+export const DashboardComponent = () => {
     const [pieChartData, setPieChartData] = useState([])
     const [labelColors, setLabelColors] = useState([])
 
@@ -59,8 +59,8 @@ export const DashboarComponent = () => {
             <PerfilComponent />
             <div >
                 <div className="container-dashboard">
-                    <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboar"><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
-                    <div className="select-dashboar" style={{ width: "40%" }}>
+                    <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard"><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
+                    <div className="select-dashboard" style={{ width: "40%" }}>
                         <select className="form-select" aria-label="Default select example">
                             <option defaultValue>Mes</option>
                             <option value="1">1</option>

@@ -14,49 +14,43 @@ export const RegistrarReferidoComponent = () => {
     const [identificacion, setIdentificacion] = useState([])
     const [state_referido, setState_referido] = useState([])
 
-    useEffect(()=>{
+    useEffect(() => {
         API.get('api/configuracion/tipoIdentificacion')
-        .then(({data})=>{
-            const item = data;
-            setIdentificacion(item)
-            console.log(item)
-        })
-    },[])
-    const handleInput = (e)=>{
+            .then(({ data }) => {
+                const item = data;
+                setIdentificacion(item)
+            })
+    }, [])
+    const handleInput = (e) => {
         setState_referido({
             ...state_referido,
             [e.target.name]: e.target.value
         })
     }
-
-    const enviarDatos = (e) =>{
+    const enviarDatos = (e) => {
         e.preventDefault();
         API.post('api/referidos/register-referidos/', JSON.stringify(state_referido))
-        .then(item => {
-            const resp = item.data;
-            document.getElementById("login-form").reset();
-            if (resp.mensaje) {
-                return Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: resp.mensaje,
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-
-            } else {
-
-                return Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: resp.error,
-                })
-            }
-        })
+            .then(item => {
+                const resp = item.data;
+                document.getElementById("login-form").reset();
+                if (resp.mensaje) {
+                    return Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: resp.mensaje,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: resp.error,
+                    })
+                }
+            })
     }
-
     return (
-
         <div className="page-registrarefe">
             <div className="registrarefe-container">
                 <div className="formulario-registrarefe">
@@ -69,6 +63,7 @@ export const RegistrarReferidoComponent = () => {
                             name="nombres"
                             placeholder="Escribe..."
                             label="Nombre"
+                            required
                             className="form-control"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInput}
@@ -81,6 +76,7 @@ export const RegistrarReferidoComponent = () => {
                             name="apellidos"
                             placeholder="Escribe..."
                             label="Apellidos"
+                            required
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInput}
@@ -93,6 +89,7 @@ export const RegistrarReferidoComponent = () => {
                             name="fechaNacimiento"
                             placeholder="Escribe..."
                             label="Fecha de nacimiento"
+                            required
                             className="form-control RegistrarReferido"
                             style={{ marginBottom: "30px" }}
                             onChange={handleInput}
@@ -103,29 +100,29 @@ export const RegistrarReferidoComponent = () => {
                         <div className="_container-referidos">
                             <div className="container-Select-cedula">
                                 <div className="select">
-                                <FormControl fullWidth  >
-                                <InputLabel shrink id="demo-simple-select-standard-label">Tipo de Documento</InputLabel>
-                                <Select
-                                    name="tipoIdentificacion"
-                                    label="Tipo de Documento"
-                                    id="demo-simple-select-standard"
-                                    onChange={handleInput}
-                                    
-                                >
-
-                                    {
-                                        identificacion.map(data => {
-                                            return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
-                                        })
-                                    }
-                                </Select>
-                            </FormControl>
+                                    <FormControl fullWidth  >
+                                        <InputLabel shrink id="demo-simple-select-standard-label">Tipo de Documento</InputLabel>
+                                        <Select
+                                            name="tipoIdentificacion"
+                                            label="Tipo de Documento"
+                                            required
+                                            id="demo-simple-select-standard"
+                                            onChange={handleInput}
+                                        >
+                                            {
+                                                identificacion.map(data => {
+                                                    return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
+                                                })
+                                            }
+                                        </Select>
+                                    </FormControl>
                                 </div>
                                 <TextField
                                     type="text"
                                     name="celular"
                                     placeholder="Escribe..."
                                     label="Celular"
+                                    required
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
                                     onChange={handleInput}
@@ -133,7 +130,6 @@ export const RegistrarReferidoComponent = () => {
                                         shrink: true,
                                     }}
                                 />
-                                
                             </div>
                             <div className="container-identidad-email">
                                 <TextField
@@ -141,6 +137,7 @@ export const RegistrarReferidoComponent = () => {
                                     name="numeroIdentificacion"
                                     placeholder="Escribe..."
                                     label="Numero de identidad"
+                                    required
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
                                     onChange={handleInput}
@@ -153,6 +150,7 @@ export const RegistrarReferidoComponent = () => {
                                     name="correo_electronico"
                                     placeholder="Escribe..."
                                     label="Email"
+                                    required
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
                                     onChange={handleInput}
@@ -162,7 +160,6 @@ export const RegistrarReferidoComponent = () => {
                                 />
                             </div>
                         </div>
-
                         <button type="submit" className="btn btn-primary">REGISTRARSE</button>
                     </form>
                 </div>

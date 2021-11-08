@@ -12,6 +12,7 @@ export const FormularioEstado = () => {
                         name="fecha"
                         placeholder="Escribe..."
                         label="Fecha"
+                        required
                         className="form-control RegistrarReferido"
                         style={{ marginBottom: "30px" }}
                         InputLabelProps={{
@@ -25,6 +26,7 @@ export const FormularioEstado = () => {
                         name="hola"
                         placeholder="Escribe..."
                         label="Hora"
+                        required
                         className="form-control RegistrarReferido"
                         style={{ marginBottom: "30px" }}
                         InputLabelProps={{
