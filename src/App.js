@@ -20,6 +20,7 @@ import { PendienteComponent } from './components/ComponetEstados/PendeinteCompon
 import { DatosPerfilComonent } from './components/perfil/DatosPerfilComonent';
 import { ListadoUsuarioComponent } from './components/ListadoUsuarioComponent';
 import { CambioContraseña } from './components/perfil/CambioContraseña';
+import { Dashboard2Component } from './components/Dashboard2Component';
 
 
 function App() {
@@ -74,6 +75,13 @@ function App() {
               <Route exact path="/dashboard">
                 {localStorage.getItem('token') !== null ? (
                   <DashboardComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/dashboard2">
+                {localStorage.getItem('token') !== null ? (
+                  <Dashboard2Component/>
                 ) : (
                   <LoginComponent />
                 )}
