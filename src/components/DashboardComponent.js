@@ -55,7 +55,7 @@ export const DashboardComponent = () => {
     };
     return (
         <>
-            <HeaderComponent />
+            <HeaderComponent dashboard/>
             <PerfilComponent />
             <div >
                 <div className="container-dashboard">

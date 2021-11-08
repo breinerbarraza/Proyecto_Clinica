@@ -4,7 +4,10 @@ import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
 import API from '../Utils/API'
 export const RegistrarAsesorComponent = () => {
-    const [asesor, setAsesor] = useState([])
+
+    const obj = {id: 10, first_name: "", last_name: "", email: "", username: "", password: ""}
+
+    const [asesor, setAsesor] = useState(obj)
 
     const hendleinput = (e) => {
         setAsesor({
@@ -16,11 +19,15 @@ export const RegistrarAsesorComponent = () => {
 
     const enviarDatos = (e) =>{
         e.preventDefault();
-        API.post('api/', JSON.stringify(asesor))
-        .then(item =>{
-            const resp = item.data;
-            console.log(resp)
-        })
+        asesor.password === asesor.password2 ? (
+            API.post('api/usuarios/asesor/register/', JSON.stringify(asesor))
+            .then(item =>{
+                const resp = item.data;
+                console.log(resp)
+            })
+        ) : (
+            alert('Las contraseñas no coinciden.')
+        )
     }
     return (
         <div className="page-registrarefe">
@@ -32,7 +39,7 @@ export const RegistrarAsesorComponent = () => {
                         <p className="p-registrarefe"><b>Alberto Hernandez</b> quiere que hagas parte de su red de referidos! </p>
                         <TextField
                             type="text"
-                            name="nombres"
+                            name="first_name"
                             placeholder="Escribe..."
                             label="Nombre"
                             required
@@ -45,7 +52,7 @@ export const RegistrarAsesorComponent = () => {
                         />
                         <TextField
                             type="text"
-                            name="apellidos"
+                            name="last_name"
                             placeholder="Escribe..."
                             label="Apellidos"
                             required
@@ -71,7 +78,7 @@ export const RegistrarAsesorComponent = () => {
                         />
                         <TextField
                             type="text"
-                            name="usuario"
+                            name="username"
                             placeholder="Escribe..."
                             label="Usuario"
                             required
@@ -97,7 +104,7 @@ export const RegistrarAsesorComponent = () => {
                         />
                         <TextField
                             type="password"
-                            name="password"
+                            name="password2"
                             placeholder="Escribe..."
                             label="Confirmar contraseña"
                             required
