@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { Link } from "react-router-dom";
 import { HeaderComponent } from "./HeaderComponent";
 import { PerfilComponent } from "./perfil/PerfilComponent";
@@ -24,12 +28,12 @@ export const DashboardComponent = () => {
                             + (Math.floor(Math.random() * 255)) + ', 0.5)'
                     }))
                 let agrupacionArray = _.toArray(agrupacion)
-                setPieChartData(agrupacionArray) 
+                setPieChartData(agrupacionArray)
             }).catch(console.error)
-            pieChartData.map((el) => (
-                setLabelColors(labelColors => [...labelColors, el.color]),
-                console.log(labelColors)
-            ))
+        pieChartData.map((el) => (
+            setLabelColors(labelColors => [...labelColors, el.color]),
+            console.log(labelColors)
+        ))
     }
     console.log(pieChartData)
     useEffect(() => {
@@ -55,19 +59,28 @@ export const DashboardComponent = () => {
     };
     return (
         <>
-            <HeaderComponent dashboard/>
+            <HeaderComponent dashboard />
             <PerfilComponent />
             <div >
                 <div className="container-dashboard">
-                    <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard"><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
+                    <div className="_h3">
+                        <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard"><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
+                    </div>
                     <div className="select-dashboard" style={{ width: "40%" }}>
-                        <select className="form-select" aria-label="Default select example">
-                            <option defaultValue>Mes</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                        <FormControl fullWidth  >
+                            <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+                            <Select
+                                name="mes"
+                                label="Mes"
+                                id="demo-simple-select-standard"
+                                style={{ marginBottom: "-4px" }}
+                                onChange={""}
+                            >
+                                <MenuItem >01</MenuItem>
+                                <MenuItem >02</MenuItem>
+                                <MenuItem >03</MenuItem>
+                            </Select>
+                        </FormControl>
                     </div>
                     <div className="dashboard-flexbox">
                         <div className="table-dashboard">
