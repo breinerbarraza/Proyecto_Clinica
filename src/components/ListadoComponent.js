@@ -130,20 +130,22 @@ export const ListadoComponent = () => {
           </FormControl>
             </div>
           <div className="select-mes">
-            <TextField
-              select
-              name="estado"
-              placeholder="Escribe..."
-              label="Estado"
-              className="form-control "
-              style={{ marginBottom: "30px" }}
-              onChange={""}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            >
-              <option value="">Choose one option</option>
-            </TextField></div>
+          <FormControl fullWidth  >
+            <InputLabel shrink id="demo-simple-select-standard-label">Estado</InputLabel>
+              <Select
+                  name="estado"
+                  label="Estado"
+                  id="demo-simple-select-standard"
+                  onChange={""}
+              >
+                <MenuItem >01</MenuItem>
+                <MenuItem >02</MenuItem>
+                <MenuItem >03</MenuItem>
+                <MenuItem >04</MenuItem>
+                <MenuItem >05</MenuItem> 
+              </Select>
+          </FormControl>
+          </div>
         </div>
         <div className="tabla-lista">
           {!loading && showTable()}
