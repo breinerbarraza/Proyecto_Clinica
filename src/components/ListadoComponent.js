@@ -14,7 +14,6 @@ export const ListadoComponent = () => {
 
   const [data_listado, setData_listado] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [cmb_listado, setCmb_listado] = useState([]);
 
   const load = async () => {
     setLoading(true)
@@ -35,16 +34,6 @@ export const ListadoComponent = () => {
       })
     setLoading(false)
   }
-
-  const cargarEstados = async()=>{
-    await API.get('api/configuracion/estadoReferido/')
-    .then( data => {
-      const resp = data.data;
-      console.log(resp);
-      setCmb_listado(resp)
-    })
-    .catch( console.error);
-  }
   
   const showTable = () => {
     return (
@@ -61,7 +50,6 @@ export const ListadoComponent = () => {
 
   useEffect(() => {
     load()
-    cargarEstados()
   }, [])
   const data = {
     columns: [
@@ -105,7 +93,6 @@ export const ListadoComponent = () => {
       }
     ],
     rows: data_listado
-
   };
 
   return (
@@ -138,24 +125,7 @@ export const ListadoComponent = () => {
               </Select>
           </FormControl>
             </div>
-          <div className="select-mes">
-          <FormControl fullWidth  >
-            <InputLabel shrink id="demo-simple-select-standard-label">Estado</InputLabel>
-              <Select
-                  name="estado"
-                  label="Estado"
-                  id="demo-simple-select-standard"
-                  onChange={""}
-              >
-                {
-                  cmb_listado.map( (item, key) => {
-                    return <MenuItem key={key} value={item.descripcion}>{item.descripcion}</MenuItem>
-                  })
-
-                }
-              </Select>
-          </FormControl>
-          </div>
+          
         </div>
         <div className="tabla-lista">
           {!loading && showTable()}

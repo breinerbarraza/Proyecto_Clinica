@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { HeaderComponent } from './HeaderComponent'
 import { MDBDataTable } from 'mdbreact';
+import Chip from '@mui/material/Chip';
 import API from '../Utils/API';
 import { PerfilComponent } from './perfil/PerfilComponent';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { Link } from 'react-router-dom'
 
 export const ListadoReferidoComponent = () => {
 
   const [data_listado, setData_listado] = useState([])
   const [loading, setLoading] = useState(false)
+  const [cmb_listado, setCmb_listado] = useState([]);
 
   const load = async () => {
     setLoading(true)
@@ -21,12 +27,21 @@ export const ListadoReferidoComponent = () => {
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
-            "estadoReferido": item.estadoReferido
+            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />
           }]),
           console.log(data_listado)
         ))
       })
     setLoading(false)
+  }
+  const cargarEstados = async()=>{
+    await API.get('api/configuracion/estadoReferido/')
+    .then( data => {
+      const resp = data.data;
+      console.log(resp);
+      setCmb_listado(resp)
+    })
+    .catch( console.error);
   }
 
   const showTable = () => {
@@ -44,6 +59,7 @@ export const ListadoReferidoComponent = () => {
 
   useEffect(() => {
     load()
+    cargarEstados()
   }, [])
 
   const data = {
@@ -87,12 +103,55 @@ export const ListadoReferidoComponent = () => {
 
   return (
     <div className="listaRefe">
-      <HeaderComponent users={false} dashboard={true} />
       <PerfilComponent />
+      <HeaderComponent users={false} dashboard={true} />
+
       <div className="lista-container">
         <h3 className="h3-Lista">Listado de referidos</h3>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: 20
+        }}>
+          <div className="select-mes">
+
+          <FormControl fullWidth  >
+            <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+              <Select
+                  name="mes"
+                  label="Mes"
+                  id="demo-simple-select-standard"
+                  onChange={""}
+              >
+                <MenuItem >01</MenuItem>
+                <MenuItem >02</MenuItem>
+                <MenuItem >03</MenuItem>
+                <MenuItem >04</MenuItem>
+                <MenuItem >05</MenuItem> 
+              </Select>
+          </FormControl>
+            </div>
+          <div className="select-mes">
+          <FormControl fullWidth  >
+            <InputLabel shrink id="demo-simple-select-standard-label">Estado</InputLabel>
+              <Select
+                  name="estado"
+                  label="Estado"
+                  id="demo-simple-select-standard"
+                  onChange={""}
+              >
+                {
+                  cmb_listado.map( (item, key) => {
+                    return <MenuItem key={key} value={item.descripcion}>{item.descripcion}</MenuItem>
+                  })
+
+                }
+              </Select>
+          </FormControl>
+          </div>
+        </div>
         <div className="tabla-lista">
-            {!loading && showTable()}
+          {!loading && showTable()}
         </div>
       </div>
     </div>
