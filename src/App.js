@@ -93,13 +93,7 @@ function App() {
                   <LoginComponent />
                 )}
               </Route>
-              <Route exact path="/listado_referido">
-                {localStorage.getItem('token') !== null ? (
-                  <ListadoReferidoComponent />
-                ) : (
-                  <LoginComponent />
-                )}
-              </Route>
+              
               <Route exact path="/lista/estado/:id">
                 {localStorage.getItem('token') !== null ? (
                   <EstadoComponent />
