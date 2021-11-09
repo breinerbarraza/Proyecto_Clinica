@@ -35,19 +35,19 @@ export const CrearUsuarioComponent = () => {
     const enviarDatos = async (e) => {
         e.preventDefault();
         console.log(dato)
-        API.post('api/usuarios/asesor/crear-usuario/', JSON.stringify(dato))
+        await API.post('api/usuarios/asesor/crear-usuario/', JSON.stringify(dato))
         .then( ({data}) => {
             const resp = data;
             if(resp.mensaje){   
                 const mensaje = resp.mensaje;
-                Swal.fire({
+                document.getElementById("login-form").reset();
+                return Swal.fire({
                     position: 'top-end',
                     icon: 'success',
                     title: mensaje,
                     showConfirmButton: false,
                     timer: 1500
                 });
-                document.getElementById("login-form").reset();
             }else{
                 return Swal.fire({
                     icon: 'error',
