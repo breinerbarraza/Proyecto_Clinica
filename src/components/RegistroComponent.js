@@ -28,13 +28,12 @@ export const RegistroComponent = () => {
             const resp = item.data;
             console.log(resp);
             if(resp.data){
+                let error_msg = resp.data
                 return Swal.fire({
-                    position: 'top-end',
                     icon: 'error',
-                    title: resp.data,
-                    showConfirmButton: false,
-                    timer: 2000
-                });
+                    title: 'Oops...',
+                    text: error_msg,
+                  });
             }else{
                 const mensaje = resp.mensaje;
                 Swal.fire({

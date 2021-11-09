@@ -7,7 +7,10 @@ import Select from '@mui/material/Select';
 import { PerfilComponent } from './perfil/PerfilComponent';
 import API from '../Utils/API';
 import { HeaderComponent } from './HeaderComponent'
+import Swal from 'sweetalert2';
+
 export const CrearUsuarioComponent = () => {
+
 
     const [group, setGroup] = useState([])
     const [dato, setDatos] = useState([])
@@ -32,7 +35,28 @@ export const CrearUsuarioComponent = () => {
     const enviarDatos = async (e) => {
         e.preventDefault();
         console.log(dato)
-        document.getElementById("login-form").reset();
+        API.post('api/usuarios/asesor/crear-usuario/', JSON.stringify(dato))
+        .then( ({data}) => {
+            const resp = data;
+            if(resp.mensaje){   
+                const mensaje = resp.mensaje;
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: mensaje,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                document.getElementById("login-form").reset();
+            }else{
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: resp.error,
+                })
+            }
+        })
+        .catch(console.error)
 
     }
     return (
