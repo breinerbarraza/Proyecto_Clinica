@@ -11,7 +11,7 @@ import API from '../../Utils/API'
 import { HeaderComponent } from '../HeaderComponent'
 import Chip from '@mui/material/Chip';
 
-export const PendienteComponent = () => {
+export const EstadoComponent = () => {
     const [data_pendiente, setData_pendiente] = useState({})
     const { id } = useParams();
     console.log(id)
@@ -143,7 +143,7 @@ export const PendienteComponent = () => {
                 )}
                 {data_pendiente.estadoReferido === "Pre-quirúrgico" && (
                     <>
-                        <p className="prequi-p"><b>· Definir fecha de pre-quirógico</b></p>
+                        <p className="prequi-p"><b>· Definir fecha de pre-quirúgico</b></p>
                         <div className="form-prequi">
                             <form>
                                 <FormularioEstado />

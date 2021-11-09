@@ -16,7 +16,7 @@ import { RegistrarReferidoComponent } from './components/RegistrarReferidoCompon
 import { DashboardComponent } from './components/DashboardComponent';
 import { CrearUsuarioComponent } from './components/CrearUsuarioComponent';
 import { ListadoReferidoComponent } from './components/ListadoReferidoComponent';
-import { PendienteComponent } from './components/ComponetEstados/PendeinteComponent';
+import { EstadoComponent } from './components/ComponetEstados/EstadoComponent';
 import { DatosPerfilComonent } from './components/perfil/DatosPerfilComonent';
 import { ListadoUsuarioComponent } from './components/ListadoUsuarioComponent';
 import { CambioContraseña } from './components/perfil/CambioContraseña';
@@ -102,7 +102,7 @@ function App() {
               </Route>
               <Route exact path="/lista/estado/:id">
                 {localStorage.getItem('token') !== null ? (
-                  <PendienteComponent />
+                  <EstadoComponent />
                 ) : (
                   <LoginComponent />
                 )}

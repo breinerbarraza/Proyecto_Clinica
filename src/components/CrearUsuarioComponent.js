@@ -20,7 +20,6 @@ export const CrearUsuarioComponent = () => {
             .then(({ data }) => {
                 setGroup(data)
                 console.log(data)
-                document.getElementById("login-form").reset();
             })
 
     }, [])
@@ -31,8 +30,7 @@ export const CrearUsuarioComponent = () => {
             [e.target.name]: e.target.value
         })
     }
-
-    const enviarDatos = async (e) => {
+    const enviarDatos = async(e) => {
         e.preventDefault();
         console.log(dato)
         API.post('api/usuarios/asesor/crear-usuario/', JSON.stringify(dato))
