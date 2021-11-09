@@ -13,14 +13,16 @@ import TextField from '@mui/material/TextField';
 
 export const ListadoComponent = () => {
 
-  const [data_listado, setData_listado] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [data_listado, setData_listado] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [cmb_listado, setCmb_listado] = useState([]);
+  const [cmb_mes, setCmb_mes] = useState([]);
 
   const load = async () => {
     setLoading(true)
     await API.get('api/referidos/')
       .then(resp => {
-        console.log(resp.data)
+        console.log(resp.data);
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -36,6 +38,16 @@ export const ListadoComponent = () => {
     setLoading(false)
   }
 
+  const cargarEstados = async()=>{
+    await API.get('api/configuracion/estadoReferido/')
+    .then( data => {
+      const resp = data.data;
+      console.log(resp);
+      setCmb_listado(resp)
+    })
+    .catch( console.error);
+  }
+  
   const showTable = () => {
     return (
       <MDBDataTable
@@ -51,9 +63,8 @@ export const ListadoComponent = () => {
 
   useEffect(() => {
     load()
+    cargarEstados()
   }, [])
-
-  console.log(data_listado)
   const data = {
     columns: [
       {
@@ -138,11 +149,12 @@ export const ListadoComponent = () => {
                   id="demo-simple-select-standard"
                   onChange={""}
               >
-                <MenuItem >01</MenuItem>
-                <MenuItem >02</MenuItem>
-                <MenuItem >03</MenuItem>
-                <MenuItem >04</MenuItem>
-                <MenuItem >05</MenuItem> 
+                {
+                  cmb_listado.map( (item, key) => {
+                    return <MenuItem key={key} value={item.descripcion}>{item.descripcion}</MenuItem>
+                  })
+
+                }
               </Select>
           </FormControl>
           </div>
