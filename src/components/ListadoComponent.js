@@ -9,14 +9,12 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
 
 export const ListadoComponent = () => {
 
   const [data_listado, setData_listado] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cmb_listado, setCmb_listado] = useState([]);
-  const [cmb_mes, setCmb_mes] = useState([]);
 
   const load = async () => {
     setLoading(true)

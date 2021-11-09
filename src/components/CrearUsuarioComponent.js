@@ -38,7 +38,7 @@ export const CrearUsuarioComponent = () => {
     return (
 
         <>
-            <HeaderComponent />
+            <HeaderComponent users={true} dashboard={false} />
             <PerfilComponent />
 
             <div className="usuario-container">
