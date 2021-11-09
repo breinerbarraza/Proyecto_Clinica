@@ -7,7 +7,7 @@ import{
 
 }from 'react-router-dom'
 import { LoginComponent } from "./components/LoginComponent";
-import { HeaderComponent } from "./components/HeaderComponent";
+//import { HeaderComponent } from "./components/HeaderComponent";
 import { RegistroComponent } from './components/RegistroComponent';
 import { ReferirComponent } from './components/ReferirComponent';
 import { ListadoComponent } from './components/ListadoComponent';

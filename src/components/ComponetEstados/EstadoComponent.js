@@ -6,13 +6,14 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { FormularioEstado } from './FormularioEstado/FormularioEstado'
+//import { FormularioEstado } from './FormularioEstado/FormularioEstado'
 import API from '../../Utils/API'
 import { HeaderComponent } from '../HeaderComponent'
 import Chip from '@mui/material/Chip';
 
 export const EstadoComponent = () => {
     const [data_pendiente, setData_pendiente] = useState({})
+    const [data, setData] = useState({})
     const { id } = useParams();
     console.log(id)
     useEffect(() => {
@@ -21,7 +22,50 @@ export const EstadoComponent = () => {
                 console.log(item.data)
                 setData_pendiente(item.data)
             })
-    }, [])
+    }, [id])
+    const handleClickProgramado =async(e)=>{
+        e.preventDefault();
+        console.log(data)
+    }
+
+    const handleClickPrequirurgico = async(e)=>{
+        e.preventDefault();
+        data.referido = id;
+        console.log(data);
+        await API.post('api/referidos_cambio_estado/', JSON.stringify(data))
+        .then( data => {
+            const resp = data.data;
+            console.log(resp)
+            if(resp){
+                return alert("Creada la fecha para el prequirurgico en la tabla de cambio de estado");
+            }
+        })
+        .catch(console.error)
+        
+    }
+
+    const handleInput =(e)=>{
+        setData({
+            ...data,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    const medico = [
+        {
+            id:1,
+            nombre: 'Fernando Herrera'
+        },
+        {
+            id:2,
+            nombre: 'Victor Robles'
+        },
+        {
+            id:3,
+            nombre: 'Fazt Web'
+        }
+    ]
+
     return (
         <>
             <HeaderComponent users={false} dashboard={true} />
@@ -117,18 +161,52 @@ export const EstadoComponent = () => {
                         <p className="prequi-p"><b>· Definir fecha de procedimiento</b></p>
                         <div className="form-prequi">
                             <div>
-                                <FormularioEstado />
+                            <form onSubmit={handleClickProgramado}>
+                                <div className="form-f-h">
+                                    <div className="form-fecha">
+                                        <TextField
+                                            type="date"
+                                            name="fecha"
+                                            placeholder="Escribe..."
+                                            label="Fecha"      
+                                            onChange= {handleInput}                         
+                                            className="form-control RegistrarReferido"
+                                            style={{ marginBottom: "30px" }}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="form-hora">
+                                        <TextField
+                                            type="text"
+                                            name="hora"
+                                            placeholder="Escribe..."
+                                            label="Hora"
+                                            onChange= {handleInput}   
+                                            className="form-control RegistrarReferido"
+                                            style={{ marginBottom: "30px" }}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
+                                    </div>
+
+                                </div>
                                 <div className="form-medico">
                                     <FormControl fullWidth >
                                         <InputLabel shrink id="demo-simple-select-standard-label">Medico</InputLabel>
                                         <Select
                                             name="medico"
-                                            required
-                                            labelId="demo-simple-select-standard-label"
-                                            id="demo-simple-select-standard"
                                             label="Medico"
-                                        >
-                                            <MenuItem >medico</MenuItem>
+                                            id="demo-simple-select-standard"
+                                            onChange= {handleInput}   
+                                            >
+                                            {
+                                                medico.map(item =>{
+                                                    return <MenuItem key={item.id} value={item.id} >{item.nombre}</MenuItem>
+                                                })
+                                            }
 
                                         </Select>
                                     </FormControl>
@@ -137,6 +215,7 @@ export const EstadoComponent = () => {
                                 <div className="prequi-button">
                                     <button type="submit" className="prequi-b">ASIGNAR</button>
                                 </div>
+                            </form>
                             </div>
                         </div>
                     </>
@@ -145,8 +224,41 @@ export const EstadoComponent = () => {
                     <>
                         <p className="prequi-p"><b>· Definir fecha de pre-quirúgico</b></p>
                         <div className="form-prequi">
-                            <form>
-                                <FormularioEstado />
+                            <form onSubmit={handleClickPrequirurgico}>
+                            <div className="form-f-h">
+                                <div className="form-fecha">
+
+                                    <TextField
+                                        type="date"
+                                        name="fecha"
+                                        placeholder="Escribe..."
+                                        label="Fecha"
+                                        onChange= {handleInput}   
+                                        required
+                                        className="form-control RegistrarReferido"
+                                        style={{ marginBottom: "30px" }}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+                                </div>
+                                <div className="form-hora">
+                                    <TextField
+                                        type="time"
+                                        name="hora"
+                                        placeholder="Escribe..."
+                                        label="Hora"
+                                        onChange= {handleInput}   
+                                        required
+                                        className="form-control RegistrarReferido"
+                                        style={{ marginBottom: "30px" }}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+                                </div>
+
+                                </div>
                                 <div className="prequi-button">
                                     <button type="submit" className="prequi-b">ASIGNAR</button>
                                 </div>

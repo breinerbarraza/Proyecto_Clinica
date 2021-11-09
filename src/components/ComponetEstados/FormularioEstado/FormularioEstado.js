@@ -23,7 +23,7 @@ export const FormularioEstado = () => {
                 <div className="form-hora">
                     <TextField
                         type="text"
-                        name="hola"
+                        name="hora"
                         placeholder="Escribe..."
                         label="Hora"
                         required
