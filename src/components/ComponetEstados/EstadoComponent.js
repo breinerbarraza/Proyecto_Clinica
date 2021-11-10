@@ -18,11 +18,10 @@ export const EstadoComponent = () => {
     const [data_medicos, setData_medicos] = useState([]);
 
     const { id } = useParams();
-    console.log(id)
+
     useEffect(() => {
         API.get("api/referidos/" + id)
             .then(item => {
-                console.log(item.data)
                 setData_pendiente(item.data)
             })
     }, [id]);
@@ -30,11 +29,35 @@ export const EstadoComponent = () => {
     useEffect(()=>{
         API.get("api/usuarios/user/grupo_medico")
         .then( data => {
-            const resp = data.data;
-            console.log(resp);
-            setData_medicos(resp)
+            setData_medicos(data.data)
         })
     }, []);
+
+
+    const handleClickPendiente = async(e)=>{
+        e.preventDefault();
+        console.log("Hola mundo")
+        data.referido = id;
+        console.log(data)
+        await API.post('api/referidos_cambio_estado/register-estado-pendiente/', JSON.stringify(data))
+        .then( data => {
+            const resp = data.data;
+            if(resp){
+                return Swal.fire({
+                    icon: 'success',
+                    title: 'Mensaje!',
+                    text: resp.mensaje,
+                })
+            }else{
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ha ocurrido un error',
+                })
+            }
+        })
+
+    }
 
     const handleClickProgramado =async(e)=>{
         e.preventDefault();
@@ -43,7 +66,6 @@ export const EstadoComponent = () => {
         await API.post('api/referidos_cambio_estado/register-estado-programado/', JSON.stringify(data))
         .then( data => {
             const resp = data.data;
-            console.log(resp)
             if(resp){
                 return Swal.fire({
                     icon: 'success',
@@ -63,11 +85,9 @@ export const EstadoComponent = () => {
     const handleClickPrequirurgico = async(e)=>{
         e.preventDefault();
         data.referido = id;
-        console.log(data);
         await API.post('api/referidos_cambio_estado/register-estado-prequirurgico/', JSON.stringify(data))
         .then( data => {
             const resp = data.data;
-            console.log(resp)
             if(resp){
                 return Swal.fire({
                     icon: 'success',
@@ -83,7 +103,6 @@ export const EstadoComponent = () => {
             }
         })
         .catch(console.error)
-        
     }
 
     const handleInput =(e)=>{
@@ -123,7 +142,7 @@ export const EstadoComponent = () => {
                     <>
                         <p className="prequi-p"><h5>· Comentario</h5></p>
                         <div className="form-pendiente">
-                            <form>
+                            <form onSubmit={handleClickPendiente}>
                                 <div className="form-f-pendiente">
                                     <div className="form-fecha-pendiente">
                                         <TextField
@@ -133,7 +152,7 @@ export const EstadoComponent = () => {
                                             required
                                             className="form-control RegistrarReferido"
                                             style={{ marginBottom: "30px" }}
-                                            onChange={""}
+                                            onChange={handleInput}
                                             InputLabelProps={{
                                                 shrink: true,
                                             }}
@@ -149,7 +168,7 @@ export const EstadoComponent = () => {
                                             rows={4}
                                             className="form-control"
                                             style={{ marginBottom: "30px" }}
-                                            onChange={""}
+                                            onChange={handleInput}
                                             InputLabelProps={{
                                                 shrink: true,
                                             }}
