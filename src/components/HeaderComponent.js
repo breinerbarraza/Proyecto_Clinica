@@ -125,7 +125,7 @@ export const HeaderComponent = ({ users, dashboard }) => {
                 </div>
                 <div className="cerrarSesion">
                     <img className="img-cerrar" onClick={() => cerrarSesion('token', 'idUser', 'nombres', 'apellidos')} alt="cerrar" src={Logout} style={{ "width": "50px", "cursor": "pointer" }} />
-
+                    <span style={{color: '#FFF'}}>Cerrar sesión</span>
                 </div>
             </nav>
         </div>
