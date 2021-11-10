@@ -7,27 +7,27 @@ import user_add_blue from '../image/Recursos-Femto/user-add-Blue.svg';
 import chart_line_up_white from '../image/Recursos-Femto/chart-line-up.svg';
 import Logout from '../image/Recursos-Femto2/Logout.svg'
 
-function ButtonReferir(){
-    return(
+function ButtonReferir() {
+    return (
         <button>
             <Link to="/referir">
-                <img alt="clinica" className="imgActiva" src={user_add_blue}/>
-            </Link>
-        </button>
-    ) 
-}
-function ButtonListar(){
-    return(
-        <button >
-            <Link to="/listado">
-                <img alt="clinica" className="imgActiva" src={chart_line_up_white}/>
+                <img alt="clinica" className="imgActiva" src={user_add_blue} />
             </Link>
         </button>
     )
 }
-export const HeaderComponent = ({users, dashboard}) => {
+function ButtonListar() {
+    return (
+        <button >
+            <Link to="/listado">
+                <img alt="clinica" className="imgActiva" src={chart_line_up_white} />
+            </Link>
+        </button>
+    )
+}
+export const HeaderComponent = ({ users, dashboard }) => {
 
-    const cerrarSesion = (token, idUser, nombres, apellidos)=>{
+    const cerrarSesion = (token, idUser, nombres, apellidos) => {
         localStorage.removeItem(token);
         localStorage.removeItem(idUser);
         localStorage.removeItem(nombres);
@@ -41,11 +41,11 @@ export const HeaderComponent = ({users, dashboard}) => {
     let estado1 = dashboard;
     const [imagen1, setImagen1] = useState(estado1);
 
-    const handleButtonClick = (e)=>{
+    const handleButtonClick = (e) => {
         setImagen(true);
     }
 
-    const handleButtonClick1 = (e)=>{
+    const handleButtonClick1 = (e) => {
         setImagen1(true);
     }
 
@@ -54,26 +54,78 @@ export const HeaderComponent = ({users, dashboard}) => {
             <nav className="nav-header">
                 <div className="imgLogo">
                     <a className="navbar-brand" href="/">
-                    <img alt="clinica" className="logo-clinica" src={ClinicaBlanco} style={{'color': '#fff'}}/>
+                        <img alt="clinica" className="logo-clinica" src={ClinicaBlanco} style={{ 'color': '#fff' }} />
                     </a>
                 </div>
                 <div className="lista-registro">
-                    { !imagen && (
-                        <button onClick={() => handleButtonClick()}><Link to="/referir"><img alt="clinica" src={useradd}/></Link></button>
-                    ) }
-                    { imagen && (
-                        <ButtonReferir />
+                    {!imagen && (
+                        <button onClick={() => handleButtonClick()}><Link to="/referir"><img alt="clinica" src={useradd} /></Link></button>
                     )}
-                    { !imagen1 && (
-                        <button onClick={() => handleButtonClick1()}><Link to="/listado"><img alt="clinica" src={chart_line_white}/></Link></button>
+                    {imagen && (
+                        <>
+                            <div style={{
+                                width: "100%",
+                                height: "30px",
+                                backgroundColor: '#FFF'
+                            }}>
+                                <div style={{
+                                    backgroundColor: '#10305b',
+                                    width: "100%",
+                                    height: "30px",
+                                    borderBottomRightRadius: "30px"
+                                }} />
+                            </div>
+                            <ButtonReferir />
+                            <div style={{
+                                width: "100%",
+                                height: "30px",
+                                backgroundColor: '#FFF'
+                            }}>
+                                <div style={{
+                                    backgroundColor: '#10305b',
+                                    width: "100%",
+                                    height: "30px",
+                                    borderTopRightRadius: "30px"
+                                }} />
+                            </div>
+                        </>
                     )}
-                    { imagen1 && (
-                        <ButtonListar />
+                    {!imagen1 && (
+                        <button onClick={() => handleButtonClick1()}><Link to="/listado"><img alt="clinica" src={chart_line_white} /></Link></button>
+                    )}
+                    {imagen1 && (
+                        <>
+                            <div style={{
+                                width: "100%",
+                                height: "30px",
+                                backgroundColor: '#FFF'
+                            }}>
+                                <div style={{
+                                    backgroundColor: '#10305b',
+                                    width: "100%",
+                                    height: "30px",
+                                    borderBottomRightRadius: "30px"
+                                }} />
+                            </div>
+                            <ButtonListar />
+                            <div style={{
+                                width: "100%",
+                                height: "30px",
+                                backgroundColor: '#FFF'
+                            }}>
+                                <div style={{
+                                    backgroundColor: '#10305b',
+                                    width: "100%",
+                                    height: "30px",
+                                    borderTopRightRadius: "30px"
+                                }} />
+                            </div>
+                        </>
                     )}
                 </div>
                 <div className="cerrarSesion">
-                    <img className="img-cerrar" onClick={()=>cerrarSesion('token', 'idUser', 'nombres', 'apellidos')} alt="cerrar" src={Logout} style={{"width":"50px","cursor":"pointer"}}/>
-            
+                    <img className="img-cerrar" onClick={() => cerrarSesion('token', 'idUser', 'nombres', 'apellidos')} alt="cerrar" src={Logout} style={{ "width": "50px", "cursor": "pointer" }} />
+
                 </div>
             </nav>
         </div>
