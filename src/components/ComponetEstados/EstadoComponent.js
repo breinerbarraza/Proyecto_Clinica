@@ -10,10 +10,13 @@ import { Link, useParams } from 'react-router-dom'
 import API from '../../Utils/API'
 import { HeaderComponent } from '../HeaderComponent'
 import Chip from '@mui/material/Chip';
+import Swal from 'sweetalert2';
 
 export const EstadoComponent = () => {
     const [data_pendiente, setData_pendiente] = useState({})
     const [data, setData] = useState({})
+    const [data_medicos, setData_medicos] = useState([]);
+
     const { id } = useParams();
     console.log(id)
     useEffect(() => {
@@ -22,22 +25,61 @@ export const EstadoComponent = () => {
                 console.log(item.data)
                 setData_pendiente(item.data)
             })
-    }, [id])
+    }, [id]);
+
+    useEffect(()=>{
+        API.get("api/usuarios/user/grupo_medico")
+        .then( data => {
+            const resp = data.data;
+            console.log(resp);
+            setData_medicos(resp)
+        })
+    }, []);
+
     const handleClickProgramado =async(e)=>{
         e.preventDefault();
+        data.referido = id;
         console.log(data)
+        await API.post('api/referidos_cambio_estado/register-estado-programado/', JSON.stringify(data))
+        .then( data => {
+            const resp = data.data;
+            console.log(resp)
+            if(resp){
+                return Swal.fire({
+                    icon: 'success',
+                    title: 'Mensaje!',
+                    text: resp.mensaje,
+                })
+            }else{
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ha ocurrido un error',
+                })
+            }
+        })
     }
 
     const handleClickPrequirurgico = async(e)=>{
         e.preventDefault();
         data.referido = id;
         console.log(data);
-        await API.post('api/referidos_cambio_estado/', JSON.stringify(data))
+        await API.post('api/referidos_cambio_estado/register-estado-prequirurgico/', JSON.stringify(data))
         .then( data => {
             const resp = data.data;
             console.log(resp)
             if(resp){
-                return alert("Creada la fecha para el prequirurgico en la tabla de cambio de estado");
+                return Swal.fire({
+                    icon: 'success',
+                    title: 'Mensaje!',
+                    text: resp.mensaje,
+                })
+            }else{
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ha ocurrido un error',
+                })
             }
         })
         .catch(console.error)
@@ -50,21 +92,6 @@ export const EstadoComponent = () => {
             [e.target.name] : e.target.value
         })
     }
-
-    const medico = [
-        {
-            id:1,
-            nombre: 'Fernando Herrera'
-        },
-        {
-            id:2,
-            nombre: 'Victor Robles'
-        },
-        {
-            id:3,
-            nombre: 'Fazt Web'
-        }
-    ]
 
     return (
         <>
@@ -179,7 +206,7 @@ export const EstadoComponent = () => {
                                     </div>
                                     <div className="form-hora">
                                         <TextField
-                                            type="text"
+                                            type="time"
                                             name="hora"
                                             placeholder="Escribe..."
                                             label="Hora"
@@ -203,8 +230,8 @@ export const EstadoComponent = () => {
                                             onChange= {handleInput}   
                                             >
                                             {
-                                                medico.map(item =>{
-                                                    return <MenuItem key={item.id} value={item.id} >{item.nombre}</MenuItem>
+                                                data_medicos.map(item =>{
+                                                    return <MenuItem key={item.id} value={item.id} >{item.first_name} {item.last_name}</MenuItem>
                                                 })
                                             }
 

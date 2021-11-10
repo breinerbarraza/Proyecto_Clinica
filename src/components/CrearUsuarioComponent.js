@@ -36,6 +36,7 @@ export const CrearUsuarioComponent = () => {
         await API.post('api/usuarios/asesor/crear-usuario/', JSON.stringify(dato))
         .then( ({data}) => {
             const resp = data;
+            console.log(resp);
             if(resp.mensaje){   
                 const mensaje = resp.mensaje;
                 document.getElementById("login-form").reset();
