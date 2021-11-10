@@ -904,6 +904,15 @@ button[type="submit"]{
     background:rgb(33, 61, 104);
     border: none;
 }
+
+.actualizar2{
+    width: 195px !important;
+    padding: 10px !important;
+    background-color: rgb(33,61,104);
+    border: none;
+    margin-top: 10px !important;
+}
+
 .cambiar{
     background:rgb(33, 61, 104);
     border: none;
