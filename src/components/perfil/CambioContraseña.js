@@ -3,11 +3,15 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import { Link } from 'react-router-dom';
 import API from '../../Utils/API';
+import Swal from 'sweetalert2';
 
 export const CambioContraseña = () => {
 
+    let estado = false;
     const [data_password, setPassword] = useState([]);
     const [data_user, setData_user] = useState([]);
+    const [data_msg, setData_msg] = useState(estado);
+    const [msg_Error, setMsg_Error] = useState("");
 
     useEffect(()=>{
         const id = JSON.parse(localStorage.getItem('id_user'))
@@ -21,15 +25,21 @@ export const CambioContraseña = () => {
         } )
     },[]);
 
+    useEffect(()=>{
+
+    }, []);
+
     const handleInputChange = (e)=>
     {
         setPassword({
             ...data_password,
             [e.target.name]: e.target.value
         });
+        setData_msg(false);
     }
 
     const handleChangePassword = (e)=>{
+        setData_msg(false);
         e.preventDefault()
         console.log("Entro en el cambio de contraseña")
         data_password.password_user = data_user.password
@@ -37,14 +47,25 @@ export const CambioContraseña = () => {
         API.put('api/usuarios/user/updated_password/', JSON.stringify(data_password))
         .then( resp =>{
             const respuesta = resp.data;
+            console.log(respuesta)
             if(respuesta.msg){
-                alert(respuesta.msg)
+                setData_msg(true);
+                setMsg_Error(respuesta.msg)
+
             }else if(respuesta.error){
-                alert(respuesta.error)
+                setData_msg(true);
+                setMsg_Error(respuesta.error)
+
             }else{
                 const msg_affirmation = respuesta.data;
-                alert(msg_affirmation)
-                window.location = "/datos_perfil"
+                Swal.fire({
+                    icon: 'sucess',
+                    title: 'Exitoso!...',
+                    text: msg_affirmation,
+                  });
+                setTimeout(()=>{
+                    window.location = "/datos_perfil"
+                }, 2000)
             }
         })
     }
@@ -74,6 +95,7 @@ export const CambioContraseña = () => {
                                 shrink: true,
                             }}
                         />
+                       
                         <TextField
                             type="password"
                             name="password"
@@ -100,6 +122,11 @@ export const CambioContraseña = () => {
                                 shrink: true,
                             }}
                         />
+                         {
+                            data_msg && (
+                                <p style={{marginTop:"5px", backgroundColor:"rgba(255,0,0,0.7)", color:"#fff", paddingLeft:"10px"}}>{msg_Error}</p>
+                            )
+                        }
                     </FormControl>
                         <div className="actualizar-cambiar">
                             <button className="btn btn-primary actualizar2" type="submit"><i className="far fa-edit" style={{ marginRight: "10px" }}></i>Actualizar contraseña</button>
