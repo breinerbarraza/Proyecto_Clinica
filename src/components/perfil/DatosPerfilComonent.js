@@ -23,14 +23,18 @@ export const DatosPerfilComonent = () => {
         const last_name = JSON.parse(localStorage.getItem('apellidos'));
         const id_user = JSON.parse(localStorage.getItem('id_user'));
         const username = JSON.parse(localStorage.getItem('username'));
+        const password = JSON.parse(localStorage.getItem("password"));
         const objeto = {
             id_user,
             first_name,
             last_name,
-            username
+            username,
+            password
         }
         set_estadoStorage(objeto)
     }, []);
+
+    console.log(estadoStorage)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -51,8 +55,8 @@ export const DatosPerfilComonent = () => {
                     console.log(item)
                     const resp = item.data;
                     console.log(resp);
-                    borrarDatos('nombres', 'apellidos', 'username')
-                    guardarDatos(resp.first_name, resp.last_name, resp.username);
+                    borrarDatos('nombres', 'apellidos', 'username','password')
+                    guardarDatos(resp.first_name, resp.last_name, resp.username, resp.password);
                     return Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -64,10 +68,11 @@ export const DatosPerfilComonent = () => {
                 
             })
     }
-    const guardarDatos = (first_name, last_name, username) => {
+    const guardarDatos = (first_name, last_name, username, password) => {
         localStorage.setItem('nombres', JSON.stringify(first_name))
         localStorage.setItem('apellidos', JSON.stringify(last_name))
         localStorage.setItem('username', JSON.stringify(username))
+        localStorage.setItem('password', JSON.stringify(password))
     }
     const borrarDatos = (first_name, last_name, username) => {
         localStorage.removeItem(first_name);
