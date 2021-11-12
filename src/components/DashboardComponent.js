@@ -14,6 +14,9 @@ var _ = require('lodash')
 export const DashboardComponent = () => {
     const [pieChartData, setPieChartData] = useState([])
     const [labelColors, setLabelColors] = useState([])
+    const [tiposFormulario, setTiposFormulario] = useState([])
+    const [cantidades, setCantidades] = useState([])
+    const [infoFull, setInfoFull] = useState([])
 
     const load = async () => {
         await API('/api/referidos/')
@@ -25,38 +28,33 @@ export const DashboardComponent = () => {
                         "valor": value.length,
                         "color": 'rgba(' + (Math.floor(Math.random() * 256)) + ','
                             + (Math.floor(Math.random() * 256)) + ','
-                            + (Math.floor(Math.random() * 255)) + ', 0.5)'
+                            + (Math.floor(Math.random() * 255)) + ', 0.8)'
                     }))
                 let agrupacionArray = _.toArray(agrupacion)
                 setPieChartData(agrupacionArray)
+                pieChartData.map((el) => (
+                    setLabelColors(labelColors => [...labelColors, el.color]),
+                    setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
+                    setCantidades(cantidades => [...cantidades, el.valor]),
+                    console.log(`Estados: ${tiposFormulario}`)
+                ))
             }).catch(console.error)
-        pieChartData.map((el) => (
-            setLabelColors(labelColors => [...labelColors, el.color]),
-            console.log(labelColors)
-        ))
+        setInfoFull({
+            labels: tiposFormulario,
+            datasets: [{
+                label: 'My First Dataset',
+                data: cantidades,
+                backgroundColor: labelColors,
+                hoverOffset: 4
+            }]
+        })
     }
-    console.log(pieChartData)
+    // console.log(pieChartData)
+    
     useEffect(() => {
         load()
     }, [])
 
-    const data = {
-        labels: [
-            'Red',
-            'Blue',
-            'Yellow'
-        ],
-        datasets: [{
-            label: 'My First Dataset',
-            data: [300, 50, 100],
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)'
-            ],
-            hoverOffset: 4
-        }]
-    };
     return (
         <>
             <HeaderComponent dashboard />
@@ -102,7 +100,7 @@ export const DashboardComponent = () => {
                             </table>
                         </div>
                         <div className="grafica" style={{ width: "40%" }}>
-                            <Doughnut classname="gra" data={data} />
+                            <Doughnut classname="gra" data={infoFull} />
                         </div>
                     </div>
                 </div>
