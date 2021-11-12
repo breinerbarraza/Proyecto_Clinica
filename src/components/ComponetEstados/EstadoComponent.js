@@ -127,7 +127,8 @@ export const EstadoComponent = () => {
                 <div className="infomacion">
                     <div className="nacimiento">
                         <div className="nacimiento">
-                            <p><b>Fecha de nacimiento: </b>{data_pendiente.fechaNacimiento} <b className="edad">Edad: </b>{data_pendiente.edad}</p>
+                            <p><b>Fecha de nacimiento: </b>{data_pendiente.fechaNacimiento}
+                            <b className="edad"> Edad: </b>{data_pendiente.edad}</p>
 
                         </div>
                     </div>
@@ -182,13 +183,13 @@ export const EstadoComponent = () => {
                 )}
                 {data_pendiente.estadoReferido === "Operado" && (
                     <>
-                        <h5 className="prequi-p"><b>· Comentarios</b></h5>
+                        <h5 className="prequi-p" style={{color:"#1c3678"}}><b>· Comentarios</b></h5>
                         <p>El paciente ha sido operado</p>
                     </>
                 )}
                 {data_pendiente.estadoReferido === "En Gestion" && (
                     <>
-                        <h5 className="prequi-p"><b>· Comentarios</b></h5>
+                        <h5 className="prequi-p" style={{color:"#1c3678"}}><b >· Comentarios</b></h5>
                         <label className="label-info-gestion"><b>Próxima gestion:</b></label>
                         <p>El referido no tenía disponibilidad para la gestión, pidío que se le contrate en 1 semana para recibir la</p>
                         <p> infromación con respecto al procedimiento refractivo. </p>
@@ -196,7 +197,7 @@ export const EstadoComponent = () => {
                 )}
                 {data_pendiente.estadoReferido === "Descartado" && (
                     <>
-                        <h5 className="prequi-p"><b>· Comentarios</b></h5>
+                        <h5 className="prequi-p" style={{color:"#1c3678"}}><b>· Comentarios</b></h5>
                         <p>Después de realizados los pre-quirúgicos el paciente no es apto para realizar el procedimiento</p>
                     </>
                 )}
