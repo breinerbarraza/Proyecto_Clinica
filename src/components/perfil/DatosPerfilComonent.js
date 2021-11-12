@@ -15,8 +15,6 @@ export const DatosPerfilComonent = () => {
         username: ""
     }
     const [estadoStorage, set_estadoStorage] = useState(estado_inicial)
-    
-
 
     useEffect(() => {
         const first_name = JSON.parse(localStorage.getItem('nombres'));
@@ -85,7 +83,6 @@ export const DatosPerfilComonent = () => {
             [e.target.name]: e.target.value
         })
     }
-
 
     return (
         <>
