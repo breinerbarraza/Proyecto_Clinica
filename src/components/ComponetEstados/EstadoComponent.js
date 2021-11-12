@@ -36,7 +36,6 @@ export const EstadoComponent = () => {
 
     const handleClickPendiente = async(e)=>{
         e.preventDefault();
-        console.log("Hola mundo")
         data.referido = id;
         console.log(data)
         await API.post('api/referidos_cambio_estado/register-estado-pendiente/', JSON.stringify(data))
@@ -56,7 +55,6 @@ export const EstadoComponent = () => {
                 })
             }
         })
-
     }
 
     const handleClickProgramado =async(e)=>{

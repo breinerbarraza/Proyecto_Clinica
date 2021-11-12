@@ -24,12 +24,13 @@ export const ListadoUsuarioComponent = () => {
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
             "estadoReferido": item.estadoReferido
-          }]),
-          console.log(data_listado)
+          }])
         ))
       })
     setLoading(false)
   }
+
+
 
   const showTable = () => {
     return (
@@ -43,6 +44,7 @@ export const ListadoUsuarioComponent = () => {
       />
     )
   }
+
 
   useEffect(() => {
     load()
@@ -77,7 +79,39 @@ export const ListadoUsuarioComponent = () => {
         width: 100
       },
     ],
-    rows: data_listado
+    //rows: data_listado
+    rows: [
+      {
+        asesor: "Juanpi Pestana",
+        numeroIdentificacion: "1042323231231",
+        correo_electronico: "juanpiPestana123@gmail.com",
+        referido: 20
+      },
+      {
+        asesor: "Breiner Barraza",
+        numeroIdentificacion: "1048233213",
+        correo_electronico: "barrazabreiner3@gmail.com",
+        referido: 15
+      },
+      {
+        asesor: "Andrea Escorcia",
+        numeroIdentificacion: "10238992032",
+        correo_electronico: "andreaescorcia123@gmail.com",
+        referido: 20
+      },
+      {
+        asesor: "Carlos Villagran",
+        numeroIdentificacion: "10899232321",
+        correo_electronico: "carlos@gmail.com",
+        referido: 33
+      },
+      {
+        asesor: "Freyler Manzanilla",
+        numeroIdentificacion: "10232313132",
+        correo_electronico: "freyler041240@gmail.com",
+        referido: 30
+      }
+    ]
 
   };
 

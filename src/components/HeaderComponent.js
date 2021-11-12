@@ -27,11 +27,13 @@ function ButtonListar() {
 }
 export const HeaderComponent = ({ users, dashboard }) => {
 
-    const cerrarSesion = (token, idUser, nombres, apellidos) => {
+    const cerrarSesion = (token, idUser, username, nombres, apellidos, password) => {
         localStorage.removeItem(token);
         localStorage.removeItem(idUser);
+        localStorage.removeItem(username);
         localStorage.removeItem(nombres);
         localStorage.removeItem(apellidos);
+        localStorage.removeItem(password);
         window.location = "/";
     }
 
@@ -124,7 +126,7 @@ export const HeaderComponent = ({ users, dashboard }) => {
                     )}
                 </div>
                 <div className="cerrarSesion">
-                    <img className="img-cerrar" onClick={() => cerrarSesion('token', 'idUser', 'nombres', 'apellidos')} alt="cerrar" src={Logout} style={{ "width": "50px", "cursor": "pointer" }} />
+                    <img className="img-cerrar" onClick={() => cerrarSesion('token','id_user','username','nombres','apellidos','password')} alt="cerrar" src={Logout} style={{ "width": "50px", "cursor": "pointer" }} />
                     <span style={{color: '#FFF'}}>Cerrar sesión</span>
                 </div>
             </nav>

@@ -9,7 +9,7 @@ export const ConfirEmailComponent = () => {
                 <div className="formulario-email1">
                     <form className="_form-email1">
                         <img className="logo_clinica-email1" src={logo_clinica} alt="clinica"/>
-                        <p className="p-email1">Confirma tu E-amil</p>
+                        <p className="p-email1">Confirma tu E-mail</p>
                         <TextField
                             type="email"
                             name="email"
