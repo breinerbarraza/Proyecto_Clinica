@@ -52,7 +52,6 @@ export const DatosPerfilComonent = () => {
                         timer: 1500
                     });   
                 }else{
-                    console.log(item)
                     const resp = item.data;
                     console.log(resp);
                     borrarDatos('nombres', 'apellidos', 'username','password')
