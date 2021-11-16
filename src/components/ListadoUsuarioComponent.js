@@ -14,16 +14,15 @@ export const ListadoUsuarioComponent = () => {
 
   const load = async () => {
     setLoading(true)
-    await API.get('api/referidos/')
+    await API.get('api/usuarios/user/')
       .then(resp => {
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
-            "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+            "nombre_completo": item.nombre_completo,
             "numeroIdentificacion": item.numeroIdentificacion,
-            "correo_electronico": item.correo_electronico,
-            "celular": item.celular,
-            "estadoReferido": item.estadoReferido
+            "correo_electronico": item.email,
+            "referidos": item.referidos,
           }])
         ))
       })
@@ -50,13 +49,15 @@ export const ListadoUsuarioComponent = () => {
     load()
   }, [])
 
+  console.log(data_listado)
+
   const data = {
 
     columns: [
       {
 
-        label: 'Asesor',
-        field: "asesor",
+        label: 'Usuario',
+        field: "nombre_completo",
         sort: 'asc',
         width: 150,
       },
@@ -74,13 +75,13 @@ export const ListadoUsuarioComponent = () => {
       },
       {
         label: 'Referidos',
-        field: 'referido',
+        field: 'referidos',
         sort: 'asc',
         width: 100
       },
     ],
-    //rows: data_listado
-    rows: [
+    rows: data_listado
+   /*  rows: [
       {
         asesor: "Juanpi Pestana",
         numeroIdentificacion: "1042323231231",
@@ -111,7 +112,7 @@ export const ListadoUsuarioComponent = () => {
         correo_electronico: "freyler041240@gmail.com",
         referido: 30
       }
-    ]
+    ] */
 
   };
 

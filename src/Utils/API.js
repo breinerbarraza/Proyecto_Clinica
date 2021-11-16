@@ -2,7 +2,7 @@ import axios from "axios";
 const getToken = () => `Token ${localStorage.getItem('user_token')}`;
 
 const API = axios.create({
-  baseURL: "http://10.0.82.86:8000/",
+  baseURL: "http://10.0.82.80:8000/",
   headers: {
     'Content-Type': 'application/json'
   }

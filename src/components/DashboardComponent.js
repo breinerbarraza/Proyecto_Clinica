@@ -19,7 +19,7 @@ export const DashboardComponent = () => {
     const [infoFull, setInfoFull] = useState([])
 
     const load = async () => {
-        await API('/api/referidos/')
+        await API.get('api/referidos/')
             .then(response => {
                 console.log(response.data)
                 let agrupacion = _.chain(response.data).groupBy('estadoReferido')
@@ -31,8 +31,9 @@ export const DashboardComponent = () => {
                             + (Math.floor(Math.random() * 255)) + ', 0.8)'
                     }))
                 let agrupacionArray = _.toArray(agrupacion)
+                console.log(agrupacionArray)
                 setPieChartData(agrupacionArray)
-                pieChartData.map((el) => (
+                agrupacionArray.map((el) => (
                     setLabelColors(labelColors => [...labelColors, el.color]),
                     setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
                     setCantidades(cantidades => [...cantidades, el.valor]),
@@ -49,11 +50,14 @@ export const DashboardComponent = () => {
             }]
         })
     }
-    // console.log(pieChartData)
+    console.log(pieChartData)
     
     useEffect(() => {
         load()
-    }, [])
+    }, [
+        
+    ])
+
 
     return (
         <>

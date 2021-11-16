@@ -8,6 +8,7 @@ import defecto_perfil from '../../image/Recursos-Femto/logo.png';
 
 export const DatosPerfilComonent = () => {
     
+    let estado = false;
     const estado_inicial = {
         id_user: "",
         nombres: "",
@@ -15,6 +16,8 @@ export const DatosPerfilComonent = () => {
         username: ""
     }
     const [estadoStorage, set_estadoStorage] = useState(estado_inicial)
+    const [estado_img, setEstado_img] = useState(estado);
+    const [img, setImg] = useState({})
 
     useEffect(() => {
         const first_name = JSON.parse(localStorage.getItem('nombres'));
@@ -29,6 +32,19 @@ export const DatosPerfilComonent = () => {
             username,
             password
         }
+        const json = {
+            id_user
+        };
+        console.log(json)
+        API.post('api/usuarios/user/get_img/', JSON.stringify(json)) 
+        .then(  resp => {
+            console.log(resp.data);
+            if(resp.data.length > 0){
+                setEstado_img(true)
+                setImg(resp.data[0])
+            }
+        } )
+
         set_estadoStorage(objeto)
     }, []);
 
@@ -84,6 +100,21 @@ export const DatosPerfilComonent = () => {
         })
     }
 
+    const handleSubmit_img = (e)=>{
+        e.preventDefault();
+        const img = document.getElementById("imagen").value;
+        const img_split = img.split("\\")
+        const name_img = img_split.at('-1');
+        const json = {
+            'id_user': estadoStorage.id_user,
+            'imagen': name_img
+        }
+        API.put('api/usuarios/user/save_img/', JSON.stringify(json))
+        .then(data => {
+            console.log(data.data)
+        })
+    }
+
     return (
         <>
             <div className="datos">
@@ -93,7 +124,27 @@ export const DatosPerfilComonent = () => {
                             <button className="btn btn-primary-outline inicio"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i><i className="fas fa-home"></i> Inicio</button>
                         </Link>
                     </div>
-                    <h4 className="h4-datos">Datos personales</h4>             
+                    <h4 className="h4-datos">Datos personales</h4>   
+                    {
+                        !estado_img && (
+                            <div className="div-imagen">
+                                <img src={defecto_perfil} alt="perfil.png" width="100px" />
+                            </div>
+                        )
+                    }
+
+                    {
+                        estado_img && (
+                            <div className="div-imagne">
+                                <img src={img.imagen} alt={img.imagen} width="100px" title={img.imagen}/> 
+                                <form onSubmit={handleSubmit_img} encType="multipart/form-data" id="form-imagen">
+                                    <input id="imagen" type="file" name="imagen"/>
+                                   <button className="fas fa-save" style={{width:'60px' }} type="submit"><i ></i></button>
+                                </form>    
+                            </div>
+                        )
+                    }
+
                     <form onSubmit={handleSubmit}>
                         <FormControl fullWidth >
                             <TextField
