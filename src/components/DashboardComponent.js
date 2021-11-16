@@ -22,7 +22,7 @@ export const DashboardComponent = () => {
     const load = async () => {
         await API.get('api/referidos/')
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 let agrupacion = _.chain(response.data).groupBy('estadoReferido')
                     .map((value, key) => ({
                         "estado": key,
@@ -30,17 +30,21 @@ export const DashboardComponent = () => {
                         "color": 'rgba(' + (Math.floor(Math.random() * 256)) + ','
                             + (Math.floor(Math.random() * 256)) + ','
                             + (Math.floor(Math.random() * 255)) + ', 0.8)'
+                            
                     }))
                 let agrupacionArray = _.toArray(agrupacion)
                 console.log(agrupacionArray)
                 setPieChartData(agrupacionArray)
+                console.log(agrupacionArray)
                 agrupacionArray.map((el) => (
                     setLabelColors(labelColors => [...labelColors, el.color]),
                     setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
-                    setCantidades(cantidades => [...cantidades, el.valor])
-                    //console.log(`Estados: ${tiposFormulario}`)
+                    setCantidades(cantidades => [...cantidades, el.valor]),
+                    console.log(`Estados: ${el}`),
+                console.log("el valor"+labelColors)
                 ))
             }).catch(console.error)
+
         setInfoFull({
             labels: tiposFormulario,
             datasets: [{
@@ -55,11 +59,7 @@ export const DashboardComponent = () => {
     
     useEffect(() => {
         load()
-    }, [
-        
-    ])
-
-
+    }, [])
     return (
         <>
             <HeaderComponent dashboard />
@@ -95,11 +95,12 @@ export const DashboardComponent = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {pieChartData.map((el, key) => (
+                                    {pieChartData.map((dato, key) => (
                                         <tr key={key}>
-                                            <td>{el.estado}</td>
-                                            <td>{el.valor}</td>
+                                            <td>{dato.estado}</td>
+                                            <td>{dato.valor}</td>
                                         </tr>
+                                        
                                     ))}
                                 </tbody>
                             </table>
