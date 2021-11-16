@@ -111,7 +111,9 @@ export const DatosPerfilComonent = () => {
         }
         API.put('api/usuarios/user/save_img/', JSON.stringify(json))
         .then(data => {
-            console.log(data.data)
+            if(data.data.msg){
+                window.location = "/datos_perfil"
+            }
         })
     }
 

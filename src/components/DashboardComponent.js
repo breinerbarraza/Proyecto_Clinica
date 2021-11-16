@@ -18,6 +18,7 @@ export const DashboardComponent = () => {
     const [cantidades, setCantidades] = useState([])
     const [infoFull, setInfoFull] = useState([])
 
+
     const load = async () => {
         await API.get('api/referidos/')
             .then(response => {
@@ -36,8 +37,8 @@ export const DashboardComponent = () => {
                 agrupacionArray.map((el) => (
                     setLabelColors(labelColors => [...labelColors, el.color]),
                     setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
-                    setCantidades(cantidades => [...cantidades, el.valor]),
-                    console.log(`Estados: ${tiposFormulario}`)
+                    setCantidades(cantidades => [...cantidades, el.valor])
+                    //console.log(`Estados: ${tiposFormulario}`)
                 ))
             }).catch(console.error)
         setInfoFull({
