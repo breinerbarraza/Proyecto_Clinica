@@ -16,7 +16,7 @@ export const DashboardComponent = () => {
     const [labelColors, setLabelColors] = useState([])
     const [tiposFormulario, setTiposFormulario] = useState([])
     const [cantidades, setCantidades] = useState([])
-    const [infoFull, setInfoFull] = useState([])
+    const [informacion, setInformacion] = useState([])
 
 
     const load = async () => {
@@ -30,7 +30,6 @@ export const DashboardComponent = () => {
                         "color": 'rgba(' + (Math.floor(Math.random() * 256)) + ','
                             + (Math.floor(Math.random() * 256)) + ','
                             + (Math.floor(Math.random() * 255)) + ', 0.8)'
-                            
                     }))
                 let agrupacionArray = _.toArray(agrupacion)
                 console.log(agrupacionArray)
@@ -40,23 +39,21 @@ export const DashboardComponent = () => {
                     setLabelColors(labelColors => [...labelColors, el.color]),
                     setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
                     setCantidades(cantidades => [...cantidades, el.valor]),
-                    console.log(`Estados: ${el}`),
-                console.log("el valor"+labelColors)
+                    console.log(`Estados: ${el}`)
                 ))
             }).catch(console.error)
-
-        setInfoFull({
-            labels: tiposFormulario,
-            datasets: [{
-                label: 'My First Dataset',
-                data: cantidades,
-                backgroundColor: labelColors,
-                hoverOffset: 4
-            }]
-        })
+        
     }
-    console.log(pieChartData)
-    
+    const data = {
+        labels: tiposFormulario,
+        datasets: [{
+          label: 'My First Dataset',
+          data: cantidades,
+          backgroundColor: labelColors,
+          hoverOffset: 4
+        }]
+      }
+
     useEffect(() => {
         load()
     }, [])
@@ -67,7 +64,7 @@ export const DashboardComponent = () => {
             <div >
                 <div className="container-dashboard">
                     <div className="_h3">
-                        <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard"><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
+                        <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
                     </div>
                     <div className="select-dashboard" style={{ width: "40%" }}>
                         <FormControl fullWidth  >
@@ -100,13 +97,13 @@ export const DashboardComponent = () => {
                                             <td>{dato.estado}</td>
                                             <td>{dato.valor}</td>
                                         </tr>
-                                        
+
                                     ))}
                                 </tbody>
                             </table>
                         </div>
-                        <div className="grafica" style={{ width: "40%" }}>
-                            <Doughnut classname="gra" data={infoFull} />
+                        <div className="grafica" style={{ width: "40%", marginTop:"-50px" }}>
+                            <Doughnut classname="gra" data={data} />
                         </div>
                     </div>
                 </div>
