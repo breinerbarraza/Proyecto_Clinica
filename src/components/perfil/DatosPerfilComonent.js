@@ -116,7 +116,6 @@ export const DatosPerfilComonent = () => {
             }
         })
     }
-
     return (
         <>
             <div className="datos">
