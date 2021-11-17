@@ -34,15 +34,14 @@ export const ListadoComponent = () => {
       })
     setLoading(false)
   }
-  
+
   const showTable = () => {
     return (
       <MDBDataTable
         striped
         className="tabla-pacientes"
         bordered
-        entrieslabel={[]}
-        hover
+        small
         data={data}
       />
     )
@@ -109,23 +108,23 @@ export const ListadoComponent = () => {
         }}>
           <div className="select-mes">
 
-          <FormControl fullWidth  >
-            <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+            <FormControl fullWidth  >
+              <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
               <Select
-                  name="mes"
-                  label="Mes"
-                  id="demo-simple-select-standard"
-                  onChange={""}
+                name="mes"
+                label="Mes"
+                id="demo-simple-select-standard"
+                onChange={""}
               >
                 <MenuItem >01</MenuItem>
                 <MenuItem >02</MenuItem>
                 <MenuItem >03</MenuItem>
                 <MenuItem >04</MenuItem>
-                <MenuItem >05</MenuItem> 
+                <MenuItem >05</MenuItem>
               </Select>
-          </FormControl>
-            </div>
-          
+            </FormControl>
+          </div>
+
         </div>
         <div className="tabla-lista">
           {!loading && showTable()}

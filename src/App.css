@@ -538,6 +538,12 @@ label {
     margin-bottom: 15px;
 }
 
+.btn_QRP{
+    padding: 10px;
+}
+.btn_QRA{
+}
+
 /*Confirma Email*/
 .login-container {
     display: flex;

@@ -23,6 +23,8 @@ export const ListadoUsuarioComponent = () => {
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.email,
             "referidos": item.referidos,
+            "QR_Paciente": ( item.qr === null && <Link ><span title="QR Paciente"><i class="fas fa-qrcode" ></i></span></Link>),
+            "QR_Asesor": <Link ><span title="QR Asesor"><i class="fas fa-qrcode" ></i></span></Link>,            
           }])
         ))
       })
@@ -38,7 +40,7 @@ export const ListadoUsuarioComponent = () => {
         className="tabla-pacientes"
         bordered
         entrieslabel={[]}
-        hover
+        small
         data={data}
       />
     )
@@ -76,6 +78,18 @@ export const ListadoUsuarioComponent = () => {
       {
         label: 'Referidos',
         field: 'referidos',
+        sort: 'asc',
+        width: 100
+      },
+      {
+        label: 'QR Paciente',
+        field: 'QR_Paciente',
+        sort: 'asc',
+        width: 100
+      },
+      {
+        label: 'QR Asesores',
+        field: 'QR_Asesor',
         sort: 'asc',
         width: 100
       },
