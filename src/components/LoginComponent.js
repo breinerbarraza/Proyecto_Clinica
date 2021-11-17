@@ -5,6 +5,7 @@ import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
 import API from '../Utils/API';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
  const login = {
         username:"",
@@ -45,7 +46,8 @@ export const LoginComponent = () => {
                 const apellidos = data.lastname;
                 const username = data.username;
                 const password = data.password;
-                guardarDataLocalStorage(token, id_user, nombres, apellidos,username, password);
+                const super_user = data.super_user
+                guardarDataLocalStorage(token, id_user, nombres, apellidos,username, password, super_user);
                 const token_guardado = obtenerLocalStorageToken('token');
                 if(token_guardado !== "null"){
                     window.location = "/"
@@ -62,13 +64,15 @@ export const LoginComponent = () => {
         return dato;
     }
 
-    const guardarDataLocalStorage = (nombre_token, idUser,nombres, apellidos,username, password)=>{
+    const guardarDataLocalStorage = (nombre_token, idUser,nombres, apellidos,username, password, super_user)=>{
         localStorage.setItem('token', JSON.stringify(nombre_token))
         localStorage.setItem('id_user', JSON.stringify(idUser));
         localStorage.setItem('nombres', JSON.stringify(nombres));
         localStorage.setItem('apellidos', JSON.stringify(apellidos));
         localStorage.setItem('username', JSON.stringify(username));
         localStorage.setItem('password', JSON.stringify(password))
+        if(super_user) localStorage.setItem('super_user', JSON.stringify(super_user))
+        
     }
 
     return (
@@ -104,6 +108,7 @@ export const LoginComponent = () => {
                                 shrink: true,
                             }}
                         /><br /><br />
+                        <Link to="/email"><em>Has olvidado la contraseña?</em></Link>
                         <button type="submit" style={{width: "100%"}} className="btn btn-primary">INICIAR SESIÓN</button>
                     </form>
 

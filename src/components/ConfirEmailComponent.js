@@ -2,10 +2,12 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
+import { Link } from 'react-router-dom';
 export const ConfirEmailComponent = () => {
     return (
         <div className="page-email1">
             <div className="email1-container">
+                <Link to="/login"><i class="fas fa-home"></i></Link>
                 <div className="formulario-email1">
                     <form className="_form-email1">
                         <img className="logo_clinica-email1" src={logo_clinica} alt="clinica"/>

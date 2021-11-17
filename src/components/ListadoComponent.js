@@ -85,7 +85,7 @@ export const ListadoComponent = () => {
         width: 150
       },
       {
-        label: 'Comisiòn',
+        label: 'Comisión',
         field: 'comision',
         sort: 'asc',
         width: 100

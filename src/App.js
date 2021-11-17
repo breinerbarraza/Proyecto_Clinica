@@ -59,11 +59,8 @@ function App() {
                 )}
               </Route>
               <Route exact path="/email">
-                {localStorage.getItem('token') !== null ? (
                   <ConfirEmailComponent />
-                ) : (
-                  <LoginComponent />
-                )}
+            
               </Route>
               <Route exact path="/referir">
                 {localStorage.getItem('token') !== null ? (
