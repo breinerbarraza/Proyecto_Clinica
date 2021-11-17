@@ -9,8 +9,11 @@ import Swal from 'sweetalert2';
 
 export const FormularioReferirComponent = () => {
 
+
     const [identificacion, setIdentificacion] = useState([])
-    const [select_state, setSelect_state] = useState([])
+    const [select_state, setSelect_state] = useState({})
+    const [storage, setstorage] = useState({})
+
     useEffect(() => {
         API.get('api/configuracion/tipoIdentificacion')
             .then(({ data }) => {
@@ -18,6 +21,17 @@ export const FormularioReferirComponent = () => {
                 setIdentificacion(item)
             })
     }, [])
+
+    useEffect(()=>{
+        const token = JSON.parse(localStorage.getItem("token"));
+        const id_user = JSON.parse(localStorage.getItem("id_user"));
+        const objeto = {
+            id_user,
+            token
+        };
+        setstorage(objeto);
+    }, []);
+
     const handleSelect = (e) => {
         setSelect_state({
             ...select_state,
@@ -26,7 +40,8 @@ export const FormularioReferirComponent = () => {
     }
     const enviarDatos = async (e) => {
         e.preventDefault();
-        console.log(select_state)
+        select_state.id_user = storage.id_user
+        select_state.token_athenthication = storage.token
         API.post('api/referidos/register-referidos/', JSON.stringify(select_state))
             .then(item => {
                 const resp = item.data;
