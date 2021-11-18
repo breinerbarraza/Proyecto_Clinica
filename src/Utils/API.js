@@ -1,5 +1,5 @@
 import axios from "axios";
-const getToken = () => `Token ${localStorage.getItem('user_token')}`;
+const getToken = () => `Token ${localStorage.getItem('token')}`;
 
 const API = axios.create({
   baseURL: "http://10.0.82.80:8000/",
@@ -10,7 +10,7 @@ const API = axios.create({
 
 API.interceptors.request.use(
   function (config) {
-    if(localStorage.getItem('user_token')){
+    if(localStorage.getItem('token')){
       config.headers.common = {
         ...config.headers.common,
         authorization: getToken(),

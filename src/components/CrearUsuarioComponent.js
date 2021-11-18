@@ -8,12 +8,13 @@ import { PerfilComponent } from './perfil/PerfilComponent';
 import API from '../Utils/API';
 import { HeaderComponent } from './HeaderComponent'
 import Swal from 'sweetalert2';
+import { Loading } from './Loading';
 
 export const CrearUsuarioComponent = () => {
 
-
     const [group, setGroup] = useState([])
     const [dato, setDatos] = useState([])
+    const [spinner, setSpinner] = useState(false);
 
     useEffect(() => {
         API.get('api/usuarios/asesor/list_grupos')
@@ -33,6 +34,10 @@ export const CrearUsuarioComponent = () => {
     const enviarDatos = async(e) => {
         e.preventDefault();
         console.log(dato)
+        setSpinner(true);
+        setTimeout(()=>{
+            setSpinner(false);
+        }, 3500)
         await API.post('api/usuarios/asesor/crear-usuario/', JSON.stringify(dato))
         .then( ({data}) => {
             const resp = data;
@@ -40,12 +45,12 @@ export const CrearUsuarioComponent = () => {
             if(resp.mensaje){   
                 const mensaje = resp.mensaje;
                 document.getElementById("login-form").reset();
+                setSpinner(false);
                 return Swal.fire({
-                    position: 'top-end',
                     icon: 'success',
-                    title: mensaje,
-                    showConfirmButton: false,
-                    timer: 1500
+                    title: 'Exito!',
+                    text : mensaje,
+                    timer: 3500
                 });
             }else{
                 return Swal.fire({
@@ -58,6 +63,13 @@ export const CrearUsuarioComponent = () => {
         .catch(console.error)
 
     }
+
+    if(spinner){
+        return (
+            <Loading />
+        )
+    }else{
+        
     return (
 
         <>
@@ -166,4 +178,6 @@ export const CrearUsuarioComponent = () => {
             </div>
         </>
     )
+    }   
+
 }

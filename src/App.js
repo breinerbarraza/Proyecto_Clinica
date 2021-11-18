@@ -1,4 +1,3 @@
-import './App.css'
 import{
   BrowserRouter as Router,
   Switch,
@@ -21,6 +20,8 @@ import { DatosPerfilComonent } from './components/perfil/DatosPerfilComonent';
 import { ListadoUsuarioComponent } from './components/ListadoUsuarioComponent';
 import { CambioContraseña } from './components/perfil/CambioContraseña';
 import { Dashboard2Component } from './components/Dashboard2Component';
+import './App.css'
+
 
 
 function App() {
@@ -126,23 +127,7 @@ function App() {
                   <LoginComponent/>
                 )}
               </Route>
-              <Redirect to="/"/>    {/*
-            <Route exact  path ="/email" component={ConfirEmailComponent}/>
-            <Route exact  path ="/listado" component={ListadoComponent}/>
-            <Route exact  path ="/referir" component={ReferirComponent}/>
-            <Route exact  path ="/registro" component={RegistroComponent}/>
-            <Route exact  path ="/header" component={HeaderComponent}/>
-            <Route exact  path ="/login" component={LoginComponent}/>
-            <Route exact  path ="/registrar_referido" component={RegistrarReferidoComponent}/>
-            <Route exact  path ="/dashboard" component={DashboardComponent}/>
-            <Route exact  path ="/crear_usuario" component={CrearUsuarioComponent}/>
-            <Route exact  path ="/listado_referido" component={ListadoReferidoComponent}/>
-            <Route exact  path ="/listado/pre_quirurgico/:id" component={PreQuirugicoComponent}/>
-            <Route exact  path ="/listado/programado/:id" component={ProgramadoComponent}/>
-            <Route exact  path ="/Listado/descartado/:id" component={DescartadoComponent}/>
-            <Route exact  path ="/lista/gestion/:id" component={GestionComponent}/> 
-            <Route exact  path ="/lista/pendiente/:id" component={PendienteComponent}/>
-            <Route exact  path ="/lista/operado/:id" component={OperadoComponent}/>*/}
+              <Redirect to="/"/>
         </Switch> 
       </Router>   
 
