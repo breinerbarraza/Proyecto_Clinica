@@ -6,7 +6,7 @@ export const Loading = () => {
     return (
         <div className="divPadre">
             <div className="divHijo">
-                <Spinner color="dark" />
+                <Spinner color="dark" className="spinnerReactStrap"/>
             </div>
         </div>
     )

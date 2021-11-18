@@ -22,7 +22,6 @@ export const CrearUsuarioComponent = () => {
                 setGroup(data)
                 console.log(data)
             })
-
     }, [])
 
     const handleInput = (e) => {
@@ -53,15 +52,16 @@ export const CrearUsuarioComponent = () => {
                     timer: 3500
                 });
             }else{
+                const error = resp.error;
                 return Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: resp.error,
+                    text: error,
+                    timer: 3500
                 })
             }
         })
         .catch(console.error)
-
     }
 
     if(spinner){
@@ -71,7 +71,6 @@ export const CrearUsuarioComponent = () => {
     }else{
         
     return (
-
         <>
             <HeaderComponent users={true} dashboard={false} />
             <PerfilComponent />

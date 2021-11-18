@@ -6,8 +6,6 @@ import API from '../Utils/API';
 import Swal from 'sweetalert2';
 
 export const RegistroComponent = () => {
-
-
     
     const estate = {
         id:10,
@@ -15,13 +13,17 @@ export const RegistroComponent = () => {
         last_name:"",
         email:"",
         username:"",
-        password:""
+        password:"",
+        password2: ""
     }    
 
     const [registros, setRegistros] = useState(estate)
+    const [state_error, setState_error] = useState(false);
+    const [msg_error, setmsg_error] = useState("")
 
     const handleSubmit = (e)=>{
         e.preventDefault()
+        setState_error(false);
         console.log(registros)
         API.post('api/usuarios/asesor/register/', JSON.stringify(registros))
         .then ( item => {
@@ -31,17 +33,18 @@ export const RegistroComponent = () => {
                 let error_msg = resp.data
                 return Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
+                    title: 'Ha ocurrido el siguiente error!',
                     text: error_msg,
                   });
+            }else if(resp.error){
+                setState_error(true);
+                setmsg_error(resp.error);
             }else{
                 const mensaje = resp.mensaje;
                 Swal.fire({
-                    position: 'top-end',
                     icon: 'success',
-                    title: mensaje,
-                    showConfirmButton: false,
-                    timer: 1500
+                    text: mensaje,
+                    timer: 2500
                 });
                 setTimeout(()=>{
                     window.location = "/";
@@ -51,6 +54,7 @@ export const RegistroComponent = () => {
     }
 
     const handleInputChange =  (e)=> {
+        setState_error(false);
         setRegistros({
             ...registros,
             [e.target.name] : e.target.value
@@ -64,7 +68,7 @@ export const RegistroComponent = () => {
                     <form onSubmit={handleSubmit}>
                         <img alt="clinica" className="logo_clinica-registro" src={logo_clinica} />
                         <h3 className="h3-registro">¡Hola,</h3>
-                        <p className="p-registro"><b>Alberto Hernandez</b> quiere que hagas parte de su red de referidos!                </p>
+                        <p className="p-registro"><b>Alberto Hernandez</b> quiere que hagas parte de su red de referidos!</p>
                        <TextField
                             type="text"
                             name="first_name"
@@ -132,7 +136,7 @@ export const RegistroComponent = () => {
                         />
                         <TextField
                             type="password"
-                            name="password"
+                            name="password2"
                             placeholder="Escribe..."
                             label="Confirmar Contraseña"
                             required
@@ -143,6 +147,11 @@ export const RegistroComponent = () => {
                                 shrink: true,
                             }}
                         />
+                        {
+                            state_error && (
+                                <p style={{marginTop:"7px", backgroundColor:"rgba(255,0,0,0.7)", color:"#fff", paddingLeft:"10px"}}>{msg_error}</p>
+                            )
+                        }
                         
                         <button type="submit" className="btn btn-primary">REGISTRARSE</button>
                     </form>
