@@ -108,7 +108,7 @@ export const LoginComponent = () => {
                                 shrink: true,
                             }}
                         /><br /><br />
-                        <Link to="/email"><em>Has olvidado la contraseña?</em></Link>
+                        <Link to="/email"><i>Has olvidado la contraseña?</i></Link>
                         <button type="submit" style={{width: "100%"}} className="btn btn-primary">INICIAR SESIÓN</button>
                     </form>
 
