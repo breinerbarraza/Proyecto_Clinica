@@ -129,7 +129,7 @@ export const EstadoComponent = () => {
                     <div className="nacimiento">
                         <div className="nacimiento">
                             <p><b>Fecha de nacimiento: </b>{data_pendiente.fechaNacimiento}
-                            <b className="edad"> Edad: </b>{data_pendiente.edad}</p>
+                            <b className="edad"> Edad: </b>{data_pendiente.edad} años</p>
 
                         </div>
                     </div>
