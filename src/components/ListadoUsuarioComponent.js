@@ -46,7 +46,6 @@ export const ListadoUsuarioComponent = () => {
     )
   }
 
-
   useEffect(() => {
     let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
     if(super_user){

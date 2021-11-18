@@ -23,7 +23,6 @@ import { Dashboard2Component } from './components/Dashboard2Component';
 import './App.css'
 
 
-
 function App() {
   return (
     <div>

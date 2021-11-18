@@ -61,7 +61,8 @@ export const DashboardComponent = () => {
         }else{
             window.location = "/"
         }
-    }, [])
+    }, []);
+    
     return (
         <>
             <HeaderComponent dashboard />
