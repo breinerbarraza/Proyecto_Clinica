@@ -38,7 +38,6 @@ export const ListadoReferidoComponent = () => {
     await API.get('api/configuracion/estadoReferido/')
     .then( data => {
       const resp = data.data;
-      console.log(resp);
       setCmb_listado(resp)
     })
     .catch( console.error);
@@ -58,7 +57,12 @@ export const ListadoReferidoComponent = () => {
   }
 
   useEffect(() => {
-    load()
+    let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+    if(super_user){
+      load()
+    }else{
+      
+    }
     cargarEstados()
   }, [])
 

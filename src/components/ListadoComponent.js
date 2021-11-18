@@ -48,7 +48,12 @@ export const ListadoComponent = () => {
   }
 
   useEffect(() => {
-    load()
+    let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+    if(super_user){
+      load()
+    }else{
+      
+    }
   }, [])
   const data = {
     columns: [

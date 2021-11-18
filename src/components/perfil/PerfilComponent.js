@@ -20,7 +20,6 @@ export const PerfilComponent = () => {
         setdatos_perfil(objeto);
     }, []);
 
-    console.log(datos_perfil)
     const cerrarSesion = (token, idUser, nombres, apellidos,username, password, super_user)=>{
         localStorage.removeItem(token);
         localStorage.removeItem(idUser);

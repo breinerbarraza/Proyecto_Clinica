@@ -48,8 +48,13 @@ export const ListadoUsuarioComponent = () => {
 
 
   useEffect(() => {
-    load()
-  }, [])
+    let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+    if(super_user){
+      load()
+    }else{
+      window.location = "/";
+    }
+  }, []);
 
   console.log(data_listado)
 

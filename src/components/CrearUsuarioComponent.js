@@ -17,6 +17,10 @@ export const CrearUsuarioComponent = () => {
     const [spinner, setSpinner] = useState(false);
 
     useEffect(() => {
+        const super_user = (JSON.parse(localStorage.getItem('super_user'))) ? JSON.parse(localStorage.getItem('super_user')) : "";
+        if(!super_user){
+            window.location = "/";
+        }
         API.get('api/usuarios/asesor/list_grupos')
             .then(({ data }) => {
                 setGroup(data)
