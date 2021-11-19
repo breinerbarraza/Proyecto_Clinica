@@ -929,3 +929,19 @@ button[type="submit"]{
     color: rgb(33, 61, 104);
 }
 
+
+.select-estado{
+    text-align: center;
+    padding: 5px;
+    border: none;
+    border-radius: 12px;
+    margin-left: 10px;
+}
+
+.change_estado{
+    margin-left: 10px;
+    letter-spacing: 2px;
+    padding: 7px !important;
+    background-color: #02305b !important;
+    height: 35px !important;
+}

@@ -13,10 +13,12 @@ import Chip from '@mui/material/Chip';
 import Swal from 'sweetalert2';
 
 export const EstadoComponent = () => {
+
     const [data_pendiente, setData_pendiente] = useState({})
     const [data, setData] = useState({})
     const [data_medicos, setData_medicos] = useState([]);
 
+    const [cmbListado, setCmbListado] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
@@ -31,6 +33,11 @@ export const EstadoComponent = () => {
         API.get("api/usuarios/user/grupo_medico")
         .then( data => {
             setData_medicos(data.data)
+        })
+
+        API.get("api/configuracion/estadoReferido/")
+        .then( data => {
+            setCmbListado(data.data);
         })
     }, []);
 
@@ -104,6 +111,31 @@ export const EstadoComponent = () => {
         .catch(console.error)
     }
 
+    const handleChangeEstado = (e)=>{
+        e.preventDefault();
+        data.id_user_referido = id;
+        data.nombre = data_pendiente.get_nombreCompleto
+        API.put('api/referidos/updated_estado/', JSON.stringify(data))
+        .then( ({data}) =>{
+            if(data.msg){
+                return Swal.fire({
+                    icon: 'success',
+                    title: 'Mensaje!',
+                    text: data.msg,
+                    confirmButtonText: "Ok"
+                }).then((result) => {
+                    if(result.isConfirmed) window.location = "/lista/estado/"+id;
+                })
+            }else{
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: data.error,
+                })
+            }
+        })
+    }
+
     const handleInput =(e)=>{
         setData({
             ...data,
@@ -124,6 +156,17 @@ export const EstadoComponent = () => {
                             backgroundColor: data_pendiente.color_estado
                         }}
                     />
+                    <form onSubmit={handleChangeEstado}>
+                        <select className="select-estado" name="estadoReferido" onChange={handleInput}>
+                            <option selected="selected">--CAMBIE EL ESTADO</option>
+                            {
+                                cmbListado.map((item) => {
+                                    return <option key={item.id} value={item.id} style={{backgroundColor: item.color}} >{item.descripcion}</option>
+                                })
+                            }
+                        </select>
+                        <input type="submit" className="btn btn-primary change_estado" value="👌" />
+                    </form>
                 </div>
                 <div className="infomacion">
                     <div className="nacimiento">

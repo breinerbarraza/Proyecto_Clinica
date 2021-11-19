@@ -15,7 +15,7 @@ export const ListadoReferidoComponent = () => {
   const [data_listado, setData_listado] = useState([])
   const [loading, setLoading] = useState(false)
   const [cmb_listado, setCmb_listado] = useState([]);
-  const [id_json, setId_json] = useState("")
+
   const load = async () => {
     setLoading(true)
     await API.get('api/referidos/')
