@@ -35,6 +35,29 @@ export const ListadoComponent = () => {
     setLoading(false)
   }
 
+  const load_referidos_by_id = async(id_user)=>{
+    setLoading(true)
+    const obj = {
+      id: id_user
+    }
+    console.log(obj)
+    await API.post('api/referidos/get_referidos/', JSON.stringify(obj))
+      .then(resp => {
+        resp.data.map((item) => (
+          setData_listado(data_listado => [...data_listado, {
+            "id": item.id,
+            "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+            "numeroIdentificacion": item.numeroIdentificacion,
+            "correo_electronico": item.correo_electronico,
+            "celular": item.celular,
+            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />
+          }]),
+          console.log(data_listado)
+        ))
+      })
+    setLoading(false)
+  }
+
   const showTable = () => {
     return (
       <MDBDataTable
@@ -48,11 +71,12 @@ export const ListadoComponent = () => {
   }
 
   useEffect(() => {
+    let id_user = JSON.parse(localStorage.getItem('id_user'));
     let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
     if(super_user){
       load()
     }else{
-      
+      load_referidos_by_id(id_user)
     }
   }, [])
   const data = {

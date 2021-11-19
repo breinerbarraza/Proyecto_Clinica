@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 
 export const LoginComponent = () => {
     
-
     const [datos, setDatos] = useState(login)
 
     const handleInputChange = (e)=>{
