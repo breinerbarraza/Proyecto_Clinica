@@ -40,7 +40,7 @@ export const CrearUsuarioComponent = () => {
         setSpinner(true);
         setTimeout(()=>{
             setSpinner(false);
-        }, 3500)
+        }, 3300)
         await API.post('api/usuarios/asesor/crear-usuario/', JSON.stringify(dato))
         .then( ({data}) => {
             const resp = data;
@@ -53,7 +53,7 @@ export const CrearUsuarioComponent = () => {
                     icon: 'success',
                     title: 'Exito!',
                     text : mensaje,
-                    timer: 3500
+                    timer: 3600
                 });
             }else{
                 const error = resp.error;

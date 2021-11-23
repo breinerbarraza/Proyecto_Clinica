@@ -165,7 +165,7 @@ export const EstadoComponent = () => {
                                 })
                             }
                         </select>
-                        <input type="submit" className="btn btn-primary change_estado" value="👌" />
+                        <button type="submit" className="btn btn-primary change_estado" title="Actuliazar Estado" ><i class="fas fa-edit"></i></button>
                     </form>
                 </div>
                 <div className="infomacion">
