@@ -541,8 +541,6 @@ label {
 .btn_QRP{
     padding: 10px;
 }
-.btn_QRA{
-}
 
 /*Confirma Email*/
 .login-container {
@@ -939,9 +937,11 @@ button[type="submit"]{
 }
 
 .change_estado{
-    margin-left: 10px;
+    margin-left: 5px;
     letter-spacing: 2px;
     padding: 7px !important;
     background-color: #02305b !important;
     height: 35px !important;
+    margin-top: -2px !important;
+    width: 50px !important;
 }
