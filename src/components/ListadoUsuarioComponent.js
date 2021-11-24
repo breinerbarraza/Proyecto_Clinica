@@ -21,7 +21,7 @@ export const ListadoUsuarioComponent = () => {
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
             "nombre_completo": item.nombre_completo,
-            "numeroIdentificacion": item.numeroIdentificacion,
+            "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
             "correo_electronico": item.email,
             "referidos": (item.total_referidos) ? item.total_referidos : 0,
             "QR_Paciente": ( item.qr === null && <Link ><span title="QR Paciente"><i class="fas fa-qrcode" ></i></span></Link>),
