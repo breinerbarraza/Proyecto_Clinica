@@ -16,13 +16,14 @@ export const ListadoUsuarioComponent = () => {
     setLoading(true)
     await API.get('api/usuarios/user/')
       .then(resp => {
+        console.log(resp.data)
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
             "nombre_completo": item.nombre_completo,
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.email,
-            "referidos": item.referidos,
+            "referidos": (item.total_referidos) ? item.total_referidos : 0,
             "QR_Paciente": ( item.qr === null && <Link ><span title="QR Paciente"><i class="fas fa-qrcode" ></i></span></Link>),
             "QR_Asesor": <Link ><span title="QR Asesor"><i class="fas fa-qrcode" ></i></span></Link>,            
           }])
