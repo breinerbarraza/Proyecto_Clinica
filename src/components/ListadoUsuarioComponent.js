@@ -24,8 +24,8 @@ export const ListadoUsuarioComponent = () => {
             "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
             "correo_electronico": item.email,
             "referidos": (item.total_referidos) ? item.total_referidos : 0,
-            "QR_Paciente": ( item.qr === null && <Link ><span title="QR Paciente"><i class="fas fa-qrcode" ></i></span></Link>),
-            "QR_Asesor": <Link ><span title="QR Asesor"><i class="fas fa-qrcode" ></i></span></Link>,            
+            "QR_Paciente": ( item.codigoqr_referidos == "") ? "" : <Link to={item.codigoqr_referidos}><span title="QR Paciente"><i class="fas fa-qrcode" ></i></span></Link> ,
+            "QR_Asesor": ( item.codigoqr_asesor == "") ? "" : <Link to={item.codigoqr_asesor}><span title="QR Asesor"><i class="fas fa-qrcode" ></i></span></Link> ,
           }])
         ))
       })
