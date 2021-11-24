@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Link } from 'react-router-dom'
+import meses_map from '../Utils/Objmeses';
 
 export const ListadoReferidoComponent = () => {
 
@@ -17,21 +18,6 @@ export const ListadoReferidoComponent = () => {
   const [cmb_listado, setCmb_listado] = useState([]);
   const [meses, setMeses] = useState([]);
   const [data_meses, setData_meses] = useState([])
-
-  const meses_map = [
-    {'mes': 'Enero'},
-    {'mes': 'Febrero'},
-    {'mes': 'Marzo'},
-    {'mes': 'Abril'},
-    {'mes': 'Mayo'},
-    {'mes': 'Junio'},
-    {'mes': 'Julio'},
-    {'mes': 'Agosto'},
-    {'mes': 'Septiembre'},
-    {'mes': 'Octubre'},
-    {'mes': 'Noviembre'},
-    {'mes': 'Diciembre'}
-  ]
 
   const load = async () => {
     setLoading(true)
@@ -108,7 +94,6 @@ export const ListadoReferidoComponent = () => {
     cargarEstados()
   }, []);
 
-  console.log(meses)
   const meses_anio = {
     '1': 'Enero',
     '2': "Febrero",
@@ -125,6 +110,7 @@ export const ListadoReferidoComponent = () => {
   };
 
   const handleSelectMonth = (e)=>{
+    setData_meses([]);
     let arreglo_vacio = [0,1] //
     const mes_nombre = e.target.value
     const obj_nombre = meses.map(item => {

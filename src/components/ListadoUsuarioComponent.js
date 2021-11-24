@@ -5,18 +5,26 @@ import { MDBDataTable } from 'mdbreact';
 import API from '../Utils/API';
 import { PerfilComponent } from './perfil/PerfilComponent';
 import { Link } from 'react-router-dom'
-import TextField from '@mui/material/TextField';
+import Chip from '@mui/material/Chip';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import meses_map from '../Utils/Objmeses';
 
 export const ListadoUsuarioComponent = () => {
 
-  const [data_listado, setData_listado] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [data_listado, setData_listado] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [meses, setMeses] = useState([]);
+  const [data_meses, setData_meses] = useState([]);
 
   const load = async () => {
     setLoading(true)
     await API.get('api/usuarios/user/')
       .then(resp => {
         console.log(resp.data)
+        setMeses(resp.data)
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -56,7 +64,54 @@ export const ListadoUsuarioComponent = () => {
     }
   }, []);
 
-  console.log(data_listado)
+  const meses_anio = {
+    '1': 'Enero',
+    '2': "Febrero",
+    '3': "Marzo",
+    '4': "Abril",
+    '5': "Mayo",
+    '6': "Junio",
+    '7': "Julio",
+    '8': "Agosto",
+    '9': "Septiembre",
+    '10': "Octubre",
+    '11': "Noviembre",
+    '12': "Diciembre",
+  };
+
+  const handleSelectMonth = (e)=>{
+    setData_meses([]);
+    let arreglo_vacio = [0,1] //
+    const mes_nombre = e.target.value
+    const obj_nombre = meses.map(item => {
+      return item.date_joined
+    })
+    console.log(obj_nombre)
+    let variable = "";
+    let dia_mes = "";
+    for(let x of obj_nombre){
+      variable = x
+      dia_mes = new Date(variable).getMonth() + 1
+    }
+    if(meses_anio[dia_mes] == mes_nombre){
+      const dato = meses.filter(item => item)
+      dato.map((item) => (
+        setData_meses(data_meses => [...data_meses, {
+          "id": item.id,
+            "nombre_completo": item.nombre_completo,
+            "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
+            "correo_electronico": item.email,
+            "referidos": (item.total_referidos) ? item.total_referidos : 0,
+            "QR_Paciente": ( item.codigoqr_referidos == "") ? "" : <Link to={item.codigoqr_referidos}><span title="QR Paciente"><i class="fas fa-qrcode" ></i></span></Link> ,
+            "QR_Asesor": ( item.codigoqr_asesor == "") ? "" : <Link to={item.codigoqr_asesor}><span title="QR Asesor"><i class="fas fa-qrcode" ></i></span></Link> ,
+        }])
+      ))
+    }else{
+      setData_meses(arreglo_vacio)
+    }
+  }
+
+  console.log(meses)
 
   const data = {
 
@@ -99,40 +154,7 @@ export const ListadoUsuarioComponent = () => {
         width: 100
       },
     ],
-    rows: data_listado
-   /*  rows: [
-      {
-        asesor: "Juanpi Pestana",
-        numeroIdentificacion: "1042323231231",
-        correo_electronico: "juanpiPestana123@gmail.com",
-        referido: 20
-      },
-      {
-        asesor: "Breiner Barraza",
-        numeroIdentificacion: "1048233213",
-        correo_electronico: "barrazabreiner3@gmail.com",
-        referido: 15
-      },
-      {
-        asesor: "Andrea Escorcia",
-        numeroIdentificacion: "10238992032",
-        correo_electronico: "andreaescorcia123@gmail.com",
-        referido: 20
-      },
-      {
-        asesor: "Carlos Villagran",
-        numeroIdentificacion: "10899232321",
-        correo_electronico: "carlos@gmail.com",
-        referido: 33
-      },
-      {
-        asesor: "Freyler Manzanilla",
-        numeroIdentificacion: "10232313132",
-        correo_electronico: "freyler041240@gmail.com",
-        referido: 30
-      }
-    ] */
-
+    rows: (data_listado && data_meses.length == 0) ? data_listado : data_meses
   };
 
   return (
@@ -144,20 +166,22 @@ export const ListadoUsuarioComponent = () => {
         <h3 className="h3-Lista">Listado de usuario</h3>
         <div className="subtitle-header">
           <div className="select-mes">
-            <TextField
-              select
-              name="identidad"
-              placeholder="Escribe..."
-              label="Mes"
-              className="form-control "
-              style={{ marginBottom: "30px" }}
-              onChange={""}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            >
-              <option value="">Choose one option</option>
-            </TextField></div>
+          <FormControl fullWidth  >
+            <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+              <Select
+                  name="mes"
+                  label="Mes"
+                  id="demo-simple-select-standard"
+                  onChange={handleSelectMonth}
+              >
+                {
+                  meses_map.map((item, key)=> {
+                    return <MenuItem key={key} value={item.mes}>{item.mes}</MenuItem>
+                  })
+                }
+              </Select>
+          </FormControl>
+            </div>
             <div style={{flex: 5}}>
 
             </div>
