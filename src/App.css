@@ -89,7 +89,7 @@ a {
 .header{
     background: #10305b;
     float: left;
-    height: 100vh;
+    height: 122vh;
 }
 .header .nav-header{
     width: 147px;
@@ -109,6 +109,7 @@ a {
 }
 .logo-clinica {
     width: 85% !important;
+    margin-bottom: 100px;
 }
 .header img {
     margin-left: 20px;

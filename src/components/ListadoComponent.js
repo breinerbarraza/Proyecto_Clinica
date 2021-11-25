@@ -65,8 +65,11 @@ export const ListadoComponent = () => {
 
   const showTable = () => {
     return (
+      //Mostrando 1 a 10 de 12 entradas
       <MDBDataTable
         striped
+        paginationLabel={["<", ">"]}
+        infoLabel={["Mostrando", "a", "de", "entradas"]}
         className="tabla-pacientes"
         bordered
         small

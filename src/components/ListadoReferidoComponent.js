@@ -38,7 +38,7 @@ export const ListadoReferidoComponent = () => {
     setLoading(false)
   }
 
-  const load_referidos_by_id = async(id_user)=>{
+  const load_referidos_by_id = async (id_user) => {
     setLoading(true)
     const obj = {
       id: id_user
@@ -62,33 +62,35 @@ export const ListadoReferidoComponent = () => {
     setLoading(false)
   }
 
-  const cargarEstados = async()=>{
+  const cargarEstados = async () => {
     await API.get('api/configuracion/estadoReferido/')
-    .then( data => {
-      const resp = data.data;
-      setCmb_listado(resp)
-    })
-    .catch( console.error);
+      .then(data => {
+        const resp = data.data;
+        setCmb_listado(resp)
+      })
+      .catch(console.error);
   }
 
   const showTable = () => {
-      return (
-        <MDBDataTable
-          striped
-          className="tabla-pacientes"
-          bordered
-          entrieslabel={[]}
-          hover
-          data={data}
-        />
-      )
+    return (
+      <MDBDataTable
+        striped
+        paginationLabel={["<", ">"]}
+        infoLabel={["Mostrando", "a", "de", "entradas"]}
+        className="tabla-pacientes"
+        bordered
+        entrieslabel={[]}
+        hover
+        data={data}
+      />
+    )
   }
   useEffect(() => {
     let id_user = JSON.parse(localStorage.getItem('id_user'));
     let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
-    if(super_user){
+    if (super_user) {
       load()
-    }else{
+    } else {
       load_referidos_by_id(id_user)
     }
     cargarEstados()
@@ -109,20 +111,20 @@ export const ListadoReferidoComponent = () => {
     '12': "Diciembre",
   };
 
-  const handleSelectMonth = (e)=>{
+  const handleSelectMonth = (e) => {
     setData_meses([]);
-    let arreglo_vacio = [0,1] //
+    let arreglo_vacio = [0, 1] //
     const mes_nombre = e.target.value
     const obj_nombre = meses.map(item => {
       return item.sys_fechaCreacion
     })
     let variable = "";
     let dia_mes = "";
-    for(let x of obj_nombre){
+    for (let x of obj_nombre) {
       variable = x
       dia_mes = new Date(variable).getMonth() + 1
     }
-    if(meses_anio[dia_mes] == mes_nombre){
+    if (meses_anio[dia_mes] == mes_nombre) {
       const dato = meses.filter(item => item)
       dato.map((item) => (
         setData_meses(data_meses => [...data_meses, {
@@ -134,16 +136,16 @@ export const ListadoReferidoComponent = () => {
           "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />
         }])
       ))
-    }else{
+    } else {
       setData_meses(arreglo_vacio)
     }
   }
 
-  const handleSelectEstate = (e)=>{
+  const handleSelectEstate = (e) => {
     setData_meses([]);
     const data = meses.filter(item => item.estadoReferido === e.target.value)
     console.log(data)
-    if(data.length > 0){
+    if (data.length > 0) {
       data.map((item) => (
         setData_meses(data_meses => [...data_meses, {
           "id": item.id,
@@ -155,7 +157,7 @@ export const ListadoReferidoComponent = () => {
         }])
       ))
     }
-   
+
   }
 
   const data = {
@@ -210,39 +212,39 @@ export const ListadoReferidoComponent = () => {
         }}>
           <div className="select-mes">
 
-          <FormControl fullWidth  >
-            <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+            <FormControl fullWidth  >
+              <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
               <Select
-                  name="mes"
-                  label="Mes"
-                  id="demo-simple-select-standard"
-                  onChange={handleSelectMonth}
+                name="mes"
+                label="Mes"
+                id="demo-simple-select-standard"
+                onChange={handleSelectMonth}
               >
                 {
-                  meses_map.map((item, key)=> {
+                  meses_map.map((item, key) => {
                     return <MenuItem key={key} value={item.mes}>{item.mes}</MenuItem>
                   })
                 }
               </Select>
-          </FormControl>
-            </div>
+            </FormControl>
+          </div>
           <div className="select-mes">
-          <FormControl fullWidth  >
-            <InputLabel shrink id="demo-simple-select-standard-label">Estado</InputLabel>
+            <FormControl fullWidth  >
+              <InputLabel shrink id="demo-simple-select-standard-label">Estado</InputLabel>
               <Select
-                  name="estado"
-                  label="Estado"
-                  id="demo-simple-select-standard"
-                  onChange={handleSelectEstate}
+                name="estado"
+                label="Estado"
+                id="demo-simple-select-standard"
+                onChange={handleSelectEstate}
               >
                 {
-                  cmb_listado.map( (item, key) => {
+                  cmb_listado.map((item, key) => {
                     return <MenuItem key={key} value={item.descripcion}>{item.descripcion}</MenuItem>
                   })
 
                 }
               </Select>
-          </FormControl>
+            </FormControl>
           </div>
         </div>
         <div className="tabla-lista">
