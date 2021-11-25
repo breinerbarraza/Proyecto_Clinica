@@ -80,7 +80,7 @@ export const ListadoReferidoComponent = () => {
         className="tabla-pacientes"
         bordered
         entrieslabel={[]}
-        hover
+        small
         data={data}
       />
     )
