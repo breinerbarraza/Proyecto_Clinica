@@ -22,14 +22,16 @@ export const EstadoComponent = () => {
     const { id } = useParams();
 
     useEffect(() => {
+       
         API.get("api/referidos/" + id)
             .then(item => {
-                console.log(item.data)
+                //console.log(item.data)
                 setData_pendiente(item.data)
             })
     }, [id]);
 
     useEffect(()=>{
+        localStorage.setItem("estadoAnterior", JSON.stringify(data_pendiente.estadoReferido))
         API.get("api/usuarios/user/grupo_medico")
         .then( data => {
             setData_medicos(data.data)
@@ -39,8 +41,7 @@ export const EstadoComponent = () => {
         .then( data => {
             setCmbListado(data.data);
         })
-    }, []);
-
+    }, [data, data_pendiente]);
 
     const handleClickPendiente = async(e)=>{
         e.preventDefault();
@@ -91,6 +92,7 @@ export const EstadoComponent = () => {
     const handleClickPrequirurgico = async(e)=>{
         e.preventDefault();
         data.referido = id;
+        console.log(data)
         await API.post('api/referidos_cambio_estado/register-estado-prequirurgico/', JSON.stringify(data))
         .then( data => {
             const resp = data.data;
@@ -115,6 +117,10 @@ export const EstadoComponent = () => {
         e.preventDefault();
         data.id_user_referido = id;
         data.nombre = data_pendiente.get_nombreCompleto
+        const select_estado = document.querySelector(".select-estado");
+        const selected = select_estado.options[select_estado.selectedIndex].text;
+        localStorage.setItem("estadoNuevo", JSON.stringify(selected));
+        console.log(selected);
         API.put('api/referidos/updated_estado/', JSON.stringify(data))
         .then( ({data}) =>{
             if(data.msg){
@@ -158,14 +164,14 @@ export const EstadoComponent = () => {
                     />
                     <form onSubmit={handleChangeEstado}>
                         <select className="select-estado" name="estadoReferido" onChange={handleInput}>
-                            <option selected="selected">--CAMBIE EL ESTADO</option>
+                            <option selected="selected">--CAMBIE EL ESTADO--</option>
                             {
                                 cmbListado.map((item) => {
                                     return <option key={item.id} value={item.id} style={{backgroundColor: item.color}} >{item.descripcion}</option>
                                 })
                             }
                         </select>
-                        <button type="submit" className="btn btn-primary change_estado" title="Actuliazar Estado" ><i class="fas fa-edit"></i></button>
+                        <button type="submit" className="btn btn-primary change_estado" title="Actualizar Estado" ><i class="fas fa-edit"></i></button>
                     </form>
                 </div>
                 <div className="infomacion">

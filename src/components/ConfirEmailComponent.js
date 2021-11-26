@@ -1,26 +1,64 @@
-import React from 'react';
+import React, {useState} from 'react';
 import TextField from '@mui/material/TextField';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
 import { Link } from 'react-router-dom';
+import API from '../Utils/API';
+import Swal from 'sweetalert2';
 export const ConfirEmailComponent = () => {
+
+    
+    const estado = {
+        "correo_electronico": "correo@gmail.com"
+    }
+    const [data_initial, setData_initial] = useState(estado)
+
+    const handleInputChange = (e)=>{
+        setData_initial({
+            ...data_initial,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleInputSubmit = async(e)=>{
+        e.preventDefault()
+        console.log(data_initial);
+        await API.post('api/usuarios/user/send_email/', JSON.stringify(data_initial))
+        .then( item => {
+            const respuesta = item.data;
+            if(respuesta.mensaje){
+                return Swal.fire({
+                    icon: 'success',
+                    title: 'Mensaje!',
+                    text: respuesta.mensaje,
+                })
+            }else{
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: respuesta.error,
+                  })
+            }
+        })
+    }   
+
     return (
         <div className="page-email1">
             <div className="email1-container">
                 <Link to="/login"><i class="fas fa-home"></i></Link>
                 <div className="formulario-email1">
-                    <form className="_form-email1">
+                    <form className="_form-email1" onSubmit={handleInputSubmit}>
                         <img className="logo_clinica-email1" src={logo_clinica} alt="clinica"/>
                         <p className="p-email1">Confirma tu E-mail</p>
                         <TextField
                             type="email"
                             name="correo_electronico"
-                            placeholder="Escribe..."
+                            placeholder={data_initial.correo_electronico}
                             label="Email"
                             className="form-control"
                             required
                             style={{ marginBottom: "30px" }}
-                            onChange={""}
+                            onChange={handleInputChange}
                             InputLabelProps={{
                                 shrink: true,
                             }}
