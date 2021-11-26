@@ -14,13 +14,16 @@ export const ConfirEmailComponent = () => {
                         <p className="p-email1">Confirma tu E-mail</p>
                         <TextField
                             type="email"
-                            name="email"
+                            name="correo_electronico"
                             placeholder="Escribe..."
                             label="Email"
-                            required
                             className="form-control"
-                            style={{marginBottom: "30px"}}
+                            required
+                            style={{ marginBottom: "30px" }}
                             onChange={""}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <button type="submit" className="btn btn-primary">REGISTRARSE</button>
                     </form>
