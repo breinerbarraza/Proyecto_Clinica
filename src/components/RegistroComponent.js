@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import {useParams} from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
@@ -8,18 +9,30 @@ import Swal from 'sweetalert2';
 export const RegistroComponent = () => {
     
     const estate = {
-        id:10,
+        id:"",
         first_name:"",
         last_name:"",
         email:"",
         username:"",
         password:"",
         password2: ""
-    }    
+    }   
+    const {id} = useParams() 
 
     const [registros, setRegistros] = useState(estate)
     const [state_error, setState_error] = useState(false);
     const [msg_error, setmsg_error] = useState("")
+    const [data_user, setData_user] = useState({});
+
+    useEffect(()=>{
+        
+        API.get("http://localhost:8080/api/usuarios/user/"+id)
+        .then(item => {
+            const respuesta = item.data;
+            console.log(respuesta)
+            setData_user(respuesta)
+        })
+    }, [id])
 
     const handleSubmit = (e)=>{
         e.preventDefault()
@@ -57,7 +70,8 @@ export const RegistroComponent = () => {
         setState_error(false);
         setRegistros({
             ...registros,
-            [e.target.name] : e.target.value
+            [e.target.name] : e.target.value,
+            'id': id
         })
     }
 
@@ -68,7 +82,7 @@ export const RegistroComponent = () => {
                     <form onSubmit={handleSubmit}>
                         <img alt="clinica" className="logo_clinica-registro" src={logo_clinica} />
                         <h3 className="h3-registro">¡Hola,</h3>
-                        <p className="p-registro"><b>Alberto Hernandez</b> quiere que hagas parte de su red de referidos!</p>
+                        <p className="p-registro"><b>{data_user.nombre_completo}</b> quiere que hagas parte de su red de referidos!</p>
                        <TextField
                             type="text"
                             name="first_name"
