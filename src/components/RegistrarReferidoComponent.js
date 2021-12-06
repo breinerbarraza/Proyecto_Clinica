@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -13,6 +14,7 @@ export const RegistrarReferidoComponent = () => {
 
     const [identificacion, setIdentificacion] = useState([])
     const [state_referido, setState_referido] = useState([])
+    const {id} = useParams();
 
     useEffect(() => {
         API.get('api/configuracion/tipoIdentificacion')
@@ -20,15 +22,19 @@ export const RegistrarReferidoComponent = () => {
                 const item = data;
                 setIdentificacion(item)
             })
-    }, [])
+        console.log(id);
+    }, []);
+
     const handleInput = (e) => {
         setState_referido({
             ...state_referido,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            id_user: id
         })
     }
     const enviarDatos = (e) => {
         e.preventDefault();
+        console.log(state_referido)
         API.post('api/referidos/register-referidos/', JSON.stringify(state_referido))
             .then(item => {
                 const resp = item.data;

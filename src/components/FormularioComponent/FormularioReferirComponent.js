@@ -41,7 +41,6 @@ export const FormularioReferirComponent = () => {
     const enviarDatos = async (e) => {
         e.preventDefault();
         select_state.id_user = storage.id_user
-        select_state.token_athenthication = storage.token
         API.post('api/referidos/register-referidos/', JSON.stringify(select_state))
             .then(item => {
                 const resp = item.data;

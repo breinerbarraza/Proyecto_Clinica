@@ -106,8 +106,8 @@ function App() {
                   <LoginComponent />
                 )}
               </Route>
-              <Route exact path="/registrar_referido">
-                {localStorage.getItem('token') !== null ? (
+              <Route exact path="/registrar_referido/:id">
+                {localStorage.getItem('token') == null ? (
                   <RegistrarReferidoComponent />
                 ) : (
                   <LoginComponent />
