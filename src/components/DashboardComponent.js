@@ -136,7 +136,7 @@ export const DashboardComponent = () => {
                             </Select>
                         </FormControl>
 
-                        <FormControl fullWidth  >
+                        {/* <FormControl fullWidth  >
                         <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
                             <Select
                                 name="usuarios"
@@ -151,7 +151,7 @@ export const DashboardComponent = () => {
                                     })
                                 }
                             </Select>
-                    º   </FormControl>   
+                    º   </FormControl>    */}
 
                     </div>
                     {

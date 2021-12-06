@@ -26,7 +26,7 @@ export const RegistroComponent = () => {
 
     useEffect(()=>{
         
-        API.get("http://localhost:8080/api/usuarios/user/"+id)
+        API.get("api/usuarios/user/"+id)
         .then(item => {
             const respuesta = item.data;
             console.log(respuesta)
