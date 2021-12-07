@@ -1,6 +1,6 @@
 /*Login de la pagina*/
 body{
-    /* background-image: url("./image/Recursos-Femto2/Background.png"); */
+    background-image: url("./image/Recursos-Femto2/Background.png");
     background-size: 99% 100%;
 }
 
@@ -307,11 +307,9 @@ a {
     margin-top: 26px;
     width: 48%;
 }
-
 .element.style {
     margin-top: 10px !important;
 }
-
 .container-identidad-email{
     width: 48%;
     margin-left: 4%;
@@ -319,6 +317,54 @@ a {
 }
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
     min-height: 0% !important;
+}
+/*Registrar Referido media jquery*/
+.container_media{
+   width: 90%;
+   border-radius: 20px 20px 20px 20px ;
+   margin-left: 17px;
+   padding: 0.1px;
+   background-image: url("./image/Recursos-Femto2/FondoLogin.png");
+   margin-top: 100px;
+   box-shadow: 1px 4px 4px 1px  grey;
+}
+.logoMedia{
+    margin-top: 150px;
+    margin-left: 35px;
+    margin-bottom: 100px;
+    box-shadow: 1px 4px 4px 1px  grey;
+    /*background-image: url("./image/Recursos-Femto2/FondoLogin.png");*/
+    border-radius: 20px;
+    opacity: 1;
+    backdrop-filter: grayscale(18%);
+    padding: 15px;
+    width: 80%;
+}
+.h1_media{
+    width: 100% !important;
+    color: white;
+}
+.div2{
+    background: white;
+    margin-top: 20px;
+    padding: 35px;
+    border-radius: 0px 0px 20px 20px;
+    box-shadow: 1px 4px 4px 1px  grey;
+}
+.botonmedia{
+    border-radius: 20px;
+    width: 70%;
+    padding: 10px;
+    margin-left: 45px;
+    float: left;
+    color: white;
+    background: rgb(26, 4, 105) ;
+    margin-top: -60px !important;
+}
+@media (max-width: 768px){
+    .container-logo-registrarefe {
+        background: red !important;
+    }
 }
 /*Regitro*/
 .registro-container {
@@ -335,7 +381,6 @@ a {
     justify-content: center;
     padding: 250px;
 }
-
 .page-registro .registro-container .formulario-registro .logo_clinica-registro{
     width: 200px;
     padding-bottom: 10px;
@@ -352,7 +397,6 @@ a {
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
     background-image: url("./image/Recursos-Femto2/FondoLogin.png");
-    
 }
 .logo-registro{
     width: 100%;
@@ -366,8 +410,6 @@ a {
     box-shadow: 2px 2px 5px rgb(22, 24, 43);
     opacity: 5;    
 }
-
-
 .formulario-registro{
     width: 50%; 
     padding: 2em; 
