@@ -307,9 +307,11 @@ a {
     margin-top: 26px;
     width: 48%;
 }
+
 .element.style {
     margin-top: 10px !important;
 }
+
 .container-identidad-email{
     width: 48%;
     margin-left: 4%;
@@ -317,54 +319,6 @@ a {
 }
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
     min-height: 0% !important;
-}
-/*Registrar Referido media jquery*/
-.container_media{
-   width: 90%;
-   border-radius: 20px 20px 20px 20px ;
-   margin-left: 17px;
-   padding: 0.1px;
-   background-image: url("./image/Recursos-Femto2/FondoLogin.png");
-   margin-top: 100px;
-   box-shadow: 1px 4px 4px 1px  grey;
-}
-.logoMedia{
-    margin-top: 150px;
-    margin-left: 35px;
-    margin-bottom: 100px;
-    box-shadow: 1px 4px 4px 1px  grey;
-    /*background-image: url("./image/Recursos-Femto2/FondoLogin.png");*/
-    border-radius: 20px;
-    opacity: 1;
-    backdrop-filter: grayscale(18%);
-    padding: 15px;
-    width: 80%;
-}
-.h1_media{
-    width: 100% !important;
-    color: white;
-}
-.div2{
-    background: white;
-    margin-top: 20px;
-    padding: 35px;
-    border-radius: 0px 0px 20px 20px;
-    box-shadow: 1px 4px 4px 1px  grey;
-}
-.botonmedia{
-    border-radius: 20px;
-    width: 70%;
-    padding: 10px;
-    margin-left: 45px;
-    float: left;
-    color: white;
-    background: rgb(26, 4, 105) ;
-    margin-top: -60px !important;
-}
-@media (max-width: 768px){
-    .container-logo-registrarefe {
-        background: red !important;
-    }
 }
 /*Regitro*/
 .registro-container {
@@ -381,6 +335,7 @@ a {
     justify-content: center;
     padding: 250px;
 }
+
 .page-registro .registro-container .formulario-registro .logo_clinica-registro{
     width: 200px;
     padding-bottom: 10px;
@@ -397,6 +352,7 @@ a {
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
     background-image: url("./image/Recursos-Femto2/FondoLogin.png");
+    
 }
 .logo-registro{
     width: 100%;
@@ -410,6 +366,8 @@ a {
     box-shadow: 2px 2px 5px rgb(22, 24, 43);
     opacity: 5;    
 }
+
+
 .formulario-registro{
     width: 50%; 
     padding: 2em; 
@@ -503,7 +461,6 @@ a {
 .container-ce{
     margin-left: 2%;
     width: 50%;
-    
 }
 
 .tabla-pacientes table{
@@ -988,3 +945,267 @@ button[type="submit"]{
     margin-top: -2px !important;
     width: 50px !important;
 }
+
+/* DIV CONTAINER */
+.div-container{
+    display: none;
+}
+
+
+/* Media QUERY para referidos sin logearse */
+@media screen and (min-width: 0px) and (max-width: 359px){
+    .registrarefe-container{
+        display: none;
+    }
+    .div-container{
+        display: block;
+        width: 100%;
+        height: 200px !important;
+        margin: auto;
+    }
+    body{
+        background:none;
+        padding: 0px !important;
+        overflow: hidden !important;
+    }
+
+    .div-separador{
+        margin-top: 10px;
+    }
+
+    .div-separador-identificacion{
+        margin-top: 27px;
+    }
+
+    .MuiSelect-outlined {
+        font-size: 2px !important;
+    }
+
+    .div-container .form-referir{
+        width: 100%;
+        background-color: #fff;
+        border: 2px solid #e1e0e4;
+        border-radius: 35px;
+        padding: 20px;
+        
+    }
+    
+    .div-container .contenedor-div{
+        width: 100%;
+        background: #274586;
+        padding: 15px;
+    }
+    
+    .div-container .contenedor-div .h3-referir{
+        color: #fff;
+        font-size: 18px;
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .form-submit .btn-referir{
+        width: 100% !important;
+        text-transform: uppercase;
+        font-size: 13px;
+    }
+}
+
+
+
+/* Media QUERY para referidos sin logearse */
+@media screen and (min-width: 360px) and (max-width: 460px){
+    .page-registrarefe{
+        display: none;
+    }
+    .div-container{
+        display: block;
+        width: 100%;
+        height: 200px !important;
+    }
+    body{
+        background:none;
+        padding: 0px !important;
+    }
+
+    .div-separador{
+        margin-top: 10px;
+    }
+
+    .div-separador-identificacion{
+        margin-top: 27px;
+    }
+
+    .MuiSelect-outlined {
+        font-size: 2px !important;
+    }
+
+    .div-container .form-referir{
+        height: 100%;
+        background-color: #fff;
+        border: 2px solid #e1e0e4;
+        border-radius: 35px;
+        padding: 20px;
+        border: 1px solid rgb(218, 215, 215);
+    }
+
+    .form-submit .btn-referir{
+        width: 100% !important;
+        text-transform: uppercase;
+        font-size: 17px;
+        margin-top: 25px;
+        padding: 12px;
+        border-radius: 10px;
+    }
+    
+    .div-container .contenedor-div{
+        width: 100% ;
+        background: #274586;
+        padding: 12px;
+    }
+    
+    .div-container .contenedor-div .h3-referir{
+        color: #fff;
+        font-size: 18px;
+        margin-top: 30px;
+        text-align: center;
+    }
+
+   
+}
+
+
+
+/* Media QUERY para referidos logeado*/
+/* @media screen and (min-width: 200px) and (max-width: 460px)
+{
+    .header{
+       
+    }
+    .header .nav-header{
+        width: 147px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .referir-container{
+        width: 100%;
+        margin-top: 20px;
+        margin-right: 15px;
+        margin: auto;
+        padding: 15px 0px 20px 140px;
+        margin-left: 25px;
+    }
+    .referir-container .formulario-referir{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .h3-referir{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: bold;
+
+    }
+    
+    .textfile{
+        width: 100%;
+        border: 2px solid green;
+    }
+
+    .textfile .form-control{
+
+    }
+
+    .contenedor-referir{
+        width: 100%;
+        border: 2px solid #000;
+    }
+    .documento .select-document{
+
+    }
+
+    .container-ce{
+    }
+
+    
+    .listado_{
+        margin-top: 30px;
+        padding: 15px;
+    }
+
+    .imgLogo{
+        border-color: yellow;
+    }
+    .lista-registro{
+
+    }
+
+    .referir-container .formulario-referir  .contenedor-referir button[type="submit"]{
+        margin-top: 40px !important;
+    }
+}
+
+@media screen and (min-width: 460px) and (max-width: 565px)
+{
+    .referir-container{
+        width: 100%;
+        margin-top: 20px;
+        margin-right: 15px;
+        margin: auto;
+        padding: 15px 0px 20px 140px;
+        margin-left: 40px;
+    }
+    .referir-container .formulario-referir{
+        width: 100%;
+    }
+    
+    .textfile{
+        border: 2px solid gray;
+    }
+
+    .contenedor-referir{
+        border: 2px solid #000;
+    }
+
+    .documento{
+        border: 2px solid green;
+    }
+
+    .container-ce{
+        border: 2px solid yellow;
+    }
+}
+
+
+@media screen and (min-width: 565px) and (max-width: 840px)
+{
+    .referir-container{
+        width: 100%;
+        margin-top: 20px;
+        margin-right: 15px;
+        margin: auto;
+        padding: 15px 0px 20px 140px;
+        margin-left: 50px;
+    }
+    .referir-container .formulario-referir{
+        width: 100%;
+    }
+    
+    .textfile{
+        border: 2px solid gray;
+    }
+
+    .contenedor-referir{
+        border: 2px solid #000;
+    }
+
+    .documento{
+        border: 2px solid green;
+    }
+
+    .container-ce{
+        border: 2px solid yellow;
+    }
+} */

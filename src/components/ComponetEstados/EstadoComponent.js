@@ -31,12 +31,10 @@ export const EstadoComponent = () => {
     }, [id]);
 
     useEffect(()=>{
-        localStorage.setItem("estadoAnterior", JSON.stringify(data_pendiente.estadoReferido))
         API.get("api/usuarios/user/grupo_medico")
         .then( data => {
             setData_medicos(data.data)
         })
-
         API.get("api/configuracion/estadoReferido/")
         .then( data => {
             setCmbListado(data.data);
