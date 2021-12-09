@@ -951,6 +951,10 @@ button[type="submit"]{
     display: none;
 }
 
+.div-container-registro{
+    display: none;
+}
+
 
 /* Media QUERY para referidos sin logearse */
 @media screen and (min-width: 0px) and (max-width: 359px){
@@ -1040,7 +1044,7 @@ button[type="submit"]{
     }
 
     .div-container .form-referir{
-        height: 100%;
+        height: 650px;
         background-color: #fff;
         border: 2px solid #e1e0e4;
         border-radius: 35px;
@@ -1064,7 +1068,7 @@ button[type="submit"]{
     }
     
     .div-container .contenedor-div .h3-referir{
-        color: #fff;
+        color: rgb(211, 199, 199);
         font-size: 18px;
         margin-top: 30px;
         text-align: center;
@@ -1074,138 +1078,66 @@ button[type="submit"]{
 }
 
 
-
-/* Media QUERY para referidos logeado*/
-/* @media screen and (min-width: 200px) and (max-width: 460px)
-{
-    .header{
-       
-    }
-    .header .nav-header{
-        width: 147px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+/* Media QUERY para el registro */
+@media screen and (min-width: 360px) and (max-width: 460px){
+    .page-registro{
+        display: none;
     }
 
-    .referir-container{
+
+    .div-container-registro{
+        display: block;
         width: 100%;
-        margin-top: 20px;
-        margin-right: 15px;
-        margin: auto;
-        padding: 15px 0px 20px 140px;
-        margin-left: 25px;
+        height: 200px !important;
     }
-    .referir-container .formulario-referir{
-        width: 100%;
-        box-sizing: border-box;
+    body{
+        background:none;
+        padding: 0px !important;
     }
 
-    .h3-referir{
-        margin-top: 20px;
-        margin-bottom: 20px;
-        font-size: 20px;
-        font-weight: bold;
+    .div-separador{
+        margin-top: 10px;
+    }
 
+    .div-container-registro .form-registro-responsive{
+        height: 550px;
+        background-color: #fff;
+        border: 2px solid #e1e0e4;
+        border-radius: 35px;
+        padding: 20px;
+        border: 1px solid rgb(218, 215, 215);
+    }
+
+    .form-submit .btn-referir{
+        width: 100% !important;
+        text-transform: uppercase;
+        font-size: 17px;
+        margin-top: 25px;
+        padding: 12px;
+        border-radius: 10px;
     }
     
-    .textfile{
-        width: 100%;
-        border: 2px solid green;
-    }
-
-    .textfile .form-control{
-
-    }
-
-    .contenedor-referir{
-        width: 100%;
-        border: 2px solid #000;
-    }
-    .documento .select-document{
-
-    }
-
-    .container-ce{
-    }
-
-    
-    .listado_{
-        margin-top: 30px;
+    .div-container-registro .contenedor-div-registro{
+        width: 100% ;
+        background: #2f4f94;
         padding: 15px;
     }
 
-    .imgLogo{
-        border-color: yellow;
+    .div-container-registro .contenedor-div-registro .h3-registro{
+        padding: 15px;
+        color: rgb(211, 199, 199);
+        font-size: 18px;
+        margin-top: 30px;
+        text-align: center;
     }
-    .lista-registro{
 
+
+    .b-registro{
+        color: #fff;
+        font-weight: bold;
     }
 
-    .referir-container .formulario-referir  .contenedor-referir button[type="submit"]{
-        margin-top: 40px !important;
-    }
+
+
+
 }
-
-@media screen and (min-width: 460px) and (max-width: 565px)
-{
-    .referir-container{
-        width: 100%;
-        margin-top: 20px;
-        margin-right: 15px;
-        margin: auto;
-        padding: 15px 0px 20px 140px;
-        margin-left: 40px;
-    }
-    .referir-container .formulario-referir{
-        width: 100%;
-    }
-    
-    .textfile{
-        border: 2px solid gray;
-    }
-
-    .contenedor-referir{
-        border: 2px solid #000;
-    }
-
-    .documento{
-        border: 2px solid green;
-    }
-
-    .container-ce{
-        border: 2px solid yellow;
-    }
-}
-
-
-@media screen and (min-width: 565px) and (max-width: 840px)
-{
-    .referir-container{
-        width: 100%;
-        margin-top: 20px;
-        margin-right: 15px;
-        margin: auto;
-        padding: 15px 0px 20px 140px;
-        margin-left: 50px;
-    }
-    .referir-container .formulario-referir{
-        width: 100%;
-    }
-    
-    .textfile{
-        border: 2px solid gray;
-    }
-
-    .contenedor-referir{
-        border: 2px solid #000;
-    }
-
-    .documento{
-        border: 2px solid green;
-    }
-
-    .container-ce{
-        border: 2px solid yellow;
-    }
-} */

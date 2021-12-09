@@ -76,6 +76,114 @@ export const RegistroComponent = () => {
     }
 
     return (
+        <>
+        <div className="div-container-registro">
+            <div className="contenedor-div-registro">
+                <h3 className="h3-registro">
+                    ¡Harás parte de la red de referidos de <b className="b-registro">{data_user.nombre_completo}</b> al ingresar tus datos!
+                </h3>
+            </div>
+            <form onSubmit={handleSubmit} className="form-registro-responsive">
+                <TextField
+                    type="text"
+                    name="first_name"
+                    placeholder="Escribe..."
+                    label="Nombre"
+                    required
+                    className="form-control"
+                    style={{ marginBottom: "30px" }}
+                    onChange={handleInputChange}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                />
+                <div className="div-separador">
+                    <TextField
+                        type="text"
+                        name="last_name"
+                        placeholder="Escribe..."
+                        label="Apellidos"
+                        required
+                        className="form-control RegistrarReferido"
+                        style={{ marginBottom: "30px" }}
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                </div>
+                    
+                <div className="div-separador">
+                    <TextField
+                            type="email"
+                            name="email"
+                            placeholder="Escribe..."
+                            label="E-mail"
+                            required
+                            className="form-control RegistrarReferido"
+                            style={{ marginBottom: "30px" }}
+                            onChange={handleInputChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                </div>  
+               <div className="div-separador"> 
+                    <TextField
+                        type="text"
+                        name="username"
+                        placeholder="Escribe..."
+                        label="Usuario"
+                        required
+                        className="form-control RegistrarReferido"
+                        style={{ marginBottom: "30px" }}
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                </div>
+                <div className="div-separador">
+                    <TextField
+                        type="password"
+                        name="password"
+                        placeholder="Escribe..."
+                        label="Contraseña"
+                        required
+                        className="form-control RegistrarReferido"
+                        style={{ marginBottom: "30px" }}
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                </div>
+                <div className="div-separador">
+                <TextField
+                    type="password"
+                    name="password2"
+                    placeholder="Escribe..."
+                    label="Confirmar Contraseña"
+                    required
+                    className="form-control RegistrarReferido"
+                    style={{ marginBottom: "30px" }}
+                    onChange={handleInputChange}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                />
+                </div>
+                {
+                    state_error && (
+                        <p style={{marginTop:"7px", backgroundColor:"rgba(255,0,0,0.7)", color:"#fff", paddingLeft:"10px"}}>{msg_error}</p>
+                    )
+                }
+                <div className="form-submit">
+                    <button type="submit" className="btn btn-primary btn-referir">Registrarse</button>
+                </div>
+            </form>
+        </div>
+
         <div className="page-registro">
             <div className="registro-container">
                 <div className="formulario-registro">
@@ -177,5 +285,6 @@ export const RegistroComponent = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
