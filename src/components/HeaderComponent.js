@@ -18,9 +18,9 @@ function ButtonReferir() {
 }
 function ButtonListar() {
     return (
-        <button >
+        <button className="btn_listar">
             <Link to="/listado">
-                <img alt="clinica" className="imgActiva" src={chart_line_up_white} />
+                <img alt="listar" className="imgActiva" src={chart_line_up_white} />
             </Link>
         </button>
     )
@@ -94,7 +94,7 @@ export const HeaderComponent = ({ users, dashboard }) => {
                         </>
                     )}
                     {!imagen1 && (
-                        <button onClick={() => handleButtonClick1()}><Link to="/listado"><img alt="clinica" src={chart_line_white} /></Link></button>
+                        <button onClick={() => handleButtonClick1()}><Link to="/listado"><img alt="listado_" className="listado_" src={chart_line_white} /></Link></button>
                     )}
                     {imagen1 && (
                         <>

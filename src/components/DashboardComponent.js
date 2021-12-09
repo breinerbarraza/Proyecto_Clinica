@@ -3,7 +3,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
 import { Link } from "react-router-dom";
 import { HeaderComponent } from "./HeaderComponent";
 import { PerfilComponent } from "./perfil/PerfilComponent";
@@ -20,21 +19,39 @@ export const DashboardComponent = () => {
     const [cantidades, setCantidades] = useState([])
     const [meses, setMeses] = useState([]);
     const [data_meses, setData_meses] = useState([])
-
+    const [usuarios_, setUsuarios_employe] = useState([]);
+    const [datosCambioEstado, setDatosCambioEstado] = useState([]);
     /*
     - Cambiar las consultas del dashboard para que tenga los cambios de estado del referido
     - Colocar el filtro en ese reporte para filtrar por empleados
 
     */
 
-    const filter_employess = async()=>{
-        await API.get('api')
+    const filter_cambio_estado = async(mes)=>{
+        await API.get(`api/referidos/dashboard_app/?mes=${mes}`)
+        .then( response => {
+            const resp  = response.data;
+            console.log(resp);
+            setDatosCambioEstado(resp)
+        })
     }
+
+    const cargarUsuarios = async()=>{
+        await API.get("api/usuarios/user/grupo_empleado/")
+        .then(response => {
+            const data = response.data;
+            console.log(data);
+            setUsuarios_employe(response)
+        })
+    }
+
+    cargarUsuarios();
 
     const load = async () => {
         await API.get('api/referidos/')
             .then(response => {
                 // console.log(response.data)
+                console.log(response.data)
                 setMeses(response.data)
                 let agrupacion = _.chain(response.data).groupBy('estadoReferido')
                     .map((value, key) => ({
@@ -51,9 +68,11 @@ export const DashboardComponent = () => {
                     setLabelColors(labelColors => [...labelColors, el.color]),
                     setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
                     setCantidades(cantidades => [...cantidades, el.valor]),
-                    console.log(`Estados: ${el}`)
+                    console.log("Estados",  el)
                 ))
             }).catch(console.error)
+
+        
         
     }
     const data = {
@@ -67,9 +86,10 @@ export const DashboardComponent = () => {
       }
 
     useEffect(() => {
+        cargarUsuarios()
         let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
         if(super_user){
-        load()
+            load()
         }
     }, []);
      const meses_anio = {
@@ -88,7 +108,7 @@ export const DashboardComponent = () => {
   };
 
   
-  const handleSelectMonth = (e)=>{
+  const handleSelectMonth = async(e)=>{
     setData_meses([]);
     let arreglo_vacio = [0,1] //
     const mes_nombre = e.target.value
@@ -102,13 +122,15 @@ export const DashboardComponent = () => {
       dia_mes = new Date(variable).getMonth() + 1
     }
     if(meses_anio[dia_mes] == mes_nombre){
-      load();
+        console.log("Entro aqui")
+        console.log(dia_mes);
+        await filter_cambio_estado(dia_mes);
+        await load();
     }else{
       setData_meses(arreglo_vacio)
       console.log("No hay nada")
     }
   }
-  console.log(data_meses)
     return (
         <>
             <HeaderComponent dashboard />
@@ -119,7 +141,7 @@ export const DashboardComponent = () => {
                         <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
                     </div>
                     <div className="select-dashboard" style={{ width: "40%" }}>
-                        <FormControl fullWidth  >
+                        <FormControl fullWidth style={{marginBottom:'15px'}}>
                             <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
                             <Select
                                 name="mes"
@@ -135,9 +157,8 @@ export const DashboardComponent = () => {
                                 }
                             </Select>
                         </FormControl>
-
-                        {/* <FormControl fullWidth  >
-                        <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+                        <FormControl fullWidth style={{marginBottom:'15px'}}>
+                        <InputLabel shrink id="demo-simple-select-standard-label">Empleados</InputLabel>
                             <Select
                                 name="usuarios"
                                 label="usuarios"
@@ -151,7 +172,7 @@ export const DashboardComponent = () => {
                                     })
                                 }
                             </Select>
-                    º   </FormControl>    */}
+                       </FormControl>   
 
                     </div>
                     {

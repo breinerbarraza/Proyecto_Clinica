@@ -117,6 +117,7 @@ export const FormularioReferirComponent = () => {
                                 <Select
                                     name="tipoIdentificacion"
                                     label="Tipo de Documento"
+                                    className= "select-document"
                                     id="demo-simple-select-standard"
                                     onChange={handleSelect}
                                     
@@ -151,7 +152,7 @@ export const FormularioReferirComponent = () => {
                                 label="Numero de identidad"
                                 className="form-control"
                                 required
-                                style={{ marginBottom: "30px" }}
+                                style={{ marginBottom: "33px" }}
                                 onChange={handleSelect}
                                 InputLabelProps={{
                                     shrink: true,
