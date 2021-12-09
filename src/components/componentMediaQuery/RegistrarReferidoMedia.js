@@ -12,7 +12,7 @@ export const RegiatrarReferidoMedia = () =>{
            
         </div>
         <div className="div2">
-        <button className="botonmedia">Continuar</button>
+        <button className="botonmedia">CONTINUAR</button>
         </div>
     </div>
     </>

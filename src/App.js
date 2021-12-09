@@ -21,6 +21,7 @@ import { ListadoUsuarioComponent } from './components/ListadoUsuarioComponent';
 import { CambioContraseña } from './components/perfil/CambioContraseña';
 import { Dashboard2Component } from './components/Dashboard2Component';
 import { RegiatrarReferidoMedia } from './components/componentMediaQuery/RegistrarReferidoMedia';
+import { ReferidoMedia } from './components/componentMediaQuery/ReferidoMedia'
 import './App.css'
 
 function App() {
@@ -109,6 +110,13 @@ function App() {
               <Route exact path="/registrar_referido/:id">
                 {localStorage.getItem('token') == null ? (
                   <RegistrarReferidoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/referido_/:id">
+                {localStorage.getItem('token') == null ? (
+                  <ReferidoMedia />
                 ) : (
                   <LoginComponent />
                 )}
