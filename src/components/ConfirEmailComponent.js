@@ -43,13 +43,14 @@ export const ConfirEmailComponent = () => {
     }   
 
     return (
+       <> 
         <div className="page-email1">
             <div className="email1-container">
                 <Link to="/login"><i class="fas fa-home"></i></Link>
                 <div className="formulario-email1">
                     <form className="_form-email1" onSubmit={handleInputSubmit}>
                         <img className="logo_clinica-email1" src={logo_clinica} alt="clinica"/>
-                        <p className="p-email1">Confirma tu E-mail</p>
+                        <p className="p-email1">Confirma tu e-mail</p>
                         <TextField
                             type="email"
                             name="correo_electronico"
@@ -63,7 +64,7 @@ export const ConfirEmailComponent = () => {
                                 shrink: true,
                             }}
                         />
-                        <button type="submit" className="btn btn-primary">REGISTRARSE</button>
+                        <button type="submit" className="btn btn-primary">CONFIRMAR</button>
                     </form>
                 </div>
                 <div className="container-logo-email1">
@@ -73,5 +74,10 @@ export const ConfirEmailComponent = () => {
                 </div>
             </div>
         </div>
+
+        <div className="div-responsive-email">
+                            
+        </div>
+        </>
     )
 }

@@ -5,6 +5,7 @@ import logo_clinica from '../image/Recursos-Femto/Logo Clinica.svg';
 import liberate from '../image/Recursos-Femto/Liberate.png';
 import API from '../Utils/API';
 import Swal from 'sweetalert2';
+import { ReferidoMedia } from './componentMediaQuery/ReferidoMedia';
 
 export const RegistroComponent = () => {
     
@@ -23,6 +24,8 @@ export const RegistroComponent = () => {
     const [state_error, setState_error] = useState(false);
     const [msg_error, setmsg_error] = useState("")
     const [data_user, setData_user] = useState({});
+    const [estadoBoleano, setestadoBoleano] = useState(true);
+    const [estadoForm, setEstadoForm] = useState(false);
 
     useEffect(()=>{
         
@@ -33,6 +36,11 @@ export const RegistroComponent = () => {
             setData_user(respuesta)
         })
     }, [id])
+
+    const handleChangeState = ()=>{
+        setestadoBoleano(false);
+        setEstadoForm(true);
+    }
 
     const handleSubmit = (e)=>{
         e.preventDefault()
@@ -77,7 +85,14 @@ export const RegistroComponent = () => {
 
     return (
         <>
-        <div className="div-container-registro">
+        {
+            estadoBoleano && (
+                <ReferidoMedia cambiarEstado={handleChangeState} />
+            )
+        }
+        {estadoForm && (
+            <>
+                <div className="div-container-registro">
             <div className="contenedor-div-registro">
                 <h3 className="h3-registro">
                     ¡Harás parte de la red de referidos de <b className="b-registro">{data_user.nombre_completo}</b> al ingresar tus datos!
@@ -285,6 +300,9 @@ export const RegistroComponent = () => {
                 </div>
             </div>
         </div>
+            </>
+        )}
+        
         </>
     )
 }

@@ -11,7 +11,7 @@ export const RegistrarReferidoMedia = ({ cambiarEstado }) =>{
             <p style={{color:"white"}}>al continuar podrás ingresar tus datos para ser un candidato y librate de tus gafas!</p>
         </div>
         <div className="div2">
-        <button className="botonmedia">CONTINUAR</button>
+        <button onClick={cambiarEstado} className="botonmedia">CONTINUAR</button>
         </div>
     </div>
     </>
