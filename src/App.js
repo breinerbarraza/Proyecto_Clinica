@@ -20,8 +20,8 @@ import { DatosPerfilComonent } from './components/perfil/DatosPerfilComonent';
 import { ListadoUsuarioComponent } from './components/ListadoUsuarioComponent';
 import { CambioContraseña } from './components/perfil/CambioContraseña';
 import { Dashboard2Component } from './components/Dashboard2Component';
-import { RegiatrarReferidoMedia } from './components/componentMediaQuery/RegistrarReferidoMedia';
-import { ReferidoMedia } from './components/componentMediaQuery/ReferidoMedia'
+import { ReferidoMedia } from './components/componentMediaQuery/ReferidoMedia';
+import { RegistrarReferidoMedia } from './components/componentMediaQuery/RegistrarReferidoMedia';
 import './App.css'
 
 function App() {
@@ -44,13 +44,13 @@ function App() {
               }
             </Route>
 
-            <Route exact path="/registro">
+           {/*  <Route exact path="/registro">
               {
                 (localStorage.getItem('token') !== null)
                 ? <ListadoComponent />
                 : <RegistroComponent />
               }
-            </Route>
+            </Route> */}
 
             <Route exact path="/registro/:id">
               {
@@ -130,7 +130,7 @@ function App() {
               </Route>
               <Route exact path="/registrar_referido_">
                 {localStorage.getItem('token') == null ? (
-                  <RegiatrarReferidoMedia />
+                  <RegistrarReferidoMedia />
                 ) : (
                   <LoginComponent />
                 )}
