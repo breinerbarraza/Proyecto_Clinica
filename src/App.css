@@ -999,6 +999,10 @@ button[type="submit"]{
     display: none;
 }
 
+.div-responsive-login{
+    display: none;
+}
+
 
 /* Media QUERY para referidos sin logearse */
 @media screen and (min-width: 0px) and (max-width: 359px){
@@ -1058,9 +1062,6 @@ button[type="submit"]{
     }
 }
 
-
-
-/* Media QUERY para referidos sin logearse */
 @media screen and (min-width: 360px) and (max-width: 460px){
     .page-registrarefe{
         display: none;
@@ -1182,6 +1183,90 @@ button[type="submit"]{
     }
 
 
+
+
+}
+
+/* media QUERY para el login */
+@media screen and (min-width: 360px) and (max-width: 460px){
+    .login{
+        display: none;
+    }
+
+    .div-responsive-login{
+        display: block;
+    }
+
+    .div-img-login{
+        background-color: #424ca8;
+        width: 100%;  
+        background: #424ca8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+
+    
+
+    .div-logo{
+        width: 100%;  
+        margin: auto;
+        background-image: url("./image/Recursos-Femto2/FondoLogin.png");
+        padding: 20px;
+        box-shadow: 2px 2px 5px rgb(22, 24, 43);
+        opacity: 10 !important; 
+        padding: 40px;
+
+    }
+
+    .div-logo img{
+        margin-left: 60px;
+        width: 70%;
+        padding: 30px;
+        border-radius: 25px;
+        box-shadow: 2px 2px 5px rgb(22, 24, 43);
+        opacity: 0.9 !important; 
+        background-color: #526ba3;   
+    }
+    
+    .div-login{
+        margin: 0px auto;
+        border-radius: 45px;
+        padding: 30px;
+    }
+    
+    .h3-login{
+        margin-left: 5px;
+        font-size: 30px;
+        letter-spacing: 2px;
+        color: #293d69;
+        font-weight: bold;
+    }
+    
+    .div-formulario-login
+    {
+        margin-top: 25px;
+    }
+
+    .div-formulario-login input[type="text"]{
+        padding : 20px;
+    }
+
+    .email_form{
+        text-align: center;
+        font-weight: bold;
+    }
+    
+
+    .div-submit button[type="submit"]{
+        padding: 12px;
+        font-size : 19px;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
 
 
 }
