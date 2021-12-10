@@ -1007,6 +1007,14 @@ button[type="submit"]{
     display: none;
 }
 
+.listado_referido_responsive{
+    display: none;
+}
+
+
+.div_crear_usuario_responsive{
+    display: none;
+}
 
 /* Media QUERY para referidos sin logearse */
 @media screen and (min-width: 0px) and (max-width: 359px){
@@ -1027,10 +1035,6 @@ button[type="submit"]{
 
     .div-separador{
         margin-top: 10px;
-    }
-
-    .div-separador-identificacion{
-        margin-top: 27px;
     }
 
     .MuiSelect-outlined {
@@ -1085,7 +1089,7 @@ button[type="submit"]{
     }
 
     .div-separador-identificacion{
-        margin-top: 27px;
+        margin-top: 19px;
     }
 
     .MuiSelect-outlined {
@@ -1309,7 +1313,7 @@ button[type="submit"]{
 
     .div_perfil div b{
         width: 100%;
-        color: rgb(47, 52, 100);
+        color: rgb(66, 73, 136);
         font-size: 20px;
         margin-left: 25px;
         margin-right: 30px;
@@ -1329,18 +1333,21 @@ button[type="submit"]{
         width: 100% !important;
         margin-top: 17px !important;
         margin-left: 20px;
-        padding: 12px !important;
+        padding: 11px !important;
         border-radius: 10px !important; 
         background-color: #213c79 !important;
     }
     
     .footer-paciente{
         width: 100%;
-        margin-top: 80px;
+        margin-top: 87px;
         background-color: #02305b;
+        position: relative;
+        bottom: 0;
     }
 
     .footer-paciente .footer-header-navbar{
+        height: 52px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -1372,7 +1379,92 @@ button[type="submit"]{
     } */
 
     .btn_referir_img{
-        min-height: 65px;
+        width: auto;
+        height: 47px;
+        margin: 3px;
     }
     
 }
+
+
+
+
+/* MEDIA QUERY para listado con comision */
+@media screen and (min-width: 360px) and (max-width: 460px){
+    .listaRefe{
+        display: none;
+    }
+
+    .listado_referido_responsive{
+        display: block;
+    }
+
+    .listado_referido_responsive_container{
+        float: right;
+        margin-right: 55px;
+    }
+
+    .listado_referido_responsive_container .div_perfil_container{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        margin-right: -22px;
+    }
+
+    .footer-paciente_{
+        width: 100%;
+        margin-top: 87px;
+        background-color: #02305b;
+        position: absolute;
+        bottom: 0;
+        align-self: flex-end;
+    }
+
+    .footer-header-navbar_{
+        height: 52px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Media query para crear usuarios */
+@media screen and (min-width: 360px) and (max-width: 460px){
+    .div_crear_usuario{
+        display: none;
+    }
+
+    .div_crear_usuario_responsive{
+        display: block;
+        
+    }
+
+    .div_perfil_usuario{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin-top: 40px;
+        margin-bottom: -15px;
+    }
+
+    .div_perfil_usuario div{
+        display: inline-block;
+    }
+
+    .div_perfil_usuario div b{
+        width: 100%;
+        color: rgb(66, 73, 136);
+        font-size: 20px;
+        margin-left: 38px;
+        margin-right: 65px;
+        letter-spacing: 2px;
+    }
+
+    .div_crear_usuario_responsive .div_form_crear_usuario{
+        padding: 35px;
+    }
+
+
+}   

@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import meses_map from '../Utils/Objmeses';
+import { ButtonReferir_change_class, ButtonListar_change_class } from './FuncionesComponent';
 
 export const ListadoComponent = () => {
 
@@ -180,45 +181,65 @@ export const ListadoComponent = () => {
   };
 
   return (
-    <div className="listaRefe">
-      <PerfilComponent />
-      <HeaderComponent users={false} dashboard={true} />
+    <>
+      <div className="listaRefe">
+        <PerfilComponent />
+        <HeaderComponent users={false} dashboard={true} />
 
-      <div className="lista-container">
-        <h3 className="h3-Lista">Listado de referidos</h3>
-        <div style={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: 20
-        }}>
-          <div className="select-mes">
+        <div className="lista-container">
+          <h3 className="h3-Lista">Listado de referidos</h3>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 20}}>
+              <div className="select-mes">
 
-            <FormControl fullWidth  >
-              <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
-              <Select
-                name="mes"
-                label="Mes"
-                id="demo-simple-select-standard"
-                onChange={handleSelectMonth}
-              >
-                 {
-                  meses_map.map( (item, key) => {
-                    return <MenuItem key={key} value={item.mes}>{item.mes}</MenuItem>
-                  })
+                <FormControl fullWidth  >
+                  <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+                  <Select
+                    name="mes"
+                    label="Mes"
+                    id="demo-simple-select-standard"
+                    onChange={handleSelectMonth}
+                  >
+                    {
+                      meses_map.map( (item, key) => {
+                        return <MenuItem key={key} value={item.mes}>{item.mes}</MenuItem>
+                      })
 
-                }
-              </Select>
-            </FormControl>
+                    }
+                  </Select>
+                </FormControl>
+              </div>
+
+            </div>
+          <div className="tabla-lista">
+            {!loading && showTable()}
           </div>
-
-        </div>
-        <div className="tabla-lista">
-          {!loading && showTable()}
         </div>
       </div>
-    </div>
 
+
+      {/*Listado responsivo*/}
+      <div className="listado_referido_responsive">
+          <div className="listado_referido_responsive_container">
+              <div className="div_perfil_container">
+                  <div>
+                      <i><PerfilComponent/></i>
+                  </div>
+              </div>
+          </div>
+
+          {/* FOOTER */}
+          <div className="footer-paciente_">
+                <div className="footer-header-navbar_">
+                    <ButtonReferir_change_class />
+                    <ButtonListar_change_class />
+                </div>
+          </div>
+      </div>
+    
+    </>
+    
   );
 }
+
 
 
