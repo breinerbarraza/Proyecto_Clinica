@@ -1189,10 +1189,28 @@ button[type="submit"]{
         color: #fff;
         font-weight: bold;
     }
+}
 
-
-
-
+/* Media QUERY para el Confirmar Email */
+@media screen and (min-width: 360px) and (max-width: 460px){
+    .div_container_email{
+        display: none;
+    }
+    /*.formulario-email1{
+        margin-block-start:auto;
+        margin-top: -100px;
+    }*/
+    .container-logo-email1{
+        width: 100%;
+        padding: 10px;
+    }ç
+    .logo-email1{
+        padding: 100px;
+    }
+   .div_container_email_media{
+       
+   }
+   
 }
 
 /* media QUERY para el login */
