@@ -8,32 +8,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import API from '../Utils/API';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
-import chart_line_up_white from '../image/Recursos-Femto/chart-line-up.svg';
-import user_add_blue from '../image/Recursos-Femto/user-add-Blue.svg';
-import useradd from '../image/Recursos-Femto/user-add.svg';
-import chart_line_white from '../image/Recursos-Femto/chart-line-up-White.svg';
+import {ButtonReferir_change_class ,ButtonListar_change_class } from './FuncionesComponent';
 
-//Componentes basadas en funciones
-function ButtonReferir() {
-    return (
-        <button className="btn_referir_img">
-            <Link to="/referir">
-                <img alt="clinica" className="imgActiva_referidos" src={user_add_blue} />
-            </Link>
-        </button>
-    )
-}
-
-function ButtonListar() {
-    return (
-        <button className="btn_referir_img">
-            <Link to="/listado">
-                <img alt="listar" className="imgActiva_referidos" src={chart_line_up_white} />
-            </Link>
-        </button>
-    )
-}
 
 export const ReferirComponent = () => {
 
@@ -253,7 +229,7 @@ export const ReferirComponent = () => {
                             />
         
                         </div>
-                        <div className="div-separador">
+
                         <TextField
                             type="text"
                             name="apellidos"
@@ -267,7 +243,6 @@ export const ReferirComponent = () => {
                                 shrink: true,
                             }}
                         />  
-                        </div>
                         
                     <div className='div-separador-identificacion'>
                         <FormControl fullWidth  >
@@ -289,7 +264,6 @@ export const ReferirComponent = () => {
                                 </Select>
                             </FormControl>
                         </div> 
-                        <div className="div-separador">
                             <TextField
                                     type="text"
                                     name="numeroIdentificacion"
@@ -303,8 +277,7 @@ export const ReferirComponent = () => {
                                         shrink: true,
                                     }}
                             />
-                        </div>
-                        <div className="div-separador">
+                        
                         <TextField
                                 type="date"
                                 name="fechaNacimiento"
@@ -318,8 +291,6 @@ export const ReferirComponent = () => {
                                     shrink: true,
                                 }}
                             />
-                        </div>        
-                        <div className="div-separador">
                             <TextField
                                 type="text"
                                 name="celular"
@@ -333,8 +304,7 @@ export const ReferirComponent = () => {
                                     shrink: true,
                                 }}
                             />
-                        </div>
-                        <div className="div-separador">
+
                             <TextField
                                 type="email"
                                 name="correo_electronico"
@@ -348,15 +318,14 @@ export const ReferirComponent = () => {
                                     shrink: true,
                                 }}
                             />
-                        </div>
                         <button className="btn-referir-paciente" type="submit">Referir</button>
                     </form>                                            
                 </div>
                 {/* FOOTER */}
                 <div className="footer-paciente">
                     <div className="footer-header-navbar">
-                        <ButtonReferir />
-                        <ButtonListar />
+                        <ButtonReferir_change_class />
+                        <ButtonListar_change_class />
                     </div>
                 </div>
             </div>    

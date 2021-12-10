@@ -3,28 +3,9 @@ import { Link } from 'react-router-dom'
 import ClinicaBlanco from '../image/Recursos-Femto2/ClinicaBlanco.svg';
 import useradd from '../image/Recursos-Femto/user-add.svg';
 import chart_line_white from '../image/Recursos-Femto/chart-line-up-White.svg';
-import user_add_blue from '../image/Recursos-Femto/user-add-Blue.svg';
-import chart_line_up_white from '../image/Recursos-Femto/chart-line-up.svg';
 import Logout from '../image/Recursos-Femto2/Logout.svg'
+import { ButtonReferir, ButtonListar } from './FuncionesComponent';
 
-function ButtonReferir() {
-    return (
-        <button>
-            <Link to="/referir">
-                <img alt="clinica" className="imgActiva" src={user_add_blue} />
-            </Link>
-        </button>
-    )
-}
-function ButtonListar() {
-    return (
-        <button className="btn_listar">
-            <Link to="/listado">
-                <img alt="listar" className="imgActiva" src={chart_line_up_white} />
-            </Link>
-        </button>
-    )
-}
 export const HeaderComponent = ({ users, dashboard }) => {
 
     const cerrarSesion = (token, idUser, username, nombres, apellidos, password, super_user) => {
