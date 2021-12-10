@@ -1192,7 +1192,10 @@ button[type="submit"]{
 }
 
 /* Media QUERY para el Confirmar Email */
-@media screen and (min-width: 360px) and (max-width: 460px){
+.div_container_email_media{
+    display: none;
+}
+@media (max-width: 600px) {
     .div_container_email{
         display: none;
     }
