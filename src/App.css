@@ -1199,6 +1199,9 @@ button[type="submit"]{
     .div_container_email{
         display: none;
     }
+    .div_container_email_media{
+        display: initial;
+    }
     .container-logo-email1{
         width: 100%;
         padding: 10px;
