@@ -75,7 +75,7 @@ export const LoginComponent = () => {
     }
 
     return (
-
+        <>
         <div className="login">
             <div className="login-container">
                 <div className="formulario">
@@ -107,7 +107,7 @@ export const LoginComponent = () => {
                                 shrink: true,
                             }}
                         /><br /><br />
-                        <Link to="/email"><i>Has olvidado la contraseña?</i></Link>
+                        <Link to="/email"><i>¿Has olvidado la contraseña?</i></Link>
                         <button type="submit" style={{width: "100%"}} className="btn btn-primary">INICIAR SESIÓN</button>
                     </form>
 
@@ -119,5 +119,50 @@ export const LoginComponent = () => {
                 </div>
             </div>
         </div>
+
+        <div className="div-responsive-login">
+            <div className="div-img-login">
+                
+                <div className="div-logo">
+                    <img alt="clinica" src={liberate} />
+                </div>
+            </div>
+            <div className="div-login">
+                <h3 className="h3-login">Iniciar sesión</h3>
+                <form onSubmit={enviarDatos} className="div-formulario-login">                
+                    <TextField
+                        type="text"
+                        name="username"
+                        label="Usuario"
+                        required
+                        className="form-control"
+                        style={{marginBottom: "30px", marginBottom: '40px'}}
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+            
+                    <TextField
+                        type="password"
+                        name="password"
+                        label="Contraseña"
+                        required
+                        className="form-control"
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    <br/><br/><br/>
+                    
+                    <p className="email_form"><Link to="/email"><i>¿Has olvidado la contraseña?</i></Link></p>
+                    <div className="div-submit">
+                        <button type="submit" style={{width: "100%"}} className="btn btn-primary">CONFIRMAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </>
     )
 }

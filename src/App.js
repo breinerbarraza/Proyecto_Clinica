@@ -36,22 +36,7 @@ function App() {
                 <LoginComponent />
               )}
             </Route>
-            <Route exact path="/login">
-              {
-                (localStorage.getItem('token') !== null)
-                ? <ListadoComponent />
-                : <LoginComponent />
-              }
-            </Route>
-
-           {/*  <Route exact path="/registro">
-              {
-                (localStorage.getItem('token') !== null)
-                ? <ListadoComponent />
-                : <RegistroComponent />
-              }
-            </Route> */}
-
+            
             <Route exact path="/registro/:id">
               {
                 (localStorage.getItem('token') !== null)

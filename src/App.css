@@ -4,7 +4,7 @@ body{
     background-size: 99% 100%;
 }
 
-p {
+p{
     color: #02305b;
 }
 
@@ -20,7 +20,6 @@ p {
     height: 100vh;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
     padding: 250px;
 }
 .container-logo{
@@ -999,6 +998,15 @@ button[type="submit"]{
     display: none;
 }
 
+.div-responsive-login{
+    display: none;
+}
+
+
+.container-responsive-referir{
+    display: none;
+}
+
 
 /* Media QUERY para referidos sin logearse */
 @media screen and (min-width: 0px) and (max-width: 359px){
@@ -1058,9 +1066,6 @@ button[type="submit"]{
     }
 }
 
-
-
-/* Media QUERY para referidos sin logearse */
 @media screen and (min-width: 360px) and (max-width: 460px){
     .page-registrarefe{
         display: none;
@@ -1202,4 +1207,190 @@ button[type="submit"]{
        
    }
    
+}
+
+/* media QUERY para el login */
+@media screen and (min-width: 360px) and (max-width: 460px){
+    .login{
+        display: none;
+    }
+
+    .div-responsive-login{
+        display: block;
+    }
+
+    .div-img-login{
+        background-color: #424ca8;
+        width: 100%;  
+        background: #424ca8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+
+    
+
+    .div-logo{
+        width: 100%;  
+        margin: auto;
+        background-image: url("./image/Recursos-Femto2/FondoLogin.png");
+        padding: 20px;
+        box-shadow: 2px 2px 5px rgb(22, 24, 43);
+        opacity: 10 !important; 
+        padding: 40px;
+
+    }
+
+    .div-logo img{
+        margin-left: 45px;
+        width: 70%;
+        padding: 30px;
+        border-radius: 25px;
+        box-shadow: 2px 2px 5px rgb(22, 24, 43);
+        opacity: 0.9 !important; 
+        background-color: #526ba3;   
+    }
+    
+    .div-login{
+        margin: 0px auto;
+        border-radius: 45px;
+        padding: 30px;
+    }
+    
+    .h3-login{
+        margin-left: 5px;
+        font-size: 30px;
+        letter-spacing: 2px;
+        color: #293d69;
+        font-weight: bold;
+    }
+    
+    .div-formulario-login
+    {
+        margin-top: 25px;
+    }
+
+    .div-formulario-login input[type="text"]{
+        padding : 20px;
+    }
+
+    .email_form{
+        text-align: center;
+        font-weight: bold;
+    }
+    
+
+    .div-submit button[type="submit"]{
+        padding: 12px;
+        font-size : 19px;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+}
+
+
+
+/* MEDIA QUERY para referidos con el usuario logeado */
+@media screen and (min-width: 360px) and (max-width: 460px){
+    .container-principal{
+        display: none;
+    }
+
+    .container-responsive-referir{
+        display: block;
+        padding: 10px;
+    }
+    .div_perfil{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin-top: 40px;
+        
+    }
+
+    .container-perfil{
+        float: none;
+        padding: 0px;
+        margin-top: 0px;  
+    }
+
+    .container-perfil .btn-group{
+        margin-top: -10px !important;
+    }
+
+    .div_perfil div{
+        display: inline-block;
+    }
+
+    .div_perfil div b{
+        width: 100%;
+        color: rgb(47, 52, 100);
+        font-size: 20px;
+        margin-left: 25px;
+        margin-right: 30px;
+        letter-spacing: 2px;
+    }
+
+    .div-formulario-referir{
+        width: 80%;
+        margin: auto;
+    }
+
+    .div-formulario-referir #login-form{
+        margin: auto;
+    }
+
+    .btn-referir-paciente{
+        width: 100% !important;
+        margin-top: 17px !important;
+        margin-left: 20px;
+        padding: 12px !important;
+        border-radius: 10px !important; 
+        background-color: #213c79 !important;
+    }
+    
+    .footer-paciente{
+        width: 100%;
+        margin-top: 80px;
+        background-color: #02305b;
+    }
+
+    .footer-paciente .footer-header-navbar{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* .imgActiva_referidos{
+        width: 60px;
+        background-color: white;
+        padding: 10px;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+    }
+    .imgActiva_referidos ::after, .imgActiva_referidos::before {
+        border-right:1px solid #FFF;
+        content:'';
+        height:32px;
+        right:-2px;
+        position:absolute;
+        width:80px;
+    }
+    .imgActiva_referidos:after {
+        border-bottom-right-radius: 5px;
+        transform:translateY(-100%);
+    }
+    .imgActiva_referidos:before {
+        border-top-right-radius:5px;
+        transform:translateY(100%);
+    } */
+
+    .btn_referir_img{
+        min-height: 65px;
+    }
+    
 }

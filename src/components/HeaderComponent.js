@@ -39,10 +39,10 @@ export const HeaderComponent = ({ users, dashboard }) => {
     }
 
     let estado = users;
-    const [imagen, setImagen] = useState(estado);
+    const [imagen, setImagen] = useState(estado); //por defecto es true
 
     let estado1 = dashboard;
-    const [imagen1, setImagen1] = useState(estado1);
+    const [imagen1, setImagen1] = useState(estado1); //por defecto es false
 
     const handleButtonClick = (e) => {
         setImagen(true);
@@ -103,12 +103,12 @@ export const HeaderComponent = ({ users, dashboard }) => {
                                 height: "30px",
                                 backgroundColor: '#FFF'
                             }}>
-                                <div style={{
-                                    backgroundColor: '#10305b',
-                                    width: "100%",
-                                    height: "30px",
-                                    borderBottomRightRadius: "30px"
-                                }} />
+                            <div style={{
+                                backgroundColor: '#10305b',
+                                width: "100%",
+                                height: "30px",
+                                borderBottomRightRadius: "30px"
+                            }} />
                             </div>
                             <ButtonListar />
                             <div style={{
@@ -116,12 +116,12 @@ export const HeaderComponent = ({ users, dashboard }) => {
                                 height: "30px",
                                 backgroundColor: '#FFF'
                             }}>
-                                <div style={{
-                                    backgroundColor: '#10305b',
-                                    width: "100%",
-                                    height: "30px",
-                                    borderTopRightRadius: "30px"
-                                }} />
+                            <div style={{
+                                backgroundColor: '#10305b',
+                                width: "100%",
+                                height: "30px",
+                                borderTopRightRadius: "30px"
+                            }} />
                             </div>
                         </>
                     )}

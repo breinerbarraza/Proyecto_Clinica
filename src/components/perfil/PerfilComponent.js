@@ -31,7 +31,6 @@ export const PerfilComponent = () => {
         window.location = "/";
     }
     
-
     return (
         <div className="container-perfil">
             <div className="btn-group">
