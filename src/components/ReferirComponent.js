@@ -9,12 +9,42 @@ import Select from '@mui/material/Select';
 import API from '../Utils/API';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import chart_line_up_white from '../image/Recursos-Femto/chart-line-up.svg';
+import user_add_blue from '../image/Recursos-Femto/user-add-Blue.svg';
+import useradd from '../image/Recursos-Femto/user-add.svg';
+import chart_line_white from '../image/Recursos-Femto/chart-line-up-White.svg';
+
+//Componentes basadas en funciones
+function ButtonReferir() {
+    return (
+        <button className="btn_referir_img">
+            <Link to="/referir">
+                <img alt="clinica" className="imgActiva_referidos" src={user_add_blue} />
+            </Link>
+        </button>
+    )
+}
+
+function ButtonListar() {
+    return (
+        <button className="btn_referir_img">
+            <Link to="/listado">
+                <img alt="listar" className="imgActiva_referidos" src={chart_line_up_white} />
+            </Link>
+        </button>
+    )
+}
 
 export const ReferirComponent = () => {
 
-    const [identificacion, setIdentificacion] = useState([])
-    const [select_state, setSelect_state] = useState({})
-    const [storage, setstorage] = useState({})
+    let estado1 = true;
+    let estado2 = false;
+    const [identificacion, setIdentificacion] = useState([]);
+    const [select_state, setSelect_state] = useState({});
+    const [storage, setstorage] = useState({});
+    const [imagen1, setImagen1] = useState(estado1);
+    const [imagen2, setImagen2] = useState(estado2);
+
 
     useEffect(() => {
         API.get('api/configuracion/tipoIdentificacion')
@@ -33,6 +63,14 @@ export const ReferirComponent = () => {
         };
         setstorage(objeto);
     }, []);
+
+    const changeState1 = ()=>{
+        setImagen1(true);
+    }
+
+    const changeState2 = ()=>{
+        setImagen2(true);
+    }
 
     const handleSelect = (e) => {
         setSelect_state({
@@ -187,6 +225,7 @@ export const ReferirComponent = () => {
                         </form>
                 </div>
             </div>
+            {/* Contenido responsive */}
             <div className="container-responsive-referir">
                 <div className="div_perfil">
                     <div>
@@ -313,9 +352,12 @@ export const ReferirComponent = () => {
                         <button className="btn-referir-paciente" type="submit">Referir</button>
                     </form>                                            
                 </div>
+                {/* FOOTER */}
                 <div className="footer-paciente">
-                    <button><i><Link to="/referir">Referir</Link></i></button>
-                    <button><i><Link to="/">Listar</Link></i></button>
+                    <div className="footer-header-navbar">
+                        <ButtonReferir />
+                        <ButtonListar />
+                    </div>
                 </div>
             </div>    
         </>

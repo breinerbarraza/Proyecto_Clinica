@@ -39,10 +39,10 @@ export const HeaderComponent = ({ users, dashboard }) => {
     }
 
     let estado = users;
-    const [imagen, setImagen] = useState(estado);
+    const [imagen, setImagen] = useState(estado); //por defecto es true
 
     let estado1 = dashboard;
-    const [imagen1, setImagen1] = useState(estado1);
+    const [imagen1, setImagen1] = useState(estado1); //por defecto es false
 
     const handleButtonClick = (e) => {
         setImagen(true);

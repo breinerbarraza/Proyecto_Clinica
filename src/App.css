@@ -1273,6 +1273,9 @@ button[type="submit"]{
     }
 }
 
+
+
+/* MEDIA QUERY para referidos con el usuario logeado */
 @media screen and (min-width: 360px) and (max-width: 460px){
     .container-principal{
         display: none;
@@ -1308,7 +1311,7 @@ button[type="submit"]{
         width: 100%;
         color: rgb(47, 52, 100);
         font-size: 20px;
-        margin-left: 37px;
+        margin-left: 25px;
         margin-right: 30px;
         letter-spacing: 2px;
     }
@@ -1334,9 +1337,42 @@ button[type="submit"]{
     .footer-paciente{
         width: 100%;
         margin-top: 80px;
-        padding: 20px;
-        background-color: #424ca8;
+        background-color: #02305b;
     }
 
+    .footer-paciente .footer-header-navbar{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* .imgActiva_referidos{
+        width: 60px;
+        background-color: white;
+        padding: 10px;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+    }
+    .imgActiva_referidos ::after, .imgActiva_referidos::before {
+        border-right:1px solid #FFF;
+        content:'';
+        height:32px;
+        right:-2px;
+        position:absolute;
+        width:80px;
+    }
+    .imgActiva_referidos:after {
+        border-bottom-right-radius: 5px;
+        transform:translateY(-100%);
+    }
+    .imgActiva_referidos:before {
+        border-top-right-radius:5px;
+        transform:translateY(100%);
+    } */
+
+    .btn_referir_img{
+        min-height: 65px;
+    }
     
 }
