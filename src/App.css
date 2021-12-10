@@ -1192,20 +1192,36 @@ button[type="submit"]{
     .div_container_email{
         display: none;
     }
-    /*.formulario-email1{
-        margin-block-start:auto;
-        margin-top: -100px;
-    }*/
     .container-logo-email1{
         width: 100%;
         padding: 10px;
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+        background-size: 100% 100%;
+        margin-bottom: -120px;
     }ç
     .logo-email1{
         padding: 100px;
     }
-   .div_container_email_media{
-       
+   ._form-email1{
+       width: 250% !important;
+       margin-top: 20px;
    }
+   .formulario-email1{
+       width: 100%;
+       border-radius: 10px 10px 10px 10px;
+   }
+   .logo-email1{
+       height: -10px !important;
+   }
+   .formulario-email1{
+        border-radius: 40px;
+   }
+   .clinica_{
+       padding: 20px;
+       margin-top: 100px; 
+   }
+
    
 }
 

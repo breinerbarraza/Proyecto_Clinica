@@ -88,16 +88,16 @@ export const ConfirEmailComponent = () => {
             <div className="div_container_email_media">
                 <div className="container-logo-email1">
                     <div className="logo-email1" style={{marginBottom:"250px"}} alt="logo">
-                        <img alt="clinica" src={liberate} />
+                        <img className="clinica_" alt="clinica" src={liberate} />
                     </div>
                 </div>
-                    <div className="email1-container">
+                    <div className="email2-container">
                        {/* <Link to="/login">
                             <i class="fas fa-home"></i>
                                 </Link>*/}
                         <div className="formulario-email1">
                             <form className="_form-email1" onSubmit={handleInputSubmit}>
-                                <p className="p-email1">Confirma tu e-mail</p>
+                                <p className="p-email1" style={{fontSize:"25px"}}>Confirma tu e-mail</p>
                                 <TextField
                                     type="email"
                                     name="correo_electronico"
@@ -111,7 +111,7 @@ export const ConfirEmailComponent = () => {
                                         shrink: true,
                                     }}
                                 />
-                                <button type="submit" className="btn btn-primary">
+                                <button type="submit" className="btn btn-primary" style={{padding:"10px"}}>
                                     CONFIRMAR
                                 </button>
                             </form>
