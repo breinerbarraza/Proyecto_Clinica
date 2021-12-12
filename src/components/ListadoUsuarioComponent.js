@@ -88,10 +88,15 @@ export const ListadoUsuarioComponent = () => {
     const obj_nombre = meses.map(item => {
       return item.date_joined
     })
-    console.log(obj_nombre)
+    const arreglo = [];
+    for(let j of obj_nombre){
+        if (j != undefined){
+          arreglo.push(j)
+        }
+    }
     let variable = "";
     let dia_mes = "";
-    for(let x of obj_nombre){
+    for(let x of arreglo){
       variable = x
       dia_mes = new Date(variable).getMonth() + 1
     }

@@ -118,9 +118,15 @@ export const ListadoReferidoComponent = () => {
     const obj_nombre = meses.map(item => {
       return item.sys_fechaCreacion
     })
+    const arreglo = [];
+    for(let j of obj_nombre){
+        if (j != undefined){
+          arreglo.push(j)
+        }
+    }
     let variable = "";
     let dia_mes = "";
-    for (let x of obj_nombre) {
+    for (let x of arreglo) {
       variable = x
       dia_mes = new Date(variable).getMonth() + 1
     }

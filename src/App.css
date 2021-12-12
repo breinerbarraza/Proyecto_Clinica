@@ -512,7 +512,7 @@ a {
 
 .tabla-pacientes table{
     box-shadow: -2px -2px 10px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    border-radius: 15px !important;
     border-collapse: collapse;
 }
 
@@ -523,7 +523,8 @@ a {
     font-weight: bold;
     border-left: 0;
     border-right: 0;
-    border-bottom: 1px solid #1c3678;
+    padding: 0.75rem;
+    font-size: 14px;
 }
 
 .tabla-pacientes tr {
@@ -1015,6 +1016,42 @@ button[type="submit"]{
 .div_crear_usuario_responsive{
     display: none;
 }
+
+
+
+
+/* ESTILOS DE LA TABLA */
+.dataTable{
+    border-color: transparent !important; 
+    border-radius: 15px !important;
+}
+
+.dataTable thead > tr th:first-child {
+    border-top-left-radius: 15px;
+}
+
+.dataTable thead > tr th:last-child {
+    border-top-right-radius: 15px;
+}
+
+.dataTable tbody{
+    border-top: #2f4f94 !important;
+}
+
+.dataTable tbody > tr:last-child {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.dataTable tbody > tr:last-child > td:first-child, #result_list tbody > tr:last-child > th:first-child {
+    border-bottom-left-radius: 15px;
+}
+
+.dataTable tbody > tr:last-child > td:last-child, #result_list tbody > tr:last-child > th:last-child {
+    border-bottom-right-radius: 15px;
+}
+
+
 
 /* Media QUERY para referidos sin logearse */
 @media screen and (min-width: 0px) and (max-width: 359px){

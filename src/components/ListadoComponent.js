@@ -12,6 +12,18 @@ import Select from '@mui/material/Select';
 import meses_map from '../Utils/Objmeses';
 import { ButtonReferir_change_class, ButtonListar_change_class } from './FuncionesComponent';
 
+function formatMoney(n, c, d, t) {
+  var c = isNaN(c = Math.abs(c)) ? 2 : c,
+      d = d == undefined ? "." : d,
+      t = t == undefined ? "," : t,
+      s = n < 0 ? "-" : "",
+      i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+      j = (j = i.length) > 3 ? j % 3 : 0;
+
+  return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+}
+
+
 export const ListadoComponent = () => {
 
   const [data_listado, setData_listado] = useState([]);
@@ -23,21 +35,45 @@ export const ListadoComponent = () => {
     setLoading(true)
     await API.get('api/referidos/')
       .then(resp => {
-        setMeses(resp.data)
-        resp.data.map((item) => (
+        const arreglo_referidos = resp.data;
+        let arreglo = [];
+        for(let x in arreglo_referidos){
+          if(arreglo_referidos[x].comision === ""){
+            continue;
+          }
+          arreglo.push(arreglo_referidos[x].comision);
+        }
+        let total_comision_final = arreglo.join(',');
+        total_comision_final = total_comision_final.split(',').map(Number);
+        total_comision_final = total_comision_final.reduce((accumulator, curr) => accumulator + curr);
+        console.log(total_comision_final);
+        const push_obj = {
+          "id": "",
+          "get_nombreCompleto": "",
+          "numeroIdentificacion": "" ,
+          "correo_electronico": "",
+          "celular": "",
+          "estadoReferido": "",
+          "comision": total_comision_final
+        }
+        arreglo_referidos.push(push_obj);
+        console.log(arreglo_referidos)
+        setMeses(arreglo_referidos)
+        arreglo_referidos.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
             "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
-            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />,
-            "comision": item.comision
+            "estadoReferido": (item.estadoReferido !== "") ? <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} /> : <b style={{color:'#02305b'}}>Total comisiones: </b>,
+            "comision": (item.comision !== "") ? "$" +  formatMoney(item.comision, 2, ',', '.') : "-"
           }])
         ))
       })
     setLoading(false)
   }
+  
 
   const load_referidos_by_id = async(id_user)=>{
     setLoading(true)
@@ -47,16 +83,42 @@ export const ListadoComponent = () => {
     console.log(obj)
     await API.post('api/referidos/get_referidos/', JSON.stringify(obj))
       .then(resp => {
-        setMeses(resp.data)
-        resp.data.map((item) => (
+        const arreglo_referidos = resp.data;
+        console.log(arreglo_referidos);
+        let arreglo = [];
+        for(let x in arreglo_referidos){
+          if(arreglo_referidos[x].comision === ""){
+            continue;
+          }
+          let total_comision = arreglo_referidos[x].comision.replace('$', "");
+          arreglo.push(total_comision);
+        }
+        let total_comision_final = arreglo.join(',');
+        total_comision_final = total_comision_final.split(',').map(Number);
+        total_comision_final = total_comision_final.reduce((accumulator, curr) => accumulator + curr);
+        console.log(total_comision_final);
+        
+        const push_obj = {
+          "id": "",
+          "get_nombreCompleto": "",
+          "numeroIdentificacion": "" ,
+          "correo_electronico": "",
+          "celular": "",
+          "estadoReferido": "",
+          "comision": total_comision_final
+        }
+        arreglo_referidos.push(push_obj);
+        console.log(arreglo_referidos)
+        setMeses(arreglo_referidos)
+        arreglo_referidos.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
             "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
-            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />,
-            "comision": item.comision
+            "estadoReferido": (item.estadoReferido !== "") ? <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} /> : <b style={{color:'#02305b'}}>Total comisiones: </b>,
+            "comision": (item.comision !== "") ? "$" +  formatMoney(item.comision, 2, ',', '.') : "-"
           }]),
           console.log(data_listado)
         ))
@@ -112,9 +174,15 @@ export const ListadoComponent = () => {
     const obj_nombre = meses.map(item => {
       return item.sys_fechaCreacion
     })
+    const arreglo = [];
+    for(let j of obj_nombre){
+        if (j != undefined){
+          arreglo.push(j)
+        }
+    }
     let variable = "";
     let dia_mes = "";
-    for(let x of obj_nombre){
+    for(let x of arreglo){
       variable = x
       dia_mes = new Date(variable).getMonth() + 1
     }
