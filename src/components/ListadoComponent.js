@@ -23,6 +23,19 @@ function formatMoney(n, c, d, t) {
   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 }
 
+function calcularComisionFinal(array_, arreglo_de_referidos){
+    for(let x in arreglo_de_referidos){
+      if(arreglo_de_referidos[x].comision === ""){
+        continue;
+      }
+      array_.push(arreglo_de_referidos[x].comision);
+    }
+    let total_comision_final = array_.join(',');
+    total_comision_final = total_comision_final.split(',').map(Number);
+    total_comision_final = total_comision_final.reduce((accumulator, curr) => accumulator + curr);
+    return total_comision_final;
+}
+
 
 export const ListadoComponent = () => {
 
@@ -36,17 +49,11 @@ export const ListadoComponent = () => {
     await API.get('api/referidos/')
       .then(resp => {
         const arreglo_referidos = resp.data;
+        console.log(arreglo_referidos)
         let arreglo = [];
-        for(let x in arreglo_referidos){
-          if(arreglo_referidos[x].comision === ""){
-            continue;
-          }
-          arreglo.push(arreglo_referidos[x].comision);
-        }
-        let total_comision_final = arreglo.join(',');
-        total_comision_final = total_comision_final.split(',').map(Number);
-        total_comision_final = total_comision_final.reduce((accumulator, curr) => accumulator + curr);
-        console.log(total_comision_final);
+        const totalComision = calcularComisionFinal(arreglo, arreglo_referidos)
+        console.log(totalComision)
+       /*  console.log(total_comision_final);
         const push_obj = {
           "id": "",
           "get_nombreCompleto": "",
@@ -57,7 +64,7 @@ export const ListadoComponent = () => {
           "comision": total_comision_final
         }
         arreglo_referidos.push(push_obj);
-        console.log(arreglo_referidos)
+        console.log(arreglo_referidos) */
         setMeses(arreglo_referidos)
         arreglo_referidos.map((item) => (
           setData_listado(data_listado => [...data_listado, {
@@ -86,19 +93,9 @@ export const ListadoComponent = () => {
         const arreglo_referidos = resp.data;
         console.log(arreglo_referidos);
         let arreglo = [];
-        for(let x in arreglo_referidos){
-          if(arreglo_referidos[x].comision === ""){
-            continue;
-          }
-          let total_comision = arreglo_referidos[x].comision.replace('$', "");
-          arreglo.push(total_comision);
-        }
-        let total_comision_final = arreglo.join(',');
-        total_comision_final = total_comision_final.split(',').map(Number);
-        total_comision_final = total_comision_final.reduce((accumulator, curr) => accumulator + curr);
-        console.log(total_comision_final);
-        
-        const push_obj = {
+        const totalComision = calcularComisionFinal(arreglo, arreglo_referidos)
+        console.log(totalComision)
+       /*  const push_obj = {
           "id": "",
           "get_nombreCompleto": "",
           "numeroIdentificacion": "" ,
@@ -108,7 +105,7 @@ export const ListadoComponent = () => {
           "comision": total_comision_final
         }
         arreglo_referidos.push(push_obj);
-        console.log(arreglo_referidos)
+        console.log(arreglo_referidos) */
         setMeses(arreglo_referidos)
         arreglo_referidos.map((item) => (
           setData_listado(data_listado => [...data_listado, {
@@ -151,36 +148,38 @@ export const ListadoComponent = () => {
     }
   }, []);
 
-  const meses_anio = {
-    '1': 'Enero',
-    '2': "Febrero",
-    '3': "Marzo",
-    '4': "Abril",
-    '5': "Mayo",
-    '6': "Junio",
-    '7': "Julio",
-    '8': "Agosto",
-    '9': "Septiembre",
-    '10': "Octubre",
-    '11': "Noviembre",
-    '12': "Diciembre",
-  };
+  
 
   
   const handleSelectMonth = (e)=>{
     setData_meses([]);
-    let arreglo_vacio = [0,1] //
-    const mes_nombre = e.target.value
-    const obj_nombre = meses.map(item => {
-      return item.sys_fechaCreacion
-    })
-    const arreglo = [];
-    for(let j of obj_nombre){
-        if (j != undefined){
-          arreglo.push(j)
-        }
-    }
-    let variable = "";
+    const mes = e.target.value
+    API.get(`api/referidos/get_referidos_month/?mes=${mes}`)
+    .then( data => {
+      const arreglo_referidos_month = data.data;
+      console.log(arreglo_referidos_month);
+      let arreglo = [];
+      const totalComision = calcularComisionFinal(arreglo, arreglo_referidos_month)
+      console.log(totalComision)
+      if(arreglo_referidos_month.length == 0){
+        setData_meses([0]);
+      }else{
+        arreglo_referidos_month.map((item)=>{
+          setData_meses(data_meses => [...data_meses, {
+            "id": item.id,
+            "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+            "numeroIdentificacion": item.numeroIdentificacion,
+            "correo_electronico": item.correo_electronico,
+            "celular": item.celular,
+            "estadoReferido": (item.estadoReferido !== "") ? <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} /> : <b style={{color:'#02305b'}}>Total comisiones: </b>,
+            "comision": (item.comision !== "") ? "$" +  formatMoney(item.comision, 2, ',', '.') : "-"
+          }]);
+        })
+      }
+    } )
+
+    return;
+    /* let variable = "";
     let dia_mes = "";
     for(let x of arreglo){
       variable = x
@@ -188,6 +187,7 @@ export const ListadoComponent = () => {
     }
     if(meses_anio[dia_mes] == mes_nombre){
       const dato = meses.filter(item => item)
+      console.log(dato);
       dato.map((item) => (
         setData_meses(data_meses => [...data_meses, {
           "id": item.id,
@@ -200,8 +200,8 @@ export const ListadoComponent = () => {
         }])
       ))
     }else{
-      setData_meses(arreglo_vacio)
-    }
+      setData_meses([0])
+    } */
   }
 
 
@@ -269,7 +269,7 @@ export const ListadoComponent = () => {
                   >
                     {
                       meses_map.map( (item, key) => {
-                        return <MenuItem key={key} value={item.mes}>{item.mes}</MenuItem>
+                        return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
                       })
 
                     }

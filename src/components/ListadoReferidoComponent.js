@@ -17,7 +17,8 @@ export const ListadoReferidoComponent = () => {
   const [loading, setLoading] = useState(false)
   const [cmb_listado, setCmb_listado] = useState([]);
   const [meses, setMeses] = useState([]);
-  const [data_meses, setData_meses] = useState([])
+  const [data_meses, setData_meses] = useState([]);
+  const [arreglo_temporal, setArreglo_temporal] = useState([]);
 
   const load = async () => {
     setLoading(true)
@@ -113,7 +114,6 @@ export const ListadoReferidoComponent = () => {
 
   const handleSelectMonth = (e) => {
     setData_meses([]);
-    let arreglo_vacio = [0, 1] //
     const mes_nombre = e.target.value
     const obj_nombre = meses.map(item => {
       return item.sys_fechaCreacion
@@ -143,7 +143,9 @@ export const ListadoReferidoComponent = () => {
         }])
       ))
     } else {
-      setData_meses(arreglo_vacio)
+      setData_meses([1])
+      setArreglo_temporal([0]);
+      console.log("hola mundito");
     }
   }
 
@@ -162,6 +164,9 @@ export const ListadoReferidoComponent = () => {
           "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />
         }])
       ))
+    }else{
+      setData_listado([])
+      console.log("Hola mundo xD");
     }
 
   }
@@ -200,9 +205,13 @@ export const ListadoReferidoComponent = () => {
         width: 150
       },
     ],
-    rows: (data_listado && data_meses.length == 0) ? data_listado : data_meses
+    rows: ((data_listado && data_meses.length == 0) && arreglo_temporal.length == 0) ? data_listado : data_meses
 
   };
+
+  console.log(data_meses);
+  console.log(data_listado);
+  console.log(arreglo_temporal);
 
   return (
     <div className="listaRefe">
