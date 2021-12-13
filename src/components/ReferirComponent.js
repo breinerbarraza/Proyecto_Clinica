@@ -9,6 +9,7 @@ import Select from '@mui/material/Select';
 import API from '../Utils/API';
 import Swal from 'sweetalert2';
 import {ButtonReferir_change_class ,ButtonListar_change_class } from './FuncionesComponent';
+import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 
 
 export const ReferirComponent = () => {
@@ -208,7 +209,7 @@ export const ReferirComponent = () => {
                         <b>Referir Paciente</b>
                     </div>
                     <div>
-                        <i><PerfilComponent/></i>
+                        <i><PerfilComponentSinNombre/></i>
                     </div>
                 </div>
                 <div className="div-formulario-referir">

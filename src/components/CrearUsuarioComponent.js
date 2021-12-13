@@ -10,6 +10,7 @@ import { HeaderComponent } from './HeaderComponent'
 import Swal from 'sweetalert2';
 import { Loading } from './Loading';
 import { ButtonListar_change_class, ButtonReferir_change_class } from './FuncionesComponent';
+import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 
 
 export const CrearUsuarioComponent = () => {
@@ -248,7 +249,7 @@ export const CrearUsuarioComponent = () => {
                             <b>Crear usuario</b>
                         </div>
                         <div>
-                            <i><PerfilComponent/></i>
+                            <i><PerfilComponentSinNombre/></i>
                         </div>
                 </div>
                 <div className="div_form_crear_usuario">

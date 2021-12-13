@@ -12,6 +12,7 @@ import Select from '@mui/material/Select';
 import meses_map from '../Utils/Objmeses';
 import { ButtonReferir_change_class, ButtonListar_change_class } from './FuncionesComponent';
 import { formatMoney, calcularComisionFinal } from '../Utils/LogicaFunciones';
+import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 
 
 export const ListadoComponent = () => {
@@ -267,7 +268,7 @@ export const ListadoComponent = () => {
           <div className="listado_referido_responsive_container">
               <div className="div_perfil_container">
                   <div>
-                      <i><PerfilComponent/></i>
+                      <i><PerfilComponentSinNombre/></i>
                   </div>
               </div>
           </div>
