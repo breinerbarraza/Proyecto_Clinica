@@ -10,7 +10,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Link } from 'react-router-dom'
 import meses_map from '../Utils/Objmeses';
-
 export const ListadoReferidoComponent = () => {
 
   const [data_listado, setData_listado] = useState([])
@@ -18,7 +17,7 @@ export const ListadoReferidoComponent = () => {
   const [cmb_listado, setCmb_listado] = useState([]);
   const [meses, setMeses] = useState([]);
   const [data_meses, setData_meses] = useState([]);
-  const [arreglo_temporal, setArreglo_temporal] = useState([]);
+  const [mes_temporal, setMes_temporal] = useState("");
 
   const load = async () => {
     setLoading(true)
@@ -40,6 +39,7 @@ export const ListadoReferidoComponent = () => {
   }
 
   const load_referidos_by_id = async (id_user) => {
+    alert("xdd")
     setLoading(true)
     const obj = {
       id: id_user
@@ -97,77 +97,64 @@ export const ListadoReferidoComponent = () => {
     cargarEstados()
   }, []);
 
-  const meses_anio = {
-    '1': 'Enero',
-    '2': "Febrero",
-    '3': "Marzo",
-    '4': "Abril",
-    '5': "Mayo",
-    '6': "Junio",
-    '7': "Julio",
-    '8': "Agosto",
-    '9': "Septiembre",
-    '10': "Octubre",
-    '11': "Noviembre",
-    '12': "Diciembre",
-  };
 
   const handleSelectMonth = (e) => {
+    
     setData_meses([]);
-    const mes_nombre = e.target.value
-    const obj_nombre = meses.map(item => {
-      return item.sys_fechaCreacion
-    })
-    const arreglo = [];
-    for(let j of obj_nombre){
-        if (j != undefined){
-          arreglo.push(j)
-        }
-    }
-    let variable = "";
-    let dia_mes = "";
-    for (let x of arreglo) {
-      variable = x
-      dia_mes = new Date(variable).getMonth() + 1
-    }
-    if (meses_anio[dia_mes] == mes_nombre) {
-      const dato = meses.filter(item => item)
-      dato.map((item) => (
-        setData_meses(data_meses => [...data_meses, {
-          "id": item.id,
-          "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
-          "numeroIdentificacion": item.numeroIdentificacion,
-          "correo_electronico": item.correo_electronico,
-          "celular": item.celular,
-          "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />
-        }])
-      ))
-    } else {
-      setData_meses([1])
-      setArreglo_temporal([0]);
-      console.log("hola mundito");
-    }
-  }
+    const mes = e.target.value;
+    setMes_temporal(mes)
+    API.get(`api/referidos/get_referidos_month/?mes=${mes}`)
+    .then( data => {
+      const arreglo_referidos_month = data.data;
+      console.log(arreglo_referidos_month);
+      if(arreglo_referidos_month.length == 0){
+        setData_meses([0]);
+      }else{
+        arreglo_referidos_month.map((item)=>{
+          setData_meses(data_meses => [...data_meses, {
+            "id": item.id,
+            "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+            "numeroIdentificacion": item.numeroIdentificacion,
+            "correo_electronico": item.correo_electronico,
+            "celular": item.celular,
+            "estadoReferido": (item.estadoReferido !== "") ? <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} /> : <b style={{color:'#02305b'}}>Total comisiones: </b>,
+          }]);
+        })
+      }
+    } )
 
-  const handleSelectEstate = (e) => {
-    setData_meses([]);
-    const data = meses.filter(item => item.estadoReferido === e.target.value)
-    console.log(data)
-    if (data.length > 0) {
-      data.map((item) => (
-        setData_meses(data_meses => [...data_meses, {
-          "id": item.id,
-          "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
-          "numeroIdentificacion": item.numeroIdentificacion,
-          "correo_electronico": item.correo_electronico,
-          "celular": item.celular,
-          "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />
-        }])
-      ))
-    }else{
-      setData_listado([])
-      console.log("Hola mundo xD");
+
+
     }
+
+  const handleSelectEstate = async(e) => {
+    setData_meses([]);
+    const id_estado = e.target.value;
+    console.log(mes_temporal)
+    console.log(id_estado)
+    await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${id_estado}`)
+      .then( data => {
+        const respuesta = data.data;
+        console.log(respuesta);
+        if(respuesta.length > 0){
+          respuesta.map((item) => (
+            setData_meses(data_meses => [...data_meses, {
+              "id": item.id,
+              "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+              "numeroIdentificacion": item.numeroIdentificacion,
+              "correo_electronico": item.correo_electronico,
+              "celular": item.celular,
+              "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />
+            }])
+          ))
+        }else{
+          console.log("No hay nada que mostrar");
+          setData_meses([0]);
+        }
+     
+    })
+    
+   
 
   }
 
@@ -205,13 +192,9 @@ export const ListadoReferidoComponent = () => {
         width: 150
       },
     ],
-    rows: ((data_listado && data_meses.length == 0) && arreglo_temporal.length == 0) ? data_listado : data_meses
+    rows: ((data_listado && data_meses.length == 0)) ? data_listado : data_meses
 
   };
-
-  console.log(data_meses);
-  console.log(data_listado);
-  console.log(arreglo_temporal);
 
   return (
     <div className="listaRefe">
@@ -237,7 +220,7 @@ export const ListadoReferidoComponent = () => {
               >
                 {
                   meses_map.map((item, key) => {
-                    return <MenuItem key={key} value={item.mes}>{item.mes}</MenuItem>
+                    return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
                   })
                 }
               </Select>
@@ -254,7 +237,7 @@ export const ListadoReferidoComponent = () => {
               >
                 {
                   cmb_listado.map((item, key) => {
-                    return <MenuItem key={key} value={item.descripcion}>{item.descripcion}</MenuItem>
+                    return <MenuItem key={key} value={item.id}>{item.descripcion}</MenuItem>
                   })
 
                 }

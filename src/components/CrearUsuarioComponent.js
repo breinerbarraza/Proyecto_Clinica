@@ -16,6 +16,7 @@ export const CrearUsuarioComponent = () => {
 
     const [group, setGroup] = useState([])
     const [dato, setDatos] = useState([])
+    const [identificacion, setIdentificacion] = useState([]);
     const [spinner, setSpinner] = useState(false);
 
     useEffect(() => {
@@ -27,7 +28,14 @@ export const CrearUsuarioComponent = () => {
             .then(({ data }) => {
                 setGroup(data)
                 console.log(data)
-            })
+        })
+        
+        API.get('api/configuracion/tipoIdentificacion')
+        .then(({ data }) => {
+            const item = data;
+            setIdentificacion(item)
+        })
+        
     }, [])
 
     const handleInput = (e) => {
@@ -38,11 +46,11 @@ export const CrearUsuarioComponent = () => {
     }
     const enviarDatos = async(e) => {
         e.preventDefault();
-        console.log(dato)
+        console.log(dato);
         setSpinner(true);
         setTimeout(()=>{
             setSpinner(false);
-        }, 3300)
+        }, 3000)
         await API.post('api/usuarios/asesor/crear-usuario/', JSON.stringify(dato))
         .then( ({data}) => {
             const resp = data;
@@ -55,7 +63,7 @@ export const CrearUsuarioComponent = () => {
                     icon: 'success',
                     title: 'Exito!',
                     text : mensaje,
-                    timer: 3600
+                    timer: 4000
                 });
             }else{
                 const error = resp.error;
@@ -160,6 +168,55 @@ export const CrearUsuarioComponent = () => {
                                     />
                                 </div>
                             </div>
+                           
+                           <Select style={{marginTop:'20px'}}
+                                name="tipoIdentificacion"
+                                required
+                                labelId="demo-simple-select-standard-label"
+                                id="demo-simple-select-standard"
+                                onChange={handleInput}
+                                label="Tipo Identificacion"
+                            >
+                                {
+                                    identificacion.map(data => {
+                                        return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
+                                    })
+                                }
+                            </Select>
+                    
+                
+                            <div className="cargo_usuario">
+                                <TextField
+                                    type="text"
+                                    name="numeroIdentificacion"
+                                    required
+                                    placeholder="Escribe..."
+                                    label="Numero de identificacion"
+                                    className="form-control RegistrarReferido"
+                                    style={{ marginBottom: "30px" }}
+                                    onChange={handleInput}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            </div>
+
+                            <div className="cargo_usuario">
+                                <TextField
+                                    type="text"
+                                    name="cargo"
+                                    required
+                                    placeholder="Escribe..."
+                                    label="Cargo"
+                                    className="form-control RegistrarReferido"
+                                    style={{ marginBottom: "30px" }}
+                                    onChange={handleInput}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            </div>
+
                             <div className="cargo_usuario">
                                 <TextField
                                     type="text"
@@ -241,7 +298,6 @@ export const CrearUsuarioComponent = () => {
                                         }}
                                     />
                         
-                            
                                         <TextField
                                             type="text"
                                             name="celular"
@@ -270,6 +326,36 @@ export const CrearUsuarioComponent = () => {
                                             shrink: true,
                                         }}
                                     />
+
+                            <Select style={{marginTop:'20px'}}
+                                name="tipoIdentificacion"
+                                required
+                                labelId="demo-simple-select-standard-label"
+                                id="demo-simple-select-standard"
+                                onChange={handleInput}
+                                label="Tipo Identificacion"
+                            >
+                                {
+                                    identificacion.map(data => {
+                                        return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
+                                    })
+                                }
+                            </Select>
+
+                                    <TextField
+                                        type="text"
+                                        name="numeroIdentificacion"
+                                        required
+                                        placeholder="Escribe..."
+                                        label="Numero identificacion"
+                                        className="form-control"
+                                        style={{ marginBottom: "30px" }}
+                                        onChange={handleInput}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+
                                     <TextField
                                         type="text"
                                         name="cargo"

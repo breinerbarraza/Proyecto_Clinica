@@ -66,56 +66,55 @@ export const ListadoUsuarioComponent = () => {
     }
   }, []);
 
-  const meses_anio = {
-    '1': 'Enero',
-    '2': "Febrero",
-    '3': "Marzo",
-    '4': "Abril",
-    '5': "Mayo",
-    '6': "Junio",
-    '7': "Julio",
-    '8': "Agosto",
-    '9': "Septiembre",
-    '10': "Octubre",
-    '11': "Noviembre",
-    '12': "Diciembre",
-  };
 
-  const handleSelectMonth = (e)=>{
+
+  const handleSelectMonth = async(e)=>{
     setData_meses([]);
-    let arreglo_vacio = [0,1] //
-    const mes_nombre = e.target.value
-    const obj_nombre = meses.map(item => {
-      return item.date_joined
-    })
-    const arreglo = [];
-    for(let j of obj_nombre){
-        if (j != undefined){
-          arreglo.push(j)
+    const mes = e.target.value;
+    console.log(mes)
+    if(mes !== 0){
+      await API.get(`api/usuarios/user/?mes=${mes}`)
+      .then(
+        data =>{
+          console.log(data.data);
+          if(data.data.length > 0){
+            data.data.map((item) => (
+              setData_meses(data_meses => [...data_meses, {
+                "id": item.id,
+                "nombre_completo": item.nombre_completo,
+                "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
+                "correo_electronico": item.email,
+                "referidos": (item.total_referidos) ? item.total_referidos : 0,
+                "QR_Paciente": ( item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i class="fas fa-qrcode" ></i></span></a> ,
+                "QR_Asesor": ( item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i class="fas fa-qrcode" ></i></span></a> ,
+              }])
+            ))
+          }else{
+            setData_meses([0])
+          }
+          
         }
-    }
-    let variable = "";
-    let dia_mes = "";
-    for(let x of arreglo){
-      variable = x
-      dia_mes = new Date(variable).getMonth() + 1
-    }
-    if(meses_anio[dia_mes] == mes_nombre){
-      const dato = meses.filter(item => item)
-      dato.map((item) => (
-        setData_meses(data_meses => [...data_meses, {
-          "id": item.id,
+      )
+    }else{
+      await API.get('api/usuarios/user/')
+      .then(resp => {
+        console.log(resp.data)
+        setMeses(resp.data)
+        resp.data.map((item) => (
+          setData_listado(data_listado => [...data_listado, {
+            "id": item.id,
             "nombre_completo": item.nombre_completo,
             "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
             "correo_electronico": item.email,
             "referidos": (item.total_referidos) ? item.total_referidos : 0,
             "QR_Paciente": ( item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i class="fas fa-qrcode" ></i></span></a> ,
             "QR_Asesor": ( item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i class="fas fa-qrcode" ></i></span></a> ,
-        }])
-      ))
-    }else{
-      setData_meses(arreglo_vacio)
+          }])
+        ))
+      })
     }
+    
+    
   }
 
   console.log(meses)
@@ -183,7 +182,7 @@ export const ListadoUsuarioComponent = () => {
               >
                 {
                   meses_map.map((item, key)=> {
-                    return <MenuItem key={key} value={item.mes}>{item.mes}</MenuItem>
+                    return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
                   })
                 }
               </Select>
