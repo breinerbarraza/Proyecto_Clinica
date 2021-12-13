@@ -46,12 +46,12 @@ export const ListadoUsuarioComponent = () => {
     return (
       <MDBDataTable
         striped
+        small
         paginationLabel={["<", ">"]}
         infoLabel={["Mostrando", "a", "de", "entradas"]}
         className="tabla-pacientes"
         bordered
         entrieslabel={[]}
-        small
         data={data}
       />
     )

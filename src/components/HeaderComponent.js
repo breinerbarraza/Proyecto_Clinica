@@ -34,6 +34,7 @@ export const HeaderComponent = ({ users, dashboard }) => {
     }
 
     return (
+        <>
         <div className="header">
             <nav className="nav-header">
                 <div className="imgLogo">
@@ -113,5 +114,85 @@ export const HeaderComponent = ({ users, dashboard }) => {
                 </div>
             </nav>
         </div>
+    
+
+        <nav className="nav-header1">
+                <div className="imgLogo">
+                    <a className="navbar-brand" href="/">
+                        <img alt="clinica" className="logo-clinica" src={ClinicaBlanco} style={{ 'color': '#fff' }} />
+                    </a>
+                </div>
+                <div className="lista-registro">
+                    {!imagen && (
+                        <button onClick={() => handleButtonClick()}><Link to="/referir"><img alt="clinica" src={useradd} /></Link></button>
+                    )}
+                    {imagen && (
+                        <>
+                            <div style={{
+                                width: "100%",
+                                height: "30px",
+                                backgroundColor: '#FFF'
+                            }}>
+                                <div style={{
+                                    backgroundColor: '#10305b',
+                                    width: "100%",
+                                    height: "30px",
+                                    borderBottomRightRadius: "30px"
+                                }} />
+                            </div>
+                            <ButtonReferir />
+                            <div style={{
+                                width: "100%",
+                                height: "30px",
+                                backgroundColor: '#FFF'
+                            }}>
+                                <div style={{
+                                    backgroundColor: '#10305b',
+                                    width: "100%",
+                                    height: "30px",
+                                    borderTopRightRadius: "30px"
+                                }} />
+                            </div>
+                        </>
+                    )}
+                    {!imagen1 && (
+                        <button onClick={() => handleButtonClick1()}><Link to="/listado"><img alt="listado_" className="listado_" src={chart_line_white} /></Link></button>
+                    )}
+                    {imagen1 && (
+                        <>
+                            <div style={{
+                                width: "100%",
+                                height: "30px",
+                                backgroundColor: '#FFF'
+                            }}>
+                            <div style={{
+                                backgroundColor: '#10305b',
+                                width: "100%",
+                                height: "30px",
+                                borderBottomRightRadius: "30px"
+                            }} />
+                            </div>
+                            <ButtonListar />
+                            <div style={{
+                                width: "100%",
+                                height: "30px",
+                                backgroundColor: '#FFF'
+                            }}>
+                            <div style={{
+                                backgroundColor: '#10305b',
+                                width: "100%",
+                                height: "30px",
+                                borderTopRightRadius: "30px"
+                            }} />
+                            </div>
+                        </>
+                    )}
+                </div>
+                <div className="cerrarSesion">
+                    <img className="img-cerrar" onClick={() => cerrarSesion('token','id_user','username','nombres','apellidos','password', 'super_user')} alt="cerrar" src={Logout} style={{ "width": "50px", "cursor": "pointer" }} />
+                    <span style={{color: '#FFF'}}>Cerrar sesión</span>
+                </div>
+            </nav>
+    </>
     )
 }

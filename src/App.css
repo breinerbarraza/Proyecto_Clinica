@@ -191,6 +191,19 @@ a {
     align-items: center;
 }
 
+/*Media query del header*/
+.nav-header1{
+    display: none;
+}
+@media screen and (min-width: 360px) and (max-width: 460px){
+    .nav-header1{
+        display: contents;
+    }
+    .header{
+        display: none;
+    }
+    }
+
 /*Registrar Referido*/
 
 .registrarefe-container {
@@ -523,7 +536,7 @@ a {
     font-weight: bold;
     border-left: 0;
     border-right: 0;
-    padding: 0.75rem;
+    padding: 0.5rem;
     font-size: 14px;
 }
 
