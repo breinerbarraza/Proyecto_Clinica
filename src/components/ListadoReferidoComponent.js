@@ -39,7 +39,6 @@ export const ListadoReferidoComponent = () => {
   }
 
   const load_referidos_by_id = async (id_user) => {
-    alert("xdd")
     setLoading(true)
     const obj = {
       id: id_user

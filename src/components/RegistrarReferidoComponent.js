@@ -95,21 +95,6 @@ export const RegistrarReferidoComponent = () => {
                  <div className="div-separador">
                      <TextField
                          type="text"
-                         name="nombres"
-                         placeholder="Escribe..."
-                         label="Nombres"
-                         required
-                         className="form-control"
-                         style={{ marginBottom: "30px" }}
-                         onChange={handleInput}
-                         InputLabelProps={{
-                             shrink: true,
-                         }}
-                     />
-                 </div>
-                 <div className="div-separador">
-                     <TextField
-                         type="text"
                          name="apellidos"
                          placeholder="Escribe..."
                          label="Apellidos"
