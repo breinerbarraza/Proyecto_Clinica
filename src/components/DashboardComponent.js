@@ -90,7 +90,7 @@ export const DashboardComponent = () => {
             load()
         }
     }, []);
-     const meses_anio = {
+    const meses_anio = {
     '1': 'Enero',
     '2': "Febrero",
     '3': "Marzo",
@@ -184,7 +184,7 @@ export const DashboardComponent = () => {
                         (
                             <div className="dashboard-flexbox">
                                 <div className="table-dashboard">
-                                    <table className="table table-hover ">
+                                    <table className="table table-hover">
                                         <thead>
                                             <tr>
                                                 <th>Tipo</th>
