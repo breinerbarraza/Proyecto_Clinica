@@ -90,7 +90,7 @@ export const DashboardComponent = () => {
             load()
         }
     }, []);
-    const meses_anio = {
+    /* const meses_anio = {
     '1': 'Enero',
     '2': "Febrero",
     '3': "Marzo",
@@ -103,7 +103,7 @@ export const DashboardComponent = () => {
     '10': "Octubre",
     '11': "Noviembre",
     '12': "Diciembre",
-  };
+  }; */
 
   
   const handleSelectMonth = async(e)=>{

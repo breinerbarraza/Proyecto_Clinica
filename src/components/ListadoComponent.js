@@ -21,7 +21,9 @@ export const ListadoComponent = () => {
   const [loading, setLoading] = useState(false);
   const [meses, setMeses] = useState([]);
   const [data_meses, setData_meses] = useState([])
+  const [comision, setComision] = useState([])
 
+  console.log(comision)
   const load = async () => {
     setLoading(true)
     await API.get('api/referidos/')
@@ -31,6 +33,7 @@ export const ListadoComponent = () => {
         let arreglo = [];
         const totalComision = calcularComisionFinal(arreglo, arreglo_referidos)
         console.log(totalComision)
+        setComision(totalComision)
        /*  console.log(total_comision_final);
         const push_obj = {
           "id": "",
@@ -52,7 +55,8 @@ export const ListadoComponent = () => {
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
             "estadoReferido": (item.estadoReferido !== "") ? <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} /> : <b style={{color:'#02305b'}}>Total comisiones: </b>,
-            "comision": (item.comision !== "") ? "$" +  formatMoney(item.comision, 2, ',', '.') : "-"
+            "comision": (item.comision !== "") ? "$" +  formatMoney(item.comision, 2, ',', '.') : "-",
+            "total": totalComision
           }])
         ))
       })
@@ -221,6 +225,9 @@ export const ListadoComponent = () => {
         field: 'comision',
         sort: 'asc',
         width: 100
+      },
+      {
+        field: 'total',
       }
     ],
     rows: (data_listado && data_meses.length == 0) ? data_listado : data_meses
