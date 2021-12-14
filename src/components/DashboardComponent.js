@@ -17,15 +17,22 @@ export const DashboardComponent = () => {
     const [labelColors, setLabelColors] = useState([])
     const [tiposFormulario, setTiposFormulario] = useState([])
     const [cantidades, setCantidades] = useState([])
-    const [meses, setMeses] = useState([]);
     const [data_meses, setData_meses] = useState([])
     const [usuarios_, setUsuarios_employe] = useState([]);
     const [datosCambioEstado, setDatosCambioEstado] = useState([]);
+    const [total_referidos, setTotal_referidos] = useState({});
     /*
     - Cambiar las consultas del dashboard para que tenga los cambios de estado del referido
     - Colocar el filtro en ese reporte para filtrar por empleados
 
     */
+
+      useEffect(() => {
+        let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+        if(super_user){
+            load()
+        }
+    }, []);
 
     const filter_cambio_estado = async(mes)=>{
         await API.get(`api/referidos/dashboard_app/?mes=${mes}`)
@@ -45,13 +52,20 @@ export const DashboardComponent = () => {
         })
     }
 
+    const cargarTotalReferidos = async(mes)=>{
+        await API.get(`api/referidos/get_count_referidos/?mes=${mes}`)
+        .then( resp =>{
+            const total_referidos = resp.data;
+            console.log(total_referidos);
+            setTotal_referidos(total_referidos)
+        } )
+    }
 
     const load = async () => {
         await API.get('api/referidos/')
             .then(response => {
                 // console.log(response.data)
                 console.log(response.data)
-                setMeses(response.data)
                 let agrupacion = _.chain(response.data).groupBy('estadoReferido')
                     .map((value, key) => ({
                         "estado": key,
@@ -84,27 +98,7 @@ export const DashboardComponent = () => {
         }]
       }
 
-    useEffect(() => {
-        let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
-        if(super_user){
-            load()
-        }
-    }, []);
-    /* const meses_anio = {
-    '1': 'Enero',
-    '2': "Febrero",
-    '3': "Marzo",
-    '4': "Abril",
-    '5': "Mayo",
-    '6': "Junio",
-    '7': "Julio",
-    '8': "Agosto",
-    '9': "Septiembre",
-    '10': "Octubre",
-    '11': "Noviembre",
-    '12': "Diciembre",
-  }; */
-
+  
   
   const handleSelectMonth = async(e)=>{
     setData_meses([]);
@@ -112,10 +106,10 @@ export const DashboardComponent = () => {
     setTiposFormulario([]);
     setCantidades([]);
     const mes = e.target.value;
+    cargarTotalReferidos(mes)
     API.get(`api/referidos/get_referidos_month/?mes=${mes}`)
     .then( response => {
         console.log(response.data);
-        setMeses(response.data)
         let agrupacion = _.chain(response.data).groupBy('estadoReferido')
             .map((value, key) => ({
                 "estado": key,
@@ -135,6 +129,7 @@ export const DashboardComponent = () => {
         ))
     } )
   }
+
     return (
         <>
             <HeaderComponent dashboard />
@@ -179,6 +174,7 @@ export const DashboardComponent = () => {
                        </FormControl>  */}  
 
                     </div>
+                    <p style={{marginTop:'10px', marginBottom: '-10px'}}>Total referidos: <b>{total_referidos.Total_referidos}</b></p>
                     {
                         data_meses.length == 0 && 
                         (
