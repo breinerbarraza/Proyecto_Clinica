@@ -169,8 +169,9 @@ export const CrearUsuarioComponent = () => {
                                     />
                                 </div>
                             </div>
-                            
-                           <Select style={{marginTop:'20px'}}
+                            <FormControl fullWidth style={{marginTop:'20px'}} >
+                            <InputLabel shrink id="demo-simple-select-standard-label">Tipo Identificacion</InputLabel>
+                           <Select 
                                 name="tipoIdentificacion"
                                 required
                                 labelId="demo-simple-select-standard-label"
@@ -184,7 +185,7 @@ export const CrearUsuarioComponent = () => {
                                     })
                                 }
                             </Select>
-                    
+                            </FormControl>
                 
                             <div className="cargo_usuario">
                                 <TextField
@@ -327,20 +328,23 @@ export const CrearUsuarioComponent = () => {
                                     />
                             
                         
-                                    <Select style={{marginTop:'20px'}}
-                                        name="tipoIdentificacion"
-                                        required
-                                        labelId="demo-simple-select-standard-label"
-                                        id="demo-simple-select-standard"
-                                        onChange={handleInput}
-                                        label="Tipo Identificacion"
-                                    >
-                                        {
-                                            identificacion.map(data => {
-                                                return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
-                                            })
-                                        }
-                                    </Select>
+                            <FormControl fullWidth style={{marginTop:'20px'}} >
+                            <InputLabel shrink id="demo-simple-select-standard-label">Tipo Identificacion</InputLabel>
+                           <Select 
+                                name="tipoIdentificacion"
+                                required
+                                labelId="demo-simple-select-standard-label"
+                                id="demo-simple-select-standard"
+                                onChange={handleInput}
+                                label="Tipo Identificacion"
+                            >
+                                {
+                                    identificacion.map(data => {
+                                        return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
+                                    })
+                                }
+                            </Select>
+                            </FormControl>
 
                                     <TextField
                                         type="text"
