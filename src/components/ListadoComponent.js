@@ -19,11 +19,10 @@ export const ListadoComponent = () => {
 
   const [data_listado, setData_listado] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [meses, setMeses] = useState([]);
   const [data_meses, setData_meses] = useState([])
   const [comision, setComision] = useState([])
 
-  console.log(comision)
+  
   const load = async () => {
     setLoading(true)
     await API.get('api/referidos/')
@@ -34,19 +33,7 @@ export const ListadoComponent = () => {
         const totalComision = calcularComisionFinal(arreglo, arreglo_referidos)
         console.log(totalComision)
         setComision(totalComision)
-       /*  console.log(total_comision_final);
-        const push_obj = {
-          "id": "",
-          "get_nombreCompleto": "",
-          "numeroIdentificacion": "" ,
-          "correo_electronico": "",
-          "celular": "",
-          "estadoReferido": "",
-          "comision": total_comision_final
-        }
-        arreglo_referidos.push(push_obj);
-        console.log(arreglo_referidos) */
-        setMeses(arreglo_referidos)
+
         arreglo_referidos.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -77,18 +64,7 @@ export const ListadoComponent = () => {
         let arreglo = [];
         const totalComision = calcularComisionFinal(arreglo, arreglo_referidos)
         console.log(totalComision)
-       /*  const push_obj = {
-          "id": "",
-          "get_nombreCompleto": "",
-          "numeroIdentificacion": "" ,
-          "correo_electronico": "",
-          "celular": "",
-          "estadoReferido": "",
-          "comision": total_comision_final
-        }
-        arreglo_referidos.push(push_obj);
-        console.log(arreglo_referidos) */
-        setMeses(arreglo_referidos)
+      
         arreglo_referidos.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -159,33 +135,7 @@ export const ListadoComponent = () => {
         })
       }
     } )
-
-    return;
-    /* let variable = "";
-    let dia_mes = "";
-    for(let x of arreglo){
-      variable = x
-      dia_mes = new Date(variable).getMonth() + 1
-    }
-    if(meses_anio[dia_mes] == mes_nombre){
-      const dato = meses.filter(item => item)
-      console.log(dato);
-      dato.map((item) => (
-        setData_meses(data_meses => [...data_meses, {
-          "id": item.id,
-          "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
-          "numeroIdentificacion": item.numeroIdentificacion,
-          "correo_electronico": item.correo_electronico,
-          "celular": item.celular,
-          "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />,
-          "comision": item.comision
-        }])
-      ))
-    }else{
-      setData_meses([0])
-    } */
   }
-
 
   const data = {
     columns: [

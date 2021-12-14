@@ -96,6 +96,8 @@ export const ListadoUsuarioComponent = () => {
         }
       )
     }else{
+      setData_meses([]);
+      setData_listado([]);
       await API.get('api/usuarios/user/')
       .then(resp => {
         console.log(resp.data)
