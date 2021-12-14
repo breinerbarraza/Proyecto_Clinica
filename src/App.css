@@ -1575,7 +1575,7 @@ button[type="submit"]{
     float: right;
     margin-top: -90px;
     margin-right: 61px;
-    width: 75%;
+    
     background: white !important;
     box-shadow:  -2px 10px 5px rgb(0 0 0 / 20%);
     border-bottom-left-radius: 15px;
@@ -1584,7 +1584,7 @@ button[type="submit"]{
 .p-comision{
     float: right;
     margin-bottom: 8px;
-    margin-right: 20px !important;
+    margin-right: 8px !important;
 }
 .pagination{
     margin-top: 30px !important;

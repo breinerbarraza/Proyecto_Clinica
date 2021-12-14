@@ -64,7 +64,7 @@ export const CrearUsuarioComponent = () => {
                     icon: 'success',
                     title: 'Exito!',
                     text : mensaje,
-                    timer: 4000
+                    timer: 4200
                 });
             }else{
                 const error = resp.error;
@@ -194,22 +194,6 @@ export const CrearUsuarioComponent = () => {
                                     required
                                     placeholder="Escribe..."
                                     label="Numero de identificacion"
-                                    className="form-control RegistrarReferido"
-                                    style={{ marginBottom: "30px" }}
-                                    onChange={handleInput}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                            </div>
-
-                            <div className="cargo_usuario">
-                                <TextField
-                                    type="text"
-                                    name="cargo"
-                                    required
-                                    placeholder="Escribe..."
-                                    label="Cargo"
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
                                     onChange={handleInput}

@@ -122,6 +122,7 @@ export const ListadoComponent = () => {
       let arreglo = [];
       const totalComision = calcularComisionFinal(arreglo, arreglo_referidos_month)
       console.log(totalComision)
+      setComision(totalComision)
       if(arreglo_referidos_month.length == 0){
         setData_meses([0]);
       }else{
@@ -217,7 +218,7 @@ export const ListadoComponent = () => {
           </div>
         </div>
         <div className='div-comision'>
-          <p className='p-comision'><b>Total de comisión: </b>{comision}</p>
+          <p className='p-comision'><b>Total de comisión: </b><b style={{color:'#000', fontWeight:'bold'}}>${formatMoney(comision, 2, ',', '.')}</b></p>
         </div>
       </div>
       {/*Listado responsivo*/}

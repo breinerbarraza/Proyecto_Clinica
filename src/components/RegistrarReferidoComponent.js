@@ -115,7 +115,7 @@ export const RegistrarReferidoComponent = () => {
                              label="Tipo de Identificacion"
                              required
                              id="demo-simple-select-standard"
-                             className="select-indentificacion-cmb"
+                             className=""
                              style={{ marginBottom: "-4px" }}
                              onChange={handleInput}
                          >
@@ -195,6 +195,8 @@ export const RegistrarReferidoComponent = () => {
                  </div>
              </form>
          </div>
+
+         {/* Diseño pc */}
          <div className="page-registrarefe">
              <div className="registrarefe-container">
                  <div className="formulario-registrarefe">
