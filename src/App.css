@@ -1592,3 +1592,9 @@ button[type="submit"]{
 .dataTables_info{
     margin-top: 30px !important;
 }
+/* Dashboard */
+.p-total{
+    float: right;
+    margin-top: -230px !important;
+    margin-inline: 360px !important;
+}

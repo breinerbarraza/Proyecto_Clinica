@@ -174,7 +174,7 @@ export const DashboardComponent = () => {
                        </FormControl>  */}  
 
                     </div>
-                    <p style={{marginTop:'10px', marginBottom: '-10px'}}>Total referidos: <b>{total_referidos.Total_referidos}</b></p>
+                    
                     {
                         data_meses.length == 0 && 
                         (
@@ -202,9 +202,10 @@ export const DashboardComponent = () => {
                                     <Doughnut classname="gra" data={data} />
                                 </div>
                             </div>
+                            
                         )
                     }
-                    
+                    <p className="p-total" style={{marginTop:'10px', marginBottom: '-10px'}}><b>Total referidos:</b> <b>{total_referidos.Total_referidos}</b></p>
                 </div>
             </div>
 
