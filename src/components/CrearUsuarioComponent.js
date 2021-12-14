@@ -169,7 +169,7 @@ export const CrearUsuarioComponent = () => {
                                     />
                                 </div>
                             </div>
-                           
+                            
                            <Select style={{marginTop:'20px'}}
                                 name="tipoIdentificacion"
                                 required
@@ -233,8 +233,6 @@ export const CrearUsuarioComponent = () => {
                                     }}
                                 />
                             </div>
-
-
 
                         </FormControl>
                         <button type="submit" className="button_usuario">Crear Usario</button>
@@ -327,21 +325,22 @@ export const CrearUsuarioComponent = () => {
                                             shrink: true,
                                         }}
                                     />
-
-                            <Select style={{marginTop:'20px'}}
-                                name="tipoIdentificacion"
-                                required
-                                labelId="demo-simple-select-standard-label"
-                                id="demo-simple-select-standard"
-                                onChange={handleInput}
-                                label="Tipo Identificacion"
-                            >
-                                {
-                                    identificacion.map(data => {
-                                        return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
-                                    })
-                                }
-                            </Select>
+                            
+                        
+                                    <Select style={{marginTop:'20px'}}
+                                        name="tipoIdentificacion"
+                                        required
+                                        labelId="demo-simple-select-standard-label"
+                                        id="demo-simple-select-standard"
+                                        onChange={handleInput}
+                                        label="Tipo Identificacion"
+                                    >
+                                        {
+                                            identificacion.map(data => {
+                                                return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
+                                            })
+                                        }
+                                    </Select>
 
                                     <TextField
                                         type="text"

@@ -39,13 +39,12 @@ export const DashboardComponent = () => {
     const cargarUsuarios = async()=>{
         await API.get("api/usuarios/user/grupo_empleado/")
         .then(response => {
-            const data = response.data;
-            console.log(data);
-            setUsuarios_employe(response)
+            const empleados = response.data;
+            console.log(empleados);
+            setUsuarios_employe(empleados)
         })
     }
 
-    cargarUsuarios();
 
     const load = async () => {
         await API.get('api/referidos/')
@@ -73,7 +72,7 @@ export const DashboardComponent = () => {
             }).catch(console.error)
 
         
-        
+    
     }
     const data = {
         labels: tiposFormulario,
@@ -86,7 +85,6 @@ export const DashboardComponent = () => {
       }
 
     useEffect(() => {
-        cargarUsuarios()
         let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
         if(super_user){
             load()
@@ -110,26 +108,11 @@ export const DashboardComponent = () => {
   
   const handleSelectMonth = async(e)=>{
     setData_meses([]);
-    let arreglo_vacio = [0,1] //
-    const mes_nombre = e.target.value
-    const obj_nombre = meses.map(item => {
-      return item.sys_fechaCreacion
-    })
-    let variable = "";
-    let dia_mes = "";
-    for(let x of obj_nombre){
-      variable = x
-      dia_mes = new Date(variable).getMonth() + 1
-    }
-    if(meses_anio[dia_mes] == mes_nombre){
-        console.log("Entro aqui")
-        console.log(dia_mes);
-        await filter_cambio_estado(dia_mes);
-        await load();
-    }else{
-      setData_meses(arreglo_vacio)
-      console.log("No hay nada")
-    }
+    const mes = e.target.value;
+    API.get(`api/referidos/get_referidos_month/?mes=${mes}`)
+    .then( resp => {
+        const respuesta = resp.data;
+    } )
   }
     return (
         <>
@@ -152,12 +135,12 @@ export const DashboardComponent = () => {
                             >
                                 {
                                     meses_map.map((item, key)=> {
-                                        return <MenuItem key={key} value={item.mes}>{item.mes}</MenuItem>
+                                        return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
                                     })
                                 }
                             </Select>
                         </FormControl>
-                        <FormControl fullWidth style={{marginBottom:'15px'}}>
+                     {/*    <FormControl fullWidth style={{marginBottom:'15px'}}>
                         <InputLabel shrink id="demo-simple-select-standard-label">Empleados</InputLabel>
                             <Select
                                 name="usuarios"
@@ -168,11 +151,11 @@ export const DashboardComponent = () => {
                             >
                                 {
                                     usuarios_.map((item, key)=> {
-                                        return <MenuItem key={key} value={item.id}>{item.nombre_completo}</MenuItem>
+                                        return <MenuItem key={key} value={item.id}>{item.first_name} {item.last_name}</MenuItem>
                                     })
                                 }
                             </Select>
-                       </FormControl>   
+                       </FormControl>  */}  
 
                     </div>
                     {
