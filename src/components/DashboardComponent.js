@@ -108,10 +108,31 @@ export const DashboardComponent = () => {
   
   const handleSelectMonth = async(e)=>{
     setData_meses([]);
+    setLabelColors([]);
+    setTiposFormulario([]);
+    setCantidades([]);
     const mes = e.target.value;
     API.get(`api/referidos/get_referidos_month/?mes=${mes}`)
-    .then( resp => {
-        const respuesta = resp.data;
+    .then( response => {
+        console.log(response.data);
+        setMeses(response.data)
+        let agrupacion = _.chain(response.data).groupBy('estadoReferido')
+            .map((value, key) => ({
+                "estado": key,
+                "valor": value.length,
+                "color": 'rgba(' + (Math.floor(Math.random() * 256)) + ','
+                    + (Math.floor(Math.random() * 256)) + ','
+                    + (Math.floor(Math.random() * 255)) + ', 0.8)'
+            }))
+        let agrupacionArray = _.toArray(agrupacion)
+        console.log("Datos de la agrupacion: ", agrupacionArray)
+        setPieChartData(agrupacionArray)
+        agrupacionArray.map((el) => (
+            setLabelColors(labelColors => [...labelColors, el.color]),
+            setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
+            setCantidades(cantidades => [...cantidades, el.valor]),
+            console.log("Estados",  el)
+        ))
     } )
   }
     return (
