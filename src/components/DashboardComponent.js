@@ -169,7 +169,7 @@ export const DashboardComponent = () => {
                         (
                             <div className="dashboard-flexbox">
                                 <div className="table-dashboard">
-                                    <table className="table table-hover ">
+                                    <table className="table table-hover">
                                         <thead>
                                             <tr>
                                                 <th>Tipo</th>
