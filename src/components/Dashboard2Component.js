@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { HeaderComponent } from "./HeaderComponent";
 import { PerfilComponent } from "./perfil/PerfilComponent";
 import { Line } from 'react-chartjs-2';
+import meses_map from '../Utils/Objmeses';
+import API from '../Utils/API';
 
 export const Dashboard2Component = () => {    
 
@@ -28,6 +30,17 @@ export const Dashboard2Component = () => {
             tension: 0.5
         }]
     };
+
+    const handleMetasChange = (e)=>{
+        const mes = e.target.value;
+        console.log(mes);
+        API.get(`api/usuarios/metas/get_metas_month/?mes=${mes}`)
+        .then( resp => {
+            const methas_mes = resp.data;
+            console.log(methas_mes);
+        } )
+    }
+
     return (
         <>
             <HeaderComponent dashboard />
@@ -46,11 +59,13 @@ export const Dashboard2Component = () => {
                                 label="Mes"
                                 id="demo-simple-select-standard"
                                 style={{ marginBottom: "-4px" }}
-                                onChange={""}
+                                onChange={handleMetasChange}
                             >
-                                <MenuItem >01</MenuItem>
-                                <MenuItem >02</MenuItem>
-                                <MenuItem >03</MenuItem>
+                                {
+                                    meses_map.map((item, key)=> {
+                                        return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
+                                    })
+                                }
                             </Select>
                         </FormControl>
                     </div>
