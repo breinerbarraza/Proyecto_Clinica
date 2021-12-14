@@ -74,13 +74,14 @@ export const ListadoReferidoComponent = () => {
   const showTable = () => {
     return (
       <MDBDataTable
+        hover
         striped
+        small
         paginationLabel={["<", ">"]}
         infoLabel={["Mostrando", "a", "de", "entradas"]}
         className="tabla-pacientes"
         bordered
         entrieslabel={[]}
-        small
         data={data}
       />
     )

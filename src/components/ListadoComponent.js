@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { HeaderComponent } from './HeaderComponent'
-import { MDBDataTable } from 'mdbreact'
+import { MDBDataTable  } from 'mdbreact'
 import { PerfilComponent } from './perfil/PerfilComponent';
 import API from '../Utils/API';
 import { Link } from 'react-router-dom'
@@ -13,9 +13,11 @@ import meses_map from '../Utils/Objmeses';
 import { ButtonReferir_change_class, ButtonListar_change_class } from './FuncionesComponent';
 import { formatMoney, calcularComisionFinal } from '../Utils/LogicaFunciones';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
+import './listaUsuario.css';
 
 
 export const ListadoComponent = () => {
+  
 
   const [data_listado, setData_listado] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -108,7 +110,8 @@ export const ListadoComponent = () => {
   const showTable = () => {
     return (
       //Mostrando 1 a 10 de 12 entradas
-      <MDBDataTable
+      <MDBDataTable 
+        hover 
         striped
         paginationLabel={["<", ">"]}
         infoLabel={["Mostrando", "a", "de", "entradas"]}
@@ -226,12 +229,10 @@ export const ListadoComponent = () => {
         sort: 'asc',
         width: 100
       },
-      {
-        field: 'total',
-      }
     ],
     rows: (data_listado && data_meses.length == 0) ? data_listado : data_meses
   };
+  
 
   return (
     <>
@@ -256,20 +257,19 @@ export const ListadoComponent = () => {
                       meses_map.map( (item, key) => {
                         return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
                       })
-
                     }
                   </Select>
                 </FormControl>
               </div>
-
             </div>
           <div className="tabla-lista">
             {!loading && showTable()}
           </div>
         </div>
+        <div className='div-comision'>
+          <p className='p-comision'><b>Total de comisión: </b>{comision}</p>
+        </div>
       </div>
-
-
       {/*Listado responsivo*/}
       <div className="listado_referido_responsive">
           <div className="listado_referido_responsive_container">
@@ -288,7 +288,7 @@ export const ListadoComponent = () => {
                 </div>
           </div>
       </div>
-    
+      
     </>
     
   );

@@ -45,6 +45,7 @@ export const ListadoUsuarioComponent = () => {
   const showTable = () => {
     return (
       <MDBDataTable
+        hover
         striped
         small
         paginationLabel={["<", ">"]}

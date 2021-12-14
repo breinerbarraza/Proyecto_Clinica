@@ -1,0 +1,9 @@
+
+
+.dataTable tbody > tr:last-child > td:last-child, #result_list tbody > tr:last-child > th:last-child {
+    border-bottom-right-radius: 0px !important;
+    border-radius: none !important;
+}
+.dataTable tbody > tr:last-child > td:first-child, #result_list tbody > tr:last-child > th:first-child {
+    border-bottom-left-radius:0px !important;
+}

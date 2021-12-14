@@ -7,7 +7,7 @@ function ButtonReferir() {
     return (
         <button className="btn_referir_img">
             <Link to="/referir">
-                <img alt="clinica" className="imgActiva" src={user_add_blue} />
+                <img alt="clinica" className="imgActiva" src={user_add_blue}  style={{display:"table-column"}}/>
             </Link>
         </button>
     )
