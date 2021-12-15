@@ -9,6 +9,8 @@ import { PerfilComponent } from "./perfil/PerfilComponent";
 import { Doughnut } from 'react-chartjs-2';
 import API from "../Utils/API";
 import meses_map from '../Utils/Objmeses';
+import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
+import { HeaderMovil } from './HeaderMovil';
 
 var _ = require('lodash')
 
@@ -132,6 +134,7 @@ export const DashboardComponent = () => {
 
     return (
         <>
+        <div className="dash">
             <HeaderComponent dashboard />
             <PerfilComponent />
             <div >
@@ -202,13 +205,19 @@ export const DashboardComponent = () => {
                                     <Doughnut classname="gra" data={data} />
                                 </div>
                             </div>
-                            
                         )
                     }
                     <p className="p-total" style={{marginTop:'10px', marginBottom: '-10px'}}><b>Total referidos:</b> <b>{total_referidos.Total_referidos}</b></p>
                 </div>
             </div>
-
+            </div>
+            <div className='quitar'>
+                <div style={{ padding: "50px", marginLeft: "200px" }}>
+                    <i><PerfilComponentSinNombre /></i>
+                </div>
+                {/* FOOTER */}
+                <HeaderMovil users={true} dashboard={false} />
+            </div>
         </>
     );
 };

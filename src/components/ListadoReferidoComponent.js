@@ -10,6 +10,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Link } from 'react-router-dom'
 import meses_map from '../Utils/Objmeses';
+import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
+import { HeaderMovil } from './HeaderMovil';
 export const ListadoReferidoComponent = () => {
 
   const [data_listado, setData_listado] = useState([])
@@ -197,6 +199,7 @@ export const ListadoReferidoComponent = () => {
   };
 
   return (
+    <>
     <div className="listaRefe">
       <PerfilComponent />
       <HeaderComponent users={false} dashboard={true} />
@@ -250,6 +253,14 @@ export const ListadoReferidoComponent = () => {
         </div>
       </div>
     </div>
+    <div className='quitar'>
+    <div style={{padding:"50px", marginLeft:"200px"}}>
+      <i><PerfilComponentSinNombre /></i>
+    </div>
+    {/* FOOTER */}
+    <HeaderMovil users={true} dashboard={false} />
+  </div>
+  </>
 
   );
 }

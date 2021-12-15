@@ -23,6 +23,7 @@ import { Dashboard2Component } from './components/Dashboard2Component';
 import { ReferidoMedia } from './components/componentMediaQuery/ReferidoMedia';
 import { RegistrarReferidoMedia } from './components/componentMediaQuery/RegistrarReferidoMedia';
 import './App.css'
+import { HeaderMovil } from './components/HeaderMovil';
 
 function App() {
   return (
@@ -137,6 +138,14 @@ function App() {
               <Route exact path="/listado_usuario">
                 {localStorage.getItem('token') !== null ?(
                   <ListadoUsuarioComponent/>
+                ) : (
+                  <LoginComponent/>
+                )}
+              </Route>
+
+              <Route exact path="/headermedia">
+                {localStorage.getItem('token') !== null ?(
+                  <HeaderMovil/>
                 ) : (
                   <LoginComponent/>
                 )}

@@ -8,8 +8,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import API from '../Utils/API';
 import Swal from 'sweetalert2';
-import {ButtonReferir_change_class ,ButtonListar_change_class } from './FuncionesComponent';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
+import { HeaderMovil } from './HeaderMovil';
 
 
 export const ReferirComponent = () => {
@@ -206,9 +206,9 @@ export const ReferirComponent = () => {
             <div className="container-responsive-referir">
                 <div className="div_perfil">
                     <div>
-                        <b>Referir Paciente</b>
+                        <b style={{padding:"10px"}}>Referir Paciente</b>
                     </div>
-                    <div>
+                    <div >
                         <i><PerfilComponentSinNombre/></i>
                     </div>
                 </div>
@@ -323,12 +323,7 @@ export const ReferirComponent = () => {
                     </form>                                            
                 </div>
                 {/* FOOTER */}
-                <div className="footer-paciente">
-                    <div className="footer-header-navbar">
-                        <ButtonReferir_change_class />
-                        <ButtonListar_change_class />
-                    </div>
-                </div>
+                <HeaderMovil users={true} dashboard={false}/>
             </div>    
         </>
     )
