@@ -2,6 +2,7 @@
 body{
     background-image: url("./image/Recursos-Femto2/Background.png");
     background-size: 99% 100%;
+    height: 100%
 }
 
 p{
@@ -1467,6 +1468,7 @@ button[type="submit"]{
 
     .container-responsive-referir{
         display: block;
+        min-height:100%;
     }
     .div_perfil{
         width: 100%;
