@@ -6,6 +6,7 @@ import Select from '@mui/material/Select';
 import { Link } from "react-router-dom";
 import { HeaderComponent } from "./HeaderComponent";
 import { PerfilComponent } from "./perfil/PerfilComponent";
+import 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
 import API from "../Utils/API";
 import meses_map from '../Utils/Objmeses';
@@ -29,12 +30,7 @@ export const DashboardComponent = () => {
 
     */
 
-      useEffect(() => {
-        let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
-        if(super_user){
-            load()
-        }
-    }, []);
+      
 
     const filter_cambio_estado = async(mes)=>{
         await API.get(`api/referidos/dashboard_app/?mes=${mes}`)
@@ -131,6 +127,16 @@ export const DashboardComponent = () => {
         ))
     } )
   }
+
+
+  useEffect(() => {
+    let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+    if(!super_user){
+        return window.location = "/";
+    }
+    load()
+    
+}, []);
 
     return (
         <>

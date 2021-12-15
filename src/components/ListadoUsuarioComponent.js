@@ -56,6 +56,7 @@ export const ListadoUsuarioComponent = () => {
         bordered
         entrieslabel={[]}
         data={data}
+        noRecordsFoundLabel='No se han encontrado registros'
       />
     )
   }
