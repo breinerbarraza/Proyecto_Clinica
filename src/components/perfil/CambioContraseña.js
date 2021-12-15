@@ -71,7 +71,6 @@ export const CambioContraseña = () => {
     }
 
     return (
-        <div>
             <>
             <div className="datos">
                 <div className="datos-personales">
@@ -134,7 +133,68 @@ export const CambioContraseña = () => {
                     </form>
                 </div>
             </div>
+            {/* Media query */}
+            <div className="datosMediaC">
+                <div className="datos-personales" >
+                <div className="salir">
+                        <Link to="datos_perfil">
+                             <button className="btn btn-primary-outline inicio"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i><i className="far fa-address-card"></i> Datos personales</button>
+                        </Link>
+                    <h4 className="h4-datos" style={{marginBottom:"10px", marginTop:"80px"}}>Cambiar contraseña</h4></div>
+                    <form onSubmit={handleChangePassword} >
+                    <FormControl fullWidth >
+                        <TextField
+                            type="password"
+                            name="old_password"
+                            placeholder="Escribe..."
+                            label="Contraseña antigua"
+                            className="form-control"
+                            onChange={handleInputChange}
+                            required
+                            style={{ marginBottom: "30px" }}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                       
+                        <TextField
+                            type="password"
+                            name="password"
+                            placeholder="Escribe..."
+                            label="Nueva contraseña"
+                            className="form-control"
+                            onChange={handleInputChange}
+                            required
+                            style={{ marginBottom: "30px" }}
+                            InputLabelProps={{  
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
+                            type="password"
+                            name="password2"
+                            placeholder="Escribe..."
+                            label="Confirmar contraseña"
+                            className="form-control"
+                            onChange={handleInputChange}
+                            required
+                            style={{ marginBottom: "30px" }}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                         {
+                            data_msg && (
+                                <p style={{marginTop:"5px", backgroundColor:"rgba(255,0,0,0.7)", color:"#fff", paddingLeft:"10px"}}>{msg_Error}</p>
+                            )
+                        }
+                    </FormControl>
+                        <div className="actualizar-cambiarc">
+                            <button className="btn btn-primary actualizar2" type="submit"><i className="far fa-edit" style={{ marginRight: "10px" }}></i>Actualizar contraseña</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </>
-        </div>
     )
 }

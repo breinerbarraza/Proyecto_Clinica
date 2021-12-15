@@ -35,7 +35,7 @@ export const PerfilComponentSinNombre = () => {
         <div className="container-perfil">
             <div className="btn-group">
             <button type="button" className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    -
+                    
                 </button>
                 <img alt="clinica" src={ClinicaBlanco} width="50" height="50"/>
                 <ul className="dropdown-menu dropdown-menu-end">

@@ -206,6 +206,100 @@ export const DatosPerfilComonent = () => {
                     </form>
                 </div>
             </div>
+
+            {/* Perfir Media query */}
+
+            <div className="datosMedia">
+                <div className="datos-personales">
+                    <div className="salir">
+                        <Link to="/">
+                            <button className="btn btn-primary-outline inicio"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i><i className="fas fa-home"></i> Inicio</button>
+                        </Link>
+                    </div>
+                    <div style={{textAlign:"center"}}>
+                    {
+                        !estado_img && (
+                            <div className="div-imagen">
+                                <img src={defecto_perfil} alt="perfil.png" width="100px" />
+                            </div>
+                        )
+                    }
+
+                    {
+                        estado_img && (
+                            <div className="div-imagne">
+                                <img src={img.imagen} alt={img.imagen} width="100px" title={img.imagen}/> 
+                                <form onSubmit={handleSubmit_img} encType="multipart/form-data" id="form-imagen">
+                                    <input id="imagen" type="file" name="imagen"/>
+                                   <button className="fas fa-save" style={{width:'60px' }} type="submit"><i ></i></button>
+                                </form>    
+                            </div>
+                        )
+                    }
+                    </div>
+                    <h4 className="h4-datos">Datos personales</h4>   
+                   
+
+                    <form onSubmit={handleSubmit}>
+                        <FormControl fullWidth >
+                            <TextField
+                                type="text"
+                                id="first_name"
+                                name="first_name"
+                                placeholder="Escribe..."
+                                label="Nombre"
+                                className="form-control"
+                                style={{ marginBottom: "30px" }}
+                                value={estadoStorage.first_name}
+                                onChange={handleInputChange}
+                                required
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            <TextField
+                                type="text"
+                                id="last_name"
+                                name="last_name"
+                                placeholder="Escribe..."
+                                label="Apellidos"
+                                className="form-control"
+                                style={{ marginBottom: "30px" }}
+                                value={estadoStorage.last_name}
+                                onChange={handleInputChange}
+                                required
+
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            <TextField
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Escribe..."
+                                label="Usuario"
+                                className="form-control"
+                                style={{ marginBottom: "30px" }}
+                                value={estadoStorage.username}
+                                onChange={handleInputChange}
+                                required
+
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                        </FormControl>
+
+                        <div className="actualizar-cambiar">
+                            <button className="btn btn-primary actualizar"><i className="far fa-edit" style={{ marginRight: "10px" }}></i>Actualizar </button>
+                            <Link to="/cambio_contraseña">
+                                <button className="btn btn-primary cambiar"><i className="fas fa-key" style={{ marginRight: "10px" }}></i>Cambiar </button>
+                            </Link>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </>
     )
 }

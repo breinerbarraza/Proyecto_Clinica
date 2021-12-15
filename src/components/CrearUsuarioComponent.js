@@ -9,7 +9,7 @@ import API from '../Utils/API';
 import { HeaderComponent } from './HeaderComponent'
 import Swal from 'sweetalert2';
 import { Loading } from './Loading';
-import { ButtonListar_change_class, ButtonReferir_change_class } from './FuncionesComponent';
+import { HeaderMovil } from './HeaderMovil';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 
 
@@ -365,8 +365,7 @@ export const CrearUsuarioComponent = () => {
                  {/* FOOTER */}
                  <div className="footer-paciente">
                     <div className="footer-header-navbar">
-                        <ButtonReferir_change_class />
-                        <ButtonListar_change_class />
+                    <HeaderMovil users={true} dashboard={false} />
                     </div>
                 </div>
 

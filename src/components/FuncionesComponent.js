@@ -15,7 +15,7 @@ function ButtonReferir() {
 
 function ButtonListar() {
     return (
-        <button className="btn_referir_img">
+        <button className="btn_referir_img_">
             <Link to="/listado">
                 <img alt="listar" className="imgActiva" src={chart_line_up_white} />
             </Link>
@@ -26,9 +26,9 @@ function ButtonListar() {
 /* Funcion sin clases por el momento */
 function ButtonReferir_change_class() {
     return (
-        <button className="btn_referir_img">
+        <button className="btn_referir_imgm_">
             <Link to="/referir">
-                <img alt="clinica" className="" src={user_add_blue} />
+                <img alt="clinica" className="imgActiva_" src={user_add_blue} />
             </Link>
         </button>
     )
@@ -36,9 +36,9 @@ function ButtonReferir_change_class() {
 
 function ButtonListar_change_class() {
     return (
-        <button className="btn_referir_img">
+        <button className="btn_referir_imgm_">
             <Link to="/listado">
-                <img alt="listar" className="" src={chart_line_up_white} />
+                <img alt="listar" className="imgActiva_" src={chart_line_up_white} />
             </Link>
         </button>
     )

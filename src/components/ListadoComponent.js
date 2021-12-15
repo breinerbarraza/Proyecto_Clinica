@@ -10,10 +10,10 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import meses_map from '../Utils/Objmeses';
-import { ButtonReferir_change_class, ButtonListar_change_class } from './FuncionesComponent';
 import { formatMoney, calcularComisionFinal } from '../Utils/LogicaFunciones';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import './listaUsuario.css';
+import { HeaderMovil } from './HeaderMovil';
 
 
 export const ListadoComponent = () => {
@@ -93,6 +93,7 @@ export const ListadoComponent = () => {
         className="tabla-pacientes"
         bordered
         small
+        noRecordsFoundLabel='No se han encontrado registros'
         data={data}
         noRecordsFoundLabel='No se han encontrado registros'
       />
@@ -214,7 +215,7 @@ export const ListadoComponent = () => {
     rows: (data_listado && data_meses.length == 0) ? data_listado : data_meses
   };
   
-
+ 
   return (
     <>
       <div className="listaRefe">
@@ -293,12 +294,7 @@ export const ListadoComponent = () => {
           </div>
 
           {/* FOOTER */}
-          <div className="footer-paciente_">
-                <div className="footer-header-navbar_">
-                    <ButtonReferir_change_class />
-                    <ButtonListar_change_class />
-                </div>
-          </div>
+         <HeaderMovil  users={false} dashboard={true}/>
       </div>
       
     </>
