@@ -284,6 +284,8 @@ export const ListadoComponent = () => {
         </div>
       </div>
       {/*Listado responsivo*/}
+      <div>
+        
       <div className="listado_referido_responsive">
           <div className="listado_referido_responsive_container">
               <div className="div_perfil_container">
@@ -296,7 +298,7 @@ export const ListadoComponent = () => {
           {/* FOOTER */}
          <HeaderMovil  users={false} dashboard={true}/>
       </div>
-      
+      </div>
     </>
     
   );

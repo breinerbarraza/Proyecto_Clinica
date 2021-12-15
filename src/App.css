@@ -1601,7 +1601,7 @@ button[type="submit"]{
         width: 100%;
         margin-top: 87px;
         background-color: #02305b;
-        position: absolute;
+        position: fixed;
         bottom: 0;
         align-self: flex-end;
     }
