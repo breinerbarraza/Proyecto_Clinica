@@ -203,7 +203,7 @@ export const ReferirComponent = () => {
                         </form>
                 </div>
             </div>
-            {/* Contenido responsive */}
+            {/* Contenido responsive rjhgkjfldsjflsd */}
             <div className="container-responsive-referir">
                 <div className="div_perfil">
                     <div>
