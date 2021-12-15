@@ -19,13 +19,15 @@ export const RegistrarReferidoComponent = () => {
     const [estadoForm, setEstadoForm] = useState(false);
     const {id} = useParams();
 
-    useEffect(() => {
-        API.get('api/configuracion/tipoIdentificacion')
+    const tipoIdentificacion = async()=>{
+       await API.get('api/configuracion/tipoIdentificacion')
             .then(({ data }) => {
                 const item = data;
                 setIdentificacion(item)
             })
-        console.log(id);
+    }
+    useEffect(() => {
+        tipoIdentificacion()
     }, []);
 
     const handleChangeState = ()=>{
@@ -40,10 +42,11 @@ export const RegistrarReferidoComponent = () => {
             id_user: id
         })
     }
-    const enviarDatos = (e) => {
+    const enviarDatos = async(e) => {
         e.preventDefault();
         console.log(state_referido)
-        API.post('api/referidos/register-referidos/', JSON.stringify(state_referido))
+        
+        await API.post('api/referidos/register-referidos/', JSON.stringify(state_referido))
             .then(item => {
                 const resp = item.data;
                 document.getElementById("login-form").reset();
@@ -64,6 +67,8 @@ export const RegistrarReferidoComponent = () => {
                 }
             })
     }
+
+    console.log(identificacion)
     return (
         <>
         {
@@ -108,6 +113,7 @@ export const RegistrarReferidoComponent = () => {
                      />
                </div>
                <div className="div-separador-identificacion">
+                  
                  <FormControl fullWidth  >
                          <InputLabel shrink id="demo-simple-select-standard-label">Tipo de identificacion</InputLabel>
                          <Select
@@ -118,6 +124,11 @@ export const RegistrarReferidoComponent = () => {
                              className=""
                              style={{ marginBottom: "-4px" }}
                              onChange={handleInput}
+                             options={
+                                identificacion.map(data => {
+                                    return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
+                                })
+                             }
                          >
                              {
                                  identificacion.map(data => {
@@ -324,3 +335,4 @@ export const RegistrarReferidoComponent = () => {
     </>
     )
 }
+

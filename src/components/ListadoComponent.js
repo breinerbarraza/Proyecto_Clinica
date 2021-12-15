@@ -21,10 +21,12 @@ export const ListadoComponent = () => {
 
   const [data_listado, setData_listado] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [data_meses, setData_meses] = useState([])
-  const [comision, setComision] = useState([])
+  const [data_meses, setData_meses] = useState([]);
+  const [comision, setComision] = useState([]);
+  const [mes_temporal, setMes_temporal] = useState("");
+  const [state_superUser, setState_superUser] = useState(false);
+  const [id_localStorage, setid_localStorage] = useState("")
 
-  
   const load = async () => {
     setLoading(true)
     await API.get('api/referidos/')
@@ -58,15 +60,12 @@ export const ListadoComponent = () => {
     const obj = {
       id: id_user
     }
-    console.log(obj)
     await API.post('api/referidos/get_referidos/', JSON.stringify(obj))
       .then(resp => {
         const arreglo_referidos = resp.data;
-        console.log(arreglo_referidos);
         let arreglo = [];
         const totalComision = calcularComisionFinal(arreglo, arreglo_referidos)
-        console.log(totalComision)
-      
+        setComision(totalComision)
         arreglo_referidos.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -75,9 +74,9 @@ export const ListadoComponent = () => {
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
             "estadoReferido": (item.estadoReferido !== "") ? <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} /> : <b style={{color:'#02305b'}}>Total comisiones: </b>,
-            "comision": (item.comision !== "") ? "$" +  formatMoney(item.comision, 2, ',', '.') : "-"
-          }]),
-          console.log(data_listado)
+            "comision": (item.comision !== "") ? "$" +  formatMoney(item.comision, 2, ',', '.') : "-",
+            "total": totalComision
+          }])
         ))
       })
     setLoading(false)
@@ -95,6 +94,7 @@ export const ListadoComponent = () => {
         bordered
         small
         data={data}
+        noRecordsFoundLabel='No se han encontrado registros'
       />
     )
   }
@@ -102,6 +102,8 @@ export const ListadoComponent = () => {
   useEffect(() => {
     let id_user = JSON.parse(localStorage.getItem('id_user'));
     let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+    setState_superUser(super_user)
+    setid_localStorage(id_user)
     if(super_user){
       load()
     }else{
@@ -112,10 +114,39 @@ export const ListadoComponent = () => {
   
 
   
-  const handleSelectMonth = (e)=>{
+  const handleSelectMonth_admin = (e)=>{
     setData_meses([]);
     const mes = e.target.value
     API.get(`api/referidos/get_referidos_month/?mes=${mes}`)
+    .then( data => {
+      const arreglo_referidos_month = data.data;
+      let arreglo = [];
+      const totalComision = calcularComisionFinal(arreglo, arreglo_referidos_month)
+      console.log(totalComision)
+      setComision(totalComision)
+      if(arreglo_referidos_month.length == 0){
+        setData_meses([0]);
+      }else{
+        arreglo_referidos_month.map((item)=>{
+          setData_meses(data_meses => [...data_meses, {
+            "id": item.id,
+            "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+            "numeroIdentificacion": item.numeroIdentificacion,
+            "correo_electronico": item.correo_electronico,
+            "celular": item.celular,
+            "estadoReferido": (item.estadoReferido !== "") ? <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} /> : <b style={{color:'#02305b'}}>Total comisiones: </b>,
+            "comision": (item.comision !== "") ? "$" +  formatMoney(item.comision, 2, ',', '.') : "-"
+          }]);
+        })
+      }
+    } )
+  }
+
+  const handleSelectMonth_rol = async(e)=>{
+    setData_meses([]);
+    const mes = e.target.value;
+    setMes_temporal(mes)
+    await API.get(`api/referidos/get_referidos_by_month_rol/?mes=${mes}&id_usuario_logeado=${id_localStorage}`)
     .then( data => {
       const arreglo_referidos_month = data.data;
       console.log(arreglo_referidos_month);
@@ -133,8 +164,7 @@ export const ListadoComponent = () => {
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
-            "estadoReferido": (item.estadoReferido !== "") ? <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} /> : <b style={{color:'#02305b'}}>Total comisiones: </b>,
-            "comision": (item.comision !== "") ? "$" +  formatMoney(item.comision, 2, ',', '.') : "-"
+            "estadoReferido": (item.estadoReferido !== "") ? <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} /> : "",
           }]);
         })
       }
@@ -193,26 +223,57 @@ export const ListadoComponent = () => {
 
         <div className="lista-container">
           <h3 className="h3-Lista">Listado de referidos</h3>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: 20}}>
-              <div className="select-mes">
+          {
+            state_superUser && (
+              <div style={{ display: 'flex', flexDirection: 'row', gap: 20}}>
+                <div className="select-mes">
 
-                <FormControl fullWidth  >
-                  <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
-                  <Select
-                    name="mes"
-                    label="Mes"
-                    id="demo-simple-select-standard"
-                    onChange={handleSelectMonth}
-                  >
-                    {
-                      meses_map.map( (item, key) => {
-                        return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
-                      })
-                    }
-                  </Select>
-                </FormControl>
-              </div>
+                  <FormControl fullWidth  >
+                    <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+                    <Select
+                      name="mes"
+                      label="Mes"
+                      id="demo-simple-select-standard"
+                      onChange={handleSelectMonth_admin}
+                    >
+                      {
+                        meses_map.map( (item, key) => {
+                          return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
+                        })
+                      }
+                    </Select>
+                  </FormControl>
+                </div>
             </div>
+            )
+          } 
+
+          {/* Si no es superuser y es por tipo de rol */}
+          {
+            !state_superUser &&(
+              <div style={{ display: 'flex', flexDirection: 'row', gap: 20}}>
+                <div className="select-mes">
+
+                  <FormControl fullWidth  >
+                    <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+                    <Select
+                      name="mes"
+                      label="Mes"
+                      id="demo-simple-select-standard"
+                      onChange={handleSelectMonth_rol}
+                    >
+                      {
+                        meses_map.map( (item, key) => {
+                          return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
+                        })
+                      }
+                    </Select>
+                  </FormControl>
+                </div>
+            </div>
+            )
+          }          
+
           <div className="tabla-lista">
             {!loading && showTable()}
           </div>
