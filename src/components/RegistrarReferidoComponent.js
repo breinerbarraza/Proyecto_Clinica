@@ -39,13 +39,12 @@ export const RegistrarReferidoComponent = () => {
         setState_referido({
             ...state_referido,
             [e.target.name]: e.target.value,
-            id_user: id
+            id_user: (id) ? id : 0
         })
     }
     const enviarDatos = async(e) => {
         e.preventDefault();
         console.log(state_referido)
-        
         await API.post('api/referidos/register-referidos/', JSON.stringify(state_referido))
             .then(item => {
                 const resp = item.data;
