@@ -51,9 +51,9 @@ export const RegistrarReferidoComponent = () => {
                 document.getElementById("login-form").reset();
                 if (resp.mensaje) {
                     return Swal.fire({
-                        position: 'center',
                         icon: 'success',
-                        title: resp.mensaje,
+                        title: 'Exito!',
+                        text: resp.mensaje,
                         showConfirmButton: false,
                         timer: 1500
                     });
