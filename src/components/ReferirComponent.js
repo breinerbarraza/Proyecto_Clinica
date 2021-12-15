@@ -322,9 +322,9 @@ export const ReferirComponent = () => {
                             />
                         <button className="btn-referir-paciente" type="submit">Referir</button>
                     </form>                                            
-                </div>
+                </div >
                 {/* FOOTER */}
-                <HeaderMovil users={true} dashboard={false}/>
+                <HeaderMovil users={true} dashboard={false} style={{position:"absolute"}}/>
             </div>    
         </>
     )
