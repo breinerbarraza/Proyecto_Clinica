@@ -59,7 +59,7 @@ export const DatosPerfilComonent = () => {
                 const username = document.getElementById('username');
                 if (first_name.value === '' || last_name.value === '' || username.value === '') {
                     return Swal.fire({
-                        position: 'top-end',
+                        position: 'center',
                         icon: 'success',
                         title: 'Favor rellenar los campos',
                         showConfirmButton: false,
@@ -71,7 +71,7 @@ export const DatosPerfilComonent = () => {
                     borrarDatos('nombres', 'apellidos', 'username','password')
                     guardarDatos(resp.first_name, resp.last_name, resp.username, resp.password);
                     return Swal.fire({
-                        position: 'top-end',
+                        position: 'center',
                         icon: 'success',
                         title: 'Usuario actualizado correctamente',
                         showConfirmButton: false,

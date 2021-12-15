@@ -65,7 +65,7 @@ export const ReferirComponent = () => {
                 document.getElementById("login-form").reset();
                 if (resp.mensaje) {
                     return Swal.fire({
-                        position: 'top-end',
+                        position: 'center',
                         icon: 'success',
                         title: resp.mensaje,
                         showConfirmButton: false,
@@ -76,6 +76,7 @@ export const ReferirComponent = () => {
                         icon: 'error',
                         title: 'Oops...',
                         text: resp.error,
+                        position: 'center',
                     })
                 }
         })

@@ -30,12 +30,14 @@ export const ConfirEmailComponent = () => {
                 return Swal.fire({
                     icon: "success",
                     title: "Mensaje!",
+                    position: 'center',
                     text: respuesta.mensaje,
                 });
             } else {
                 return Swal.fire({
                     icon: "error",
                     title: "Oops...",
+                    position: 'center',
                     text: respuesta.error,
                 });
             }

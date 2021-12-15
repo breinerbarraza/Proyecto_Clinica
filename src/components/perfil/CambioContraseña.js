@@ -60,6 +60,7 @@ export const CambioContraseña = () => {
                 const msg_affirmation = respuesta.data;
                 Swal.fire({
                     icon: 'sucess',
+                    position: 'center',
                     title: 'Exitoso!...',
                     text: msg_affirmation,
                   });

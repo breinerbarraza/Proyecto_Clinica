@@ -56,6 +56,7 @@ export const RegistroComponent = () => {
                     icon: 'error',
                     title: 'Ha ocurrido el siguiente error!',
                     text: error_msg,
+                    position: 'center',
                   });
             }else if(resp.error){
                 setState_error(true);
@@ -64,6 +65,7 @@ export const RegistroComponent = () => {
                 const mensaje = resp.mensaje;
                 Swal.fire({
                     icon: 'success',
+                    position: 'center',
                     text: mensaje,
                     timer: 2500
                 });

@@ -36,6 +36,7 @@ export const LoginComponent = () => {
                     icon: 'error',
                     title: 'Oops...',
                     text: error_msg,
+                    position: 'center',
                   })
                 document.querySelector(".login-form").reset();
             }else{

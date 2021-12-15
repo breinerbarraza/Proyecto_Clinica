@@ -64,6 +64,7 @@ export const CrearUsuarioComponent = () => {
                     icon: 'success',
                     title: 'Exito!',
                     text : mensaje,
+                    position: 'center',
                     timer: 4200
                 });
             }else{
@@ -71,6 +72,7 @@ export const CrearUsuarioComponent = () => {
                 return Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
+                    position: 'center',
                     text: error,
                     timer: 3500
                 })
