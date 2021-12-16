@@ -332,6 +332,7 @@ export const DashboardComponent = () => {
                 {/* FOOTER */}
                 <HeaderMovil users={true} dashboard={false} />
             </div>
+        </div>
         </>
-    );
-};
+    )
+}
