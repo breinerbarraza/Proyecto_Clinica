@@ -811,7 +811,7 @@ label {
     }
 
 }
-/*Dashboard2*/
+/*Dashboard2*/quitar
 .grafica2{
     width: 80% !important;
     padding: 20px;
@@ -822,7 +822,7 @@ label {
 ._h3{
     width: 10px;
 }
-/* media query dashboar2 */
+/* media query dashboar2 y listas */
 .quitar{
     display: none;
 }
@@ -832,6 +832,13 @@ label {
 }
 .quitar{
     display: contents;
+}
+.quitar{
+    width: 100% !important;
+}
+.lista-container{
+    width: 100% !important;
+    
 }
 }
 /*Crear Usuario*/
@@ -947,7 +954,8 @@ button[type="submit"]{
 .container-perfil{
     float: right;
     padding: 3vh 9vh 0vh 0vh;
-    margin-top: 10px;  
+    margin-top: 10px; 
+    margin-left: 190px; 
 }
 .dropdown-toggle{
     background: white;
@@ -1475,15 +1483,18 @@ button[type="submit"]{
         flex-direction: row;
         margin-top: 40px;
         
-    }
+    } 
 
-    .container-perfil{
-        float: none;
+    .container-perfil_{
+        /* float: none;
         padding: 0px;
-        margin-top: 0px;  
+        margin-top: 0px;   */
+        /* float: right;
+        margin-top: 10px; 
+        margin-left: 190px;  */
     }
 
-    .container-perfil .btn-group{
+    .container-perfil_ .btn-group{
         margin-top: -10px !important;
     }
 
@@ -1583,19 +1594,23 @@ button[type="submit"]{
     .listado_referido_responsive{
         display: block;
     }
+    .listado_referido_responsive{
+        width: 100% !important;
+    }
+    
 
-    .listado_referido_responsive_container{
+    /* .listado_referido_responsive_container{
         float: right;
         margin-right: 55px;
     }
-
-    .listado_referido_responsive_container .div_perfil_container{
+ */
+   /*  .listado_referido_responsive_container .div_perfil_container{
         width: 100%;
         display: flex;
         flex-direction: row;
         margin-top: 50px;
         margin-right: -22px;
-    }
+    } */
 
     .footer-paciente_{
         width: 100%;
@@ -1657,7 +1672,7 @@ button[type="submit"]{
     border-bottom-color:darkgray ;
 }
 /* Comision */
-.div-comision{
+/* .div-comision{
     float: right;
     margin-top: -90px;
     margin-right: 61px;
@@ -1677,7 +1692,7 @@ button[type="submit"]{
 }
 .dataTables_info{
     margin-top: 30px !important;
-}
+} */
 /* Dashboard */
 .p-total{
     float: right;

@@ -32,7 +32,7 @@ export const PerfilComponentSinNombre = () => {
     }
     
     return (
-        <div className="container-perfil">
+        <div className="container-perfil_">
             <div className="btn-group">
             <button type="button" className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     

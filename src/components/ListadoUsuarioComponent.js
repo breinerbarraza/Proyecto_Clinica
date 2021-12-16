@@ -48,6 +48,8 @@ export const ListadoUsuarioComponent = () => {
     return (
       <MDBDataTable
         hover
+        responsive
+        hover
         striped
         small
         paginationLabel={["<", ">"]}
@@ -211,9 +213,48 @@ export const ListadoUsuarioComponent = () => {
           </div>
         </div>
       </div>
+      {/* Media Query de Usuario */}
+
       <div className='quitar'>
-        <div style={{padding:"50px", marginLeft:"200px"}}>
-          <i><PerfilComponentSinNombre /></i>
+        <div style={{ padding: "50px", width: "100%" }}>
+          <div style={{ float: "none", marginTop: "-10px", marginLeft: "190px" }}>
+            <i><PerfilComponentSinNombre /></i>
+          </div>
+          <div className="lista-containers">
+            <h3 className="h3-Lista">Listado de usuario</h3>
+            <div className="subtitle-header">
+              <div className="select-mes">
+                <FormControl fullWidth  >
+                  <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+                  <Select
+                    name="mes"
+                    label="Mes"
+                    id="demo-simple-select-standard"
+                    onChange={handleSelectMonth}
+                  >
+                    {
+                      meses_map.map((item, key) => {
+                        return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
+                      })
+                    }
+                  </Select>
+                </FormControl>
+              </div>
+              <div style={{ flex: 5 }}>
+
+              </div>
+              <div className="link-crearusuario">
+                <Link to="/crear_usuario">
+                  <button className="btn btn-primary-outline crear-usuario">
+                    Crear usuario <img style={{ width: "20%" }} src={user_add_blue} />
+                  </button>
+                </Link>
+              </div>
+            </div>
+            <div className="tabla-lista">
+              {!loading && showTable()}
+            </div>
+          </div>
         </div>
         {/* FOOTER */}
         <HeaderMovil users={true} dashboard={false} />
