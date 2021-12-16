@@ -101,7 +101,7 @@ export const Dashboard2Component = () => {
                                     label="Asesores"
                                     id="demo-simple-select-standard"
                                     style={{ marginBottom: "-4px" }}
-                                    onChange={""}
+                                    onChange=""
                                 >
                                     {
                                         data_asesor.map((item, key) => {
