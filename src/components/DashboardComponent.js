@@ -12,7 +12,6 @@ import API from "../Utils/API";
 import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
-
 var _ = require('lodash')
 
 export const DashboardComponent = () => {
@@ -24,6 +23,7 @@ export const DashboardComponent = () => {
     const [usuarios_, setUsuarios_employe] = useState([]);
     const [datosCambioEstado, setDatosCambioEstado] = useState([]);
     const [total_referidos, setTotal_referidos] = useState({});
+    const [total_referidos_first, setTotal_referidos_first] = useState("");
     /*
     - Cambiar las consultas del dashboard para que tenga los cambios de estado del referido
     - Colocar el filtro en ese reporte para filtrar por empleados
@@ -87,15 +87,18 @@ export const DashboardComponent = () => {
     
     }
     const data = {
-        labels: tiposFormulario,
+        labels: tiposFormulario,  
         datasets: [{
           label: 'My First Dataset',
           data: cantidades,
           backgroundColor: labelColors,
           hoverOffset: 4
-        }]
-      }
+        }],
+        //centerText : (total_referidos_first == 0) ? total_referidos.Total_referidos :  total_referidos_first
+        //text: (total_referidos_first == 0) ? total_referidos.Total_referidos :  total_referidos_first
+    }    
 
+    console.log(total_referidos_first)
   
   
   const handleSelectMonth = async(e)=>{
@@ -103,6 +106,7 @@ export const DashboardComponent = () => {
     setLabelColors([]);
     setTiposFormulario([]);
     setCantidades([]);
+    setTotal_referidos_first(0);
     const mes = e.target.value;
     cargarTotalReferidos(mes)
     API.get(`api/referidos/get_referidos_month/?mes=${mes}`)
@@ -128,6 +132,13 @@ export const DashboardComponent = () => {
     } )
   }
 
+  useEffect(async()=>{
+    await API.get('api/referidos/get_count_referidos_total/')
+    .then( data => {
+        const totalReferido = data.data;
+        setTotal_referidos_first(totalReferido);
+    } )
+  }, []);
 
   useEffect(() => {
     let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
@@ -146,7 +157,7 @@ export const DashboardComponent = () => {
             <div >
                 <div className="container-dashboard">
                     <div className="_h3">
-                        <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
+                        <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
                     </div>
                     <div className="select-dashboard" style={{ width: "40%" }}>
                         <FormControl fullWidth style={{marginBottom:'15px'}}>
@@ -183,7 +194,7 @@ export const DashboardComponent = () => {
                        </FormControl>  */}  
 
                     </div>
-                    
+                    <b>Total referidos: </b>{ (total_referidos_first == 0) ? total_referidos.Total_referidos :  total_referidos_first }
                     {
                         data_meses.length == 0 && 
                         (
@@ -208,12 +219,11 @@ export const DashboardComponent = () => {
                                     </table>
                                 </div>
                                 <div className="grafica" style={{ width: "40%", marginTop:"-50px" }}>
-                                    <Doughnut classname="gra" data={data} />
+                                    <Doughnut classname="gra" data={data}  />
                                 </div>
                             </div>
                         )
                     }
-                    <p className="p-total" style={{marginTop:'10px', marginBottom: '-10px'}}><b>Total referidos:</b> <b>{total_referidos.Total_referidos}</b></p>
                 </div>
             </div>
             </div>

@@ -50,7 +50,7 @@ export const ConfirEmailComponent = () => {
                 <div className="page-email1">
                     <div className="email1-container">
                         <Link to="/login">
-                            <i class="fas fa-home"></i>
+                            <i className="fas fa-home"></i>
                         </Link>
                         <div className="formulario-email1">
                             <form className="_form-email1" onSubmit={handleInputSubmit}>
@@ -94,9 +94,6 @@ export const ConfirEmailComponent = () => {
                     </div>
                 </div>
                     <div className="email2-container">
-                       {/* <Link to="/login">
-                            <i class="fas fa-home"></i>
-                                </Link>*/}
                         <div className="formulario-email1">
                             <form className="_form-email1" onSubmit={handleInputSubmit}>
                                 <p className="p-email1" style={{fontSize:"25px"}}>Confirma tu e-mail</p>

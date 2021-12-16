@@ -365,12 +365,7 @@ export const CrearUsuarioComponent = () => {
                 </div>
 
                  {/* FOOTER */}
-                 {/* <div className="footer-paciente">
-                    <div className="footer-header-navbar"> */}
                     <HeaderMovil users={true} dashboard={false} />
-                    {/* </div>
-                </div> */}
-
             </div>
         </>
     )

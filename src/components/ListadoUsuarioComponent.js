@@ -34,8 +34,8 @@ export const ListadoUsuarioComponent = () => {
             "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
             "correo_electronico": item.email,
             "referidos": (item.total_referidos) ? item.total_referidos : 0,
-            "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i class="fas fa-qrcode" ></i></span></a>,
-            "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i class="fas fa-qrcode" ></i></span></a>,
+            "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
+            "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
           }])
         ))
       })
@@ -91,8 +91,8 @@ export const ListadoUsuarioComponent = () => {
                   "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
                   "correo_electronico": item.email,
                   "referidos": (item.total_referidos) ? item.total_referidos : 0,
-                  "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i class="fas fa-qrcode" ></i></span></a>,
-                  "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i class="fas fa-qrcode" ></i></span></a>,
+                  "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
+                  "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
                 }])
               ))
             } else {
@@ -115,8 +115,8 @@ export const ListadoUsuarioComponent = () => {
               "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
               "correo_electronico": item.email,
               "referidos": (item.total_referidos) ? item.total_referidos : 0,
-              "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i class="fas fa-qrcode" ></i></span></a>,
-              "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i class="fas fa-qrcode" ></i></span></a>,
+              "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
+              "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
             }])
           ))
         })
