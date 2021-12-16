@@ -217,9 +217,9 @@ a {
         padding: 0 !important;
 
     } */
-    .footer-header-navbar_{
+    /* .footer-header-navbar_{
         margin-left: 10px;
-    }
+    } */
     }
 
 /*Registrar Referido*/
@@ -1534,12 +1534,12 @@ button[type="submit"]{
         background-color: #213c79 !important;
     }
     
-    .footer-paciente{
+    /* .footer-paciente{
         width: 100%;
         margin-top: 87px;
         background-color: #02305b;
         position: fixed !important;
-    }
+    } */
 
     .footer-paciente .footer-header-navbar{
         height: 52px;
