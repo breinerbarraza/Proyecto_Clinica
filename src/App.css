@@ -840,6 +840,10 @@ label {
     width: 100% !important;
     
 }
+._h3_ {
+    width: 10px;
+    margin-top: -74px;
+}
 }
 /*Crear Usuario*/
 .usuario-container{
@@ -1509,6 +1513,10 @@ button[type="submit"]{
         margin-left: 20px;
         margin-right: 30px;
         letter-spacing: 2px;
+        
+    }
+    .div_perfil´{
+        padding: 25%;
     }
 
     .div-formulario-referir{

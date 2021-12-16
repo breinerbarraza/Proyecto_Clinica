@@ -230,10 +230,9 @@ export const CrearUsuarioComponent = () => {
 
             <div className="div_crear_usuario_responsive">
                 <div className="div_perfil_usuario">
-                        <div>
+                        <div style={{padding:"25px"}}>
                             <b>Crear usuario</b>
-                        </div>
-                        <div>
+                        
                             <i><PerfilComponentSinNombre/></i>
                         </div>
                 </div>
