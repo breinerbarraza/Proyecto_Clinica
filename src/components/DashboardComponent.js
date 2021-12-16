@@ -89,13 +89,6 @@ export const DashboardComponent = () => {
     const data = {
         labels: tiposFormulario,  
         datasets: [{
-<<<<<<< HEAD
-            label: 'My First Dataset',
-            data: cantidades,
-            backgroundColor: labelColors,
-            hoverOffset: 4
-        }]
-=======
           label: 'My First Dataset',
           data: cantidades,
           backgroundColor: labelColors,
@@ -151,7 +144,6 @@ export const DashboardComponent = () => {
     let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
     if(!super_user){
         return window.location = "/";
->>>>>>> 3979b83eaf08c78416af438ec7656ee23d75cb50
     }
 
 
@@ -198,34 +190,6 @@ export const DashboardComponent = () => {
 
     return (
         <>
-<<<<<<< HEAD
-            <div className="dash">
-                <HeaderComponent dashboard />
-                <PerfilComponent />
-                <div >
-                    <div className="container-dashboard">
-                        <div className="_h3">
-                            <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
-                        </div>
-                        <div className="select-dashboard" style={{ width: "40%" }}>
-                            <FormControl fullWidth style={{ marginBottom: '15px' }}>
-                                <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
-                                <Select
-                                    name="mes"
-                                    label="Mes"
-                                    id="demo-simple-select-standard"
-                                    style={{ marginBottom: "-4px" }}
-                                    onChange={handleSelectMonth}
-                                >
-                                    {
-                                        meses_map.map((item, key) => {
-                                            return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
-                                        })
-                                    }
-                                </Select>
-                            </FormControl>
-                            {/*    <FormControl fullWidth style={{marginBottom:'15px'}}>
-=======
         <div className="dash">
             <HeaderComponent dashboard />
             <PerfilComponent />
@@ -252,7 +216,6 @@ export const DashboardComponent = () => {
                             </Select>
                         </FormControl>
                      {/*    <FormControl fullWidth style={{marginBottom:'15px'}}>
->>>>>>> 3979b83eaf08c78416af438ec7656ee23d75cb50
                         <InputLabel shrink id="demo-simple-select-standard-label">Empleados</InputLabel>
                             <Select
                                 name="usuarios"
@@ -269,20 +232,6 @@ export const DashboardComponent = () => {
                             </Select>
                        </FormControl>  */}
 
-<<<<<<< HEAD
-                        </div>
-
-                        {
-                            data_meses.length == 0 &&
-                            (
-                                <div className="dashboard-flexbox">
-                                    <div className="table-dashboard">
-                                        <table className="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Tipo</th>
-                                                    <th>Cantidad</th>
-=======
                     </div>
                     <b>Total referidos: </b>{ (total_referidos_first == 0) ? total_referidos.Total_referidos :  total_referidos_first }
                     {
@@ -302,37 +251,18 @@ export const DashboardComponent = () => {
                                                 <tr key={key}>
                                                     <td>{dato.estado}</td>
                                                     <td>{dato.valor}</td>
->>>>>>> 3979b83eaf08c78416af438ec7656ee23d75cb50
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                {pieChartData.map((dato, key) => (
-                                                    <tr key={key}>
-                                                        <td>{dato.estado}</td>
-                                                        <td>{dato.valor}</td>
-                                                    </tr>
 
-                                                ))}
+                                            ))}
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div className="grafica" style={{ width: "40%", marginTop: "-50px" }}>
-                                        <Doughnut classname="gra" data={data} />
-                                    </div>
-                                </div>
-<<<<<<< HEAD
-                            )
-                        }
-                        <p className="p-total" style={{ marginTop: '10px', marginBottom: '-10px' }}><b>Total referidos:</b> <b>{total_referidos.Total_referidos}</b></p>
-                    </div>
-=======
                                 <div className="grafica" style={{ width: "40%", marginTop:"-50px" }}>
                                     <Doughnut classname="gra" data={data}  />
                                 </div>
                             </div>
                         )
                     }
->>>>>>> 3979b83eaf08c78416af438ec7656ee23d75cb50
                 </div>
             </div>
 
