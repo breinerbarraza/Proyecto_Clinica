@@ -36,7 +36,7 @@ function ButtonReferir_change_class() {
 
 function ButtonListar_change_class() {
     return (
-        <button className="btn_referir_imgm_">
+        <button className="btn_referir_imgm_" style={{marginBottom:"5px"}}>
             <Link to="/listado">
                 <img alt="listar" className="imgActiva_" src={chart_line_up_white} />
             </Link>
