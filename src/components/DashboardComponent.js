@@ -231,12 +231,12 @@ export const DashboardComponent = () => {
             {/* Media Query */}
 
             <div className='quitar'>
-                <div style={{ padding: "50px", width: "100%" }}>
-                    <div style={{ float: "none", marginTop: "-10px", marginLeft: "190px" }}>
+                <div style={{ padding: "50px", width: "100%", marginTop:"60px" }}>
+                    <div style={{ float: "none", marginTop: "-50px", marginLeft: "190px" }}>
                         <i><PerfilComponentSinNombre /></i>
                     </div>
                     <div className="lista-container_">
-                        <div className="_h3_">
+                        <div className="_h3_" >
                             <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
                         </div>
                         <div className="select-dashboard" style={{ width: "10t0%" }}>

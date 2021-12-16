@@ -794,8 +794,7 @@ label {
     display: flex;
     margin-bottom: 6vh;
     color: #1c3678;
-    
-
+    margin-top: 50px;
 }
 .table-hover{
     border-radius: 10px !important;
@@ -1483,7 +1482,6 @@ button[type="submit"]{
     }
     .div_perfil{
         width: 100%;
-        display: flex;
         flex-direction: row;
         margin-top: 40px;
         
@@ -1499,7 +1497,7 @@ button[type="submit"]{
     }
 
     .container-perfil_ .btn-group{
-        margin-top: -10px !important;
+        margin-top: -50px !important;
     }
 
     .div_perfil div{
@@ -1680,7 +1678,7 @@ button[type="submit"]{
     border-bottom-color:darkgray ;
 }
 /* Comision */
-/* .div-comision{
+.div-comision{
     float: right;
     margin-top: -90px;
     margin-right: 61px;
@@ -1700,7 +1698,7 @@ button[type="submit"]{
 }
 .dataTables_info{
     margin-top: 30px !important;
-} */
+}
 /* Dashboard */
 .p-total{
     float: right;

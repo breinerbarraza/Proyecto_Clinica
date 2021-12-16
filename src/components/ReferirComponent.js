@@ -205,9 +205,9 @@ export const ReferirComponent = () => {
             </div>
             {/* Contenido responsive rjhgkjfldsjflsd */}
             <div className="container-responsive-referir">
-                <div className="div_perfil" style={{padding:"25px"}}>
+                <div className="div_perfil" style={{padding:"10px"}}>
                     <div>
-                        <b style={{padding:"10px"}}>Referir Paciente</b>
+                        <b style={{padding:"5px", marginTop:"10px"}}>Referir Paciente</b>
                     </div>
                     <div >
                         <i><PerfilComponentSinNombre/></i>

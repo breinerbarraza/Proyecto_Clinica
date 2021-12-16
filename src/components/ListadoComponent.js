@@ -394,8 +394,8 @@ export const ListadoComponent = () => {
                     </Select>
                   </FormControl>
                 </div>
-                <div className="div-comision">
-                  <p className="p-comision">
+                <div className="div-comision_">
+                  <p className="p-comision_">
                     <b>Total: </b>
                     <b style={{ color: "#000", fontWeight: "bold" }}>
                       ${formatMoney(comision, 2, ",", ".")}
