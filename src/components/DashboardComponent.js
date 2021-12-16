@@ -12,7 +12,6 @@ import API from "../Utils/API";
 import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
-
 var _ = require('lodash')
 
 export const DashboardComponent = () => {
@@ -24,6 +23,7 @@ export const DashboardComponent = () => {
     const [usuarios_, setUsuarios_employe] = useState([]);
     const [datosCambioEstado, setDatosCambioEstado] = useState([]);
     const [total_referidos, setTotal_referidos] = useState({});
+    const [total_referidos_first, setTotal_referidos_first] = useState("");
     /*
     - Cambiar las consultas del dashboard para que tenga los cambios de estado del referido
     - Colocar el filtro en ese reporte para filtrar por empleados
@@ -87,13 +87,71 @@ export const DashboardComponent = () => {
 
     }
     const data = {
-        labels: tiposFormulario,
+        labels: tiposFormulario,  
         datasets: [{
+<<<<<<< HEAD
             label: 'My First Dataset',
             data: cantidades,
             backgroundColor: labelColors,
             hoverOffset: 4
         }]
+=======
+          label: 'My First Dataset',
+          data: cantidades,
+          backgroundColor: labelColors,
+          hoverOffset: 4
+        }],
+        //centerText : (total_referidos_first == 0) ? total_referidos.Total_referidos :  total_referidos_first
+        //text: (total_referidos_first == 0) ? total_referidos.Total_referidos :  total_referidos_first
+    }    
+
+    console.log(total_referidos_first)
+  
+  
+  const handleSelectMonth = async(e)=>{
+    setData_meses([]);
+    setLabelColors([]);
+    setTiposFormulario([]);
+    setCantidades([]);
+    setTotal_referidos_first(0);
+    const mes = e.target.value;
+    cargarTotalReferidos(mes)
+    API.get(`api/referidos/get_referidos_month/?mes=${mes}`)
+    .then( response => {
+        console.log(response.data);
+        let agrupacion = _.chain(response.data).groupBy('estadoReferido')
+            .map((value, key) => ({
+                "estado": key,
+                "valor": value.length,
+                "color": 'rgba(' + (Math.floor(Math.random() * 256)) + ','
+                    + (Math.floor(Math.random() * 256)) + ','
+                    + (Math.floor(Math.random() * 255)) + ', 0.8)'
+            }))
+        let agrupacionArray = _.toArray(agrupacion)
+        console.log("Datos de la agrupacion: ", agrupacionArray)
+        setPieChartData(agrupacionArray)
+        agrupacionArray.map((el) => (
+            setLabelColors(labelColors => [...labelColors, el.color]),
+            setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
+            setCantidades(cantidades => [...cantidades, el.valor]),
+            console.log("Estados",  el)
+        ))
+    } )
+  }
+
+  useEffect(async()=>{
+    await API.get('api/referidos/get_count_referidos_total/')
+    .then( data => {
+        const totalReferido = data.data;
+        setTotal_referidos_first(totalReferido);
+    } )
+  }, []);
+
+  useEffect(() => {
+    let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+    if(!super_user){
+        return window.location = "/";
+>>>>>>> 3979b83eaf08c78416af438ec7656ee23d75cb50
     }
 
 
@@ -140,6 +198,7 @@ export const DashboardComponent = () => {
 
     return (
         <>
+<<<<<<< HEAD
             <div className="dash">
                 <HeaderComponent dashboard />
                 <PerfilComponent />
@@ -166,6 +225,34 @@ export const DashboardComponent = () => {
                                 </Select>
                             </FormControl>
                             {/*    <FormControl fullWidth style={{marginBottom:'15px'}}>
+=======
+        <div className="dash">
+            <HeaderComponent dashboard />
+            <PerfilComponent />
+            <div >
+                <div className="container-dashboard">
+                    <div className="_h3">
+                        <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
+                    </div>
+                    <div className="select-dashboard" style={{ width: "40%" }}>
+                        <FormControl fullWidth style={{marginBottom:'15px'}}>
+                            <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+                            <Select
+                                name="mes"
+                                label="Mes"
+                                id="demo-simple-select-standard"
+                                style={{ marginBottom: "-4px" }}
+                                onChange={handleSelectMonth}
+                            >
+                                {
+                                    meses_map.map((item, key)=> {
+                                        return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
+                                    })
+                                }
+                            </Select>
+                        </FormControl>
+                     {/*    <FormControl fullWidth style={{marginBottom:'15px'}}>
+>>>>>>> 3979b83eaf08c78416af438ec7656ee23d75cb50
                         <InputLabel shrink id="demo-simple-select-standard-label">Empleados</InputLabel>
                             <Select
                                 name="usuarios"
@@ -182,6 +269,7 @@ export const DashboardComponent = () => {
                             </Select>
                        </FormControl>  */}
 
+<<<<<<< HEAD
                         </div>
 
                         {
@@ -194,6 +282,27 @@ export const DashboardComponent = () => {
                                                 <tr>
                                                     <th>Tipo</th>
                                                     <th>Cantidad</th>
+=======
+                    </div>
+                    <b>Total referidos: </b>{ (total_referidos_first == 0) ? total_referidos.Total_referidos :  total_referidos_first }
+                    {
+                        data_meses.length == 0 && 
+                        (
+                            <div className="dashboard-flexbox">
+                                <div className="table-dashboard">
+                                    <table className="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Tipo</th>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {pieChartData.map((dato, key) => (
+                                                <tr key={key}>
+                                                    <td>{dato.estado}</td>
+                                                    <td>{dato.valor}</td>
+>>>>>>> 3979b83eaf08c78416af438ec7656ee23d75cb50
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -211,10 +320,19 @@ export const DashboardComponent = () => {
                                         <Doughnut classname="gra" data={data} />
                                     </div>
                                 </div>
+<<<<<<< HEAD
                             )
                         }
                         <p className="p-total" style={{ marginTop: '10px', marginBottom: '-10px' }}><b>Total referidos:</b> <b>{total_referidos.Total_referidos}</b></p>
                     </div>
+=======
+                                <div className="grafica" style={{ width: "40%", marginTop:"-50px" }}>
+                                    <Doughnut classname="gra" data={data}  />
+                                </div>
+                            </div>
+                        )
+                    }
+>>>>>>> 3979b83eaf08c78416af438ec7656ee23d75cb50
                 </div>
             </div>
 
