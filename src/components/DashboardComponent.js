@@ -256,6 +256,7 @@ export const DashboardComponent = () => {
                                     }
                                 </Select>
                             </FormControl>
+                            <b>Total referidos: </b>{(total_referidos_first == 0) ? total_referidos.Total_referidos : total_referidos_first}
                             {
                                 data_meses.length == 0 &&
                                 (
@@ -279,9 +280,7 @@ export const DashboardComponent = () => {
                                                 </tbody>
                                             </table>
                                         </div>
-                                        {/*  <div className="grafica" style={{ width: "40%", marginTop: "-50px" }}>
-                        <Doughnut classname="gra" data={data} />
-                    </div> */}
+                                        
                                     </div>
                                 )
                             }
