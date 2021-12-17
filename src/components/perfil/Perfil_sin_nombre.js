@@ -33,7 +33,7 @@ export const PerfilComponentSinNombre = () => {
     
     return (
         <div className="container-perfil_">
-            <div className="btn-group" style={{ marginLeft:"20px", marginBottom:"-40px"}}>
+            <div className="btn-group" style={{  marginBottom:"-40px"}}>
             <button type="button" className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     
                 </button>

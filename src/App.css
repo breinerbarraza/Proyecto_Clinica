@@ -1710,3 +1710,75 @@ button[type="submit"]{
     margin-top: -230px !important;
     margin-inline: 360px !important;
 }
+
+/* Media query de los estados */
+
+.estadosMedia{
+    display: none; 
+}
+
+@media screen and (min-width: 360px) and (max-width: 460px){
+    .estadosMedia{
+        display: contents; 
+    }
+    .estados_{
+        display: none;
+    }
+    .link-p_{
+        padding: 20px ;
+    }
+    .infomacion_{
+        padding: 20px;
+    }
+    .contendor-prequi_{
+        margin-top: 20px;
+    }
+    .select-estado_{
+        text-align: center;
+        padding: 5px;
+        border: none;
+        border-radius: 12px;
+        margin-left: 10px;
+        margin-top: 15px;
+    }
+    .change_estado_{
+        margin-left: 5px;
+        letter-spacing: 2px;
+        padding: 7px !important;
+        background-color: #02305b !important;
+        height: 35px !important;
+        margin-top: 15px !important;
+        margin-right: 50px !important;
+        width: 50px !important;
+    }
+    .comentario_{
+        padding:5px;
+        margin-left:10px;
+    }
+    .form-hora_{
+        width: 50%;
+        margin-left: 5px;
+    }
+    .form-fecha_{
+        width: 50%;
+        margin-left: 5px;
+    }
+    .form-f-h_{
+        display: flex;
+        width: 100%;
+    }
+    .form-fecha-pendiente_{
+        width: 90%;
+        text-align: center;
+    }
+    .pendiente-button_pendiente{
+        margin-right: 35px;
+        margin-top: 65px;
+    }
+    .form-medico_{
+        width: 98%;
+        padding: 1px;
+        margin-top: 20px;
+        margin-left: 5px;
+    }
+}
