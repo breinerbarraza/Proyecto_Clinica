@@ -1784,4 +1784,8 @@ button[type="submit"]{
     .add_meta_msg_{
         margin-left: 60px;
     }
+    /* nombre de los select */
+    .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
+        font-size: 13px !important;
+    }
 }

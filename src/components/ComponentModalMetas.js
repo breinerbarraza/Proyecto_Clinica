@@ -103,7 +103,7 @@ export const ComponentModalMetas = () => {
             <ModalBody>
                 <div className="body_modal">
                     <form onSubmit={enviarMeta} id='modal'>
-                        <FormControl fullWidth  >
+                        <FormControl fullWidth id='modal' >
                             <FormControl fullWidth >
                                 <InputLabel shrink id="demo-simple-select-standard-label">Seleccione Mes</InputLabel>
                                 <Select
@@ -122,7 +122,7 @@ export const ComponentModalMetas = () => {
                                 </Select>
                             </FormControl>
                             <TextField
-                                type="text"
+                                type="number"
                                 name="anio"
                                 label="Anio"
                                 required
@@ -152,7 +152,7 @@ export const ComponentModalMetas = () => {
                                 </Select>
                             </FormControl>
                             <TextField
-                                type="text"
+                                type="number"
                                 name="cantidad"
                                 label="Cantidad"
                                 required
@@ -185,8 +185,8 @@ export const ComponentModalMetas = () => {
                 </div>
             </ModalBody>
             <ModalFooter>
-                <Button className="btn btn-dark" onClick={enviarMeta}>Guardar Meta</Button>
-                <Button className="btn btn-dark" onClick={cerrarModal}>Cerrar</Button>
+                <button className="btn btn" style={{background:"#02305b", color:"white"}} onClick={enviarMeta}>Guardar Meta</button>
+                <button className="btn btn" style={{background:"#02305b", color:"white"}} onClick={cerrarModal}>Cerrar</button>
             </ModalFooter>
         </Modal>
     )
