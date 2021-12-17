@@ -229,7 +229,7 @@ export const CrearUsuarioComponent = () => {
 
 
             <div className="div_crear_usuario_responsive">
-                <div className="div_perfil" style={{padding:"5px", marginBottom:"-30px", marginTop:"50px"}}>
+                <div className="div_perfil" style={{padding:"5px", marginTop:"50px"}}>
                         <div style={{padding:"25px"}}>
                             <b>Crear usuario</b>
                         
