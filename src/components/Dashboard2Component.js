@@ -16,6 +16,7 @@ import API from '../Utils/API';
 export const Dashboard2Component = () => {
 
     const [data_asesor, setData_asesor] = useState([])
+    const [mes_Temporal, setMes_Temporal] = useState("");
 
     const cargarAsesores = async () => {
         API.get('api/usuarios/user/grupo_asesor')
@@ -43,22 +44,32 @@ export const Dashboard2Component = () => {
         datasets: [
             {
                 label: 'Cumplimientos de metas',
-                data: [100, 59, 80, 81, 56, 55, 10],
+                data: [100, 59, 80, 81, 56, 55, 96],
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.7
-            }
+            },
+            
         ]
     };
 
-    const handleMetasChange = (e) => {
+    const handleMetasChangeMonth = (e) => {
         const mes = e.target.value;
-        console.log(mes);
+        setMes_Temporal(mes)
         API.get(`api/usuarios/metas/get_metas_month/?mes=${mes}`)
             .then(resp => {
                 const methas_mes = resp.data;
                 console.log(methas_mes);
-            })
+        })
+    }
+
+    const handleMetasAsesor = (e)=>{
+        const id_asesor = e.target.value;
+        API.get(`api/usuarios/metas/get_metas_month_asesor/?mes=${mes_Temporal}&id_asesor=${id_asesor}`)
+        .then( data => {
+            const respuesta = data.data;
+            console.log(respuesta);
+        })
     }
 
     return (
@@ -81,7 +92,7 @@ export const Dashboard2Component = () => {
                                     label="Mes"
                                     id="demo-simple-select-standard"
                                     style={{ marginBottom: "-4px" }}
-                                    onChange={handleMetasChange}
+                                    onChange={handleMetasChangeMonth}
                                 >
                                     {
                                         meses_map.map((item, key) => {
@@ -101,7 +112,7 @@ export const Dashboard2Component = () => {
                                     label="Asesores"
                                     id="demo-simple-select-standard"
                                     style={{ marginBottom: "-4px" }}
-                                    onChange=""
+                                    onChange={handleMetasAsesor}
                                 >
                                     {
                                         data_asesor.map((item, key) => {
