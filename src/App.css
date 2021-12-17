@@ -1781,4 +1781,7 @@ button[type="submit"]{
         margin-top: 20px;
         margin-left: 5px;
     }
+    .add_meta_msg_{
+        margin-left: 60px;
+    }
 }
