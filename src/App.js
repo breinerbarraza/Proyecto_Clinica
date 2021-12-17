@@ -24,6 +24,7 @@ import { ReferidoMedia } from './components/componentMediaQuery/ReferidoMedia';
 import { RegistrarReferidoMedia } from './components/componentMediaQuery/RegistrarReferidoMedia';
 import './App.css'
 import { HeaderMovil } from './components/HeaderMovil';
+import { ComponentModalMetas } from './components/ComponentModalMetas';
 
 function App() {
   return (
@@ -78,6 +79,15 @@ function App() {
                   <LoginComponent />
                 )}
               </Route>
+
+              <Route exact path="/add_metas">
+                {localStorage.getItem('token') !== null ? (
+                  <ComponentModalMetas/>
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+
               <Route exact path="/crear_usuario">
                 {localStorage.getItem('token') !== null ? (
                   <CrearUsuarioComponent />
