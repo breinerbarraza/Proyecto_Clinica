@@ -19,6 +19,7 @@ export const CrearUsuarioComponent = () => {
     const [dato, setDatos] = useState([])
     const [identificacion, setIdentificacion] = useState([]);
     const [spinner, setSpinner] = useState(false);
+    const [ms_confirmation, setMs_confirmation] = useState(false);
 
     useEffect(() => {
         const super_user = (JSON.parse(localStorage.getItem('super_user'))) ? JSON.parse(localStorage.getItem('super_user')) : "";
@@ -48,10 +49,6 @@ export const CrearUsuarioComponent = () => {
     const enviarDatos = async(e) => {
         e.preventDefault();
         console.log(dato);
-        setSpinner(true);
-        setTimeout(()=>{
-            setSpinner(false);
-        }, 3000)
         await API.post('api/usuarios/asesor/crear-usuario/', JSON.stringify(dato))
         .then( ({data}) => {
             const resp = data;
@@ -59,14 +56,11 @@ export const CrearUsuarioComponent = () => {
             if(resp.mensaje){   
                 const mensaje = resp.mensaje;
                 document.getElementById("login-form").reset();
-                setSpinner(false);
                 return Swal.fire({
-                    icon: 'success',
-                    title: 'Exito!',
-                    text : mensaje,
-                    position: 'center',
-                    timer: 4200
-                });
+                    icon: 'sucess',
+                    title: 'Exitoso!...',
+                    text: mensaje,
+                  });
             }else{
                 const error = resp.error;
                 return Swal.fire({
@@ -80,12 +74,11 @@ export const CrearUsuarioComponent = () => {
         })
         .catch(console.error)
     }
-
-    if(spinner){
+  /*   if(spinner){
         return (
             <Loading />
         )
-    }else{
+    }else{ */
         
     return (
         <>
@@ -230,7 +223,13 @@ export const CrearUsuarioComponent = () => {
 
             <div className="div_crear_usuario_responsive">
                 <div className="div_perfil" style={{padding:"5px", marginTop:"-15px", marginBottom:"-40px"}}>
+               
+                    {ms_confirmation && (
+                            <p style={{backgroundColor:'##10305b', color:'#fff', fontSize:'20px'}}>¡Se ha enviado una notificacion a su correo!</p>
+                    )}
+                    
                         <div style={{padding:"25px"}}>
+                            
                             <b>Crear usuario</b>
                         
                             <i><PerfilComponentSinNombre/></i>
@@ -368,6 +367,6 @@ export const CrearUsuarioComponent = () => {
             </div>
         </>
     )
-    }   
+    
 
 }
