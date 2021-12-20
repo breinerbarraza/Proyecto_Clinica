@@ -57,7 +57,7 @@ export const CrearUsuarioComponent = () => {
                 const mensaje = resp.mensaje;
                 document.getElementById("login-form").reset();
                 return Swal.fire({
-                    icon: 'sucess',
+                    icon: 'success',
                     title: 'Exitoso!...',
                     text: mensaje,
                   });
