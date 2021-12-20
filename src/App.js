@@ -117,13 +117,6 @@ function App() {
                   <LoginComponent />
                 )}
               </Route>
-              <Route exact path="/referido_/:id">
-                {localStorage.getItem('token') == null ? (
-                  <ReferidoMedia />
-                ) : (
-                  <LoginComponent />
-                )}
-              </Route>
               <Route exact path="/registrar_referido_">
                 {localStorage.getItem('token') == null ? (
                   <RegistrarReferidoMedia />
