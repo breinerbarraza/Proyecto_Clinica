@@ -86,17 +86,17 @@ export const ConfirEmailComponent = () => {
                     </div>
                 </div>
             </div>
-
+            {/* Media query */}
             <div className="div_container_email_media">
                 <div className="container-logo-email1">
-                    <div className="logo-email1" style={{marginBottom:"250px"}} alt="logo">
-                        <img className="clinica_" alt="clinica" src={liberate} />
+                    <div className="logo-email1_" style={{marginBottom:"250px" }} alt="logo">
+                        <img className="clinica_" alt="clinica" style={{backgroundColor:"#526ba3", height:"300px",width:"70%", borderRadius:"30px"}} src={liberate} />
                     </div>
                 </div>
                     <div className="email2-container">
                         <div className="formulario-email1">
                             <form className="_form-email1" onSubmit={handleInputSubmit}>
-                                <p className="p-email1" style={{fontSize:"25px"}}>Confirma tu e-mail</p>
+                                <p className="p-email1" style={{fontSize:"25px", color:"#293d69", fontWeight:"bold"}}>Confirma tu e-mail</p>
                                 <TextField
                                     type="email"
                                     name="correo_electronico"

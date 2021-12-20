@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import logo_clinica from '.././../image/Recursos-Femto2/ClinicaBlanco.svg';
 import API from '../../Utils/API'
 import { useParams } from 'react-router';
+
 export const ReferidoMedia = ({cambiarEstado}) =>{
 
     const {id} = useParams()
@@ -18,7 +19,7 @@ export const ReferidoMedia = ({cambiarEstado}) =>{
     return(
     <>
     <div className="container_media">
-        <div className="logoMedia">
+        <div className="logoMedia" style={{backgroundColor:"#526ba3"}}>
             <img alt="clinica" className="logo_clinica_media" src={logo_clinica} style={{width:"90%", marginLeft:"10px", padding:"20px"}}/>
             <h1 className="h1_media">!Hola,</h1>
             <p style={{color:"white", fontSize:'17px'}}><b>{name.nombre_completo}</b> quiere que hagas parte de su red de referidos!</p>
