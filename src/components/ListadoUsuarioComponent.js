@@ -5,7 +5,6 @@ import { MDBDataTable } from 'mdbreact';
 import API from '../Utils/API';
 import { PerfilComponent } from './perfil/PerfilComponent';
 import { Link } from 'react-router-dom'
-import Chip from '@mui/material/Chip';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -13,6 +12,7 @@ import Select from '@mui/material/Select';
 import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
+import Swal from 'sweetalert2';
 
 export const ListadoUsuarioComponent = () => {
 
@@ -36,13 +36,97 @@ export const ListadoUsuarioComponent = () => {
             "referidos": (item.total_referidos) ? item.total_referidos : 0,
             "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
             "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
+            "is_active": (item.is_active) ? <input onChange={(e, id_user) => handleChangeActivo(e, item.id)} type="checkbox" checked /> : <input onChange={(e, id_user) => handleChangeNoActivo(e, item.id)} type="checkbox"/>
           }])
         ))
       })
     setLoading(false)
   }
 
+  const handleChangeNoActivo = (e, id_user)=>{
+    const obj = {
+      id_user
+    }
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "Lo puedes cambiar mas adelante!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, cambiarlo!'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        await API.put('api/usuarios/user/change_active/', JSON.stringify(obj))
+          .then(({data})=>{
+              console.log(data);
+              if(data.msg){
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Exito!',
+                  text: data.msg,
+                  timer: 2500,
+                  position: 'center',
+                });
+                setTimeout(()=>{
+                  window.location = "/listado_usuario";
+                }, 2000);
+            }
+            else{
+                return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: data.error,
+                timer: 2500,
+                position: 'center',
+              });
+              
+            }
+        })
+      }
+    })
+  } 
 
+  const handleChangeActivo = (e, id_user)=>{
+    const obj = {
+      id_user
+    }
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "Lo puedes cambiar mas adelante!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, cambiarlo!'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        await API.put('api/usuarios/user/change_desactive/', JSON.stringify(obj))
+        .then(({data})=>{
+            console.log(data); 
+            if(data.msg){
+              Swal.fire({
+                icon: 'success',
+                title: 'Exito!',
+                text: data.msg,
+                position: 'center',
+              })
+              setTimeout(()=>{
+                window.location = "/listado_usuario";
+              }, 2000);
+          }
+          else{
+            return Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: data.error,
+              position: 'center',
+            })
+          }   
+        })
+      }
+    })
+  }
 
   const showTable = () => {
     return (
@@ -93,6 +177,7 @@ export const ListadoUsuarioComponent = () => {
                   "referidos": (item.total_referidos) ? item.total_referidos : 0,
                   "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
                   "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
+                  "is_active": item.is_active
                 }])
               ))
             } else {
@@ -117,6 +202,7 @@ export const ListadoUsuarioComponent = () => {
               "referidos": (item.total_referidos) ? item.total_referidos : 0,
               "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
               "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
+              "is_active": item.is_active
             }])
           ))
         })
@@ -167,6 +253,12 @@ export const ListadoUsuarioComponent = () => {
         sort: 'asc',
         width: 100
       },
+      {
+        label: 'Activo',
+        field: 'is_active',
+        sort: 'asc',
+        width: 100
+      }
     ],
     rows: (data_listado && data_meses.length == 0) ? data_listado : data_meses
   };
