@@ -68,7 +68,17 @@ export const ComponentModalMetas = () => {
     const enviarMeta = async (e) => {
         e.preventDefault();
         console.log(dataForm)
-        await API.post('api/usuarios/metas/create_metas/', JSON.stringify(dataForm))
+        const inputAnio = document.getElementById("anio")
+        const fechaActual = new Date().getFullYear();
+        if(inputAnio.value < fechaActual){
+            return Swal.fire({
+                icon: 'Error',
+                title: 'Atencion!',
+                text: "El año debe ser mayor o igual al año actual",
+            });
+        } 
+        else{
+            await API.post('api/usuarios/metas/create_metas/', JSON.stringify(dataForm))
             .then(({ data }) => {
                 const resp = data
                 if (resp.data) {
@@ -92,7 +102,7 @@ export const ComponentModalMetas = () => {
                     })
                 }
             })
-
+        }   
     }
 
     return (
@@ -122,6 +132,7 @@ export const ComponentModalMetas = () => {
                                 </Select>
                             </FormControl>
                             <TextField
+                                id="anio"
                                 type="number"
                                 name="anio"
                                 label="Anio"
