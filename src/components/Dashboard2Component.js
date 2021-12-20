@@ -53,19 +53,19 @@ export const Dashboard2Component = () => {
         ]
     };
 
-    const handleMetasChangeMonth = (e) => {
+    const handleMetasChangeMonth = async(e) => {
         const mes = e.target.value;
         setMes_Temporal(mes)
-        API.get(`api/usuarios/metas/get_metas_month/?mes=${mes}`)
+        await API.get(`api/usuarios/metas/get_metas_month/?mes=${mes}`)
             .then(resp => {
                 const methas_mes = resp.data;
                 console.log(methas_mes);
         })
     }
 
-    const handleMetasAsesor = (e)=>{
+    const handleMetasAsesor = async(e)=>{
         const id_asesor = e.target.value;
-        API.get(`api/usuarios/metas/get_metas_month_asesor/?mes=${mes_Temporal}&id_asesor=${id_asesor}`)
+        await API.get(`api/usuarios/metas/get_metas_month_asesor/?mes=${mes_Temporal}&id_asesor=${id_asesor}`)
         .then( data => {
             const respuesta = data.data;
             console.log(respuesta);
