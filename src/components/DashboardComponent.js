@@ -7,12 +7,13 @@ import { Link } from "react-router-dom";
 import { HeaderComponent } from "./HeaderComponent";
 import { PerfilComponent } from "./perfil/PerfilComponent";
 import 'chart.js/auto';
-import { Doughnut } from 'react-chartjs-2';
+import { Chart, Doughnut } from 'react-chartjs-2';
 import API from "../Utils/API";
 import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
 var _ = require('lodash')
+
 
 export const DashboardComponent = () => {
     const [pieChartData, setPieChartData] = useState([])
@@ -86,6 +87,8 @@ export const DashboardComponent = () => {
 
 
     }
+
+
     const data = {
         labels: tiposFormulario,
         datasets: [{
@@ -97,9 +100,6 @@ export const DashboardComponent = () => {
         //centerText : (total_referidos_first == 0) ? total_referidos.Total_referidos :  total_referidos_first
         //text: (total_referidos_first == 0) ? total_referidos.Total_referidos :  total_referidos_first
     }
-
-    console.log(total_referidos_first)
-
 
     const handleSelectMonth = async (e) => {
         setData_meses([]);
