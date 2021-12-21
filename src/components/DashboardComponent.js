@@ -25,12 +25,6 @@ export const DashboardComponent = () => {
     const [datosCambioEstado, setDatosCambioEstado] = useState([]);
     const [total_referidos, setTotal_referidos] = useState({});
     const [total_referidos_first, setTotal_referidos_first] = useState("");
-    /*
-    - Cambiar las consultas del dashboard para que tenga los cambios de estado del referido
-    - Colocar el filtro en ese reporte para filtrar por empleados
-
-    */
-
 
 
     const filter_cambio_estado = async (mes) => {
@@ -83,11 +77,7 @@ export const DashboardComponent = () => {
                     console.log("Estados", el)
                 ))
             }).catch(console.error)
-
-
-
     }
-
 
     const data = {
         labels: tiposFormulario,
@@ -96,9 +86,7 @@ export const DashboardComponent = () => {
             data: cantidades,
             backgroundColor: labelColors,
             hoverOffset: 4
-        }],
-        //centerText : (total_referidos_first == 0) ? total_referidos.Total_referidos :  total_referidos_first
-        //text: (total_referidos_first == 0) ? total_referidos.Total_referidos :  total_referidos_first
+        }]
     }
 
     const handleSelectMonth = async (e) => {
@@ -132,7 +120,6 @@ export const DashboardComponent = () => {
             })
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async() => {
         await API.get('api/referidos/get_count_referidos_total/')
             .then(data => {
@@ -177,23 +164,7 @@ export const DashboardComponent = () => {
                                     }
                                 </Select>
                             </FormControl>
-                            {/*    <FormControl fullWidth style={{marginBottom:'15px'}}>
-                        <InputLabel shrink id="demo-simple-select-standard-label">Empleados</InputLabel>
-                            <Select
-                                name="usuarios"
-                                label="usuarios"
-                                id="demo-simple-select-standard"
-                                style={{ marginBottom: "-4px" }}
-                                onChange={""}
-                            >
-                                {
-                                    usuarios_.map((item, key)=> {
-                                        return <MenuItem key={key} value={item.id}>{item.first_name} {item.last_name}</MenuItem>
-                                    })
-                                }
-                            </Select>
-                       </FormControl>  */}
-
+                            
                         </div>
                         <b>Total referidos: </b>{(total_referidos_first == 0) ? total_referidos.Total_referidos : total_referidos_first}
                         {
