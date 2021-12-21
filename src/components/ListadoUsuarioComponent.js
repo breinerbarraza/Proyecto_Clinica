@@ -102,6 +102,7 @@ export const ListadoUsuarioComponent = () => {
       confirmButtonText: 'Si, cambiarlo!'
     }).then(async(result) => {
       if (result.isConfirmed) {
+        console.log("entro"+result)
         await API.put('api/usuarios/user/change_desactive/', JSON.stringify(obj))
         .then(({data})=>{
             console.log(data); 

@@ -190,7 +190,7 @@ export const DashboardComponent = () => {
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div className="grafica" style={{ width: "40%", marginTop: "-50px" }}>
+                                    <div className="grafica" style={{ width: "40%", marginTop: "-80px" }}>
                                         <Doughnut classname="gra" data={data} />
                                     </div>
                                 </div>
