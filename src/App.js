@@ -25,6 +25,7 @@ import { RegistrarReferidoMedia } from './components/componentMediaQuery/Registr
 import './App.css'
 import { HeaderMovil } from './components/HeaderMovil';
 import { ComponentModalMetas } from './components/ComponentModalMetas';
+import { ComponentModalStateMetas } from './components/ComponentModalStateMetas';
 
 function App() {
   return (
@@ -83,6 +84,14 @@ function App() {
               <Route exact path="/add_metas">
                 {localStorage.getItem('token') !== null ? (
                   <ComponentModalMetas/>
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+
+              <Route exact path="/add_metas_estate">
+                {localStorage.getItem('token') !== null ? (
+                  <ComponentModalStateMetas/>
                 ) : (
                   <LoginComponent />
                 )}

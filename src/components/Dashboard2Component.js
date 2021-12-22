@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { HeaderComponent } from "./HeaderComponent";
 import { PerfilComponent } from "./perfil/PerfilComponent";
 import 'chart.js/auto';
-import { Line } from 'react-chartjs-2';
+import { Line, Bar } from 'react-chartjs-2';
 import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
@@ -23,23 +23,38 @@ export const Dashboard2Component = () => {
     const [operaciones, setOperaciones] = useState({});
     const [gestiones, setGestiones] = useState({});
     const [total_comision, setTotal_comision] = useState({});
+    const [programados, setProgramados] = useState({});
+    const [prequirurgicos, setPrequirurgicos] = useState({});
+    const [pendientes, setPendientes] = useState({});
     const [data_meses, setData_meses] = useState([]);
 
     const [metaReferidos, setMetaReferidos] = useState(0)
     const [metaOperaciones, setMetaOperaciones] = useState(0)
     const [metaGestion, setMetaGestion] = useState(0)
+    const [metaProgramados, setMetaProgramados] = useState(0)
+    const [metaPrequirurgicos, setMetaPrequirurgicos] = useState(0)
+    const [metaPendientes, setMetaPendiente] = useState(0)
 
     function conseguirMetas_asesor(arreglo){
         const totalReferidos = arreglo.filter(item => item.tipoMeta == "referidos")
         const totalOperaciones = arreglo.filter(item => item.tipoMeta == "operaciones")
         const totalGestiones = arreglo.filter(item => item.tipoMeta == "gestiones")
-        
+        const totalProgramados = arreglo.filter(item => item.tipoMeta == "programados")
+        const totalPrequirurgicos = arreglo.filter(item => item.tipoMeta == "prequirurgicos")
+        const totalPendientes = arreglo.filter(item => item.tipoMeta == "pendientes")
+
         const total = totalReferidos.map(item => item.cantidad)
         const operacion = totalOperaciones.map(item => item.cantidad);
         const gestion = totalGestiones.map(item => item.cantidad)
+        const programado = totalProgramados.map(item => item.cantidad)
+        const prequirurgico = totalPrequirurgicos.map(item => item.cantidad)
+        const pendientes = totalPendientes.map(item => item.cantidad)
         setMetaReferidos(total)
         setMetaOperaciones(operacion)
         setMetaGestion(gestion)
+        setMetaProgramados(programado)
+        setMetaPrequirurgicos(prequirurgico)
+        setMetaPendiente(pendientes)
     }
 
 
@@ -66,12 +81,7 @@ export const Dashboard2Component = () => {
         setGestiones({})
         setTotal_comision({})
         const mes = e.target.value;
-        setMes_Temporal(mes)
-      /*   await API.get(`api/usuarios/metas/get_metas_month/?mes=${mes}`)
-            .then(resp => {
-                const methas_mes = resp.data;
-                setData_meses(methas_mes);
-        }) */
+        setMes_Temporal(mes);
     }
 
     const handleMetasAsesor = async(e)=>{
@@ -84,53 +94,38 @@ export const Dashboard2Component = () => {
             const total_referido = arreglo_meses[1]
             const operaciones = arreglo_meses[2]
             const gestiones_ = arreglo_meses[3]
+            const programados = arreglo_meses[4]
+            const prequirurgicos = arreglo_meses[5]
+            const pendientes = arreglo_meses[6]
             const total_comision_ = arreglo_meses[arreglo_meses.length - 1]
             setData_meses(meses);
             conseguirMetas_asesor(meses) //funcion y se le pasa el parametro de arreglo de metas
             setTotal_referidos(total_referido)
             setOperaciones(operaciones)
             setGestiones(gestiones_)
+            setProgramados(programados)
+            setPrequirurgicos(prequirurgicos)
+            setPendientes(pendientes)
             setTotal_comision(total_comision_)
-            console.log(arreglo_meses)
-            let agrupacion = _.chain(meses).groupBy('tipoMeta')
-            .map((value, key)=>({
-                "referido": key,
-                "valor":value.length
-                
-            }))
-            let agrupacionArray = _.toArray(agrupacion)
-            console.log(agrupacionArray)
-            
-            
+            console.log(arreglo_meses)            
         })
     }
-    
-    const labels = meses_map.map(item => item.mes);
 
     const data = {
-        labels,
+        labels : ['Referidos', 'Operaciones', 'Gestiones', 'Programados', 'Pre-quirurgicos', 'Pendientes'],
         datasets: [
             {
-                label: `Gestiones ${(metaGestion != "") ? metaGestion : "0"}`,
-                data: [100, 59, 80, 81, 56, 55, 96],
-                fill: false,
+                label: `Datos reales`,
+                data: [total_referidos.referidos,operaciones.operaciones,gestiones.gestiones, programados.programados, prequirurgicos.prequirurgicos, pendientes.pendientes],
                 backgroundColor: '#826af9',
                 tension: 0.7
             },
             {
-                label: `Referidos ${(metaReferidos != "") ? metaReferidos : "0"}`,
-                data: [100, 59, 80, 81, 56, 55, 96],
-                fill: false,
+                label: `Meta`,
+                data: [metaReferidos, metaOperaciones, metaGestion, metaProgramados, metaPrequirurgicos, metaPendientes],
                 backgroundColor: '#ff6c40',
                 tension: 0.7
-            },
-            {
-                label: `Operaciones ${(metaOperaciones != "") ? metaOperaciones : "0"}`,
-                data: [100, 59, 80, 81, 56, 55, 96],
-                fill: false,
-                backgroundColor: '#ffe700',
-                tension: 0.7
-            },
+            }
             
         ]
     };
@@ -191,16 +186,16 @@ export const Dashboard2Component = () => {
                     {
                         data_meses.length > 0 &&(
                             <>
+                            <p>Gestiones: {gestiones.gestiones}</p>
                             <p>Referidos: {total_referidos.referidos}</p>
                             <p>Operaciones: {operaciones.operaciones}</p>
-                            <p>Gestiones: {gestiones.gestiones}</p>
                             <p>Total Comision: {total_comision.total_comision}</p>
                             </>    
                         )
                     }
                 
                     <div className="grafica2" style={{ width: "40%" }}>
-                        <Line className="gra" data={data} />
+                        <Bar className="gra" data={data} />
                     </div>
                 </div>
             </div>

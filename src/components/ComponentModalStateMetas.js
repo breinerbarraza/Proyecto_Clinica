@@ -28,13 +28,26 @@ const arreglo_metas = [
     { "valor": 'referidos', "metas": "Número de referido" },
     { "valor": 'gestiones', "metas": "Gestiones" },
     { "valor": 'operaciones', "metas": "Operaciones" },
+    { "valor": 'programados', "metas": "Programados" },
+    { "valor": 'pendientes', "metas":  "Pendientes"},
+    { "valor": 'pre-quirurgico', "metas": "Pre-quirurgico"}
 ]
 
-export const ComponentModalMetas = () => {
+export const ComponentModalStateMetas = () => {
 
     const [metas_Modal, setMetas_Modal] = useState(true);
     const [dataForm, setDataForm] = useState({})
     const [empleado, setEmpleado] = useState([])
+    const [estado , setEstado ] = useState([])
+
+    const cargarEstados = async () => {
+        await API.get('api/configuracion/estadoReferido/get_estados')
+          .then(data => {
+            const resp = data.data;
+            setEstado(resp)
+          })
+          .catch(console.error);
+    }
 
     useEffect(() => {
         API.get('api/usuarios/user/grupo_asesor')
@@ -50,6 +63,7 @@ export const ComponentModalMetas = () => {
         if (!super_user) {
             return window.location = "/";
         }
+        cargarEstados()
     }, []);
 
     const cerrarModal = () => {
@@ -104,7 +118,6 @@ export const ComponentModalMetas = () => {
         }   
     }
 
-
     return (
         <Modal isOpen={metas_Modal} >
             <ModalHeader>
@@ -145,7 +158,7 @@ export const ComponentModalMetas = () => {
                                 }}
                             />
 
-                            <FormControl fullWidth >
+                            <FormControl fullWidth>
                                 <InputLabel shrink id="demo-simple-select-standard-label">Tipo de Metas</InputLabel>
                                 <Select
                                     name="tipoMeta"
@@ -153,6 +166,7 @@ export const ComponentModalMetas = () => {
                                     label="metas"
                                     id="demo-simple-select-standard"
                                     onChange={handleInputChange}
+                                    style={{marginBottom:'20px'}}
                                 >
                                     {
                                         arreglo_metas.map((item, key) => {
@@ -162,6 +176,25 @@ export const ComponentModalMetas = () => {
 
                                 </Select>
                             </FormControl>
+
+                            <FormControl fullWidth >
+                                <InputLabel shrink id="demo-simple-select-standard-label">Tipo de estado</InputLabel>
+                                <Select
+                                    name="id_estado"
+                                    required
+                                    label="estados"
+                                    id="demo-simple-select-standard"
+                                    onChange={handleInputChange}
+                                >
+                                    {
+                                        estado.map((item, key) => {
+                                            return <MenuItem key={key} value={item.id} >{item.descripcion}</MenuItem>
+                                        })
+                                    }
+
+                                </Select>
+                            </FormControl>
+
                             <TextField
                                 type="number"
                                 name="cantidad"
