@@ -105,14 +105,14 @@ export const Dashboard2Component = () => {
                 tension: 0.7
             },
             {
-                label: `Referidos ${(metaReferidos) ? metaGestion : "0"}`,
+                label: `Referidos ${(metaReferidos) ? metaReferidos : "0"}`,
                 data: [100, 59, 80, 81, 56, 55, 96],
                 fill: false,
                 backgroundColor: '#ff6c40',
                 tension: 0.7
             },
             {
-                label: `Operaciones ${(metaOperaciones) ? metaGestion : "0"}`,
+                label: `Operaciones ${(metaOperaciones) ? metaOperaciones : "0"}`,
                 data: [100, 59, 80, 81, 56, 55, 96],
                 fill: false,
                 backgroundColor: '#ffe700',
@@ -178,10 +178,10 @@ export const Dashboard2Component = () => {
                     {
                         data_meses.length > 0 &&(
                             <>
-                            <p>{total_referidos.referidos}</p>
-                            <p>{operaciones.operaciones}</p>
-                            <p>{gestiones.gestiones}</p>
-                            <p>{total_comision.total_comision}</p>
+                            <p>Referidos: {total_referidos.referidos}</p>
+                            <p>Operaciones: {operaciones.operaciones}</p>
+                            <p>Gestiones: {gestiones.gestiones}</p>
+                            <p>Total Comision: {total_comision.total_comision}</p>
                             </>    
                         )
                     }
