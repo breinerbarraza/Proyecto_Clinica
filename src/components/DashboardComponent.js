@@ -57,7 +57,7 @@ export const DashboardComponent = () => {
     const load = async () => {
         await API.get('api/referidos/')
             .then(response => {
-                // console.log(response.data)
+                 console.log(response.data)
                 console.log(response.data)
                 let agrupacion = _.chain(response.data).groupBy('estadoReferido')
                     .map((value, key) => ({
