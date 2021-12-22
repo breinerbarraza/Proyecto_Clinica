@@ -13,6 +13,8 @@ import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
 import API from '../Utils/API';
 
+var _ = require("lodash")
+
 export const Dashboard2Component = () => {
 
     const [data_asesor, setData_asesor] = useState([])
@@ -76,6 +78,7 @@ export const Dashboard2Component = () => {
         const id_asesor = e.target.value;
         await API.get(`api/usuarios/metas/get_metas_month_asesor/?mes=${mes_Temporal}&id_asesor=${id_asesor}`)
         .then( data => {
+            console.log(data.data)
             const arreglo_meses = data.data;
             const meses = arreglo_meses[0]
             const total_referido = arreglo_meses[1]
@@ -88,32 +91,42 @@ export const Dashboard2Component = () => {
             setOperaciones(operaciones)
             setGestiones(gestiones_)
             setTotal_comision(total_comision_)
+            console.log(arreglo_meses)
+            let agrupacion = _.chain(meses).groupBy('tipoMeta')
+            .map((value, key)=>({
+                "referido": key,
+                "valor":value.length
+                
+            }))
+            let agrupacionArray = _.toArray(agrupacion)
+            console.log(agrupacionArray)
+            
             
         })
     }
-    const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
-        'Agosto', 'Octubre', 'Noviembre', 'Diciembre'];
+    
+    const labels = meses_map.map(item => item.mes);
 
     const data = {
         labels,
         datasets: [
             {
                 label: `Gestiones ${(metaGestion) ? metaGestion : "0"}`,
-                data: [100, 59, 80, 81, 56, 55, 96],
+                data: [gestiones.gestiones],
                 fill: false,
                 backgroundColor: '#826af9',
                 tension: 0.7
             },
             {
                 label: `Referidos ${(metaReferidos) ? metaReferidos : "0"}`,
-                data: [100, 59, 80, 81, 56, 55, 96],
+                data: [total_referidos.referidos],
                 fill: false,
                 backgroundColor: '#ff6c40',
                 tension: 0.7
             },
             {
                 label: `Operaciones ${(metaOperaciones) ? metaOperaciones : "0"}`,
-                data: [100, 59, 80, 81, 56, 55, 96],
+                data: [operaciones.operaciones],
                 fill: false,
                 backgroundColor: '#ffe700',
                 tension: 0.7
