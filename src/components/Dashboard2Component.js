@@ -74,7 +74,6 @@ export const Dashboard2Component = () => {
         }
         cargarAsesores();
     }, []);
-
     const handleMetasChangeMonth = async(e) => {
         setTotal_referidos({})
         setOperaciones({})
