@@ -59,7 +59,6 @@ export const Dashboard2Component = () => {
         }
         cargarAsesores();
     }, []);
-
     const handleMetasChangeMonth = async(e) => {
         setTotal_referidos({})
         setOperaciones({})
@@ -100,7 +99,7 @@ export const Dashboard2Component = () => {
             }))
             let agrupacionArray = _.toArray(agrupacion)
             console.log(agrupacionArray)
-            
+            /* Agrupación */
             
         })
     }
