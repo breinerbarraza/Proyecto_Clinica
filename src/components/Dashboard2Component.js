@@ -76,22 +76,21 @@ export const Dashboard2Component = () => {
         const id_asesor = e.target.value;
         await API.get(`api/usuarios/metas/get_metas_month_asesor/?mes=${mes_Temporal}&id_asesor=${id_asesor}`)
         .then( data => {
-            const respuesta = data.data;
-            console.log(respuesta)
-            //setData_meses(respuesta)
-            setTotal_referidos(respuesta[1])
-            setOperaciones(respuesta[2])
-            setGestiones(respuesta[3])
-            setTotal_comision(respuesta[respuesta.length - 1])
-            console.log(respuesta);
+            const arreglo_meses = data.data;
+            const meses = arreglo_meses[0]
+            const total_referido = arreglo_meses[1]
+            const operaciones = arreglo_meses[2]
+            const gestiones_ = arreglo_meses[3]
+            const total_comision_ = arreglo_meses[arreglo_meses.length - 1]
+            setData_meses(meses);
+            conseguirMetas_asesor(meses) //Arreglo de metas
+            setTotal_referidos(total_referido)
+            setOperaciones(operaciones)
+            setGestiones(gestiones_)
+            setTotal_comision(total_comision_)
             
         })
     }
-
-    if(data_meses.length > 0){
-        conseguirMetas_asesor(data_meses[0])   
-    }
-    
     const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
         'Agosto', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -99,21 +98,21 @@ export const Dashboard2Component = () => {
         labels,
         datasets: [
             {
-                label: `Gestiones ${metaReferidos}`,
+                label: `Gestiones ${(metaGestion) ? metaGestion : "0"}`,
                 data: [100, 59, 80, 81, 56, 55, 96],
                 fill: false,
                 backgroundColor: '#826af9',
                 tension: 0.7
             },
             {
-                label: `Referidos ${metaOperaciones}`,
+                label: `Referidos ${(metaReferidos) ? metaGestion : "0"}`,
                 data: [100, 59, 80, 81, 56, 55, 96],
                 fill: false,
                 backgroundColor: '#ff6c40',
                 tension: 0.7
             },
             {
-                label: `Operaciones ${metaOperaciones}`,
+                label: `Operaciones ${(metaOperaciones) ? metaGestion : "0"}`,
                 data: [100, 59, 80, 81, 56, 55, 96],
                 fill: false,
                 backgroundColor: '#ffe700',
@@ -176,11 +175,17 @@ export const Dashboard2Component = () => {
                         </div>
 
                     </div>
-                    <p>{total_referidos.referidos}</p>
-                    <p>{operaciones.operaciones}</p>
-                    <p>{gestiones.gestiones}</p>
-                    <p>{total_comision.total_comision}</p>
-
+                    {
+                        data_meses.length > 0 &&(
+                            <>
+                            <p>{total_referidos.referidos}</p>
+                            <p>{operaciones.operaciones}</p>
+                            <p>{gestiones.gestiones}</p>
+                            <p>{total_comision.total_comision}</p>
+                            </>    
+                        )
+                    }
+                
                     <div className="grafica2" style={{ width: "40%" }}>
                         <Line className="gra" data={data} />
                     </div>
