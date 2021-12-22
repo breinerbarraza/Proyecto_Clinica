@@ -17,9 +17,32 @@ export const Dashboard2Component = () => {
 
     const [data_asesor, setData_asesor] = useState([])
     const [mes_Temporal, setMes_Temporal] = useState("");
+    const [total_referidos, setTotal_referidos] = useState({});
+    const [operaciones, setOperaciones] = useState({});
+    const [gestiones, setGestiones] = useState({});
+    const [total_comision, setTotal_comision] = useState({});
+    const [data_meses, setData_meses] = useState([]);
+
+    const [metaReferidos, setMetaReferidos] = useState(0)
+    const [metaOperaciones, setMetaOperaciones] = useState(0)
+    const [metaGestion, setMetaGestion] = useState(0)
+
+    function conseguirMetas_asesor(arreglo){
+        const totalReferidos = arreglo.filter(item => item.tipoMeta == "referidos")
+        const totalOperaciones = arreglo.filter(item => item.tipoMeta == "operaciones")
+        const totalGestiones = arreglo.filter(item => item.tipoMeta == "gestiones")
+        
+        const total = totalReferidos.map(item => item.cantidad)
+        const operacion = totalOperaciones.map(item => item.cantidad);
+        const gestion = totalGestiones.map(item => item.cantidad)
+        setMetaReferidos(total)
+        setMetaOperaciones(operacion)
+        setMetaGestion(gestion)
+    }
+
 
     const cargarAsesores = async () => {
-        API.get('api/usuarios/user/grupo_asesor')
+        await API.get('api/usuarios/user/grupo_asesor')
             .then(resp => {
                 const respuesta = resp.data;
                 console.log(respuesta)
@@ -35,32 +58,18 @@ export const Dashboard2Component = () => {
         cargarAsesores();
     }, []);
 
-
-    const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
-        'Agosto', 'Octubre', 'Noviembre', 'Diciembre'];
-
-    const data = {
-        labels,
-        datasets: [
-            {
-                label: 'Cumplimientos de metas',
-                data: [100, 59, 80, 81, 56, 55, 96],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.7
-            },
-            
-        ]
-    };
-
     const handleMetasChangeMonth = async(e) => {
+        setTotal_referidos({})
+        setOperaciones({})
+        setGestiones({})
+        setTotal_comision({})
         const mes = e.target.value;
         setMes_Temporal(mes)
-        await API.get(`api/usuarios/metas/get_metas_month/?mes=${mes}`)
+      /*   await API.get(`api/usuarios/metas/get_metas_month/?mes=${mes}`)
             .then(resp => {
                 const methas_mes = resp.data;
-                console.log(methas_mes);
-        })
+                setData_meses(methas_mes);
+        }) */
     }
 
     const handleMetasAsesor = async(e)=>{
@@ -68,9 +77,51 @@ export const Dashboard2Component = () => {
         await API.get(`api/usuarios/metas/get_metas_month_asesor/?mes=${mes_Temporal}&id_asesor=${id_asesor}`)
         .then( data => {
             const respuesta = data.data;
+            console.log(respuesta)
+            //setData_meses(respuesta)
+            setTotal_referidos(respuesta[1])
+            setOperaciones(respuesta[2])
+            setGestiones(respuesta[3])
+            setTotal_comision(respuesta[respuesta.length - 1])
             console.log(respuesta);
+            
         })
     }
+
+    if(data_meses.length > 0){
+        conseguirMetas_asesor(data_meses[0])   
+    }
+    
+    const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+        'Agosto', 'Octubre', 'Noviembre', 'Diciembre'];
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: `Gestiones ${metaReferidos}`,
+                data: [100, 59, 80, 81, 56, 55, 96],
+                fill: false,
+                backgroundColor: '#826af9',
+                tension: 0.7
+            },
+            {
+                label: `Referidos ${metaOperaciones}`,
+                data: [100, 59, 80, 81, 56, 55, 96],
+                fill: false,
+                backgroundColor: '#ff6c40',
+                tension: 0.7
+            },
+            {
+                label: `Operaciones ${metaOperaciones}`,
+                data: [100, 59, 80, 81, 56, 55, 96],
+                fill: false,
+                backgroundColor: '#ffe700',
+                tension: 0.7
+            },
+            
+        ]
+    };
 
     return (
         <>
@@ -125,6 +176,10 @@ export const Dashboard2Component = () => {
                         </div>
 
                     </div>
+                    <p>{total_referidos.referidos}</p>
+                    <p>{operaciones.operaciones}</p>
+                    <p>{gestiones.gestiones}</p>
+                    <p>{total_comision.total_comision}</p>
 
                     <div className="grafica2" style={{ width: "40%" }}>
                         <Line className="gra" data={data} />
