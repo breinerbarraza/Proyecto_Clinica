@@ -85,7 +85,7 @@ export const Dashboard2Component = () => {
             const gestiones_ = arreglo_meses[3]
             const total_comision_ = arreglo_meses[arreglo_meses.length - 1]
             setData_meses(meses);
-            conseguirMetas_asesor(meses) //Arreglo de metas
+            conseguirMetas_asesor(meses) //funcion y se le pasa el parametro de arreglo de metas
             setTotal_referidos(total_referido)
             setOperaciones(operaciones)
             setGestiones(gestiones_)
@@ -110,22 +110,22 @@ export const Dashboard2Component = () => {
         labels,
         datasets: [
             {
-                label: `Gestiones ${(metaGestion) ? metaGestion : "0"}`,
-                data: [gestiones.gestiones],
+                label: `Gestiones ${(metaGestion != "") ? metaGestion : "0"}`,
+                data: [100, 59, 80, 81, 56, 55, 96],
                 fill: false,
                 backgroundColor: '#826af9',
                 tension: 0.7
             },
             {
-                label: `Referidos ${(metaReferidos) ? metaReferidos : "0"}`,
-                data: [total_referidos.referidos],
+                label: `Referidos ${(metaReferidos != "") ? metaReferidos : "0"}`,
+                data: [100, 59, 80, 81, 56, 55, 96],
                 fill: false,
                 backgroundColor: '#ff6c40',
                 tension: 0.7
             },
             {
-                label: `Operaciones ${(metaOperaciones) ? metaOperaciones : "0"}`,
-                data: [operaciones.operaciones],
+                label: `Operaciones ${(metaOperaciones != "") ? metaOperaciones : "0"}`,
+                data: [100, 59, 80, 81, 56, 55, 96],
                 fill: false,
                 backgroundColor: '#ffe700',
                 tension: 0.7
