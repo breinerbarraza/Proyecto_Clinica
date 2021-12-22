@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3eeffb72.chunk.css",
+    "main.js": "/static/js/main.7a42a6f9.chunk.js",
+    "main.js.map": "/static/js/main.7a42a6f9.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.dfab303a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.dfab303a.js.map",
+    "static/js/2.4905e504.chunk.js": "/static/js/2.4905e504.chunk.js",
+    "static/js/2.4905e504.chunk.js.map": "/static/js/2.4905e504.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.3eeffb72.chunk.css.map": "/static/css/main.3eeffb72.chunk.css.map",
+    "static/js/2.4905e504.chunk.js.LICENSE.txt": "/static/js/2.4905e504.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/FondoLogin.b658e308.png",
+    "static/media/ClinicaBlanco.2de6ad01.svg": "/static/media/ClinicaBlanco.2de6ad01.svg",
+    "static/media/Liberate.b3aeba88.png": "/static/media/Liberate.b3aeba88.png",
+    "static/media/Logo Clinica.758c9c4a.svg": "/static/media/Logo Clinica.758c9c4a.svg",
+    "static/media/Logout.22360af9.svg": "/static/media/Logout.22360af9.svg",
+    "static/media/chart-line-up-White.0d2d07a9.svg": "/static/media/chart-line-up-White.0d2d07a9.svg",
+    "static/media/chart-line-up.eabbf376.svg": "/static/media/chart-line-up.eabbf376.svg",
+    "static/media/user-add-Blue.2f28d4c8.svg": "/static/media/user-add-Blue.2f28d4c8.svg",
+    "static/media/user-add.eac3109d.svg": "/static/media/user-add.eac3109d.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dfab303a.js",
+    "static/js/2.4905e504.chunk.js",
+    "static/css/main.3eeffb72.chunk.css",
+    "static/js/main.7a42a6f9.chunk.js"
+  ]
+}
