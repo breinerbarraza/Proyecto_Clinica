@@ -40,7 +40,7 @@ export const Dashboard2Component = () => {
         const totalOperaciones = arreglo.filter(item => item.tipoMeta == "operaciones")
         const totalGestiones = arreglo.filter(item => item.tipoMeta == "gestiones")
         const totalProgramados = arreglo.filter(item => item.tipoMeta == "programados")
-        const totalPrequirurgicos = arreglo.filter(item => item.tipoMeta == "prequirurgicos")
+        const totalPrequirurgicos = arreglo.filter(item => item.tipoMeta == "pre-quirurgico")
         const totalPendientes = arreglo.filter(item => item.tipoMeta == "pendientes")
 
         const total = totalReferidos.map(item => item.cantidad)
@@ -128,6 +128,7 @@ export const Dashboard2Component = () => {
             
         ]
     };
+    console.log(metaPrequirurgicos)
 
     return (
         <>

@@ -23,7 +23,8 @@ export const ListadoMetas = () => {
                         "estado":item.estado,
                         "empleado":item.empleados,
                         "anio": item.anio,
-                        "cantidad": item.cantidad
+                        "cantidad": item.cantidad,
+                        "accion": ""
                     }])
                 })
 
@@ -93,6 +94,14 @@ export const ListadoMetas = () => {
                 sort: 'asc',
                 width: 100
             },
+            {
+                label: 'Accion',
+                field: 'accion',
+                sort: 'asc',
+                width: 100
+            },
+
+            
             
         ],
         rows: data_listado
