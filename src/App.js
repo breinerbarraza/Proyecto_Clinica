@@ -25,6 +25,7 @@ import { RegistrarReferidoMedia } from './components/componentMediaQuery/Registr
 import './App.css'
 import { HeaderMovil } from './components/HeaderMovil';
 import { ComponentModalMetas } from './components/ComponentModalMetas';
+import { ListadoMetas } from './components/ListadoMetas';
 
 function App() {
   return (
@@ -50,6 +51,13 @@ function App() {
               <Route exact path="/listado">
                 {localStorage.getItem('token') !== null ? (
                   <ListadoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/listado_meta">
+                {localStorage.getItem('token') !== null ? (
+                  <ListadoMetas />
                 ) : (
                   <LoginComponent />
                 )}
