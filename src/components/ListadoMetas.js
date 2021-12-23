@@ -21,7 +21,7 @@ export const ListadoMetas = () => {
                         "mes":item.mes,
                         "tipoMeta":item.tipoMeta,
                         "estado":item.estado,
-                        "empleado":item.empleados,
+                        "empleado":<Link to={`actualizar_meta`}>{item.empleados}</Link>,
                         "anio": item.anio,
                         "cantidad": item.cantidad,
                         "accion": 
