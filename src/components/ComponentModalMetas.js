@@ -37,7 +37,7 @@ export const ComponentModalMetas = () => {
     const [empleado, setEmpleado] = useState([])
 
     useEffect(() => {
-        API.get('api/usuarios/user/grupo_asesor')
+        API.get('api/usuarios/user/grupo_empleado')
             .then(({ data }) => {
                 const resp = data;
                 console.log(resp)
@@ -175,7 +175,7 @@ export const ComponentModalMetas = () => {
                                 }}
                             />
                             <FormControl fullWidth >
-                                <InputLabel shrink id="demo-simple-select-standard-label">Asesores</InputLabel>
+                                <InputLabel shrink id="demo-simple-select-standard-label">Empleados</InputLabel>
                                 <Select
                                     name="empleados"
                                     required

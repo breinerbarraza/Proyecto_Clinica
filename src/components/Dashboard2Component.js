@@ -17,7 +17,7 @@ var _ = require("lodash")
 
 export const Dashboard2Component = () => {
 
-    const [data_asesor, setData_asesor] = useState([])
+    const [data_empleado, setDataEmpleado] = useState([])
     const [mes_Temporal, setMes_Temporal] = useState("");
     const [total_referidos, setTotal_referidos] = useState({});
     const [operaciones, setOperaciones] = useState({});
@@ -59,11 +59,11 @@ export const Dashboard2Component = () => {
 
 
     const cargarAsesores = async () => {
-        await API.get('api/usuarios/user/grupo_asesor')
+        await API.get('api/usuarios/user/grupo_empleado')
             .then(resp => {
                 const respuesta = resp.data;
                 console.log(respuesta)
-                setData_asesor(respuesta);
+                setDataEmpleado(respuesta);
             })
     }
 
@@ -173,7 +173,7 @@ export const Dashboard2Component = () => {
                                     onChange={handleMetasAsesor}
                                 >
                                     {
-                                        data_asesor.map((item, key) => {
+                                        data_empleado.map((item, key) => {
                                             return <MenuItem key={key} value={item.id}>{item.first_name} {item.last_name}</MenuItem>
                                         })
                                     }

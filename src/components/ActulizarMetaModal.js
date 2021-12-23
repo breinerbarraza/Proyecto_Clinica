@@ -8,6 +8,7 @@ import Select from '@mui/material/Select';
 import API from '../Utils/API';
 import Swal from 'sweetalert2';
 import { textAlign } from '@mui/system';
+import { useParams } from 'react-router-dom';
 
 const arreglo_meses = [
     { "valor": 1, "mes": "Enero" },
@@ -25,8 +26,7 @@ const arreglo_meses = [
 ]
 
 const arreglo_metas = [
-    { "valor": 'referido', "metas": "Número de referido" },
-    { "valor": 'cantidad_dinero', "metas": "Por cantidad de dinero" },
+    { "valor": 'referidos', "metas": "Número de referido" },
     { "valor": 'gestiones', "metas": "Gestiones" },
     { "valor": 'operaciones', "metas": "Operaciones" },
 ]
@@ -36,14 +36,22 @@ export const ActualizarMetaModal = () => {
     const [metas_Modal, setMetas_Modal] = useState(true);
     const [dataForm, setDataForm] = useState({})
     const [empleado, setEmpleado] = useState([])
+    const {id} = useParams();
 
     useEffect(() => {
-        API.get('api/usuarios/user/grupo_asesor')
+        API.get('api/usuarios/user/grupo_empleado')
             .then(({ data }) => {
                 const resp = data;
                 console.log(resp)
                 setEmpleado(resp)
             })
+
+        API.get(`api/usuarios/metas/${id}`)
+        .then(({data}) => {
+            const resp = data;
+            console.log(resp)
+            setDataForm(resp)
+        })
     }, [])
 
     useEffect(() => {
@@ -65,10 +73,9 @@ export const ActualizarMetaModal = () => {
         });
     }
 
-    const enviarMeta = async (e) => {
+    const actualizarMeta = async (e) => {
         e.preventDefault();
         console.log(dataForm)
-        return;
         const inputAnio = document.getElementById("anio")
         const fechaActual = new Date().getFullYear();
         if(inputAnio.value < fechaActual){
@@ -79,10 +86,10 @@ export const ActualizarMetaModal = () => {
             });
         } 
         else{
-            await API.post('api/usuarios/metas/create_metas/', JSON.stringify(dataForm))
+            await API.put(`api/usuarios/metas/${id}/`, JSON.stringify(dataForm))
             .then(({ data }) => {
                 const resp = data
-                if (resp.data) {
+                if (resp) {
                     const mensaje = resp.data;
                     document.getElementById("modal").reset();
                     return Swal.fire({
@@ -113,7 +120,7 @@ export const ActualizarMetaModal = () => {
             </ModalHeader>
             <ModalBody>
                 <div className="body_modal">
-                    <form onSubmit={enviarMeta} id='modal'>
+                    <form onSubmit={actualizarMeta} id='modal'>
                         <FormControl fullWidth id='modal' >
                             <FormControl fullWidth >
                                 <InputLabel shrink id="demo-simple-select-standard-label">Seleccione Mes</InputLabel>
@@ -136,6 +143,7 @@ export const ActualizarMetaModal = () => {
                                 id="anio"
                                 type="number"
                                 name="anio"
+                                value={dataForm.anio}
                                 label="Anio"
                                 required
                                 className="form-control RegistrarReferido"
@@ -150,6 +158,7 @@ export const ActualizarMetaModal = () => {
                                 <InputLabel shrink id="demo-simple-select-standard-label">Tipo de Metas</InputLabel>
                                 <Select
                                     name="tipoMeta"
+                                    value={dataForm.tipoMeta}
                                     required
                                     label="metas"
                                     id="demo-simple-select-standard"
@@ -166,6 +175,7 @@ export const ActualizarMetaModal = () => {
                             <TextField
                                 type="number"
                                 name="cantidad"
+                                value={dataForm.cantidad}
                                 label="Cantidad"
                                 required
                                 className="form-control RegistrarReferido"
@@ -176,7 +186,7 @@ export const ActualizarMetaModal = () => {
                                 }}
                             />
                             <FormControl fullWidth >
-                                <InputLabel shrink id="demo-simple-select-standard-label">Asesores</InputLabel>
+                                <InputLabel shrink id="demo-simple-select-standard-label">Empleados</InputLabel>
                                 <Select
                                     name="empleados"
                                     required
@@ -197,7 +207,7 @@ export const ActualizarMetaModal = () => {
                 </div>
             </ModalBody>
             <ModalFooter>
-                <button className="btn btn" style={{background:"#02305b", color:"white"}} onClick={enviarMeta}>Guardar Meta</button>
+                <button className="btn btn" style={{background:"#02305b", color:"white"}} onClick={actualizarMeta}>Guardar Meta</button>
                 <button className="btn btn" style={{background:"#02305b", color:"white"}} onClick={cerrarModal}>Cerrar</button>
             </ModalFooter>
         </Modal>
