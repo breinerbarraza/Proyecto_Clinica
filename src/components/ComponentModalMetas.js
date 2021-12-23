@@ -13,7 +13,7 @@ const arreglo_meses = [
     { "valor": 1, "mes": "Enero" },
     { "valor": 2, "mes": "Febrero" },
     { "valor": 3, "mes": "Marzo" },
-    { "valor": 4, "mes": "Abrir" },
+    { "valor": 4, "mes": "Abril" },
     { "valor": 5, "mes": "Mayo" },
     { "valor": 6, "mes": "Junio" },
     { "valor": 7, "mes": "Julio" },
@@ -35,6 +35,7 @@ export const ComponentModalMetas = () => {
     const [metas_Modal, setMetas_Modal] = useState(true);
     const [dataForm, setDataForm] = useState({})
     const [empleado, setEmpleado] = useState([])
+    const [arreglo_de_Todos, setArreglo_de_Todos] = useState([])
 
     useEffect(() => {
         API.get('api/usuarios/user/grupo_empleado')
@@ -42,6 +43,13 @@ export const ComponentModalMetas = () => {
                 const resp = data;
                 console.log(resp)
                 setEmpleado(resp)
+            })
+        API.get('api/usuarios/user/grupo_all')
+            .then(({data}) => {
+                const resp = data.ids_empleados
+                const ids = resp.map(item => item.id)
+                console.log(ids)
+                setArreglo_de_Todos(ids);
             })
     }, [])
 
@@ -182,7 +190,9 @@ export const ComponentModalMetas = () => {
                                     label="empleados"
                                     id="demo-simple-select-standard"
                                     onChange={handleInputChange}
+                                    displayEmpty
                                 >
+                                    <MenuItem value={arreglo_de_Todos}>Todos los empleados</MenuItem>
                                     {
                                         empleado.map((item, key) => {
                                             return <MenuItem key={key} value={item.id} >{item.first_name} {item.last_name}</MenuItem>

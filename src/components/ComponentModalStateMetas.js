@@ -39,6 +39,7 @@ export const ComponentModalStateMetas = () => {
     const [dataForm, setDataForm] = useState({})
     const [empleado, setEmpleado] = useState([])
     const [estado , setEstado ] = useState([])
+    const [arreglo_de_Todos, setArreglo_de_Todos] = useState([])
 
     const cargarEstados = async () => {
         await API.get('api/configuracion/estadoReferido/get_estados')
@@ -57,6 +58,15 @@ export const ComponentModalStateMetas = () => {
                 console.log(resp)
                 setEmpleado(resp)
             })
+        
+        API.get('api/usuarios/user/grupo_all')
+            .then(({data}) => {
+                const resp = data.ids_empleados
+                const ids = resp.map(item => item.id)
+                console.log(ids)
+                setArreglo_de_Todos(ids);
+        })
+
     }, [])
 
     useEffect(() => {
@@ -216,7 +226,9 @@ export const ComponentModalStateMetas = () => {
                                     label="empleados"
                                     id="demo-simple-select-standard"
                                     onChange={handleInputChange}
+                                    displayEmpty
                                 >
+                                    <MenuItem value={arreglo_de_Todos}>Todos los empleados</MenuItem>
                                     {
                                         empleado.map((item, key) => {
                                             return <MenuItem key={key} value={item.id} >{item.first_name} {item.last_name}</MenuItem>
