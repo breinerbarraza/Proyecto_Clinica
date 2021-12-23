@@ -186,7 +186,7 @@ export const ListadoMetas = () => {
             <PerfilComponent />
             <HeaderComponent users={false} dashboard={true} />
             <div className="lista-container">
-                <h2 style={{marginBottom: "25px"}}>Listado de Metas</h2>
+                <h2 style={{marginBottom: "26px", fontSize: '28px' , color: "#02305b"}}>Listado de Metas</h2>
                 <div className="tabla-lista">
                     {showTable()}
                 </div>
