@@ -164,7 +164,7 @@ export const Dashboard2Component = () => {
 
                         <div className="select-mes">
                             <FormControl fullWidth  >
-                                <InputLabel shrink id="demo-simple-select-standard-label">Asesores</InputLabel>
+                                <InputLabel shrink id="demo-simple-select-standard-label">Empleados</InputLabel>
                                 <Select
                                     name="id_asesor"
                                     label="Asesores"
