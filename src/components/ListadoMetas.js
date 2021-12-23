@@ -101,7 +101,13 @@ export const ListadoMetas = () => {
     }
 
     useEffect(() => {
-        Metas();
+        let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+        if(super_user){
+            Metas();
+        }else{
+            window.location='/'
+        }
+        
     }, [])
 
 

@@ -204,7 +204,7 @@ export const ActualizarMetaModal = () => {
                             <FormControl fullWidth >
                                 <InputLabel shrink id="demo-simple-select-standard-label">Tipo de estado</InputLabel>
                                 <Select
-                                    name="id_estado"
+                                    name="estado"
                                     required
                                     displayEmpty
                                     label="estados"
