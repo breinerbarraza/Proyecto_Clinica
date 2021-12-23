@@ -21,18 +21,22 @@ export const ListadoMetas = () => {
                         "mes":item.mes,
                         "tipoMeta":item.tipoMeta,
                         "estado":item.estado,
-                        "empleado":<Link to={`actualizar_meta`}>{item.empleados}</Link>,
+                        "empleado":item.empleados,
                         "anio": item.anio,
                         "cantidad": item.cantidad,
                         "accion": 
                             <>
-                                <button className="btn btn-danger"><i className="fas fa-trash" style={{fontSize:'10px'}}><Link></Link></i></button>
-                                <button className="btn btn-primary"><i className='fas fa-edit' style={{fontSize:'10px'}}><Link></Link></i></button>
+                                <button className="btn btn-danger" style={{marginLeft: '4px'}} onClick={() => borrarMeta(item.id)}><i className="fas fa-trash" style={{fontSize:'10px'}}></i></button>
+                                <Link to={`actualizar_meta/${item.id}`}><button className="btn btn-primary" style={{marginLeft: '4px'}}><i className='fas fa-edit' style={{fontSize:'10px'}}></i></button></Link>
                             </>
                         }])
                 })
 
             })
+    }
+
+    const borrarMeta = async(id)=>{
+        console.log(id);
     }
 
     useEffect(() => {

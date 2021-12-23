@@ -55,7 +55,7 @@ export const ActualizarMetaModal = () => {
 
     const cerrarModal = () => {
         setMetas_Modal(false);
-        return window.location = "listado_meta";
+        return window.location = "/listado_meta";
     }
 
     const handleInputChange = (e) => {
@@ -68,6 +68,7 @@ export const ActualizarMetaModal = () => {
     const enviarMeta = async (e) => {
         e.preventDefault();
         console.log(dataForm)
+        return;
         const inputAnio = document.getElementById("anio")
         const fechaActual = new Date().getFullYear();
         if(inputAnio.value < fechaActual){

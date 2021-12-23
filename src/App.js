@@ -56,7 +56,7 @@ function App() {
                   <LoginComponent />
                 )}
               </Route>
-              <Route exact path="/actualizar_meta">
+              <Route exact path="/actualizar_meta/:id">
                 {localStorage.getItem('token') !== null ? (
                   <ActualizarMetaModal />
                 ) : (
@@ -107,14 +107,6 @@ function App() {
               <Route exact path="/add_metas_estate">
                 {localStorage.getItem('token') !== null ? (
                   <ComponentModalStateMetas/>
-                ) : (
-                  <LoginComponent />
-                )}
-              </Route>
-
-              <Route exact path="/listado_metas">
-                {localStorage.getItem('token') !== null ? (
-                  <ListadoMetas/>
                 ) : (
                   <LoginComponent />
                 )}
