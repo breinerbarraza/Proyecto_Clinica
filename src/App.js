@@ -27,7 +27,7 @@ import { HeaderMovil } from './components/HeaderMovil';
 import { ComponentModalMetas } from './components/ComponentModalMetas';
 import { ListadoMetas } from './components/ListadoMetas';
 import { ComponentModalStateMetas } from './components/ComponentModalStateMetas';
-
+import { ActualizarMetaModal } from './components/ActulizarMetaModal';
 function App() {
   return (
     <div>
@@ -52,6 +52,13 @@ function App() {
               <Route exact path="/listado">
                 {localStorage.getItem('token') !== null ? (
                   <ListadoComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+              <Route exact path="/actualizar_meta">
+                {localStorage.getItem('token') !== null ? (
+                  <ActualizarMetaModal />
                 ) : (
                   <LoginComponent />
                 )}
