@@ -54,7 +54,7 @@ export const ComponentModalMetas = () => {
 
     const cerrarModal = () => {
         setMetas_Modal(false);
-        return window.location = "/";
+        return window.location = "/listado_meta";
     }
 
     const handleInputChange = (e) => {

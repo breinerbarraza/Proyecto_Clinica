@@ -36,7 +36,18 @@ export const ActualizarMetaModal = () => {
     const [metas_Modal, setMetas_Modal] = useState(true);
     const [dataForm, setDataForm] = useState({})
     const [empleado, setEmpleado] = useState([])
+    const [estado, setEstado] = useState([])
     const {id} = useParams();
+
+    const cargarEstados = async () => {
+        await API.get('api/configuracion/estadoReferido/get_estados')
+          .then(data => {
+            const resp = data.data;
+            setEstado(resp)
+            console.log(resp);
+          })
+          .catch(console.error);
+    }
 
     useEffect(() => {
         API.get('api/usuarios/user/grupo_empleado')
@@ -44,6 +55,7 @@ export const ActualizarMetaModal = () => {
                 const resp = data;
                 console.log(resp)
                 setEmpleado(resp)
+                cargarEstados();
             })
 
         API.get(`api/usuarios/metas/${id}`)
@@ -177,11 +189,32 @@ export const ActualizarMetaModal = () => {
                                     label="metas"
                                     id="demo-simple-select-standard"
                                     onChange={handleInputChange}
+                                    style={{marginBottom:"20px"}}
                                 >
                                     <MenuItem>{dataForm.tipoMeta}</MenuItem>
                                     {
                                         arreglo_metas.map((item, key) => {
                                             return <MenuItem key={key} value={item.valor} >{item.metas}</MenuItem>
+                                        })
+                                    }
+
+                                </Select>
+                            </FormControl>
+
+                            <FormControl fullWidth >
+                                <InputLabel shrink id="demo-simple-select-standard-label">Tipo de estado</InputLabel>
+                                <Select
+                                    name="id_estado"
+                                    required
+                                    displayEmpty
+                                    label="estados"
+                                    id="demo-simple-select-standard"
+                                    onChange={handleInputChange}
+                                >
+                                    <MenuItem>{dataForm.nombre_estado}</MenuItem>
+                                    {
+                                        estado.map((item, key) => {
+                                            return <MenuItem key={key} value={item.id} >{item.descripcion}</MenuItem>
                                         })
                                     }
 
