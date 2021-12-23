@@ -24,8 +24,12 @@ export const ListadoMetas = () => {
                         "empleado":item.empleados,
                         "anio": item.anio,
                         "cantidad": item.cantidad,
-                        "accion": ""
-                    }])
+                        "accion": 
+                            <>
+                                <button className="btn btn-danger"><i className="fas fa-trash" style={{fontSize:'10px'}}><Link></Link></i></button>
+                                <button className="btn btn-primary"><i className='fas fa-edit' style={{fontSize:'10px'}}><Link></Link></i></button>
+                            </>
+                        }])
                 })
 
             })
@@ -100,8 +104,6 @@ export const ListadoMetas = () => {
                 sort: 'asc',
                 width: 100
             },
-
-            
             
         ],
         rows: data_listado
