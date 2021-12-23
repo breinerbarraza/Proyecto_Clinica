@@ -116,7 +116,7 @@ export const ActualizarMetaModal = () => {
     return (
         <Modal isOpen={metas_Modal} >
             <ModalHeader>
-                <h5 className="add_meta_msg_">¡Actualizar meta!</h5>
+                <h3>Actualizar Meta</h3>
             </ModalHeader>
             <ModalBody>
                 <div className="body_modal">
@@ -125,12 +125,25 @@ export const ActualizarMetaModal = () => {
                             <FormControl fullWidth >
                                 <InputLabel shrink id="demo-simple-select-standard-label">Seleccione Mes</InputLabel>
                                 <Select
+                                 displayEmpty
                                     name="mes"
                                     required
                                     label="mes"
                                     id="demo-simple-select-standard"
                                     onChange={handleInputChange}
+                                    value={dataForm.mes}
                                 >
+                                    {
+                                        arreglo_meses.filter( item => (
+                                            item.valor == dataForm.mes 
+                                        ))
+                                        .map(item => {
+                                            return <MenuItem >{item.mes} </MenuItem>
+                                        })
+                                    
+                                     
+                                    }
+
                                     {
                                         arreglo_meses.map((item, key) => {
                                             return <MenuItem key={key} value={item.valor} >{item.mes}</MenuItem>
@@ -160,10 +173,12 @@ export const ActualizarMetaModal = () => {
                                     name="tipoMeta"
                                     value={dataForm.tipoMeta}
                                     required
+                                    displayEmpty
                                     label="metas"
                                     id="demo-simple-select-standard"
                                     onChange={handleInputChange}
                                 >
+                                    <MenuItem>{dataForm.tipoMeta}</MenuItem>
                                     {
                                         arreglo_metas.map((item, key) => {
                                             return <MenuItem key={key} value={item.valor} >{item.metas}</MenuItem>
@@ -190,10 +205,12 @@ export const ActualizarMetaModal = () => {
                                 <Select
                                     name="empleados"
                                     required
+                                    displayEmpty
                                     label="empleados"
                                     id="demo-simple-select-standard"
                                     onChange={handleInputChange}
                                 >
+                                    <MenuItem>{dataForm.empleado}</MenuItem>
                                     {
                                         empleado.map((item, key) => {
                                             return <MenuItem key={key} value={item.id} >{item.first_name} {item.last_name}</MenuItem>

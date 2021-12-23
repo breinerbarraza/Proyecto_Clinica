@@ -7,6 +7,20 @@ import API from '../Utils/API';
 import Chip from '@mui/material/Chip';
 import Swal from 'sweetalert2';
 
+const arreglo_meses = [
+    { "valor": 1, "mes": "Enero" },
+    { "valor": 2, "mes": "Febrero" },
+    { "valor": 3, "mes": "Marzo" },
+    { "valor": 4, "mes": "Abrir" },
+    { "valor": 5, "mes": "Mayo" },
+    { "valor": 6, "mes": "Junio" },
+    { "valor": 7, "mes": "Julio" },
+    { "valor": 8, "mes": "Agosto" },
+    { "valor": 9, "mes": "Septiembre" },
+    { "valor": 10, "mes": "Octubre" },
+    { "valor": 11, "mes": "Noviembre" },
+    { "valor": 12, "mes": "Diciembre" },
+]
 export const ListadoMetas = () => {
 
     const [data_listado, setData_listado] = useState([])
@@ -19,7 +33,14 @@ export const ListadoMetas = () => {
                 datos.map((item) =>{
                     setData_listado(data_listado => [...data_listado,{
                         "id":item.id,
-                        "mes":item.mes,
+                        /* "mes":item.mes, */
+                        "mes": 
+                            arreglo_meses.filter( el => (
+                                el.valor == item.mes
+                            ))
+                            .map( item =>  {
+                                return item.mes
+                            }),       
                         "tipoMeta":item.tipoMeta,
                         "estado":item.nombre_estado,
                         "empleado":item.empleado,
@@ -31,6 +52,7 @@ export const ListadoMetas = () => {
                                 <Link to={`actualizar_meta/${item.id}`}><button className="btn btn-primary" style={{marginLeft: '4px'}}><i className='fas fa-edit' style={{fontSize:'10px'}} title={item.id}></i></button></Link>
                             </>
                         }])
+                        console.log(data_listado)
                 })
 
             })
