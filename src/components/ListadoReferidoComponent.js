@@ -110,13 +110,13 @@ export const ListadoReferidoComponent = () => {
     let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
     setState_superUser(super_user)
     setid_localStorage(id_user)
+    cargarSelect()
+    cargarEstados()
     if (super_user) {
       load()
-      cargarSelect()
     } else {
       load_referidos_by_id(id_user)
     }
-    cargarEstados()
   }, []);
 
   const handleSelectMonth_admin = async (e) => {
