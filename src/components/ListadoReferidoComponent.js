@@ -14,13 +14,15 @@ import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
 export const ListadoReferidoComponent = () => {
 
-  const [data_listado, setData_listado] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [data_listado, setData_listado] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [cmb_listado, setCmb_listado] = useState([]);
   const [data_meses, setData_meses] = useState([]);
   const [mes_temporal, setMes_temporal] = useState("");
   const [state_superUser, setState_superUser] = useState(false);
-  const [id_localStorage, setid_localStorage] = useState("")
+  const [id_localStorage, setid_localStorage] = useState("");
+  const [arreglo_year, setArreglo_year] = useState([]);
+  const [anio_temporal, setAnioTemporal] = useState([]);
 
   const load = async () => {
     setLoading(true)
@@ -62,6 +64,19 @@ export const ListadoReferidoComponent = () => {
       })
     setLoading(false)
   }
+  
+  const cargarSelect = ()=>{
+    const fecha = new Date();
+    const anio_actual = fecha.getFullYear()
+    const arreglo = []
+    for(let x = 1900; x < anio_actual + 1; x++){
+      const obj = {
+        valor: x
+      }
+      arreglo.push(obj)
+    }
+    setArreglo_year(arreglo)
+  }
 
   const cargarEstados = async () => {
     await API.get('api/configuracion/estadoReferido/')
@@ -97,6 +112,7 @@ export const ListadoReferidoComponent = () => {
     setid_localStorage(id_user)
     if (super_user) {
       load()
+      cargarSelect()
     } else {
       load_referidos_by_id(id_user)
     }
@@ -211,6 +227,12 @@ export const ListadoReferidoComponent = () => {
   }
 
 
+  const handleYearChange = (e)=>{
+    const anio = e.target.value;
+    console.log(anio);
+    setAnioTemporal(anio)
+  }
+
 
   const data = {
 
@@ -266,6 +288,24 @@ export const ListadoReferidoComponent = () => {
                 flexDirection: 'row',
                 gap: 20
               }}>
+                
+                <div className="select-mes">
+                  <FormControl fullWidth  >
+                    <InputLabel shrink id="demo-simple-select-standard-label">Años</InputLabel>
+                    <Select
+                      name="anio"
+                      label="Anio"
+                      id="demo-simple-select-standard"
+                      onChange={handleYearChange}
+                    >
+                      {
+                        arreglo_year.map((item, key) => {
+                          return <MenuItem key={key} value={item.valor}>{item.valor}</MenuItem>
+                        })
+                      }
+                    </Select>
+                  </FormControl>
+                </div>
                 <div className="select-mes">
 
                   <FormControl fullWidth  >
@@ -378,6 +418,7 @@ export const ListadoReferidoComponent = () => {
                   flexDirection: 'row',
                   gap: 20
                 }}>
+
                   <div className="select-mes">
 
                     <FormControl fullWidth  >
