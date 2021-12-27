@@ -69,7 +69,7 @@ export const ListadoReferidoComponent = () => {
     const fecha = new Date();
     const anio_actual = fecha.getFullYear()
     const arreglo = []
-    for(let x = 1900; x < anio_actual + 1; x++){
+    for(let x = anio_actual; x >= 1900; x--){
       const obj = {
         valor: x
       }
@@ -123,7 +123,7 @@ export const ListadoReferidoComponent = () => {
     setData_meses([]);
     const mes = e.target.value;
     setMes_temporal(mes)
-    await API.get(`api/referidos/get_referidos_month/?mes=${mes}`)
+    await API.get(`api/referidos/get_referidos_month/?mes=${mes}&anio=${anio_temporal}`)
       .then(data => {
         const arreglo_referidos_month = data.data;
         console.log(arreglo_referidos_month);
@@ -173,9 +173,7 @@ export const ListadoReferidoComponent = () => {
   const handleSelectEstate_admin = async (e) => {
     setData_meses([]);
     const id_estado = e.target.value;
-    console.log(mes_temporal)
-    console.log(id_estado)
-    await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${id_estado}`)
+    await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${id_estado}&anio=${anio_temporal}`)
       .then(data => {
         const respuesta = data.data;
         console.log(respuesta);
@@ -191,7 +189,6 @@ export const ListadoReferidoComponent = () => {
             }])
           ))
         } else {
-          console.log("No hay nada que mostrar");
           setData_meses([0]);
         }
 
@@ -291,7 +288,7 @@ export const ListadoReferidoComponent = () => {
                 
                 <div className="select-mes">
                   <FormControl fullWidth  >
-                    <InputLabel shrink id="demo-simple-select-standard-label">Años</InputLabel>
+                    <InputLabel shrink id="demo-simple-select-standard-label">Año</InputLabel>
                     <Select
                       name="anio"
                       label="Anio"
