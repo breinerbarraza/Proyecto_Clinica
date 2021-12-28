@@ -17,6 +17,7 @@ export const EstadoComponent = () => {
     const [data_pendiente, setData_pendiente] = useState({})
     const [data, setData] = useState({})
     const [data_medicos, setData_medicos] = useState([]);
+    const [estadoEmpleado, setEstadoEmpleado] = useState(false)
 
     const [cmbListado, setCmbListado] = useState([]);
     const { id } = useParams();
@@ -25,12 +26,24 @@ export const EstadoComponent = () => {
 
         API.get("api/referidos/" + id)
             .then(item => {
-                //console.log(item.data)
                 setData_pendiente(item.data)
             })
     }, [id]);
 
     useEffect(() => {
+        const id = localStorage.getItem('id_user')
+
+        API.get(`api/referidos/comprobar_empleado/?id_empleado=${id}`)
+        .then( data =>{
+            console.log(data.data)
+            const respuesta = data.data;
+            if(respuesta.msg){
+                setEstadoEmpleado(true);
+            }else{
+                setEstadoEmpleado(false);
+            }
+        } )
+
         API.get("api/usuarios/user/grupo_medico")
             .then(data => {
                 setData_medicos(data.data)
@@ -51,7 +64,6 @@ export const EstadoComponent = () => {
                 if (resp) {
                     return Swal.fire({
                         icon: 'success',
-                        title: 'Mensaje!',
                         text: resp.mensaje,
                     })
                 } else {
@@ -74,7 +86,6 @@ export const EstadoComponent = () => {
                 if (resp) {
                     return Swal.fire({
                         icon: 'success',
-                        title: 'Mensaje!',
                         text: resp.mensaje,
                     })
                 } else {
@@ -97,7 +108,6 @@ export const EstadoComponent = () => {
                 if (resp) {
                     return Swal.fire({
                         icon: 'success',
-                        title: 'Mensaje!',
                         text: resp.mensaje,
                     })
                 } else {
@@ -124,7 +134,6 @@ export const EstadoComponent = () => {
                 if (data.msg) {
                     return Swal.fire({
                         icon: 'success',
-                        title: 'Mensaje!',
                         text: data.msg,
                         confirmButtonText: "Ok"
                     }).then((result) => {
@@ -161,17 +170,22 @@ export const EstadoComponent = () => {
                                 backgroundColor: data_pendiente.color_estado
                             }}
                         />
-                        <form onSubmit={handleChangeEstado}>
-                            <select className="select-estado" name="estadoReferido" onChange={handleInput}>
-                                <option selected="selected">--CAMBIE EL ESTADO--</option>
-                                {
-                                    cmbListado.map((item) => {
-                                        return <option key={item.id} value={item.id} style={{ backgroundColor: item.color }} >{item.descripcion}</option>
-                                    })
-                                }
-                            </select>
-                            <button type="submit" className="btn btn-primary change_estado" title="Actualizar Estado" ><i class="fas fa-edit"></i></button>
-                        </form>
+                        {
+                            !estadoEmpleado && (
+                                <form onSubmit={handleChangeEstado}>
+                                <select className="select-estado" name="estadoReferido" onChange={handleInput}>
+                                    <option selected="selected">--CAMBIE EL ESTADO--</option>
+                                    {
+                                        cmbListado.map((item) => {
+                                            return <option key={item.id} value={item.id} style={{ backgroundColor: item.color }} >{item.descripcion}</option>
+                                        })
+                                    }
+                                </select>
+                                <button type="submit" className="btn btn-primary change_estado" title="Actualizar Estado" ><i class="fas fa-edit"></i></button>
+                            </form>
+                            )
+                        }
+                       
                     </div>
                     <div className="infomacion">
                         <div className="nacimiento">

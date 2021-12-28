@@ -25,7 +25,21 @@ export const DashboardComponent = () => {
     const [datosCambioEstado, setDatosCambioEstado] = useState([]);
     const [total_referidos, setTotal_referidos] = useState({});
     const [total_referidos_first, setTotal_referidos_first] = useState("");
+    const [anio_temporal, setAnio_temporal] = useState("");
+    const [arreglo_year, setArreglo_year] = useState([]);
 
+    const cargarSelect = ()=>{
+        const fecha = new Date();
+        const anio_actual = fecha.getFullYear()
+        const arreglo = []
+        for(let x = anio_actual; x >= 1900; x--){
+          const obj = {
+            valor: x
+          }
+          arreglo.push(obj)
+        }
+        setArreglo_year(arreglo)
+    }
 
     const filter_cambio_estado = async (mes) => {
         await API.get(`api/referidos/dashboard_app/?mes=${mes}`)
@@ -89,34 +103,63 @@ export const DashboardComponent = () => {
         }]
     }
 
-    const handleSelectMonth = async (e) => {
+    const handleSelectYear = (e)=>{
+        const anio = e.target.value;
+        setAnio_temporal(anio);
+        console.log(anio);
+    }
+
+    const handleSelectMonth = async(e) => {
         setData_meses([]);
         setLabelColors([]);
         setTiposFormulario([]);
         setCantidades([]);
         setTotal_referidos_first(0);
+        
         const mes = e.target.value;
-        cargarTotalReferidos(mes)
-        API.get(`api/referidos/get_referidos_month/?mes=${mes}`)
-            .then(response => {
-                console.log(response.data);
-                let agrupacion = _.chain(response.data).groupBy('estadoReferido')
-                    .map((value, key) => ({
-                        "estado": key,
-                        "valor": value.length,
-                        "color": 'rgba(' + (Math.floor(Math.random() * 256)) + ','
-                            + (Math.floor(Math.random() * 256)) + ','
-                            + (Math.floor(Math.random() * 255)) + ', 0.8)'
-                    }))
-                let agrupacionArray = _.toArray(agrupacion)
-                console.log("Datos de la agrupacion: ", agrupacionArray)
-                setPieChartData(agrupacionArray)
-                agrupacionArray.map((el) => (
-                    setLabelColors(labelColors => [...labelColors, el.color]),
-                    setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
-                    setCantidades(cantidades => [...cantidades, el.valor]),
-                    console.log("Estados", el)
-                ))
+        await API.get(`api/referidos/get_referidos_month/?mes=${mes}&anio=${anio_temporal}`)
+        .then(response => {
+            const referidos_data = response.data;
+            if(referidos_data.length > 0){
+                    cargarTotalReferidos(mes)
+                    console.log(referidos_data);
+                    let agrupacion = _.chain(referidos_data).groupBy('estadoReferido')
+                        .map((value, key) => ({
+                            "estado": key,
+                            "valor": value.length,
+                            "color": 'rgba(' + (Math.floor(Math.random() * 256)) + ','
+                                + (Math.floor(Math.random() * 256)) + ','
+                                + (Math.floor(Math.random() * 255)) + ', 0.8)'
+                        }))
+                    let agrupacionArray = _.toArray(agrupacion)
+                    console.log("Datos de la agrupacion: ", agrupacionArray)
+                    setPieChartData(agrupacionArray)
+                    agrupacionArray.map((el) => (
+                        setLabelColors(labelColors => [...labelColors, el.color]),
+                        setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
+                        setCantidades(cantidades => [...cantidades, el.valor]),
+                        console.log("Estados", el)
+                    ))
+                }else{
+                    setTotal_referidos({})
+                    let agrupacion = _.chain(referidos_data).groupBy('estadoReferido')
+                        .map((value, key) => ({
+                            "estado": key,
+                            "valor": value.length,
+                            "color": 'rgba(' + (Math.floor(Math.random() * 256)) + ','
+                                + (Math.floor(Math.random() * 256)) + ','
+                                + (Math.floor(Math.random() * 255)) + ', 0.8)'
+                        }))
+                    let agrupacionArray = _.toArray(agrupacion)
+                    console.log("Datos de la agrupacion: ", agrupacionArray)
+                    setPieChartData(agrupacionArray)
+                    agrupacionArray.map((el) => (
+                        setLabelColors(labelColors => [...labelColors, el.color]),
+                        setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
+                        setCantidades(cantidades => [...cantidades, el.valor]),
+                        console.log("Estados", el)
+                    ))
+                }
             })
     }
 
@@ -134,6 +177,7 @@ export const DashboardComponent = () => {
             return window.location = "/";
         }
         load()
+        cargarSelect()
 
     }, []);
 
@@ -148,7 +192,24 @@ export const DashboardComponent = () => {
                             <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
                         </div>
                         <div className="select-dashboard" style={{ width: "40%" }}>
-                            <FormControl fullWidth style={{ marginBottom: '15px' }}>
+                           <FormControl fullWidth style={{ marginBottom: '15px', width:'230px'}}>
+                                        <InputLabel shrink id="demo-simple-select-standard-label">Año</InputLabel>
+                                        <Select
+                                            name="anio"
+                                            label="Año"
+                                            id="demo-simple-select-standard"
+                                            style={{ marginBottom: "-4px" }}
+                                            onChange={handleSelectYear}
+                                        >
+                                            {
+                                                arreglo_year.map((item, key) => {
+                                                    return <MenuItem key={key} value={item.valor}>{item.valor}</MenuItem>
+                                                })
+                                            }
+                                        </Select>
+                            </FormControl>
+
+                            <FormControl fullWidth style={{ marginBottom: '20px', marginLeft:'5px', width:'230px' }}>
                                 <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
                                 <Select
                                     name="mes"
@@ -211,22 +272,23 @@ export const DashboardComponent = () => {
                             <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
                         </div>
                         <div className="select-dashboard" style={{ width: "10t0%" }}>
-                            <FormControl fullWidth style={{ marginBottom: '15px' }}>
-                                <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
-                                <Select
-                                    name="mes"
-                                    label="Mes"
-                                    id="demo-simple-select-standard"
-                                    style={{ marginBottom: "-4px" }}
-                                    onChange={handleSelectMonth}
-                                >
-                                    {
-                                        meses_map.map((item, key) => {
-                                            return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
-                                        })
-                                    }
-                                </Select>
-                            </FormControl>
+                                
+                                <FormControl fullWidth style={{ marginBottom: '15px'}}>
+                                    <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
+                                    <Select
+                                        name="mes"
+                                        label="Mes"
+                                        id="demo-simple-select-standard"
+                                        style={{ marginBottom: "-4px" }}
+                                        onChange={handleSelectMonth}
+                                    >
+                                        {
+                                            meses_map.map((item, key) => {
+                                                return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
+                                            })
+                                        }
+                                    </Select>
+                                </FormControl>
                             <b>Total referidos: </b>{(total_referidos_first == 0) ? total_referidos.Total_referidos : total_referidos_first}
                             {
                                 data_meses.length == 0 &&

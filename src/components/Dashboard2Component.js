@@ -28,12 +28,14 @@ export const Dashboard2Component = () => {
     const [pendientes, setPendientes] = useState({});
     const [data_meses, setData_meses] = useState([]);
 
-    const [metaReferidos, setMetaReferidos] = useState(0)
-    const [metaOperaciones, setMetaOperaciones] = useState(0)
-    const [metaGestion, setMetaGestion] = useState(0)
-    const [metaProgramados, setMetaProgramados] = useState(0)
-    const [metaPrequirurgicos, setMetaPrequirurgicos] = useState(0)
-    const [metaPendientes, setMetaPendiente] = useState(0)
+    const [metaReferidos, setMetaReferidos] = useState(0);
+    const [metaOperaciones, setMetaOperaciones] = useState(0);
+    const [metaGestion, setMetaGestion] = useState(0);
+    const [metaProgramados, setMetaProgramados] = useState(0);
+    const [metaPrequirurgicos, setMetaPrequirurgicos] = useState(0);
+    const [metaPendientes, setMetaPendiente] = useState(0);
+    const [arreglo_year, setArreglo_year] = useState([]);
+    const [anio_Temporal, setAnio_Temporal] = useState("");
 
     function conseguirMetas_asesor(arreglo){
         const totalReferidos = arreglo.filter(item => item.tipoMeta == "referidos")
@@ -57,6 +59,19 @@ export const Dashboard2Component = () => {
         setMetaPendiente(pendientes)
     }
 
+    const cargarSelect = ()=>{
+        const fecha = new Date();
+        const anio_actual = fecha.getFullYear()
+        const arreglo = []
+        for(let x = anio_actual; x <= 2100; x++){
+          const obj = {
+            valor: x
+          }
+          arreglo.push(obj)
+        }
+        setArreglo_year(arreglo)
+    }
+
 
     const cargarAsesores = async () => {
         await API.get('api/usuarios/user/grupo_empleado')
@@ -73,6 +88,7 @@ export const Dashboard2Component = () => {
             return window.location = "/";
         }
         cargarAsesores();
+        cargarSelect();
     }, []);
     const handleMetasChangeMonth = async(e) => {
         setTotal_referidos({})
@@ -83,30 +99,38 @@ export const Dashboard2Component = () => {
         setMes_Temporal(mes);
     }
 
+    const handleSelectYear = (e)=>{
+        const year = e.target.value;
+        console.log(year)
+        setAnio_Temporal(year)
+    }
+
     const handleMetasAsesor = async(e)=>{
         const id_asesor = e.target.value;
-        await API.get(`api/usuarios/metas/get_metas_month_asesor/?mes=${mes_Temporal}&id_asesor=${id_asesor}`)
+        await API.get(`api/usuarios/metas/get_metas_month_asesor/?mes=${mes_Temporal}&id_asesor=${id_asesor}&anio=${anio_Temporal}`)
         .then( data => {
             console.log(data.data)
             const arreglo_meses = data.data;
-            const meses = arreglo_meses[0]
-            const total_referido = arreglo_meses[1]
-            const operaciones = arreglo_meses[2]
-            const gestiones_ = arreglo_meses[3]
-            const programados = arreglo_meses[4]
-            const prequirurgicos = arreglo_meses[5]
-            const pendientes = arreglo_meses[6]
-            const total_comision_ = arreglo_meses[arreglo_meses.length - 1]
-            setData_meses(meses);
-            conseguirMetas_asesor(meses) //funcion y se le pasa el parametro de arreglo de metas
-            setTotal_referidos(total_referido)
-            setOperaciones(operaciones)
-            setGestiones(gestiones_)
-            setProgramados(programados)
-            setPrequirurgicos(prequirurgicos)
-            setPendientes(pendientes)
-            setTotal_comision(total_comision_)
-            console.log(arreglo_meses)            
+            if(arreglo_meses.length > 0){
+                const meses = arreglo_meses[0]
+                const total_referido = arreglo_meses[1]
+                const operaciones = arreglo_meses[2]
+                const gestiones_ = arreglo_meses[3]
+                const programados = arreglo_meses[4]
+                const prequirurgicos = arreglo_meses[5]
+                const pendientes = arreglo_meses[6]
+                const total_comision_ = arreglo_meses[arreglo_meses.length - 1]
+                setData_meses(meses);
+                conseguirMetas_asesor(meses) //funcion y se le pasa el parametro de arreglo de metas
+                setTotal_referidos(total_referido)
+                setOperaciones(operaciones)
+                setGestiones(gestiones_)
+                setProgramados(programados)
+                setPrequirurgicos(prequirurgicos)
+                setPendientes(pendientes)
+                setTotal_comision(total_comision_)
+                console.log(arreglo_meses)
+            }                
         })
     }
 
@@ -142,7 +166,27 @@ export const Dashboard2Component = () => {
                             <h3 className="h3-dashboard"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row', gap: 20 }}>
-                        <div className="select-mes">
+
+                    <div className="select-mes" style={{width:'145px'}}>
+                            <FormControl fullWidth  >
+                                <InputLabel shrink id="demo-simple-select-standard-label">Año</InputLabel>
+                                <Select
+                                    name="anio"
+                                    label="Año"
+                                    id="demo-simple-select-standard"
+                                    style={{ marginBottom: "-4px" }}
+                                    onChange={handleSelectYear}
+                                >
+                                    {
+                                        arreglo_year.map((item, key) => {
+                                            return <MenuItem key={key} value={item.valor}>{item.valor}</MenuItem>
+                                        })
+                                    }
+                                </Select>
+                            </FormControl>
+
+                        </div>
+                        <div className="select-mes" style={{width:'145px'}}>
                             <FormControl fullWidth  >
                                 <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
                                 <Select
@@ -161,8 +205,7 @@ export const Dashboard2Component = () => {
                             </FormControl>
 
                         </div>
-
-                        <div className="select-mes">
+                        <div className="select-mes" style={{width:'145px'}}>
                             <FormControl fullWidth  >
                                 <InputLabel shrink id="demo-simple-select-standard-label">Empleados</InputLabel>
                                 <Select

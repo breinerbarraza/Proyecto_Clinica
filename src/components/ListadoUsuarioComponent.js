@@ -20,6 +20,8 @@ export const ListadoUsuarioComponent = () => {
   const [loading, setLoading] = useState(false);
   const [meses, setMeses] = useState([]);
   const [data_meses, setData_meses] = useState([]);
+  const [group, setGroup] = useState([]);
+  const [mes_temporal, setMes_temporal] = useState("")
 
   const load = async () => {
     setLoading(true)
@@ -36,6 +38,7 @@ export const ListadoUsuarioComponent = () => {
             "referidos": (item.total_referidos) ? item.total_referidos : 0,
             "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
             "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
+            "rol": item.rol_,
             "is_active": (item.is_active) ? <input onChange={(e) => handleChangeActivo(e, item.id)} type="checkbox" checked /> : <input onChange={(e) => handleChangeNoActivo(e, item.id)} type="checkbox"/>
           }])
         ))
@@ -149,7 +152,16 @@ export const ListadoUsuarioComponent = () => {
     )
   }
 
+  const cargarGrupos = async()=>{
+    await API.get('api/usuarios/asesor/list_grupos')
+            .then(({ data }) => {
+                setGroup(data)
+                console.log(data)
+        })
+  }
+
   useEffect(() => {
+    cargarGrupos()
     let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
     if (super_user) {
       load()
@@ -164,6 +176,7 @@ export const ListadoUsuarioComponent = () => {
     setData_meses([]);
     const mes = e.target.value;
     console.log(mes)
+    setMes_temporal(mes)
     if (mes !== 0) {
       await API.get(`api/usuarios/user/?mes=${mes}`)
         .then(
@@ -213,7 +226,32 @@ export const ListadoUsuarioComponent = () => {
 
   }
 
-  console.log(meses)
+  /* Falta seleccionar tambien el mes con una variable que se llama mes_temporal */
+
+  const handleSelectTipoRol = async(e)=>{
+    setData_meses([]);
+    setData_listado([]);
+    const id_grupo = e.target.value;
+    console.log(id_grupo);
+    await API.get(`api/usuarios/user/tipo_rol/?grupo=${id_grupo}&mes=${mes_temporal}`)
+    .then( resp => {
+      const respuesta = resp.data;
+      console.log(respuesta)
+      setMeses(respuesta)
+      respuesta.map((item) => (
+        setData_listado(data_listado => [...data_listado, {
+          "id": item.id,
+          "nombre_completo": item.nombre_completo,
+          "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
+          "correo_electronico": item.email,
+          "referidos": (item.total_referidos) ? item.total_referidos : 0,
+          "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
+          "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
+          "is_active": (item.is_active) ? <input onChange={(e) => handleChangeActivo(e, item.id)} type="checkbox" checked /> : <input onChange={(e) => handleChangeNoActivo(e, item.id)} type="checkbox"/>
+        }])
+      ))
+    });
+  }
 
   const data = {
 
@@ -256,6 +294,12 @@ export const ListadoUsuarioComponent = () => {
         width: 100
       },
       {
+        label: 'Rol_usuario',
+        field: 'rol',
+        sort: 'asc',
+        width: 100
+      },
+      {
         label: 'Activo',
         field: 'is_active',
         sort: 'asc',
@@ -264,6 +308,7 @@ export const ListadoUsuarioComponent = () => {
     ],
     rows: (data_listado && data_meses.length == 0) ? data_listado : data_meses
   };
+  
 
   return (
     <>
@@ -291,6 +336,25 @@ export const ListadoUsuarioComponent = () => {
                 </Select>
               </FormControl>
             </div>
+
+            <div className="select-mes" style={{marginLeft:'10px'}}>
+                <FormControl fullWidth  >
+                  <InputLabel shrink id="demo-simple-select-standard-label">Rol</InputLabel>
+                  <Select
+                    name="tipo_rol"
+                    label="TipoRol"
+                    id="demo-simple-select-standard"
+                    onChange={handleSelectTipoRol}
+                  >
+                    {
+                      group.map((item, key) => {
+                        return <MenuItem key={key} value={item.id}>{item.name}</MenuItem>
+                      })
+                    }
+                  </Select>
+                </FormControl>
+              </div>
+
             <div style={{ flex: 5 }}>
 
             </div>
@@ -334,6 +398,7 @@ export const ListadoUsuarioComponent = () => {
                   </Select>
                 </FormControl>
               </div>
+
               <div style={{ flex: 5 }}>
 
               </div>

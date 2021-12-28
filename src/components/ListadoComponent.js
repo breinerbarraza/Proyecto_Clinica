@@ -230,7 +230,7 @@ export const ListadoComponent = () => {
     setData_meses([]);
     const mes = e.target.value;
     await API.get(
-      `api/referidos/get_referidos_by_month_rol/?mes=${mes}&id_usuario_logeado=${id_localStorage}`
+      `api/referidos/get_referidos_by_month_rol/?mes=${mes}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}`
     ).then((data) => {
       const arreglo_referidos_month = data.data;
       console.log(arreglo_referidos_month);
@@ -264,8 +264,12 @@ export const ListadoComponent = () => {
                     style={{ backgroundColor: item.color_estado }}
                   />
                 ) : (
-                  ""
+                  <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
+              comision:
+                item.comision !== ""
+                  ? "$" + formatMoney(item.comision, 2, ",", ".")
+                  : "-",
             },
           ]);
         });
@@ -397,7 +401,7 @@ export const ListadoComponent = () => {
                     }
                   </Select>
                 </FormControl>
-              </div>
+          </div>
 
               <div className="select-mes">
                 <FormControl fullWidth>
@@ -448,6 +452,23 @@ export const ListadoComponent = () => {
           {/* Si no es superuser y es por tipo de rol */}
           {!state_superUser && (
             <div style={{ display: "flex", flexDirection: "row", gap: 20 }}>
+               <div className="select-mes">
+                    <FormControl fullWidth  >
+                      <InputLabel shrink id="demo-simple-select-standard-label">Año</InputLabel>
+                      <Select
+                        name="anio"
+                        label="Anio"
+                        id="demo-simple-select-standard"
+                        onChange={handleYearChange}
+                      >
+                        {
+                          arreglo_year.map((item, key) => {
+                            return <MenuItem key={key} value={item.valor}>{item.valor}</MenuItem>
+                          })
+                        }
+                      </Select>
+                    </FormControl>
+                 </div>
               <div className="select-mes">
                 <FormControl fullWidth>
                   <InputLabel shrink id="demo-simple-select-standard-label">
