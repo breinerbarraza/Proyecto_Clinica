@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import ClinicaBlanco from '../../image/Recursos-Femto/logo.png';
+import API from '../../Utils/API';
 export const PerfilComponent = () => {
 
     const [datos_perfil, setdatos_perfil] = useState({});
+    const [estadoEmpleado, setEstadoEmpleado] = useState(false)
+
     useEffect(() => {
         const nombres = JSON.parse(localStorage.getItem('nombres'));
         const apellidos = JSON.parse(localStorage.getItem('apellidos'));
@@ -18,6 +21,18 @@ export const PerfilComponent = () => {
             superuser,            
         }
         setdatos_perfil(objeto);
+
+        API.get(`api/referidos/comprobar_empleado/?id_empleado=${id_user}`)
+        .then( ({data}) =>{
+            const resp = data;
+            if(resp.msg){
+                setEstadoEmpleado(true)
+            }else{
+                setEstadoEmpleado(false)
+            }
+            setEstadoEmpleado()
+        })
+
     }, []);
 
     const cerrarSesion = (token, idUser, nombres, apellidos,username, password, super_user)=>{
@@ -40,6 +55,12 @@ export const PerfilComponent = () => {
                 <img alt="clinica" src={ClinicaBlanco} width="50" height="50"/>
                 <ul className="dropdown-menu dropdown-menu-end">
                     <li><Link to="/datos_perfil"><button className="dropdown-item" type="button"><i className="fas fa-user"></i> Perfil</button></Link></li>
+                    {
+                        !estadoEmpleado && !datos_perfil.superuser && (
+                            <li><Link to="/metas_programadas"><button className="dropdown-item" type="button"><i className="fas fa-chart-line"></i>Metas programadas</button></Link></li>
+                        )
+                    }
+
                     {
                         datos_perfil.superuser && (
                             <>

@@ -119,6 +119,8 @@ export const Dashboard2Component = () => {
                 const programados = arreglo_meses[4]
                 const prequirurgicos = arreglo_meses[5]
                 const pendientes = arreglo_meses[6]
+                console.log(pendientes)
+                console.log(prequirurgicos)
                 const total_comision_ = arreglo_meses[arreglo_meses.length - 1]
                 setData_meses(meses);
                 conseguirMetas_asesor(meses) //funcion y se le pasa el parametro de arreglo de metas

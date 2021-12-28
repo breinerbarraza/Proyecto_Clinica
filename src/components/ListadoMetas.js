@@ -11,7 +11,7 @@ const arreglo_meses = [
     { "valor": 1, "mes": "Enero" },
     { "valor": 2, "mes": "Febrero" },
     { "valor": 3, "mes": "Marzo" },
-    { "valor": 4, "mes": "Abrir" },
+    { "valor": 4, "mes": "Abril" },
     { "valor": 5, "mes": "Mayo" },
     { "valor": 6, "mes": "Junio" },
     { "valor": 7, "mes": "Julio" },
@@ -24,7 +24,6 @@ const arreglo_meses = [
 export const ListadoMetas = () => {
 
     const [data_listado, setData_listado] = useState([])
-    const [listado, setListado] = useState([])
 
     const Metas = async () => {
         await API.get('api/usuarios/metas/')

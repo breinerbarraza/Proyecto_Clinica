@@ -28,6 +28,7 @@ import { ComponentModalMetas } from './components/ComponentModalMetas';
 import { ListadoMetas } from './components/ListadoMetas';
 import { ComponentModalStateMetas } from './components/ComponentModalStateMetas';
 import { ActualizarMetaModal } from './components/ActulizarMetaModal';
+import { MetasProgramadas } from './components/MetasProgramadas';
 function App() {
   return (
     <div>
@@ -70,6 +71,15 @@ function App() {
                   <LoginComponent />
                 )}
               </Route>
+
+              <Route exact path="/metas_programadas">
+                {localStorage.getItem('token') !== null ? (
+                  <MetasProgramadas />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+
               <Route exact path="/email">
                   <ConfirEmailComponent />
             
