@@ -35,15 +35,15 @@ export const EstadoComponent = () => {
         const id = localStorage.getItem('id_user')
 
         API.get(`api/referidos/comprobar_empleado/?id_empleado=${id}`)
-        .then( data =>{
-            console.log(data.data)
-            const respuesta = data.data;
-            if(respuesta.msg){
-                setEstadoEmpleado(true);
-            }else{
-                setEstadoEmpleado(false);
-            }
-        } )
+            .then(data => {
+                console.log(data.data)
+                const respuesta = data.data;
+                if (respuesta.msg) {
+                    setEstadoEmpleado(true);
+                } else {
+                    setEstadoEmpleado(false);
+                }
+            })
 
         API.get("api/usuarios/user/grupo_medico")
             .then(data => {
@@ -127,14 +127,19 @@ export const EstadoComponent = () => {
         data_estado.id_user_referido = id;
         data_estado.nombre = data_pendiente.get_nombreCompleto
         console.log(data_estado)
-        if(data_temporal_pendiente.estado_referido == "Descartado"){
+        if (data_temporal_pendiente.estado_referido == "Descartado") {
             const observacion = document.querySelector("#observacion")
-            if(observacion.value == ""){
+            if (observacion.value == "") {
                 return alert("Porfavor llene la observacion")
             }
             data_estado.observacion = observacion.value;
         }
-        console.log(data_estado)
+        if(data_temporal_pendiente.estado_referido == "Operado"){
+            const ordenServicio = document.querySelector("#ordenServicio")
+            if(ordenServicio.value != ""){
+                data_estado.ordenServicio = ordenServicio.value;
+            }
+        }
         API.put('api/referidos/updated_estado/', JSON.stringify(data_estado))
             .then(({ data }) => {
                 if (data.msg) {
@@ -160,14 +165,14 @@ export const EstadoComponent = () => {
             ...data,
             [e.target.name]: e.target.value
         })
-      
+
     }
 
-    const handleInput2 = (e)=>{
+    const handleInput2 = (e) => {
         const select_estado = document.querySelector(".select-estado")
         const selected = select_estado.options[select_estado.selectedIndex].text;
         console.log(selected)
-        setData_temporal_pendiente({'estado_referido': selected})
+        setData_temporal_pendiente({ 'estado_referido': selected })
         setData_estado({
             ...data_estado,
             [e.target.name]: e.target.value
@@ -191,19 +196,19 @@ export const EstadoComponent = () => {
                         {
                             !estadoEmpleado && (
                                 <form onSubmit={handleChangeEstado}>
-                                <select className="select-estado" name="estadoReferido" onChange={handleInput2}>
-                                    <option selected="selected">--CAMBIE EL ESTADO--</option>
-                                    {
-                                        cmbListado.map((item) => {
-                                            return <option key={item.id} value={item.id} style={{ backgroundColor: item.color }} >{item.descripcion}</option>
-                                        })
-                                    }
-                                </select>
-                                <button type="submit" className="btn btn-primary change_estado" title="Actualizar Estado" ><i class="fas fa-edit"></i></button>
-                            </form>
+                                    <select className="select-estado" name="estadoReferido" onChange={handleInput2}>
+                                        <option selected="selected">--CAMBIE EL ESTADO--</option>
+                                        {
+                                            cmbListado.map((item) => {
+                                                return <option key={item.id} value={item.id} style={{ backgroundColor: item.color }} >{item.descripcion}</option>
+                                            })
+                                        }
+                                    </select>
+                                    <button type="submit" className="btn btn-primary change_estado" title="Actualizar Estado" ><i class="fas fa-edit"></i></button>
+                                </form>
                             )
                         }
-                       
+
                     </div>
                     <div className="infomacion">
                         <div className="nacimiento">
@@ -220,52 +225,52 @@ export const EstadoComponent = () => {
                     {
                         data_temporal_pendiente.estado_referido === "Pendiente" && (
                             <>
-                            <p className="prequi-p"><h5>· Comentario</h5></p>
-                            <div className="form-pendiente">
-                                <form onSubmit={handleClickPendiente}>
-                                    <div className="form-f-pendiente">
-                                        <div className="form-fecha-pendiente">
-                                            <TextField
-                                                type="date"
-                                                name="fecha"
-                                                label="Próxima gestión"
-                                                required
-                                                className="form-control RegistrarReferido"
-                                                style={{ marginBottom: "30px" }}
-                                                onChange={handleInput}
-                                                InputLabelProps={{
-                                                    shrink: true,
-                                                }}
-                                            />
-                                            <TextField
-                                                textarea
-                                                type="text"
-                                                name="comentario"
-                                                placeholder="Escribe..."
-                                                label="Comentario"
-                                                required
-                                                multiline
-                                                rows={4}
-                                                className="form-control"
-                                                style={{ marginBottom: "30px" }}
-                                                onChange={handleInput}
-                                                InputLabelProps={{
-                                                    shrink: true,
-                                                }}
-                                            />
+                                <p className="prequi-p"><h5>· Comentario</h5></p>
+                                <div className="form-pendiente">
+                                    <form onSubmit={handleClickPendiente}>
+                                        <div className="form-f-pendiente">
+                                            <div className="form-fecha-pendiente">
+                                                <TextField
+                                                    type="date"
+                                                    name="fecha"
+                                                    label="Próxima gestión"
+                                                    required
+                                                    className="form-control RegistrarReferido"
+                                                    style={{ marginBottom: "30px" }}
+                                                    onChange={handleInput}
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
+                                                />
+                                                <TextField
+                                                    textarea
+                                                    type="text"
+                                                    name="comentario"
+                                                    placeholder="Escribe..."
+                                                    label="Comentario"
+                                                    required
+                                                    multiline
+                                                    rows={4}
+                                                    className="form-control"
+                                                    style={{ marginBottom: "30px" }}
+                                                    onChange={handleInput}
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="pendiente-button">
-                                        <button type="submit" className="prequi-b">ASIGNAR</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </>
+                                        <div className="pendiente-button">
+                                            <button type="submit" className="prequi-b">ASIGNAR</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </>
                         )
 
                     }
 
-                    {data_pendiente.estadoReferido === "Pendiente" && !data_temporal_pendiente.estado_referido &&(
+                    {data_pendiente.estadoReferido === "Pendiente" && !data_temporal_pendiente.estado_referido && (
                         <>
                             <p className="prequi-p"><h5>· Comentario</h5></p>
                             <div className="form-pendiente">
@@ -311,33 +316,46 @@ export const EstadoComponent = () => {
                     )}
 
                     {
-                        data_temporal_pendiente.estado_referido === "Operado" &&(
+                        data_temporal_pendiente.estado_referido === "Operado" && (
                             <>
-                                <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· Comentarios</b></h5>
-                                <p>El paciente ha sido operado</p>
+                                <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· N° Orden servicio</b></h5>
+                                {/* <p>El paciente ha sido operado</p> */}
+                                <TextField
+                                    type="number"
+                                    name="ordenServicio"
+                                    id="ordenServicio"
+                                    // value={dataForm.cantidad}
+                                    label="N° Orden Servicio"
+                                    required
+                                    style={{ marginTop: "10px", width:'230px'}}
+                                    onChange={handleInput2}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
                             </>
                         )
                     }
 
-                    {data_pendiente.estadoReferido === "Operado" && !data_temporal_pendiente.estado_referido &&(
+                    {data_pendiente.estadoReferido === "Operado" && !data_temporal_pendiente.estado_referido && (
                         <>
                             <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· Comentarios</b></h5>
-                            <p>El paciente ha sido operado</p>
+                            {/* <p>El paciente ha sido operado</p> */}
                         </>
                     )}
-    
+
                     {
                         data_temporal_pendiente.estado_referido === "En Gestion" && (
                             <>
-                            <h5 className="prequi-p" style={{ color: "#1c3678" }}><b >· Comentarios</b></h5>
-                            <label className="label-info-gestion"><b>Próxima gestion:</b></label>
-                            <p>El referido no tenía disponibilidad para la gestión, pidío que se le contrate en 1 semana para recibir la</p>
-                            <p> infromación con respecto al procedimiento refractivo. </p>
+                                <h5 className="prequi-p" style={{ color: "#1c3678" }}><b >· Comentarios</b></h5>
+                                <label className="label-info-gestion"><b>Próxima gestion:</b></label>
+                                <p>El referido no tenía disponibilidad para la gestión, pidío que se le contrate en 1 semana para recibir la</p>
+                                <p> infromación con respecto al procedimiento refractivo. </p>
                             </>
                         )
                     }
 
-                    {data_pendiente.estadoReferido === "En Gestion" && !data_temporal_pendiente.estado_referido &&(
+                    {data_pendiente.estadoReferido === "En Gestion" && !data_temporal_pendiente.estado_referido && (
                         <>
                             <h5 className="prequi-p" style={{ color: "#1c3678" }}><b >· Comentarios</b></h5>
                             <label className="label-info-gestion"><b>Próxima gestion:</b></label>
@@ -350,7 +368,7 @@ export const EstadoComponent = () => {
                         data_temporal_pendiente.estado_referido === "Descartado" && (
                             <>
                                 <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· Comentarios</b></h5>
-                                
+
                                 <TextField
                                     textarea
                                     type="text"
@@ -362,94 +380,94 @@ export const EstadoComponent = () => {
                                     multiline
                                     rows={4}
                                     className="form-control"
-                                    style={{ marginBottom: "30px", width:'350px'}}
+                                    style={{ marginBottom: "30px", width: '350px' }}
                                     onChange={handleInput2}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                 />
-            
-                                
+
+
                             </>
                         )
                     }
 
 
-                    {data_pendiente.estadoReferido === "Descartado" && !data_temporal_pendiente.estado_referido &&(
+                    {data_pendiente.estadoReferido === "Descartado" && !data_temporal_pendiente.estado_referido && (
                         <>
                             <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· Comentarios</b></h5>
 
-                            </>
+                        </>
                     )}
 
                     {
                         data_temporal_pendiente.estado_referido === "Programado" && (
                             <>
-                            <p className="prequi-p"><b>· Definir fecha de procedimiento</b></p>
-                            <div className="form-prequi">
-                                <div>
-                                    <form onSubmit={handleClickProgramado}>
-                                        <div className="form-f-h">
-                                            <div className="form-fecha">
-                                                <TextField
-                                                    type="date"
-                                                    name="fecha"
-                                                    placeholder="Escribe..."
-                                                    label="Fecha"
-                                                    onChange={handleInput}
-                                                    className="form-control RegistrarReferido"
-                                                    style={{ marginBottom: "30px" }}
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                    }}
-                                                />
+                                <p className="prequi-p"><b>· Definir fecha de procedimiento</b></p>
+                                <div className="form-prequi">
+                                    <div>
+                                        <form onSubmit={handleClickProgramado}>
+                                            <div className="form-f-h">
+                                                <div className="form-fecha">
+                                                    <TextField
+                                                        type="date"
+                                                        name="fecha"
+                                                        placeholder="Escribe..."
+                                                        label="Fecha"
+                                                        onChange={handleInput}
+                                                        className="form-control RegistrarReferido"
+                                                        style={{ marginBottom: "30px" }}
+                                                        InputLabelProps={{
+                                                            shrink: true,
+                                                        }}
+                                                    />
+                                                </div>
+                                                <div className="form-hora">
+                                                    <TextField
+                                                        type="time"
+                                                        name="hora"
+                                                        placeholder="Escribe..."
+                                                        label="Hora"
+                                                        onChange={handleInput}
+                                                        className="form-control RegistrarReferido"
+                                                        style={{ marginBottom: "30px" }}
+                                                        InputLabelProps={{
+                                                            shrink: true,
+                                                        }}
+                                                    />
+                                                </div>
+
                                             </div>
-                                            <div className="form-hora">
-                                                <TextField
-                                                    type="time"
-                                                    name="hora"
-                                                    placeholder="Escribe..."
-                                                    label="Hora"
-                                                    onChange={handleInput}
-                                                    className="form-control RegistrarReferido"
-                                                    style={{ marginBottom: "30px" }}
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                    }}
-                                                />
+                                            <div className="form-medico">
+                                                <FormControl fullWidth >
+                                                    <InputLabel shrink id="demo-simple-select-standard-label">Medico</InputLabel>
+                                                    <Select
+                                                        name="medico"
+                                                        label="Medico"
+                                                        id="demo-simple-select-standard"
+                                                        onChange={handleInput}
+                                                    >
+                                                        {
+                                                            data_medicos.map(item => {
+                                                                return <MenuItem key={item.id} value={item.id} >{item.first_name} {item.last_name}</MenuItem>
+                                                            })
+                                                        }
+
+                                                    </Select>
+                                                </FormControl>
                                             </div>
 
-                                        </div>
-                                        <div className="form-medico">
-                                            <FormControl fullWidth >
-                                                <InputLabel shrink id="demo-simple-select-standard-label">Medico</InputLabel>
-                                                <Select
-                                                    name="medico"
-                                                    label="Medico"
-                                                    id="demo-simple-select-standard"
-                                                    onChange={handleInput}
-                                                >
-                                                    {
-                                                        data_medicos.map(item => {
-                                                            return <MenuItem key={item.id} value={item.id} >{item.first_name} {item.last_name}</MenuItem>
-                                                        })
-                                                    }
-
-                                                </Select>
-                                            </FormControl>
-                                        </div>
-
-                                        <div className="prequi-button">
-                                            <button type="submit" className="prequi-b">ASIGNAR</button>
-                                        </div>
-                                    </form>
+                                            <div className="prequi-button">
+                                                <button type="submit" className="prequi-b">ASIGNAR</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                        </>
+                            </>
                         )
                     }
 
-                    {data_pendiente.estadoReferido === "Programado" && !data_temporal_pendiente.estado_referido &&(
+                    {data_pendiente.estadoReferido === "Programado" && !data_temporal_pendiente.estado_referido && (
                         <>
                             <p className="prequi-p"><b>· Definir fecha de procedimiento</b></p>
                             <div className="form-prequi">
@@ -516,56 +534,56 @@ export const EstadoComponent = () => {
 
 
                     {
-                        data_temporal_pendiente.estado_referido === "Pre-quirúrgico"  && (
+                        data_temporal_pendiente.estado_referido === "Pre-quirúrgico" && (
                             <>
-                            <p className="prequi-p"><b>· Definir fecha de pre-quirúgico</b></p>
-                            <div className="form-prequi">
-                                <form onSubmit={handleClickPrequirurgico}>
-                                    <div className="form-f-h">
-                                        <div className="form-fecha">
+                                <p className="prequi-p"><b>· Definir fecha de pre-quirúgico</b></p>
+                                <div className="form-prequi">
+                                    <form onSubmit={handleClickPrequirurgico}>
+                                        <div className="form-f-h">
+                                            <div className="form-fecha">
 
-                                            <TextField
-                                                type="date"
-                                                name="fecha"
-                                                placeholder="Escribe..."
-                                                label="Fecha"
-                                                onChange={handleInput}
-                                                required
-                                                className="form-control RegistrarReferido"
-                                                style={{ marginBottom: "30px" }}
-                                                InputLabelProps={{
-                                                    shrink: true,
-                                                }}
-                                            />
-                                        </div>
-                                        <div className="form-hora">
-                                            <TextField
-                                                type="time"
-                                                name="hora"
-                                                placeholder="Escribe..."
-                                                label="Hora"
-                                                onChange={handleInput}
-                                                required
-                                                className="form-control RegistrarReferido"
-                                                style={{ marginBottom: "30px" }}
-                                                InputLabelProps={{
-                                                    shrink: true,
-                                                }}
-                                            />
-                                        </div>
+                                                <TextField
+                                                    type="date"
+                                                    name="fecha"
+                                                    placeholder="Escribe..."
+                                                    label="Fecha"
+                                                    onChange={handleInput}
+                                                    required
+                                                    className="form-control RegistrarReferido"
+                                                    style={{ marginBottom: "30px" }}
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="form-hora">
+                                                <TextField
+                                                    type="time"
+                                                    name="hora"
+                                                    placeholder="Escribe..."
+                                                    label="Hora"
+                                                    onChange={handleInput}
+                                                    required
+                                                    className="form-control RegistrarReferido"
+                                                    style={{ marginBottom: "30px" }}
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
+                                                />
+                                            </div>
 
-                                    </div>
-                                    <div className="prequi-button">
-                                        <button type="submit" className="prequi-b">ASIGNAR</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </>
+                                        </div>
+                                        <div className="prequi-button">
+                                            <button type="submit" className="prequi-b">ASIGNAR</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </>
                         )
                     }
-                
 
-                    {data_pendiente.estadoReferido === "Pre-quirúrgico" && !data_temporal_pendiente.estado_referido &&(
+
+                    {data_pendiente.estadoReferido === "Pre-quirúrgico" && !data_temporal_pendiente.estado_referido && (
                         <>
                             <p className="prequi-p"><b>· Definir fecha de pre-quirúgico</b></p>
                             <div className="form-prequi">
@@ -623,14 +641,14 @@ export const EstadoComponent = () => {
                 <div className="contendor-prequi_">
                     <div className="link-p_">
                         <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-prequi_"><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i>{data_pendiente.get_nombreCompleto}
-                        <Chip
-                            label={`• ${data_pendiente.estadoReferido}`}
-                            style={{
-                                marginLeft: "1px",
-                                backgroundColor: data_pendiente.color_estado
-                            }}
-                        /></h3></Link>
-                        
+                            <Chip
+                                label={`• ${data_pendiente.estadoReferido}`}
+                                style={{
+                                    marginLeft: "1px",
+                                    backgroundColor: data_pendiente.color_estado
+                                }}
+                            /></h3></Link>
+
                         <form onSubmit={handleChangeEstado}>
                             <select className="select-estado_" name="estadoReferido" onChange={handleInput}>
                                 <option selected="selected">--CAMBIE EL ESTADO--</option>
@@ -693,7 +711,7 @@ export const EstadoComponent = () => {
                                         </div>
                                     </div>
                                     <div className="pendiente-button_pendiente">
-                                        <button type="submit" className="prequi-b_" style={{marginLeft:"-0px"}}>ASIGNAR</button>
+                                        <button type="submit" className="prequi-b_" style={{ marginLeft: "-0px" }}>ASIGNAR</button>
                                     </div>
                                 </form>
                             </div>
@@ -701,7 +719,7 @@ export const EstadoComponent = () => {
                     )}
                     {data_pendiente.estadoReferido === "Operado" && (
                         <div className="comentario_">
-                            <h5 className="prequi-p" style={{ color: "#1c3678"}}><b>· Comentarios</b></h5>
+                            <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· Comentarios</b></h5>
                             <p>El paciente ha sido operado</p>
                         </div>
                     )}

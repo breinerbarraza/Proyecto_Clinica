@@ -159,7 +159,7 @@ export const ComponentModalStateMetas = () => {
                                 id="anio"
                                 type="number"
                                 name="anio"
-                                label="Anio"
+                                label="Año"
                                 required
                                 className="form-control RegistrarReferido"
                                 style={{ marginBottom: "50px" }}
