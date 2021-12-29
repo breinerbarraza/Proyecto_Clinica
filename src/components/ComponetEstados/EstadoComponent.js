@@ -127,6 +127,14 @@ export const EstadoComponent = () => {
         data_estado.id_user_referido = id;
         data_estado.nombre = data_pendiente.get_nombreCompleto
         console.log(data_estado)
+        if(data_temporal_pendiente.estado_referido == "Descartado"){
+            const observacion = document.querySelector("#observacion")
+            if(observacion.value == ""){
+                return alert("Porfavor llene la observacion")
+            }
+            data_estado.observacion = observacion.value;
+        }
+        console.log(data_estado)
         API.put('api/referidos/updated_estado/', JSON.stringify(data_estado))
             .then(({ data }) => {
                 if (data.msg) {
@@ -342,7 +350,26 @@ export const EstadoComponent = () => {
                         data_temporal_pendiente.estado_referido === "Descartado" && (
                             <>
                                 <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· Comentarios</b></h5>
-                                <p>Después de realizados los pre-quirúgicos el paciente no es apto para realizar el procedimiento</p>
+                                
+                                <TextField
+                                    textarea
+                                    type="text"
+                                    name="observacion"
+                                    id="observacion"
+                                    placeholder="Escribe..."
+                                    label="Comentario"
+                                    required
+                                    multiline
+                                    rows={4}
+                                    className="form-control"
+                                    style={{ marginBottom: "30px", width:'350px'}}
+                                    onChange={handleInput2}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+            
+                                
                             </>
                         )
                     }
@@ -351,8 +378,8 @@ export const EstadoComponent = () => {
                     {data_pendiente.estadoReferido === "Descartado" && !data_temporal_pendiente.estado_referido &&(
                         <>
                             <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· Comentarios</b></h5>
-                            <p>Después de realizados los pre-quirúgicos el paciente no es apto para realizar el procedimiento</p>
-                        </>
+
+                            </>
                     )}
 
                     {
