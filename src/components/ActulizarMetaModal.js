@@ -38,7 +38,7 @@ export const ActualizarMetaModal = () => {
     const [empleado, setEmpleado] = useState([])
     const [estado, setEstado] = useState([])
     const {id} = useParams();
-
+    //Cargar Estados 
     const cargarEstados = async () => {
         await API.get('api/configuracion/estadoReferido/get_estados')
           .then(data => {
@@ -48,7 +48,7 @@ export const ActualizarMetaModal = () => {
           })
           .catch(console.error);
     }
-
+    //Carga los datos por defectos
     useEffect(() => {
         API.get('api/usuarios/user/grupo_empleado')
             .then(({ data }) => {
@@ -65,26 +65,26 @@ export const ActualizarMetaModal = () => {
             setDataForm(resp)
         })
     }, [])
-
+    //Si es admin lo deje actuaizar meta si no lo bloquea
     useEffect(() => {
         let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
         if (!super_user) {
             return window.location = "/";
         }
     }, []);
-
+    //cerrar la ventana de modal
     const cerrarModal = () => {
         setMetas_Modal(false);
         return window.location = "/listado_meta";
     }
-
+    //para guardar los datos del formulario en el estado
     const handleInputChange = (e) => {
         setDataForm({
             ...dataForm,
             [e.target.name]: e.target.value
         });
     }
-
+    //captura los datos que se van a enviar al back
     const actualizarMeta = async (e) => {
         e.preventDefault();
         console.log(dataForm)
@@ -126,6 +126,7 @@ export const ActualizarMetaModal = () => {
     }
 
     return (
+        // lo que se va a mostrar en la pagina como lo stitulos y el formulario.
         <Modal isOpen={metas_Modal} >
             <ModalHeader>
                 <h3>Actualizar Meta</h3>
