@@ -14,6 +14,7 @@ import { formatMoney, calcularComisionFinal } from "../Utils/LogicaFunciones";
 import { PerfilComponentSinNombre } from "./perfil/Perfil_sin_nombre";
 import "./listaUsuario.css";
 import { HeaderMovil } from "./HeaderMovil";
+import { Alert } from "@mui/material";
 
 export const ListadoComponent = () => {
   const [data_listado, setData_listado] = useState([]);
@@ -82,6 +83,7 @@ export const ListadoComponent = () => {
               ) : (
                 <b style={{ color: "#02305b" }}>Total comisiones: </b>
               ),
+            ordenServicio : item.ordenServicio,
             comision:
               (item.finalizado && item.comision !== "")
                 ? "$" + formatMoney(item.comision, 2, ",", ".")
@@ -129,6 +131,7 @@ export const ListadoComponent = () => {
                 ) : (
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
+              ordenServicio : item.ordenServicio,
               comision:
               (item.finalizado && item.comision !== "")
                   ? "$" + formatMoney(item.comision, 2, ",", ".")
@@ -217,6 +220,7 @@ export const ListadoComponent = () => {
                 ) : (
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
+              ordenServicio : item.ordenServicio,
               comision:
               (item.finalizado && item.comision !== "")
                   ? "$" + formatMoney(item.comision, 2, ",", ".")
@@ -269,6 +273,7 @@ export const ListadoComponent = () => {
                 ) : (
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
+              ordenServicio : item.ordenServicio,
               comision:
               (item.finalizado && item.comision !== "")
                   ? "$" + formatMoney(item.comision, 2, ",", ".")
@@ -311,6 +316,12 @@ export const ListadoComponent = () => {
         field: "estadoReferido",
         sort: "asc",
         width: 150,
+      },
+      {
+        label: "N° Orden",
+        field: "ordenServicio",
+        sort: "asc",
+        width: 100,
       },
       {
         label: "Comisión",
@@ -369,6 +380,7 @@ export const ListadoComponent = () => {
                 ) : (
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
+              ordenServicio : item.ordenServicio,
               comision:
               (item.finalizado && item.comision !== "")
                   ? "$" + formatMoney(item.comision, 2, ",", ".")

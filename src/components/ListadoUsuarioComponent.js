@@ -156,7 +156,6 @@ export const ListadoUsuarioComponent = () => {
     await API.get('api/usuarios/asesor/list_grupos')
             .then(({ data }) => {
                 setGroup(data)
-                console.log(data)
         })
   }
 
@@ -192,6 +191,7 @@ export const ListadoUsuarioComponent = () => {
                   "referidos": (item.total_referidos) ? item.total_referidos : 0,
                   "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
                   "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
+                  "rol": item.rol_,
                   "is_active": (item.is_active) ? <input onChange={(e) => handleChangeActivo(e, item.id)} type="checkbox" checked /> : <input onChange={(e) => handleChangeNoActivo(e, item.id)} type="checkbox"/>
                 }])
               ))
@@ -217,6 +217,7 @@ export const ListadoUsuarioComponent = () => {
               "referidos": (item.total_referidos) ? item.total_referidos : 0,
               "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
               "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
+              "rol": item.rol_,
               "is_active": (item.is_active) ? <input onChange={(e) => handleChangeActivo(e, item.id)} type="checkbox" checked /> : <input onChange={(e) => handleChangeNoActivo(e, item.id)} type="checkbox"/>
             }])
           ))
@@ -247,6 +248,7 @@ export const ListadoUsuarioComponent = () => {
           "referidos": (item.total_referidos) ? item.total_referidos : 0,
           "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
           "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
+          "rol": item.rol_,
           "is_active": (item.is_active) ? <input onChange={(e) => handleChangeActivo(e, item.id)} type="checkbox" checked /> : <input onChange={(e) => handleChangeNoActivo(e, item.id)} type="checkbox"/>
         }])
       ))
@@ -345,7 +347,8 @@ export const ListadoUsuarioComponent = () => {
                     label="TipoRol"
                     id="demo-simple-select-standard"
                     onChange={handleSelectTipoRol}
-                  >
+                    >
+                    <MenuItem value={0}>Todos los roles</MenuItem>
                     {
                       group.map((item, key) => {
                         return <MenuItem key={key} value={item.id}>{item.name}</MenuItem>
