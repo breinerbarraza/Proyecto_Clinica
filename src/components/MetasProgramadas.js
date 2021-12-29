@@ -23,7 +23,7 @@ export const MetasProgramadas = () => {
 
     const [data_listado, setData_listado] = useState([])
     const [datos_reales, setDatos_reales] = useState([])
-
+    
     const conseguirMetaEmpleado = async(id)=>{
         await API.get(`api/usuarios/metas/?empleados=${id}`)
         .then( resp =>{

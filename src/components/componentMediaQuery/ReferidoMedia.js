@@ -7,7 +7,6 @@ export const ReferidoMedia = ({cambiarEstado}) =>{
 
     const {id} = useParams()
     const [name, setName] = useState("")
-
     useEffect(() => {
         API.get("api/usuarios/user/"+id)
         .then(item =>{
