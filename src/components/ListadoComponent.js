@@ -53,8 +53,10 @@ export const ListadoComponent = () => {
     await API.get("api/referidos/").then((resp) => {
       const arreglo_referidos = resp.data;
       console.log(arreglo_referidos);
+      const filter_arreglo = arreglo_referidos.filter(item => item.finalizado === true)
+      
       let arreglo = [];
-      const totalComision = calcularComisionFinal(arreglo, arreglo_referidos);
+      const totalComision = calcularComisionFinal(arreglo, filter_arreglo);
       console.log(totalComision);
       setComision(totalComision);
 
@@ -81,7 +83,7 @@ export const ListadoComponent = () => {
                 <b style={{ color: "#02305b" }}>Total comisiones: </b>
               ),
             comision:
-              item.comision !== ""
+              (item.finalizado && item.comision !== "")
                 ? "$" + formatMoney(item.comision, 2, ",", ".")
                 : "-",
             total: totalComision,
@@ -100,8 +102,10 @@ export const ListadoComponent = () => {
     await API.post("api/referidos/get_referidos/", JSON.stringify(obj)).then(
       (resp) => {
         const arreglo_referidos = resp.data;
+        console.log(arreglo_referidos);
         let arreglo = [];
-        const totalComision = calcularComisionFinal(arreglo, arreglo_referidos);
+        const filter_arreglo = arreglo_referidos.filter(item => item.finalizado === true)
+        const totalComision = calcularComisionFinal(arreglo, filter_arreglo);
         setComision(totalComision);
         arreglo_referidos.map((item) =>
           setData_listado((data_listado) => [
@@ -126,7 +130,7 @@ export const ListadoComponent = () => {
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
               comision:
-                item.comision !== ""
+              (item.finalizado && item.comision !== "")
                   ? "$" + formatMoney(item.comision, 2, ",", ".")
                   : "-",
               total: totalComision,
@@ -181,10 +185,11 @@ export const ListadoComponent = () => {
       `api/referidos/get_referidos_month/?mes=${mes}&anio=${anio_temporal}`
     ).then((data) => {
       const arreglo_referidos_month = data.data;
+      const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
       let arreglo = [];
       const totalComision = calcularComisionFinal(
         arreglo,
-        arreglo_referidos_month
+        filter_arreglo
       );
       setComision(totalComision);
       if (arreglo_referidos_month.length == 0) {
@@ -213,7 +218,7 @@ export const ListadoComponent = () => {
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
               comision:
-                item.comision !== ""
+              (item.finalizado && item.comision !== "")
                   ? "$" + formatMoney(item.comision, 2, ",", ".")
                   : "-",
             },
@@ -231,10 +236,11 @@ export const ListadoComponent = () => {
     ).then((data) => {
       const arreglo_referidos_month = data.data;
       console.log(arreglo_referidos_month);
+      const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
       let arreglo = [];
       const totalComision = calcularComisionFinal(
         arreglo,
-        arreglo_referidos_month
+        filter_arreglo
       );
       console.log(totalComision);
       setComision(totalComision);
@@ -264,7 +270,7 @@ export const ListadoComponent = () => {
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
               comision:
-                item.comision !== ""
+              (item.finalizado && item.comision !== "")
                   ? "$" + formatMoney(item.comision, 2, ",", ".")
                   : "-",
             },
@@ -329,10 +335,13 @@ export const ListadoComponent = () => {
       `api/referidos/get_referidos_employee/?mes=${mes_temporal}&anio=${anio_temporal}&id_empleado=${id_empleado}`
     ).then((data) => {
       const arreglo_referidos_month = data.data;
+      const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
+      console.log(arreglo_referidos_month)
+      console.log(filter_arreglo)
       let arreglo = [];
       const totalComision = calcularComisionFinal(
         arreglo,
-        arreglo_referidos_month
+        filter_arreglo
       );
       setComision(totalComision);
       if (arreglo_referidos_month.length == 0) {
@@ -361,7 +370,7 @@ export const ListadoComponent = () => {
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
               comision:
-                item.comision !== ""
+              (item.finalizado && item.comision !== "")
                   ? "$" + formatMoney(item.comision, 2, ",", ".")
                   : "-",
             },

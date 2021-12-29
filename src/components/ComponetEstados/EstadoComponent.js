@@ -21,6 +21,7 @@ export const EstadoComponent = () => {
     const [data_estado, setData_estado] = useState([])
     const [cmbListado, setCmbListado] = useState([]);
     const [data_temporal_pendiente, setData_temporal_pendiente] = useState({})
+    const [observacion_, setObservacion_] = useState({});
     const { id } = useParams();
 
     useEffect(() => {
@@ -29,7 +30,15 @@ export const EstadoComponent = () => {
             .then(item => {
                 setData_pendiente(item.data)
             })
+        
+        API.get(`api/referidos/get_observacion_descartado/?id_referido=${id}`)
+        .then( data => {
+            const resp = data.data;
+            setObservacion_(resp.observacion)
+        } )
+
     }, [id]);
+
 
     useEffect(() => {
         const id = localStorage.getItem('id_user')
@@ -340,7 +349,7 @@ export const EstadoComponent = () => {
                     {data_pendiente.estadoReferido === "Operado" && !data_temporal_pendiente.estado_referido && (
                         <>
                             <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· Comentarios</b></h5>
-                            {/* <p>El paciente ha sido operado</p> */}
+                            <p>El paciente ha sido operado</p>
                         </>
                     )}
 
@@ -396,7 +405,7 @@ export const EstadoComponent = () => {
                     {data_pendiente.estadoReferido === "Descartado" && !data_temporal_pendiente.estado_referido && (
                         <>
                             <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· Comentarios</b></h5>
-
+                            <p>{observacion_}</p>
                         </>
                     )}
 
