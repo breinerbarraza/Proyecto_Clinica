@@ -191,8 +191,8 @@ export const DashboardComponent = () => {
                         <div className="_h3">
                             <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i className="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
                         </div>
-                        <div className="select-dashboard" style={{ width: "40%" }}>
-                           <FormControl fullWidth style={{ marginBottom: '15px', width:'230px'}}>
+                        <div className="select-dashboard" style={{ width: "48%" }}>
+                           <FormControl fullWidth style={{ marginBottom: '15px', width:'200px'}}>
                                         <InputLabel shrink id="demo-simple-select-standard-label">Año</InputLabel>
                                         <Select
                                             name="anio"
@@ -209,7 +209,7 @@ export const DashboardComponent = () => {
                                         </Select>
                             </FormControl>
 
-                            <FormControl fullWidth style={{ marginBottom: '20px', marginLeft:'5px', width:'230px' }}>
+                            <FormControl fullWidth style={{ marginBottom: '20px', marginLeft:'5px', width:'200px' }}>
                                 <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
                                 <Select
                                     name="mes"
@@ -271,7 +271,23 @@ export const DashboardComponent = () => {
                         <div className="_h3_" >
                             <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
                         </div>
-                        <div className="select-dashboard" style={{ width: "10t0%" }}>
+                        <div className="select-dashboard" style={{ width: "100%" }}>
+                        <FormControl fullWidth style={{ marginBottom: '15px'}}>
+                                        <InputLabel shrink id="demo-simple-select-standard-label">Año</InputLabel>
+                                        <Select
+                                            name="anio"
+                                            label="Año"
+                                            id="demo-simple-select-standard"
+                                            style={{ marginBottom: "-4px" }}
+                                            onChange={handleSelectYear}
+                                        >
+                                            {
+                                                arreglo_year.map((item, key) => {
+                                                    return <MenuItem key={key} value={item.valor}>{item.valor}</MenuItem>
+                                                })
+                                            }
+                                        </Select>
+                            </FormControl>
                                 
                                 <FormControl fullWidth style={{ marginBottom: '15px'}}>
                                     <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>

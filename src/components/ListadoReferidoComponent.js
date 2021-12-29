@@ -435,7 +435,23 @@ export const ListadoReferidoComponent = () => {
                   flexDirection: 'row',
                   gap: 20
                 }}>
-
+                   <div className="select-mes">
+                  <FormControl fullWidth  >
+                    <InputLabel shrink id="demo-simple-select-standard-label">Año</InputLabel>
+                    <Select
+                      name="anio"
+                      label="Anio"
+                      id="demo-simple-select-standard"
+                      onChange={handleYearChange}
+                    >
+                      {
+                        arreglo_year.map((item, key) => {
+                          return <MenuItem key={key} value={item.valor}>{item.valor}</MenuItem>
+                        })
+                      }
+                    </Select>
+                  </FormControl>
+                </div>
                   <div className="select-mes">
 
                     <FormControl fullWidth  >
