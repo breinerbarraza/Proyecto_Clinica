@@ -211,7 +211,9 @@ export const ActualizarMetaModal = () => {
                                     id="demo-simple-select-standard"
                                     onChange={handleInputChange}
                                 >
+                                    
                                     <MenuItem>{dataForm.nombre_estado}</MenuItem>
+                                    
                                     {
                                         estado.map((item, key) => {
                                             return <MenuItem key={key} value={item.id} >{item.descripcion}</MenuItem>

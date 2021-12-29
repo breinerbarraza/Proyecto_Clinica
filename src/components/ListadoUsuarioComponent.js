@@ -398,9 +398,24 @@ export const ListadoUsuarioComponent = () => {
                   </Select>
                 </FormControl>
               </div>
-
+              <div className="select-mes" style={{marginLeft:'10px'}}>
+                <FormControl fullWidth  >
+                  <InputLabel shrink id="demo-simple-select-standard-label">Rol</InputLabel>
+                  <Select
+                    name="tipo_rol"
+                    label="TipoRol"
+                    id="demo-simple-select-standard"
+                    onChange={handleSelectTipoRol}
+                  >
+                    {
+                      group.map((item, key) => {
+                        return <MenuItem key={key} value={item.id}>{item.name}</MenuItem>
+                      })
+                    }
+                  </Select>
+                </FormControl>
+              </div>
               <div style={{ flex: 5 }}>
-
               </div>
               <div className="link-crearusuario">
                 <Link to="/crear_usuario">
