@@ -21,6 +21,9 @@ export const EstadoComponent = () => {
     const [data_estado, setData_estado] = useState([])
     const [cmbListado, setCmbListado] = useState([]);
     const [data_temporal_pendiente, setData_temporal_pendiente] = useState({})
+    const [observacion_, setObservacion_] = useState({});
+    const [observacion_gestion, setObservacion_gestion] = useState([]);
+    const [observacion_operado, setObservacion_operado ] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
@@ -29,7 +32,29 @@ export const EstadoComponent = () => {
             .then(item => {
                 setData_pendiente(item.data)
             })
+        
+        API.get(`api/referidos/get_observacion_descartado/?id_referido=${id}`)
+        .then( data => {
+            const resp = data.data;
+            setObservacion_(resp.observacion)
+        } )
+
+        API.get(`api/referidos_cambio_estado/obtener_observacion_gestion/?id_referido=${id}`)
+        .then( data => {
+            const resp = data.data;
+            setObservacion_gestion(resp)
+        })
+
+        API.get(`api/referidos_cambio_estado/get_observacion_operado/?id_referido=${id}`)
+        .then( data => {
+            const resp = data.data;
+            setObservacion_operado(resp)
+
+        })
+
     }, [id]);
+    
+
 
     useEffect(() => {
         const id = localStorage.getItem('id_user')
@@ -341,6 +366,18 @@ export const EstadoComponent = () => {
                         <>
                             <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· Comentarios</b></h5>
                             {/* <p>El paciente ha sido operado</p> */}
+                            {
+                                observacion_operado.length > 0 && (
+                                    <>
+                                    {
+                                        observacion_operado.map(item => {
+                                        return <p>Orden servicio: <b>{item.ordenServicio}</b></p>
+                                    })
+                                 }
+                                 </>
+                            
+                                )
+                            }
                         </>
                     )}
 
@@ -348,9 +385,7 @@ export const EstadoComponent = () => {
                         data_temporal_pendiente.estado_referido === "En Gestion" && (
                             <>
                                 <h5 className="prequi-p" style={{ color: "#1c3678" }}><b >· Comentarios</b></h5>
-                                <label className="label-info-gestion"><b>Próxima gestion:</b></label>
-                                <p>El referido no tenía disponibilidad para la gestión, pidío que se le contrate en 1 semana para recibir la</p>
-                                <p> infromación con respecto al procedimiento refractivo. </p>
+                                
                             </>
                         )
                     }
@@ -359,8 +394,18 @@ export const EstadoComponent = () => {
                         <>
                             <h5 className="prequi-p" style={{ color: "#1c3678" }}><b >· Comentarios</b></h5>
                             <label className="label-info-gestion"><b>Próxima gestion:</b></label>
-                            <p>El referido no tenía disponibilidad para la gestión, pidío que se le contrate en 1 semana para recibir la</p>
-                            <p> infromación con respecto al procedimiento refractivo. </p>
+                            {
+                                observacion_gestion.length > 0 && (
+                                    <ul>
+                                         {
+                                            observacion_gestion.map(item => {
+                                                return <li>{item.observaciones}</li>
+                                            })
+                                        }
+                                    </ul>
+                                )
+                            }
+                           
                         </>
                     )}
 
@@ -396,7 +441,7 @@ export const EstadoComponent = () => {
                     {data_pendiente.estadoReferido === "Descartado" && !data_temporal_pendiente.estado_referido && (
                         <>
                             <h5 className="prequi-p" style={{ color: "#1c3678" }}><b>· Comentarios</b></h5>
-
+                            <p>{observacion_}</p>
                         </>
                     )}
 
