@@ -31,12 +31,12 @@ const arreglo_metas = [
 ]
 
 export const ComponentModalMetas = () => {
-
+    //Estados 
     const [metas_Modal, setMetas_Modal] = useState(true);
     const [dataForm, setDataForm] = useState({})
     const [empleado, setEmpleado] = useState([])
     const [arreglo_de_Todos, setArreglo_de_Todos] = useState([])
-
+    //carga los empleados por defectos
     useEffect(() => {
         API.get('api/usuarios/user/grupo_empleado')
             .then(({ data }) => {
@@ -47,31 +47,31 @@ export const ComponentModalMetas = () => {
         API.get('api/usuarios/user/grupo_all')
             .then(({data}) => {
                 const resp = data.ids_empleados
+                console.log(resp)
                 const ids = resp.map(item => item.id)
                 console.log(ids)
                 setArreglo_de_Todos(ids);
             })
     }, [])
-
+    //validando si es administrador o no 
     useEffect(() => {
         let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
         if (!super_user) {
             return window.location = "/";
         }
     }, []);
-
+    //cerrar el modal
     const cerrarModal = () => {
         setMetas_Modal(false);
         return window.location = "/listado_meta";
     }
-
     const handleInputChange = (e) => {
         setDataForm({
             ...dataForm,
             [e.target.name]: e.target.value
         });
     }
-
+    //captura y envia los datos a la base de datos
     const enviarMeta = async (e) => {
         e.preventDefault();
         console.log(dataForm)

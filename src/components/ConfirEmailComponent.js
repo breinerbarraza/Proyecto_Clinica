@@ -6,18 +6,21 @@ import { Link } from "react-router-dom";
 import API from "../Utils/API";
 import Swal from "sweetalert2";
 export const ConfirEmailComponent = () => {
+
+    //objeto
     const estado = {
         correo_electronico: "correo@gmail.com",
     };
+    //estados 
     const [data_initial, setData_initial] = useState(estado);
-
+    
     const handleInputChange = (e) => {
         setData_initial({
             ...data_initial,
             [e.target.name]: e.target.value,
         });
     };
-
+    //captura los datos del formualrio y los manda a la base de datos 
     const handleInputSubmit = async (e) => {
         e.preventDefault();
         console.log(data_initial);
