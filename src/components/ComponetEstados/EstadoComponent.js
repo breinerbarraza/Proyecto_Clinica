@@ -117,7 +117,6 @@ export const EstadoComponent = () => {
                 } else {
                     return Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
                         text: 'Ha ocurrido un error',
                     })
                 }
@@ -151,7 +150,6 @@ export const EstadoComponent = () => {
         e.preventDefault();
         data_estado.id_user_referido = id;
         data_estado.nombre = data_pendiente.get_nombreCompleto
-        console.log(data_estado)
         if (data_temporal_pendiente.estado_referido == "Descartado") {
             const observacion = document.querySelector("#observacion")
             if (observacion.value == "") {
@@ -178,7 +176,6 @@ export const EstadoComponent = () => {
                 } else {
                     return Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
                         text: data.error,
                     })
                 }
@@ -482,6 +479,22 @@ export const EstadoComponent = () => {
                                                     />
                                                 </div>
 
+                                                <div className="form-hora">
+                                                    <TextField
+                                                        type="text"
+                                                        name="direccion"
+                                                        placeholder="Escribe..."
+                                                        label="Direccion"
+                                                        onChange={handleInput}
+                                                        required
+                                                        className="form-control RegistrarReferido"
+                                                        style={{ marginBottom: "30px" }}
+                                                        InputLabelProps={{
+                                                            shrink: true,
+                                                        }}
+                                                    />
+                                                </div>
+
                                             </div>
                                             <div className="form-medico">
                                                 <FormControl fullWidth >
@@ -501,6 +514,8 @@ export const EstadoComponent = () => {
                                                     </Select>
                                                 </FormControl>
                                             </div>
+
+                                           
 
                                             <div className="prequi-button">
                                                 <button type="submit" className="prequi-b">ASIGNAR</button>
@@ -540,6 +555,22 @@ export const EstadoComponent = () => {
                                                     placeholder="Escribe..."
                                                     label="Hora"
                                                     onChange={handleInput}
+                                                    className="form-control RegistrarReferido"
+                                                    style={{ marginBottom: "30px" }}
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
+                                                />
+                                            </div>
+
+                                            <div className="form-hora">
+                                                <TextField
+                                                    type="text"
+                                                    name="direccion"
+                                                    placeholder="Escribe..."
+                                                    label="Direccion"
+                                                    onChange={handleInput}
+                                                    required
                                                     className="form-control RegistrarReferido"
                                                     style={{ marginBottom: "30px" }}
                                                     InputLabelProps={{
@@ -617,6 +648,22 @@ export const EstadoComponent = () => {
                                                 />
                                             </div>
 
+                                            <div className="form-hora">
+                                                <TextField
+                                                    type="text"
+                                                    name="direccion"
+                                                    placeholder="Escribe..."
+                                                    label="Direccion"
+                                                    onChange={handleInput}
+                                                    required
+                                                    className="form-control RegistrarReferido"
+                                                    style={{ marginBottom: "30px" }}
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
+                                                />
+                                            </div>
+
                                         </div>
                                         <div className="prequi-button">
                                             <button type="submit" className="prequi-b">ASIGNAR</button>
@@ -665,6 +712,22 @@ export const EstadoComponent = () => {
                                                 }}
                                             />
                                         </div>
+
+                                        <div className="form-hora">
+                                                <TextField
+                                                    type="text"
+                                                    name="direccion"
+                                                    placeholder="Escribe..."
+                                                    label="Direccion"
+                                                    onChange={handleInput}
+                                                    required
+                                                    className="form-control RegistrarReferido"
+                                                    style={{ marginBottom: "30px" }}
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
+                                                />
+                                            </div>
 
                                     </div>
                                     <div className="prequi-button">

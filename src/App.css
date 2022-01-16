@@ -900,7 +900,7 @@ button[type="submit"]{
 }
 .form-f-h{
     display: flex;
-    width: 150%;
+    width: 110%;
 }
 .form-prequi{
     width: 100%;
@@ -932,11 +932,11 @@ button[type="submit"]{
     text-align: center;
 }
 .prequi-button{
-    margin-left: 150%;
+    margin-left: 110%;
 }
 /*Programado*/
 .form-medico{
-    width: 150%;
+    width: 110%;
     margin-top: 20px;
 }
 /*gestion*/

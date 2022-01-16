@@ -60,7 +60,6 @@ export const DatosPerfilComonent = () => {
                 if (first_name.value === '' || last_name.value === '' || username.value === '') {
                     return Swal.fire({
                         icon: 'error',
-                        title: 'Error!',
                         title: 'Favor rellenar los campos',
                         showConfirmButton: false,
                         timer: 1500
@@ -72,7 +71,6 @@ export const DatosPerfilComonent = () => {
                     guardarDatos(resp.first_name, resp.last_name, resp.username, resp.password);
                     return Swal.fire({
                         icon: 'success',
-                        title: 'Exito!',
                         text: 'Usuario actualizado correctamente',
                         showConfirmButton: false,
                         timer: 1500

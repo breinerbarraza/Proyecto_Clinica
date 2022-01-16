@@ -66,7 +66,6 @@ export const ReferirComponent = () => {
                 if (resp.mensaje) {
                     return Swal.fire({
                         icon: 'success',
-                        title: 'Exito!',
                         text: resp.mensaje,
                         showConfirmButton: false,
                         timer: 1500
@@ -131,6 +130,19 @@ export const ReferirComponent = () => {
                                             shrink: true,
                                         }}
                                     />
+                                     <TextField
+                                            type="text"
+                                            name="celular"
+                                            placeholder="Escribe..."
+                                            label="Celular"
+                                            className="form-control"
+                                            required
+                                            style={{ marginBottom: "30px" }}
+                                            onChange={handleSelect}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
                                 </div>
 
                                 <div className="contenedor-referir">
@@ -155,18 +167,20 @@ export const ReferirComponent = () => {
                                         </FormControl>
                                         <TextField
                                             type="text"
-                                            name="celular"
+                                            name="telefono"
                                             placeholder="Escribe..."
-                                            label="Celular"
+                                            label="Telefono"
                                             className="form-control"
-                                            required
                                             style={{ marginBottom: "30px" }}
                                             onChange={handleSelect}
                                             InputLabelProps={{
                                                 shrink: true,
                                             }}
                                         />
+
+                                       
                                     </div>
+
                                     <div className="container-ce">
                                     <TextField
                                             type="text"
@@ -203,6 +217,10 @@ export const ReferirComponent = () => {
                         </form>
                 </div>
             </div>
+
+
+
+            
             {/* Contenido responsive rjhgkjfldsjflsd */}
             <div className="container-responsive-referir">
                 <div className="div_perfil" style={{padding:"10px"}}>

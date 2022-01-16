@@ -1,8 +1,14 @@
 import { MDBDataTable } from 'mdbreact';
 import React, { useEffect, useState } from 'react'
 import API from '../Utils/API';
+import meses_map from '../Utils/Objmeses';
 import { HeaderComponent } from './HeaderComponent';
 import { PerfilComponent } from './perfil/PerfilComponent';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
 
 const arreglo_meses = [
     { "valor": 1, "mes": "Enero" },
@@ -23,6 +29,23 @@ export const MetasProgramadas = () => {
 
     const [data_listado, setData_listado] = useState([])
     const [datos_reales, setDatos_reales] = useState([])
+    const [arreglo_year, setArreglo_year] = useState([])
+    const [anioTemporal, setAnioTemporal] = useState("")
+    const [id_usuario, setId_usuario] = useState({})
+
+    const cargarSelect = () => {
+        const fecha = new Date();
+        const anio_actual = fecha.getFullYear();
+        const arreglo = [];
+        for (let x = anio_actual; x >= 1900; x--) {
+          const obj = {
+            valor: x,
+          };
+          arreglo.push(obj);
+        }
+        setArreglo_year(arreglo);
+      };
+    
     
     const conseguirMetaEmpleado = async(id)=>{
         await API.get(`api/usuarios/metas/?empleados=${id}`)
@@ -52,7 +75,9 @@ export const MetasProgramadas = () => {
 
     useEffect(()=>{
         let id_user = (JSON.parse(localStorage.getItem("id_user"))) ? JSON.parse(localStorage.getItem("id_user")) : "";
+        cargarSelect()
         conseguirMetaEmpleado(id_user);
+        setId_usuario({'id_user': id_user})
 
         API.get(`api/usuarios/metas/meta_empleado/?id_empleado=${id_user}`)
         .then(({data})=> {
@@ -72,6 +97,32 @@ export const MetasProgramadas = () => {
         })
 
     }, []);
+    
+    const handleYearChange = (e)=>{
+        const anio = e.target.value;
+        setAnioTemporal(anio)
+    }
+    const handleSelectMonth = (e)=>{
+        setDatos_reales([]);
+        const mes = e.target.value;
+        API.get(`api/usuarios/metas/meta_empleado/?id_empleado=${id_usuario.id_user}&mes=${mes}&anio=${anioTemporal}`)
+        .then(({data})=> {
+            const datos = data;
+            console.log(datos.data)
+            datos.data.map((item) =>{
+                setDatos_reales(datos_reales => [...datos_reales,{    
+                    "referidos":item.referidos,
+                    "gestiones":item.gestiones,
+                    "operaciones":item.operaciones,
+                    'prequirurgicos': item.prequirurgicos,
+                    'pendientes': item.pendientes,
+                    'programados': item.programados
+                    }])
+                
+            })
+        })
+    }
+
 
 
     const showTable = () => {
@@ -215,11 +266,56 @@ export const MetasProgramadas = () => {
                     </div>   
             </div> 
 
-        <div className="lista-container" style={{marginTop: '-80px'}}>
-            <h2 style={{marginBottom: "26px", fontSize: '28px' , color: "#02305b"}}>Datos reales</h2>
-            <div className="tabla-lista">
-            {showTable2()}
+            <div style={{ display: "flex", flexDirection: "row", gap: 20, alignItems:'center', marginBottom:'15px', marginTop:'10px', width:'70%', marginLeft:'190px'}}>
+              <div className="select-mes">
+                <FormControl fullWidth>
+                  <InputLabel shrink id="demo-simple-select-standard-label">
+                    Año
+                  </InputLabel>
+                  <Select
+                    name="anio"
+                    label="Anio"
+                    id="demo-simple-select-standard"
+                    onChange={handleYearChange}
+                  >
+                    {arreglo_year.map((item, key) => {
+                      return (
+                        <MenuItem key={key} value={item.valor}>
+                          {item.valor}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+              </div>
+              <div className="select-mes">
+                <FormControl fullWidth>
+                  <InputLabel shrink id="demo-simple-select-standard-label">
+                    Mes
+                  </InputLabel>
+                  <Select
+                    name="mes"
+                    label="Mes"
+                    id="demo-simple-select-standard"
+                    onChange={handleSelectMonth}
+                  >
+                    {meses_map.map((item, key) => {
+                      return (
+                        <MenuItem key={key} value={item.id}>
+                          {item.mes}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+              </div>
             </div>
+
+            <div className="lista-container" style={{marginTop: '-80px'}}>
+                <h2 style={{marginBottom: "26px", fontSize: '28px' , color: "#02305b"}}>Datos reales</h2>
+                <div className="tabla-lista">
+                {showTable2()}
+                </div>
         </div>        
             
         </div>
