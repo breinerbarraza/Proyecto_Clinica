@@ -8,7 +8,7 @@ export const RegistrarReferidoMedia = ({ cambiarEstado }) =>{
         <div className="logoMedia" style={{backgroundColor:"#526ba3"}}>
             <img alt="clinica" className="logo_clinica_media" src={logo_clinica} style={{width:"90%", marginLeft:"10px", padding:"20px", }}/>
             <h1 className="h1_media">!Hola,</h1>
-            <p style={{color:"white", }}>al continuar podrás ingresar tus datos para ser un candidato y liberarte de tus gafas!</p>
+            <p style={{color:"white", }}>al continuar podrás ingresar tus datos para ser un candidato y libérate de tus gafas!</p>
         </div>
         <div className="div2">
         <button onClick={cambiarEstado} className="botonmedia">CONTINUAR</button>
