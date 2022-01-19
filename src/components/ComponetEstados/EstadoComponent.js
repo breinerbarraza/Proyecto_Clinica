@@ -54,8 +54,6 @@ export const EstadoComponent = () => {
 
     }, [id]);
     
-
-
     useEffect(() => {
         const id = localStorage.getItem('id_user')
 
@@ -95,7 +93,6 @@ export const EstadoComponent = () => {
                 } else {
                     return Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
                         text: 'Ha ocurrido un error',
                     })
                 }
@@ -138,7 +135,6 @@ export const EstadoComponent = () => {
                 } else {
                     return Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
                         text: 'Ha ocurrido un error',
                     })
                 }
