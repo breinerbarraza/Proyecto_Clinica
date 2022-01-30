@@ -46,7 +46,6 @@ export const ComponentModalStateMetas = () => {
           .then(data => {
             const resp = data.data;
             setEstado(resp)
-            console.log(resp);
           })
           .catch(console.error);
     }
@@ -55,7 +54,6 @@ export const ComponentModalStateMetas = () => {
         API.get('api/usuarios/user/grupo_empleado')
             .then(({ data }) => {
                 const resp = data;
-                console.log(resp)
                 setEmpleado(resp)
             })
         
@@ -63,7 +61,6 @@ export const ComponentModalStateMetas = () => {
             .then(({data}) => {
                 const resp = data.ids_empleados
                 const ids = resp.map(item => item.id)
-                console.log(ids)
                 setArreglo_de_Todos(ids);
         })
 
@@ -91,7 +88,6 @@ export const ComponentModalStateMetas = () => {
 
     const enviarMeta = async (e) => {
         e.preventDefault();
-        console.log(dataForm)
         const inputAnio = document.getElementById("anio")
         const fechaActual = new Date().getFullYear();
         if(inputAnio.value < fechaActual){

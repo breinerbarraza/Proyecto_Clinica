@@ -11,7 +11,6 @@ export const ReferidoMedia = ({cambiarEstado}) =>{
         API.get("api/usuarios/user/"+id)
         .then(item =>{
             const resp = item.data;
-            console.log(resp)
             setName(resp)
         })
     }, [id])

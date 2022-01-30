@@ -5,7 +5,7 @@ import API from '../../Utils/API';
 export const PerfilComponent = () => {
 
     const [datos_perfil, setdatos_perfil] = useState({});
-    const [estadoEmpleado, setEstadoEmpleado] = useState(false)
+    const [estadoEmpleado, setEstadoEmpleado] = useState(true)
 
     useEffect(() => {
         const nombres = JSON.parse(localStorage.getItem('nombres'));
@@ -26,14 +26,18 @@ export const PerfilComponent = () => {
         .then( ({data}) =>{
             const resp = data;
             if(resp.msg){
+                console.log(resp.msg)
+                //No muestre las metas programadas porque es asesor, tiene que ser empleado
                 setEstadoEmpleado(true)
             }else{
+                console.log(resp.error)
                 setEstadoEmpleado(false)
             }
-            setEstadoEmpleado()
         })
 
     }, []);
+
+    console.log(estadoEmpleado, datos_perfil.superuser)
 
     const cerrarSesion = (token, idUser, nombres, apellidos,username, password, super_user)=>{
         localStorage.removeItem(token);
@@ -45,7 +49,6 @@ export const PerfilComponent = () => {
         localStorage.removeItem(super_user);
         window.location = "/";
     }
-    
     return (
         <div className="container-perfil">
             <div className="btn-group">
@@ -56,7 +59,7 @@ export const PerfilComponent = () => {
                 <ul className="dropdown-menu dropdown-menu-end">
                     <li><Link to="/datos_perfil"><button className="dropdown-item" type="button"><i className="fas fa-user"></i> Perfil</button></Link></li>
                     {
-                        !estadoEmpleado && !datos_perfil.superuser && (
+                        !estadoEmpleado && datos_perfil.superuser == "" && (
                             <li><Link to="/metas_programadas"><button className="dropdown-item" type="button"><i className="fas fa-chart-line"></i>Metas programadas</button></Link></li>
                         )
                     }

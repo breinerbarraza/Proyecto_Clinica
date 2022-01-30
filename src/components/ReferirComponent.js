@@ -61,7 +61,6 @@ export const ReferirComponent = () => {
         API.post('api/referidos/register-referidos/', JSON.stringify(select_state))
             .then(item => {
                 const resp = item.data;
-                console.log(resp)
                 document.getElementById("login-form").reset();
                 if (resp.mensaje) {
                     return Swal.fire({

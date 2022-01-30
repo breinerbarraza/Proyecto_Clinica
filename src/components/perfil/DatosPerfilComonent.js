@@ -35,10 +35,9 @@ export const DatosPerfilComonent = () => {
         const json = {
             id_user
         };
-        console.log(json)
+
         API.post('api/usuarios/user/get_img/', JSON.stringify(json)) 
         .then(  resp => {
-            console.log(resp.data);
             if(resp.data.length > 0){
                 setEstado_img(true)
                 setImg(resp.data[0])
@@ -47,8 +46,6 @@ export const DatosPerfilComonent = () => {
 
         set_estadoStorage(objeto)
     }, []);
-
-    console.log(estadoStorage)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -66,7 +63,6 @@ export const DatosPerfilComonent = () => {
                     });   
                 }else{
                     const resp = item.data;
-                    console.log(resp);
                     borrarDatos('nombres', 'apellidos', 'username','password')
                     guardarDatos(resp.first_name, resp.last_name, resp.username, resp.password);
                     return Swal.fire({

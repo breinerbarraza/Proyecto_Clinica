@@ -59,7 +59,6 @@ export const EstadoComponent = () => {
 
         API.get(`api/referidos/comprobar_empleado/?id_empleado=${id}`)
             .then(data => {
-                console.log(data.data)
                 const respuesta = data.data;
                 if (respuesta.msg) {
                     setEstadoEmpleado(true);
@@ -81,7 +80,6 @@ export const EstadoComponent = () => {
     const handleClickPendiente = async (e) => {
         e.preventDefault();
         data.referido = id;
-        console.log(data)
         await API.post('api/referidos_cambio_estado/register-estado-pendiente/', JSON.stringify(data))
             .then(data => {
                 const resp = data.data;
@@ -102,7 +100,6 @@ export const EstadoComponent = () => {
     const handleClickProgramado = async (e) => {
         e.preventDefault();
         data.referido = id;
-        console.log(data)
         await API.post('api/referidos_cambio_estado/register-estado-programado/', JSON.stringify(data))
             .then(data => {
                 const resp = data.data;
@@ -123,7 +120,6 @@ export const EstadoComponent = () => {
     const handleClickPrequirurgico = async (e) => {
         e.preventDefault();
         data.referido = id;
-        console.log(data)
         await API.post('api/referidos_cambio_estado/register-estado-prequirurgico/', JSON.stringify(data))
             .then(data => {
                 const resp = data.data;
@@ -189,7 +185,6 @@ export const EstadoComponent = () => {
     const handleInput2 = (e) => {
         const select_estado = document.querySelector(".select-estado")
         const selected = select_estado.options[select_estado.selectedIndex].text;
-        console.log(selected)
         setData_temporal_pendiente({ 'estado_referido': selected })
         setData_estado({
             ...data_estado,

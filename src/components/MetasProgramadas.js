@@ -82,7 +82,6 @@ export const MetasProgramadas = () => {
         API.get(`api/usuarios/metas/meta_empleado/?id_empleado=${id_user}`)
         .then(({data})=> {
             const datos = data;
-            console.log(datos.data)
             datos.data.map((item) =>{
                 setDatos_reales(datos_reales => [...datos_reales,{    
                     "referidos":item.referidos,
@@ -108,7 +107,6 @@ export const MetasProgramadas = () => {
         API.get(`api/usuarios/metas/meta_empleado/?id_empleado=${id_usuario.id_user}&mes=${mes}&anio=${anioTemporal}`)
         .then(({data})=> {
             const datos = data;
-            console.log(datos.data)
             datos.data.map((item) =>{
                 setDatos_reales(datos_reales => [...datos_reales,{    
                     "referidos":item.referidos,

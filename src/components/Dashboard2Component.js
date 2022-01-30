@@ -77,7 +77,6 @@ export const Dashboard2Component = () => {
         await API.get('api/usuarios/user/grupo_empleado')
             .then(resp => {
                 const respuesta = resp.data;
-                console.log(respuesta)
                 setDataEmpleado(respuesta);
             })
     }
@@ -101,7 +100,6 @@ export const Dashboard2Component = () => {
 
     const handleSelectYear = (e)=>{
         const year = e.target.value;
-        console.log(year)
         setAnio_Temporal(year)
     }
 
@@ -109,7 +107,6 @@ export const Dashboard2Component = () => {
         const id_asesor = e.target.value;
         await API.get(`api/usuarios/metas/get_metas_month_asesor/?mes=${mes_Temporal}&id_asesor=${id_asesor}&anio=${anio_Temporal}`)
         .then( data => {
-            console.log(data.data)
             const arreglo_meses = data.data;
             if(arreglo_meses.length > 0){
                 const meses = arreglo_meses[0]
@@ -119,8 +116,6 @@ export const Dashboard2Component = () => {
                 const programados = arreglo_meses[4]
                 const prequirurgicos = arreglo_meses[5]
                 const pendientes = arreglo_meses[6]
-                console.log(pendientes)
-                console.log(prequirurgicos)
                 const total_comision_ = arreglo_meses[arreglo_meses.length - 1]
                 setData_meses(meses);
                 conseguirMetas_asesor(meses) //funcion y se le pasa el parametro de arreglo de metas
@@ -131,7 +126,6 @@ export const Dashboard2Component = () => {
                 setPrequirurgicos(prequirurgicos)
                 setPendientes(pendientes)
                 setTotal_comision(total_comision_)
-                console.log(arreglo_meses)
             }                
         })
     }
@@ -154,7 +148,6 @@ export const Dashboard2Component = () => {
             
         ]
     };
-    console.log(metaPrequirurgicos)
 
     return (
         <>

@@ -23,7 +23,6 @@ export const ConfirEmailComponent = () => {
     //captura los datos del formualrio y los manda a la base de datos 
     const handleInputSubmit = async (e) => {
         e.preventDefault();
-        console.log(data_initial);
         await API.post(
             "api/usuarios/user/send_email/",
             JSON.stringify(data_initial)

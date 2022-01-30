@@ -45,7 +45,6 @@ export const DashboardComponent = () => {
         await API.get(`api/referidos/dashboard_app/?mes=${mes}`)
             .then(response => {
                 const resp = response.data;
-                console.log(resp);
                 setDatosCambioEstado(resp)
             })
     }
@@ -54,7 +53,6 @@ export const DashboardComponent = () => {
         await API.get("api/usuarios/user/grupo_empleado/")
             .then(response => {
                 const empleados = response.data;
-                console.log(empleados);
                 setUsuarios_employe(empleados)
             })
     }
@@ -63,7 +61,6 @@ export const DashboardComponent = () => {
         await API.get(`api/referidos/get_count_referidos/?mes=${mes}`)
             .then(resp => {
                 const total_referidos = resp.data;
-                console.log(total_referidos);
                 setTotal_referidos(total_referidos)
             })
     }
@@ -71,8 +68,6 @@ export const DashboardComponent = () => {
     const load = async () => {
         await API.get('api/referidos/')
             .then(response => {
-                 console.log(response.data)
-                console.log(response.data)
                 let agrupacion = _.chain(response.data).groupBy('estadoReferido')
                     .map((value, key) => ({
                         "estado": key,
@@ -82,13 +77,11 @@ export const DashboardComponent = () => {
                             + (Math.floor(Math.random() * 255)) + ', 0.8)'
                     }))
                 let agrupacionArray = _.toArray(agrupacion)
-                console.log("Datos de la agrupacion: ", agrupacionArray)
                 setPieChartData(agrupacionArray)
                 agrupacionArray.map((el) => (
                     setLabelColors(labelColors => [...labelColors, el.color]),
                     setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
-                    setCantidades(cantidades => [...cantidades, el.valor]),
-                    console.log("Estados", el)
+                    setCantidades(cantidades => [...cantidades, el.valor])
                 ))
             }).catch(console.error)
     }
@@ -106,7 +99,6 @@ export const DashboardComponent = () => {
     const handleSelectYear = (e)=>{
         const anio = e.target.value;
         setAnio_temporal(anio);
-        console.log(anio);
     }
 
     const handleSelectMonth = async(e) => {
@@ -122,7 +114,6 @@ export const DashboardComponent = () => {
             const referidos_data = response.data;
             if(referidos_data.length > 0){
                     cargarTotalReferidos(mes)
-                    console.log(referidos_data);
                     let agrupacion = _.chain(referidos_data).groupBy('estadoReferido')
                         .map((value, key) => ({
                             "estado": key,
@@ -132,13 +123,12 @@ export const DashboardComponent = () => {
                                 + (Math.floor(Math.random() * 255)) + ', 0.8)'
                         }))
                     let agrupacionArray = _.toArray(agrupacion)
-                    console.log("Datos de la agrupacion: ", agrupacionArray)
                     setPieChartData(agrupacionArray)
                     agrupacionArray.map((el) => (
                         setLabelColors(labelColors => [...labelColors, el.color]),
                         setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
-                        setCantidades(cantidades => [...cantidades, el.valor]),
-                        console.log("Estados", el)
+                        setCantidades(cantidades => [...cantidades, el.valor])
+
                     ))
                 }else{
                     setTotal_referidos({})
@@ -151,13 +141,11 @@ export const DashboardComponent = () => {
                                 + (Math.floor(Math.random() * 255)) + ', 0.8)'
                         }))
                     let agrupacionArray = _.toArray(agrupacion)
-                    console.log("Datos de la agrupacion: ", agrupacionArray)
                     setPieChartData(agrupacionArray)
                     agrupacionArray.map((el) => (
                         setLabelColors(labelColors => [...labelColors, el.color]),
                         setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
-                        setCantidades(cantidades => [...cantidades, el.valor]),
-                        console.log("Estados", el)
+                        setCantidades(cantidades => [...cantidades, el.valor])
                     ))
                 }
             })

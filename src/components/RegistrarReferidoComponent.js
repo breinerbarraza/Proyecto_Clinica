@@ -44,7 +44,6 @@ export const RegistrarReferidoComponent = () => {
     }
     const enviarDatos = async(e) => {
         e.preventDefault();
-        console.log(state_referido)
         await API.post('api/referidos/register-referidos/', JSON.stringify(state_referido))
             .then(item => {
                 const resp = item.data;
@@ -68,7 +67,6 @@ export const RegistrarReferidoComponent = () => {
             })
     }
 
-    console.log(identificacion)
     return (
         <>
         {

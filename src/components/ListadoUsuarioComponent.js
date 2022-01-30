@@ -27,7 +27,6 @@ export const ListadoUsuarioComponent = () => {
     setLoading(true)
     await API.get('api/usuarios/user/')
       .then(resp => {
-        console.log(resp.data)
         setMeses(resp.data)
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
@@ -62,7 +61,6 @@ export const ListadoUsuarioComponent = () => {
       if (result.isConfirmed) {
         await API.put('api/usuarios/user/change_active/', JSON.stringify(obj))
           .then(({data})=>{
-              console.log(data);
               if(data.msg){
                 Swal.fire({
                   icon: 'success',
@@ -91,7 +89,6 @@ export const ListadoUsuarioComponent = () => {
   } 
 
   const handleChangeActivo = (e, id_user)=>{
-    console.log(id_user)
     const obj = {
       id_user
     }
@@ -105,10 +102,8 @@ export const ListadoUsuarioComponent = () => {
       confirmButtonText: 'Si, cambiarlo!'
     }).then(async(result) => {
       if (result.isConfirmed) {
-        console.log("entro"+result)
         await API.put('api/usuarios/user/change_desactive/', JSON.stringify(obj))
         .then(({data})=>{
-            console.log(data); 
             if(data.msg){
               Swal.fire({
                 icon: 'success',
@@ -174,13 +169,11 @@ export const ListadoUsuarioComponent = () => {
   const handleSelectMonth = async (e) => {
     setData_meses([]);
     const mes = e.target.value;
-    console.log(mes)
     setMes_temporal(mes)
     if (mes !== 0) {
       await API.get(`api/usuarios/user/?mes=${mes}`)
         .then(
           data => {
-            console.log(data.data);
             if (data.data.length > 0) {
               data.data.map((item) => (
                 setData_meses(data_meses => [...data_meses, {
@@ -206,7 +199,6 @@ export const ListadoUsuarioComponent = () => {
       setData_listado([]);
       await API.get('api/usuarios/user/')
         .then(resp => {
-          console.log(resp.data)
           setMeses(resp.data)
           resp.data.map((item) => (
             setData_listado(data_listado => [...data_listado, {
@@ -233,11 +225,9 @@ export const ListadoUsuarioComponent = () => {
     setData_meses([]);
     setData_listado([]);
     const id_grupo = e.target.value;
-    console.log(id_grupo);
     await API.get(`api/usuarios/user/tipo_rol/?grupo=${id_grupo}&mes=${mes_temporal}`)
     .then( resp => {
       const respuesta = resp.data;
-      console.log(respuesta)
       setMeses(respuesta)
       respuesta.map((item) => (
         setData_listado(data_listado => [...data_listado, {

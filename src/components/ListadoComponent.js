@@ -44,7 +44,6 @@ export const ListadoComponent = () => {
   const cargarEmpleados = async () => {
     await API.get("api/usuarios/user/grupo_empleado").then((resp) => {
       const respuesta = resp.data;
-      console.log(respuesta);
       setDataEmpleado(respuesta);
     });
   };
@@ -53,12 +52,10 @@ export const ListadoComponent = () => {
     setLoading(true);
     await API.get("api/referidos/").then((resp) => {
       const arreglo_referidos = resp.data;
-      console.log(arreglo_referidos);
       const filter_arreglo = arreglo_referidos.filter(item => item.finalizado === true)
       
       let arreglo = [];
       const totalComision = calcularComisionFinal(arreglo, filter_arreglo);
-      console.log(totalComision);
       setComision(totalComision);
 
       arreglo_referidos.map((item) =>
@@ -104,7 +101,6 @@ export const ListadoComponent = () => {
     await API.post("api/referidos/get_referidos/", JSON.stringify(obj)).then(
       (resp) => {
         const arreglo_referidos = resp.data;
-        console.log(arreglo_referidos);
         let arreglo = [];
         const filter_arreglo = arreglo_referidos.filter(item => item.finalizado === true)
         const totalComision = calcularComisionFinal(arreglo, filter_arreglo);
@@ -239,14 +235,12 @@ export const ListadoComponent = () => {
       `api/referidos/get_referidos_by_month_rol/?mes=${mes}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}`
     ).then((data) => {
       const arreglo_referidos_month = data.data;
-      console.log(arreglo_referidos_month);
       const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
       let arreglo = [];
       const totalComision = calcularComisionFinal(
         arreglo,
         filter_arreglo
       );
-      console.log(totalComision);
       setComision(totalComision);
       if (arreglo_referidos_month.length == 0) {
         setData_meses([0]);
@@ -335,7 +329,6 @@ export const ListadoComponent = () => {
 
   const handleYearChange = (e) => {
     const anio = e.target.value;
-    console.log(anio);
     setAnioTemporal(anio);
   };
 
@@ -347,8 +340,6 @@ export const ListadoComponent = () => {
     ).then((data) => {
       const arreglo_referidos_month = data.data;
       const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
-      console.log(arreglo_referidos_month)
-      console.log(filter_arreglo)
       let arreglo = [];
       const totalComision = calcularComisionFinal(
         arreglo,

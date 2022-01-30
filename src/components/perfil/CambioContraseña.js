@@ -15,11 +15,9 @@ export const CambioContraseña = () => {
 
     useEffect(()=>{
         const id = JSON.parse(localStorage.getItem('id_user'))
-        console.log(id)
         API.get('api/usuarios/user/'+id)
         .then( data => {
             const respuesta = data.data;
-            console.log(respuesta)
             setData_user(respuesta)
 
         } )
@@ -41,13 +39,10 @@ export const CambioContraseña = () => {
     const handleChangePassword = (e)=>{
         setData_msg(false);
         e.preventDefault()
-        console.log("Entro en el cambio de contraseña")
         data_password.password_user = data_user.password
-        console.log(data_password)
         API.put('api/usuarios/user/updated_password/', JSON.stringify(data_password))
         .then( resp =>{
             const respuesta = resp.data;
-            console.log(respuesta)
             if(respuesta.msg){
                 setData_msg(true);
                 setMsg_Error(respuesta.msg)

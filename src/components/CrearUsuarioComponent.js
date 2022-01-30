@@ -29,7 +29,6 @@ export const CrearUsuarioComponent = () => {
         API.get('api/usuarios/asesor/list_grupos')
             .then(({ data }) => {
                 setGroup(data)
-                console.log(data)
         })
         
         API.get('api/configuracion/tipoIdentificacion')
@@ -48,11 +47,9 @@ export const CrearUsuarioComponent = () => {
     }
     const enviarDatos = async(e) => {
         e.preventDefault();
-        console.log(dato);
         await API.post('api/usuarios/asesor/crear-usuario/', JSON.stringify(dato))
         .then( ({data}) => {
             const resp = data;
-            console.log(resp);
             if(resp.mensaje){   
                 const mensaje = resp.mensaje;
                 document.getElementById("login-form").reset();

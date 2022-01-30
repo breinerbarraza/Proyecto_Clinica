@@ -25,11 +25,9 @@ export const LoginComponent = () => {
     }
     const enviarDatos = async(e) => {
         e.preventDefault() 
-       console.log(datos)
        API.post('/api-token-auth/', JSON.stringify(datos))
         .then(item => {
             const data = item.data
-            console.log(data) 
             if(data.error){
                 const error_msg = data.error;
                 Swal.fire({
@@ -60,7 +58,6 @@ export const LoginComponent = () => {
 
     const obtenerLocalStorageToken = (nombre_token)=>{
         const dato = JSON.parse(localStorage.getItem(nombre_token))
-        console.log(dato)
         return dato;
     }
 

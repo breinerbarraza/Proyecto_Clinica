@@ -47,7 +47,7 @@ export const ListadoReferidoComponent = () => {
     const obj = {
       id: id_user
     }
-    console.log(obj)
+
     await API.post('api/referidos/get_referidos/', JSON.stringify(obj))
       .then(resp => {
         resp.data.map((item) => (
@@ -58,8 +58,7 @@ export const ListadoReferidoComponent = () => {
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
             "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />
-          }]),
-          console.log(data_listado)
+          }])
         ))
       })
     setLoading(false)
@@ -126,7 +125,6 @@ export const ListadoReferidoComponent = () => {
     await API.get(`api/referidos/get_referidos_month/?mes=${mes}&anio=${anio_temporal}`)
       .then(data => {
         const arreglo_referidos_month = data.data;
-        console.log(arreglo_referidos_month);
         if (arreglo_referidos_month.length == 0) {
           setData_meses([0]);
         } else {
@@ -152,7 +150,7 @@ export const ListadoReferidoComponent = () => {
     await API.get(`api/referidos/get_referidos_by_month_rol/?mes=${mes}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}`)
       .then(data => {
         const arreglo_referidos_month = data.data;
-        console.log(arreglo_referidos_month);
+
         if (arreglo_referidos_month.length == 0) {
           setData_meses([0]);
         } else {
@@ -176,7 +174,6 @@ export const ListadoReferidoComponent = () => {
     await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${id_estado}&anio=${anio_temporal}`)
       .then(data => {
         const respuesta = data.data;
-        console.log(respuesta);
         if (respuesta.length > 0) {
           respuesta.map((item) => (
             setData_meses(data_meses => [...data_meses, {
@@ -198,12 +195,9 @@ export const ListadoReferidoComponent = () => {
   const handleSelectEstate_rol = async (e) => {
     setData_meses([]);
     const id_estado = e.target.value;
-    console.log(mes_temporal)
-    console.log(id_estado)
     await API.get(`api/referidos/get_referidos_estado_rol/?id_estado=${id_estado}&mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}`)
       .then(data => {
         const respuesta = data.data;
-        console.log(respuesta);
         if (respuesta.length > 0) {
           respuesta.map((item) => (
             setData_meses(data_meses => [...data_meses, {
@@ -216,7 +210,6 @@ export const ListadoReferidoComponent = () => {
             }])
           ))
         } else {
-          console.log("No hay nada que mostrar");
           setData_meses([0]);
         }
 
@@ -225,8 +218,7 @@ export const ListadoReferidoComponent = () => {
 
 
   const handleYearChange = (e)=>{
-    const anio = e.target.value;
-    console.log(anio);
+    const anio = e.target.value
     setAnioTemporal(anio)
   }
 
