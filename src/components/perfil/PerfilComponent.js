@@ -26,18 +26,15 @@ export const PerfilComponent = () => {
         .then( ({data}) =>{
             const resp = data;
             if(resp.msg){
-                console.log(resp.msg)
                 //No muestre las metas programadas porque es asesor, tiene que ser empleado
                 setEstadoEmpleado(true)
             }else{
-                console.log(resp.error)
                 setEstadoEmpleado(false)
             }
         })
 
     }, []);
 
-    console.log(estadoEmpleado, datos_perfil.superuser)
 
     const cerrarSesion = (token, idUser, nombres, apellidos,username, password, super_user)=>{
         localStorage.removeItem(token);
