@@ -141,6 +141,19 @@ export const ListadoComponent = () => {
     setLoading(false);
   };
 
+  //const comprobarUsuarioAsesor = async(id_user)=>{
+  //  await API.get(`api/usuarios/user/comprobar_asesor/?id_user=${id_user}`)
+  //  .then( ({data}) => {
+  //    const resp = data;
+  //    if(resp.msg){
+  //      console.log(resp.msg)
+  //    }else{
+  //      console.log(resp.error)
+  //    }
+  //
+  //  })
+  //}
+
   const showTable = () => {
     return (
       //Mostrando 1 a 10 de 12 entradas
@@ -172,6 +185,7 @@ export const ListadoComponent = () => {
     if (super_user) {
       load();
     } else {
+      //comprobarUsuarioAsesor(id_user);
       load_referidos_by_id(id_user);
     }
   }, []);
