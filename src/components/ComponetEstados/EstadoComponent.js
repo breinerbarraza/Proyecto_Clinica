@@ -12,6 +12,8 @@ import { HeaderComponent } from '../HeaderComponent'
 import Chip from '@mui/material/Chip';
 import Swal from 'sweetalert2';
 
+var moment = require('moment')
+
 export const EstadoComponent = () => {
 
     const [data_pendiente, setData_pendiente] = useState({})
@@ -25,6 +27,7 @@ export const EstadoComponent = () => {
     const [observacion_gestion, setObservacion_gestion] = useState([]);
     const [observacion_operado, setObservacion_operado ] = useState([]);
     const { id } = useParams();
+    const [today, setToday] = useState(new Date())
 
     useEffect(() => {
 
@@ -443,6 +446,7 @@ export const EstadoComponent = () => {
                                             <div className="form-f-h">
                                                 <div className="form-fecha">
                                                     <TextField
+                                                        InputProps={{inputProps: { min: moment(today).format('YYYY-MM-DD')} }}
                                                         type="date"
                                                         name="fecha"
                                                         placeholder="Escribe..."
@@ -527,6 +531,7 @@ export const EstadoComponent = () => {
                                         <div className="form-f-h">
                                             <div className="form-fecha">
                                                 <TextField
+                                                    InputProps={{inputProps: { min: moment(today).format('YYYY-MM-DD')} }}
                                                     type="date"
                                                     name="fecha"
                                                     placeholder="Escribe..."
@@ -610,6 +615,7 @@ export const EstadoComponent = () => {
                                             <div className="form-fecha">
 
                                                 <TextField
+                                                    InputProps={{inputProps: { min: moment(today).format('YYYY-MM-DD')} }}
                                                     type="date"
                                                     name="fecha"
                                                     placeholder="Escribe..."
@@ -621,6 +627,7 @@ export const EstadoComponent = () => {
                                                     InputLabelProps={{
                                                         shrink: true,
                                                     }}
+                    
                                                 />
                                             </div>
                                             <div className="form-hora">
@@ -675,6 +682,7 @@ export const EstadoComponent = () => {
                                         <div className="form-fecha">
 
                                             <TextField
+                                                InputProps={{inputProps: { min: moment(today).format('YYYY-MM-DD')} }}
                                                 type="date"
                                                 name="fecha"
                                                 placeholder="Escribe..."
@@ -845,6 +853,7 @@ export const EstadoComponent = () => {
                                         <div className="form-f-h_">
                                             <div className="form-fecha_">
                                                 <TextField
+                                                
                                                     type="date"
                                                     name="fecha"
                                                     placeholder="Escribe..."
