@@ -32,7 +32,6 @@ export const LoginComponent = () => {
                 const error_msg = data.error;
                 Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
                     text: error_msg,
                     position: 'center',
                   })

@@ -14,7 +14,12 @@ import { formatMoney, calcularComisionFinal } from "../Utils/LogicaFunciones";
 import { PerfilComponentSinNombre } from "./perfil/Perfil_sin_nombre";
 import "./listaUsuario.css";
 import { HeaderMovil } from "./HeaderMovil";
-import { Alert } from "@mui/material";
+import { Button } from "@mui/material";
+import ExportExcel from 'react-export-excel';
+
+const ExcelFile = ExportExcel.ExcelFile
+const ExcelSheet = ExportExcel.ExcelSheet 
+const ExcelColumn = ExportExcel.ExcelColumn 
 
 export const ListadoComponent = () => {
   const [data_listado, setData_listado] = useState([]);
@@ -27,6 +32,7 @@ export const ListadoComponent = () => {
   const [anio_temporal, setAnioTemporal] = useState([]);
   const [dataEmpleado, setDataEmpleado] = useState([]);
   const [mes_temporal, setMes_temporal] = useState("");
+  const [arreglo_referidos_temporal, setArreglo_referidos_temporal] = useState([]);
 
   const cargarSelect = () => {
     const fecha = new Date();
@@ -52,8 +58,9 @@ export const ListadoComponent = () => {
     setLoading(true);
     await API.get("api/referidos/").then((resp) => {
       const arreglo_referidos = resp.data;
+      setArreglo_referidos_temporal(arreglo_referidos)
       const filter_arreglo = arreglo_referidos.filter(item => item.finalizado === true)
-      
+      console.log(arreglo_referidos)
       let arreglo = [];
       const totalComision = calcularComisionFinal(arreglo, filter_arreglo);
       setComision(totalComision);
@@ -81,6 +88,7 @@ export const ListadoComponent = () => {
                 <b style={{ color: "#02305b" }}>Total comisiones: </b>
               ),
             ordenServicio : item.ordenServicio,
+            valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
             comision:
               (item.finalizado && item.comision !== "")
                 ? "$" + formatMoney(item.comision, 2, ",", ".")
@@ -128,6 +136,7 @@ export const ListadoComponent = () => {
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
               ordenServicio : item.ordenServicio,
+              valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
               comision:
               (item.finalizado && item.comision !== "")
                   ? "$" + formatMoney(item.comision, 2, ",", ".")
@@ -192,12 +201,14 @@ export const ListadoComponent = () => {
 
   const handleSelectMonth_admin = (e) => {
     setData_meses([]);
+    setArreglo_referidos_temporal([]);
     const mes = e.target.value;
     setMes_temporal(mes);
     API.get(
       `api/referidos/get_referidos_month/?mes=${mes}&anio=${anio_temporal}`
     ).then((data) => {
       const arreglo_referidos_month = data.data;
+      setArreglo_referidos_temporal(arreglo_referidos_month)
       const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
       let arreglo = [];
       const totalComision = calcularComisionFinal(
@@ -231,6 +242,7 @@ export const ListadoComponent = () => {
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
               ordenServicio : item.ordenServicio,
+              valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
               comision:
               (item.finalizado && item.comision !== "")
                   ? "$" + formatMoney(item.comision, 2, ",", ".")
@@ -282,6 +294,7 @@ export const ListadoComponent = () => {
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
               ordenServicio : item.ordenServicio,
+              valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
               comision:
               (item.finalizado && item.comision !== "")
                   ? "$" + formatMoney(item.comision, 2, ",", ".")
@@ -332,6 +345,12 @@ export const ListadoComponent = () => {
         width: 100,
       },
       {
+        label: "Valor cancelado",
+        field: "valor_cancelado",
+        sort: "asc",
+        width: 100,
+      },
+      {
         label: "Comisión",
         field: "comision",
         sort: "asc",
@@ -349,10 +368,12 @@ export const ListadoComponent = () => {
   const handleFilterEmployee = (e) => {
     const id_empleado = e.target.value;
     setData_meses([]);
+    setArreglo_referidos_temporal([])
     API.get(
       `api/referidos/get_referidos_employee/?mes=${mes_temporal}&anio=${anio_temporal}&id_empleado=${id_empleado}`
     ).then((data) => {
       const arreglo_referidos_month = data.data;
+      setArreglo_referidos_temporal(arreglo_referidos_month)
       const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
       let arreglo = [];
       const totalComision = calcularComisionFinal(
@@ -397,6 +418,8 @@ export const ListadoComponent = () => {
     });
   };
 
+  console.log(arreglo_referidos_temporal)
+
   return (
     <>
       <div className="listaRefe">
@@ -406,73 +429,87 @@ export const ListadoComponent = () => {
         <div className="lista-container">
           <h3 className="h3-Lista">Listado de referidos</h3>
           {state_superUser && (
-            <div style={{ display: "flex", flexDirection: "row", gap: 20 }}>
-              <div className="select-mes">
-                <FormControl fullWidth>
-                  <InputLabel shrink id="demo-simple-select-standard-label">
-                    Año
-                  </InputLabel>
-                  <Select
-                    name="anio"
-                    label="Anio"
-                    id="demo-simple-select-standard"
-                    onChange={handleYearChange}
-                  >
-                    {arreglo_year.map((item, key) => {
-                      return (
-                        <MenuItem key={key} value={item.valor}>
-                          {item.valor}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-              </div>
+              <div style={{ display: "flex", flexDirection: "row", gap: 20 }}>
+                <div className="select-mes">
+                  <FormControl fullWidth>
+                    <InputLabel shrink id="demo-simple-select-standard-label">
+                      Año
+                    </InputLabel>
+                    <Select
+                      name="anio"
+                      label="Anio"
+                      id="demo-simple-select-standard"
+                      onChange={handleYearChange}
+                    >
+                      {arreglo_year.map((item, key) => {
+                        return (
+                          <MenuItem key={key} value={item.valor}>
+                            {item.valor}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
 
-              <div className="select-mes">
-                <FormControl fullWidth>
-                  <InputLabel shrink id="demo-simple-select-standard-label">
-                    Mes
-                  </InputLabel>
-                  <Select
-                    name="mes"
-                    label="Mes"
-                    id="demo-simple-select-standard"
-                    onChange={handleSelectMonth_admin}
-                  >
-                    {meses_map.map((item, key) => {
-                      return (
-                        <MenuItem key={key} value={item.id}>
-                          {item.mes}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-              </div>
+                <div className="select-mes">
+                  <FormControl fullWidth>
+                    <InputLabel shrink id="demo-simple-select-standard-label">
+                      Mes
+                    </InputLabel>
+                    <Select
+                      name="mes"
+                      label="Mes"
+                      id="demo-simple-select-standard"
+                      onChange={handleSelectMonth_admin}
+                    >
+                      {meses_map.map((item, key) => {
+                        return (
+                          <MenuItem key={key} value={item.id}>
+                            {item.mes}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
 
-              <div className="select-mes">
-                <FormControl fullWidth>
-                  <InputLabel shrink id="demo-simple-select-standard-label">
-                    Empleados
-                  </InputLabel>
-                  <Select
-                    name="mes"
-                    label="Mes"
-                    id="demo-simple-select-standard"
-                    onChange={handleFilterEmployee}
-                  >
-                    {dataEmpleado.map((item, key) => {
-                      return (
-                        <MenuItem key={key} value={item.id}>
-                          {item.first_name} {item.last_name}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
+                <div className="select-mes">
+                  <FormControl fullWidth>
+                    <InputLabel shrink id="demo-simple-select-standard-label">
+                      Empleados
+                    </InputLabel>
+                    <Select
+                      name="mes"
+                      label="Mes"
+                      id="demo-simple-select-standard"
+                      onChange={handleFilterEmployee}
+                    >
+                      {dataEmpleado.map((item, key) => {
+                        return (
+                          <MenuItem key={key} value={item.id}>
+                            {item.first_name} {item.last_name}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+                <ExcelFile element={<Button variant="contained" color="success" class="dw-informe">Descargar informe</Button>} filename="Informe">
+                  <ExcelSheet data={arreglo_referidos_temporal} name="Informe de referidos">
+                    <ExcelColumn label="Mes" value="mes"/>
+                    <ExcelColumn label="Referido" value="get_nombreCompleto"/>
+                    <ExcelColumn label="Fecha de ingreso" value="fecha_ingreso" />
+                    <ExcelColumn label="Fecha de operado" value="fecha_operado" />
+                    <ExcelColumn label="Referido por" value="referido_por" />
+                    <ExcelColumn label="Cargo" value="cargo" />
+                    <ExcelColumn label="Valor cancelado" value="valor_cancelado" />
+                    <ExcelColumn label="Asesor" value="asesor" />
+                    <ExcelColumn label="Canal" value="canal" />
+                  </ExcelSheet>
+                </ExcelFile>
+                
               </div>
-            </div>
           )}
 
           {/* Si no es superuser y es por tipo de rol */}
@@ -534,7 +571,9 @@ export const ListadoComponent = () => {
           </p>
         </div>
       </div>
-
+      
+      
+      {/* ******************* responsive design************************** */}
       {/*Listado responsivo*/}
 
       <div className="listado_referido_responsive">
@@ -625,6 +664,20 @@ export const ListadoComponent = () => {
                     </Select>
                   </FormControl>
                 </div>
+
+                <ExcelFile element={<Button variant="contained" color="success" class="dw-informe">Descargar informe</Button>} filename="Informe">
+                  <ExcelSheet data={arreglo_referidos_temporal} name="Informe de referidos">
+                    <ExcelColumn label="Mes" value="mes"/>
+                    <ExcelColumn label="Referido" value="get_nombreCompleto"/>
+                    <ExcelColumn label="Fecha de ingreso" value="fecha_ingreso" />
+                    <ExcelColumn label="Fecha de operado" value="fecha_operado" />
+                    <ExcelColumn label="Referido por" value="referido_por" />
+                    <ExcelColumn label="Cargo" value="cargo" />
+                    <ExcelColumn label="Valor cancelado" value="valor_cancelado" />
+                    <ExcelColumn label="Asesor" value="asesor" />
+                    <ExcelColumn label="Canal" value="canal" />
+                  </ExcelSheet>
+                </ExcelFile>
                 </div>
               
             )}

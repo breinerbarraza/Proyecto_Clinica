@@ -20,7 +20,6 @@ import { DatosPerfilComonent } from './components/perfil/DatosPerfilComonent';
 import { ListadoUsuarioComponent } from './components/ListadoUsuarioComponent';
 import { CambioContraseña } from './components/perfil/CambioContraseña';
 import { Dashboard2Component } from './components/Dashboard2Component';
-import { ReferidoMedia } from './components/componentMediaQuery/ReferidoMedia';
 import { RegistrarReferidoMedia } from './components/componentMediaQuery/RegistrarReferidoMedia';
 import './App.css'
 import { HeaderMovil } from './components/HeaderMovil';
@@ -29,6 +28,8 @@ import { ListadoMetas } from './components/ListadoMetas';
 import { ComponentModalStateMetas } from './components/ComponentModalStateMetas';
 import { ActualizarMetaModal } from './components/ActulizarMetaModal';
 import { MetasProgramadas } from './components/MetasProgramadas';
+import { DashboardComponentCanal } from './components/DashboardComponentCanal';
+
 function App() {
   return (
     <div>
@@ -101,6 +102,14 @@ function App() {
               <Route exact path="/dashboard2">
                 {localStorage.getItem('token') !== null ? (
                   <Dashboard2Component/>
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+
+              <Route exact path="/dashboardMeta">
+                {localStorage.getItem('token') !== null ? (
+                  <DashboardComponentCanal/>
                 ) : (
                   <LoginComponent />
                 )}

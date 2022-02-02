@@ -48,7 +48,9 @@ export const PerfilComponentSinNombre = () => {
                             <li><Link to="/"><button className="dropdown-item" type="button"><i className="fas fa-list-ul"></i> Listado Referidos</button></Link></li>
                             <li><Link to="/listado"><button className="dropdown-item" type="button"><i className="fas fa-list-ul"></i> Listado Comision</button></Link></li>
                             <li><Link to="/dashboard"><button className="dropdown-item" type="button"><i className="fas fa-chart-pie"></i> Dashboard</button></Link></li>
+                            <li><Link to="/dashboardMeta"><button className="dropdown-item" type="button"><i className="fas fa-chart-pie"></i> Dashboard Canales</button></Link></li>
                             <li><Link to="/add_metas"><button className="dropdown-item" type="button"><i className="fas fa-chart-line"></i> Agregar Metas</button></Link></li>
+                            <li><Link to="/add_metas_estate"><button className="dropdown-item" type="button"><i className="fas fa-chart-line"></i> Agregar Meta con estado</button></Link></li>
                             <li><Link to="/dashboard2"><button className="dropdown-item" type="button"><i className="fas fa-chart-line"></i> Metas</button></Link></li>
                             </>
                         )

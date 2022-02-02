@@ -1001,6 +1001,24 @@ button[type="submit"]{
 }
 
 
+.canal{
+    margin-top: 17px !important;
+    margin-bottom: -10px !important;
+}
+
+.dw-informe{
+    background-color: #6b8dd6;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    margin-top: -5px;
+    font-weight: bold;
+}
+
+
 /*Datos perfil*/
 
 .datos{

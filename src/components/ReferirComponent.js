@@ -17,6 +17,7 @@ export const ReferirComponent = () => {
     let estado1 = true;
     let estado2 = false;
     const [identificacion, setIdentificacion] = useState([]);
+    const [canal, setCanal] = useState([]);
     const [select_state, setSelect_state] = useState({});
     const [storage, setstorage] = useState({});
     const [imagen1, setImagen1] = useState(estado1);
@@ -28,6 +29,12 @@ export const ReferirComponent = () => {
             .then(({ data }) => {
                 const item = data;
                 setIdentificacion(item)
+            })
+
+        API.get('api/configuracion/canal/')
+            .then(({data}) => {
+                const item = data;
+                setCanal(item)
             })
     }, []);
 
@@ -142,6 +149,25 @@ export const ReferirComponent = () => {
                                                 shrink: true,
                                             }}
                                         />
+
+                                        <FormControl fullWidth className='canal'>
+                                            <InputLabel shrink id="demo-simple-select-standard-label">Tipo de canal</InputLabel>
+                                            <Select
+                                                name="canal"
+                                                label="Tipo de Canal"
+                                                className= "select-document"
+                                                id="demo-simple-select-standard"
+                                                onChange={handleSelect}
+                                                required
+                                                
+                                            >
+                                                {
+                                                    canal.map(data => {
+                                                        return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
+                                                    })
+                                                }
+                                            </Select>
+                                        </FormControl>
                                 </div>
 
                                 <div className="contenedor-referir">
@@ -154,9 +180,9 @@ export const ReferirComponent = () => {
                                                 className= "select-document"
                                                 id="demo-simple-select-standard"
                                                 onChange={handleSelect}
+                                                required
                                                 
                                             >
-
                                                 {
                                                     identificacion.map(data => {
                                                         return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
@@ -219,8 +245,8 @@ export const ReferirComponent = () => {
 
 
 
-            
-            {/* Contenido responsive rjhgkjfldsjflsd */}
+            {/* ****************************************************** */}
+            {/* Contenido responsive */}
             <div className="container-responsive-referir">
                 <div className="div_perfil" style={{padding:"10px"}}>
                     <div>
@@ -272,7 +298,6 @@ export const ReferirComponent = () => {
                                     className= "select-document"
                                     id="demo-simple-select-standard"
                                     onChange={handleSelect}
-                                    
                                 >
 
                                     {
@@ -282,7 +307,7 @@ export const ReferirComponent = () => {
                                     }
                                 </Select>
                             </FormControl>
-                        </div> 
+                    </div> 
                             <TextField
                                     type="text"
                                     name="numeroIdentificacion"

@@ -28,6 +28,7 @@ export const ListadoReferidoComponent = () => {
     setLoading(true)
     await API.get('api/referidos/')
       .then(resp => {
+        console.log(resp.data)
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -125,6 +126,7 @@ export const ListadoReferidoComponent = () => {
     await API.get(`api/referidos/get_referidos_month/?mes=${mes}&anio=${anio_temporal}`)
       .then(data => {
         const arreglo_referidos_month = data.data;
+        console.log(data)
         if (arreglo_referidos_month.length == 0) {
           setData_meses([0]);
         } else {

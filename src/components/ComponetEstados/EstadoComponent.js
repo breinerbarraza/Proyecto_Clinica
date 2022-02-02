@@ -11,6 +11,7 @@ import API from '../../Utils/API'
 import { HeaderComponent } from '../HeaderComponent'
 import Chip from '@mui/material/Chip';
 import Swal from 'sweetalert2';
+import { formatMoney } from '../../Utils/LogicaFunciones';
 
 var moment = require('moment')
 
@@ -154,8 +155,10 @@ export const EstadoComponent = () => {
         }
         if(data_temporal_pendiente.estado_referido == "Operado"){
             const ordenServicio = document.querySelector("#ordenServicio")
-            if(ordenServicio.value != ""){
+            const valor_cancelado = document.querySelector("#valor_cancelado")
+            if(ordenServicio.value != "" && valor_cancelado.value != ""){
                 data_estado.ordenServicio = ordenServicio.value;
+                data_estado.valor_cancelado = valor_cancelado.value
             }
         }
         API.put('api/referidos/updated_estado/', JSON.stringify(data_estado))
@@ -195,6 +198,7 @@ export const EstadoComponent = () => {
         })
     }
 
+    console.log(observacion_operado)
     return (
         <>
             <div className="estados_">
@@ -247,6 +251,7 @@ export const EstadoComponent = () => {
                                         <div className="form-f-pendiente">
                                             <div className="form-fecha-pendiente">
                                                 <TextField
+                                                    InputProps={{inputProps: { min: moment(today).format('YYYY-MM-DD')} }}
                                                     type="date"
                                                     name="fecha"
                                                     label="Próxima gestión"
@@ -294,6 +299,7 @@ export const EstadoComponent = () => {
                                     <div className="form-f-pendiente">
                                         <div className="form-fecha-pendiente">
                                             <TextField
+                                                InputProps={{inputProps: { min: moment(today).format('YYYY-MM-DD')} }}
                                                 type="date"
                                                 name="fecha"
                                                 label="Próxima gestión"
@@ -349,6 +355,19 @@ export const EstadoComponent = () => {
                                         shrink: true,
                                     }}
                                 />
+                                <TextField
+                                    type="number"
+                                    name="valor_cancelado"
+                                    id="valor_cancelado"
+                                    // value={dataForm.cantidad}
+                                    label="Valor cancelado"
+                                    required
+                                    style={{ marginLeft: "10px", marginTop: "10px", width:'230px'}}
+                                    onChange={handleInput2}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
                             </>
                         )
                     }
@@ -362,7 +381,10 @@ export const EstadoComponent = () => {
                                     <>
                                     {
                                         observacion_operado.map(item => {
-                                        return <p>Orden servicio: <b>{item.ordenServicio}</b></p>
+                                        return <div>
+                                            <p>Orden servicio: <b>{item.ordenServicio}</b>  </p>
+                                            <p>Valor cancelado: <b>${formatMoney(item.valor_cancelado, 2, ",", ".")}</b></p>
+                                        </div>
                                     })
                                  }
                                  </>

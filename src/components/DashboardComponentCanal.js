@@ -7,22 +7,18 @@ import { Link } from "react-router-dom";
 import { HeaderComponent } from "./HeaderComponent";
 import { PerfilComponent } from "./perfil/PerfilComponent";
 import 'chart.js/auto';
-import { Chart, Doughnut } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import API from "../Utils/API";
 import meses_map from '../Utils/Objmeses';
-import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
-import { HeaderMovil } from './HeaderMovil';
+
 var _ = require('lodash')
 
-
-export const DashboardComponent = () => {
+export const DashboardComponentCanal = () => {
     const [pieChartData, setPieChartData] = useState([])
     const [labelColors, setLabelColors] = useState([])
     const [tiposFormulario, setTiposFormulario] = useState([])
     const [cantidades, setCantidades] = useState([])
     const [data_meses, setData_meses] = useState([])
-    const [usuarios_, setUsuarios_employe] = useState([]);
-    const [datosCambioEstado, setDatosCambioEstado] = useState([]);
     const [total_referidos, setTotal_referidos] = useState({});
     const [total_referidos_first, setTotal_referidos_first] = useState("");
     const [anio_temporal, setAnio_temporal] = useState("");
@@ -41,22 +37,6 @@ export const DashboardComponent = () => {
         setArreglo_year(arreglo)
     }
 
-    /* const filter_cambio_estado = async (mes) => {
-        await API.get(`api/referidos/dashboard_app/?mes=${mes}`)
-            .then(response => {
-                const resp = response.data;
-                setDatosCambioEstado(resp)
-            })
-    }
-
-    const cargarUsuarios = async () => {
-        await API.get("api/usuarios/user/grupo_empleado/")
-            .then(response => {
-                const empleados = response.data;
-                setUsuarios_employe(empleados)
-            })
-    }
- */
     const cargarTotalReferidos = async (mes) => {
         await API.get(`api/referidos/get_count_referidos/?mes=${mes}`)
             .then(resp => {
@@ -68,9 +48,9 @@ export const DashboardComponent = () => {
     const load = async () => {
         await API.get('api/referidos/')
             .then(response => {
-                let agrupacion = _.chain(response.data).groupBy('estadoReferido')
+                let agrupacion = _.chain(response.data).groupBy('canal')
                     .map((value, key) => ({
-                        "estado": key,
+                        "descripcion": key,
                         "valor": value.length,
                         "color": 'rgba(' + (Math.floor(Math.random() * 256)) + ','
                             + (Math.floor(Math.random() * 256)) + ','
@@ -81,7 +61,7 @@ export const DashboardComponent = () => {
                 setPieChartData(agrupacionArray)
                 agrupacionArray.map((el) => (
                     setLabelColors(labelColors => [...labelColors, el.color]),
-                    setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
+                    setTiposFormulario(tiposFormulario => [...tiposFormulario, el.descripcion]),
                     setCantidades(cantidades => [...cantidades, el.valor])
                 ))
             }).catch(console.error)
@@ -115,9 +95,9 @@ export const DashboardComponent = () => {
             const referidos_data = response.data;
             if(referidos_data.length > 0){
                     cargarTotalReferidos(mes)
-                    let agrupacion = _.chain(referidos_data).groupBy('estadoReferido')
+                    let agrupacion = _.chain(referidos_data).groupBy('canal')
                         .map((value, key) => ({
-                            "estado": key,
+                            "descripcion": key,
                             "valor": value.length,
                             "color": 'rgba(' + (Math.floor(Math.random() * 256)) + ','
                                 + (Math.floor(Math.random() * 256)) + ','
@@ -128,15 +108,15 @@ export const DashboardComponent = () => {
                     setPieChartData(agrupacionArray)
                     agrupacionArray.map((el) => (
                         setLabelColors(labelColors => [...labelColors, el.color]),
-                        setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
+                        setTiposFormulario(tiposFormulario => [...tiposFormulario, el.descripcion]),
                         setCantidades(cantidades => [...cantidades, el.valor])
 
                     ))
                 }else{
                     setTotal_referidos({})
-                    let agrupacion = _.chain(referidos_data).groupBy('estadoReferido')
+                    let agrupacion = _.chain(referidos_data).groupBy('canal')
                         .map((value, key) => ({
-                            "estado": key,
+                            "descripcion": key,
                             "valor": value.length,
                             "color": 'rgba(' + (Math.floor(Math.random() * 256)) + ','
                                 + (Math.floor(Math.random() * 256)) + ','
@@ -146,7 +126,7 @@ export const DashboardComponent = () => {
                     setPieChartData(agrupacionArray)
                     agrupacionArray.map((el) => (
                         setLabelColors(labelColors => [...labelColors, el.color]),
-                        setTiposFormulario(tiposFormulario => [...tiposFormulario, el.estado]),
+                        setTiposFormulario(tiposFormulario => [...tiposFormulario, el.descripcion]),
                         setCantidades(cantidades => [...cantidades, el.valor])
                     ))
                 }
@@ -226,14 +206,14 @@ export const DashboardComponent = () => {
                                         <table className="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Tipo</th>
+                                                    <th>Canal</th>
                                                     <th>Cantidad</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {pieChartData.map((dato, key) => (
                                                     <tr key={key}>
-                                                        <td>{dato.estado}</td>
+                                                        <td>{dato.descripcion}</td>
                                                         <td>{dato.valor}</td>
                                                     </tr>
 
@@ -249,91 +229,6 @@ export const DashboardComponent = () => {
                         }
                     </div>
                 </div>
-            </div>
-
-                
-
-            {/* ********************************************************************** */}
-            {/* Media Query */}
-            <div className='quitar'>
-                <div style={{ padding: "50px", width: "100%", marginTop:"60px" }}>
-                    <div style={{ float: "none", marginTop: "-50px", marginLeft: "190px" }}>
-                        <i><PerfilComponentSinNombre /></i>
-                    </div>
-                    <div className="lista-container_">
-                        <div className="_h3_" >
-                            <Link to="/listado" style={{ textDecoration: "none" }}><h3 className="h3-dashboard" ><i class="fas fa-angle-left" style={{ marginRight: "10px" }}></i>Dashboard</h3></Link>
-                        </div>
-                        <div className="select-dashboard" style={{ width: "100%" }}>
-                        <FormControl fullWidth style={{ marginBottom: '15px'}}>
-                                        <InputLabel shrink id="demo-simple-select-standard-label">Año</InputLabel>
-                                        <Select
-                                            name="anio"
-                                            label="Año"
-                                            id="demo-simple-select-standard"
-                                            style={{ marginBottom: "-4px" }}
-                                            onChange={handleSelectYear}
-                                        >
-                                            {
-                                                arreglo_year.map((item, key) => {
-                                                    return <MenuItem key={key} value={item.valor}>{item.valor}</MenuItem>
-                                                })
-                                            }
-                                        </Select>
-                            </FormControl>
-                                
-                                <FormControl fullWidth style={{ marginBottom: '15px'}}>
-                                    <InputLabel shrink id="demo-simple-select-standard-label">Mes</InputLabel>
-                                    <Select
-                                        name="mes"
-                                        label="Mes"
-                                        id="demo-simple-select-standard"
-                                        style={{ marginBottom: "-4px" }}
-                                        onChange={handleSelectMonth}
-                                    >
-                                        {
-                                            meses_map.map((item, key) => {
-                                                return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
-                                            })
-                                        }
-                                    </Select>
-                                </FormControl>
-                            <b>Total referidos: </b>{(total_referidos_first == 0) ? total_referidos.Total_referidos : total_referidos_first}
-                            {
-                                data_meses.length == 0 &&
-                                (
-                                    <div className="dashboard-flexbox" >
-                                        <div className="table-dashboard_" style={{ width: "100%", marginTop: "12px" }}>
-                                            <table className="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tipo</th>
-                                                        <th>Cantidad</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {pieChartData.map((dato, key) => (
-                                                        <tr key={key}>
-                                                            <td>{dato.estado}</td>
-                                                            <td>{dato.valor}</td>
-                                                        </tr>
-
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        
-                                    </div>
-                                )
-                            }
-                            <div className="grafica" style={{ width: "100%", marginTop: "30px" }}>
-                                <Doughnut classname="gra" data={data} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* FOOTER */}
-                <HeaderMovil users={true} dashboard={false} />
             </div>
         </>
     );

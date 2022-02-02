@@ -18,7 +18,6 @@ export const ListadoUsuarioComponent = () => {
 
   const [data_listado, setData_listado] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [meses, setMeses] = useState([]);
   const [data_meses, setData_meses] = useState([]);
   const [group, setGroup] = useState([]);
   const [mes_temporal, setMes_temporal] = useState("")
@@ -27,7 +26,6 @@ export const ListadoUsuarioComponent = () => {
     setLoading(true)
     await API.get('api/usuarios/user/')
       .then(resp => {
-        setMeses(resp.data)
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -76,7 +74,6 @@ export const ListadoUsuarioComponent = () => {
             else{
                 return Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
                 text: data.error,
                 timer: 2500,
                 position: 'center',
@@ -118,7 +115,6 @@ export const ListadoUsuarioComponent = () => {
           else{
             return Swal.fire({
               icon: 'error',
-              title: 'Oops...',
               text: data.error,
               position: 'center',
             })
@@ -199,7 +195,6 @@ export const ListadoUsuarioComponent = () => {
       setData_listado([]);
       await API.get('api/usuarios/user/')
         .then(resp => {
-          setMeses(resp.data)
           resp.data.map((item) => (
             setData_listado(data_listado => [...data_listado, {
               "id": item.id,
@@ -219,8 +214,6 @@ export const ListadoUsuarioComponent = () => {
 
   }
 
-  /* Falta seleccionar tambien el mes con una variable que se llama mes_temporal */
-
   const handleSelectTipoRol = async(e)=>{
     setData_meses([]);
     setData_listado([]);
@@ -228,7 +221,6 @@ export const ListadoUsuarioComponent = () => {
     await API.get(`api/usuarios/user/tipo_rol/?grupo=${id_grupo}&mes=${mes_temporal}`)
     .then( resp => {
       const respuesta = resp.data;
-      setMeses(respuesta)
       respuesta.map((item) => (
         setData_listado(data_listado => [...data_listado, {
           "id": item.id,
@@ -249,7 +241,6 @@ export const ListadoUsuarioComponent = () => {
 
     columns: [
       {
-
         label: 'Usuario',
         field: "nombre_completo",
         sort: 'asc',
