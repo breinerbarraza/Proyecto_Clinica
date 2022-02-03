@@ -160,6 +160,13 @@ export const EstadoComponent = () => {
                 data_estado.ordenServicio = ordenServicio.value;
                 data_estado.valor_cancelado = valor_cancelado.value
             }
+            if(ordenServicio.value != "" && valor_cancelado.value == ""){
+                return alert("Asegurate de llenar el valor cancelado")
+            }
+
+            if(ordenServicio.value == "" && valor_cancelado.value != ""){
+                return alert("Asegurate de llenar la orden de servicio")
+            }
         }
         API.put('api/referidos/updated_estado/', JSON.stringify(data_estado))
             .then(({ data }) => {
