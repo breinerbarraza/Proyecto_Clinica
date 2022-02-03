@@ -91,6 +91,7 @@ export const LoginComponent = () => {
                             InputLabelProps={{
                                 shrink: true,
                             }}
+                            autoFocus
                         /><br />
               
                         <TextField
@@ -116,6 +117,10 @@ export const LoginComponent = () => {
                 </div>
             </div>
         </div>
+
+
+        {/* **************** */}
+        {/* RESPONSIVE DESIGN */}
 
         <div className="div-responsive-login">
             <div className="div-img-login">
