@@ -36,7 +36,7 @@ export const ListadoUsuarioComponent = () => {
             "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
             "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
             "rol": item.rol_,
-            "is_active": (item.is_active) ? <input onChange={(e) => handleChangeActivo(e, item.id)} type="checkbox" checked /> : <input onChange={(e) => handleChangeNoActivo(e, item.id)} type="checkbox"/>
+            "is_active": <input onChange={item.is_active ? (e) => handleChangeActivo(e, item.id) : (e) => handleChangeNoActivo(e, item.id)} type="checkbox" checked={item.is_active && true} />
           }])
         ))
       })
@@ -104,7 +104,6 @@ export const ListadoUsuarioComponent = () => {
             if(data.msg){
               Swal.fire({
                 icon: 'success',
-                title: 'Exito!',
                 text: data.msg,
                 position: 'center',
               })
@@ -181,7 +180,7 @@ export const ListadoUsuarioComponent = () => {
                   "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
                   "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
                   "rol": item.rol_,
-                  "is_active": (item.is_active) ? <input onChange={(e) => handleChangeActivo(e, item.id)} type="checkbox" checked /> : <input onChange={(e) => handleChangeNoActivo(e, item.id)} type="checkbox"/>
+                  "is_active": <input onChange={item.is_active ? (e) => handleChangeActivo(e, item.id) : (e) => handleChangeNoActivo(e, item.id)} type="checkbox" checked={item.is_active && true} />
                 }])
               ))
             } else {
@@ -205,7 +204,7 @@ export const ListadoUsuarioComponent = () => {
               "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
               "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
               "rol": item.rol_,
-              "is_active": (item.is_active) ? <input onChange={(e) => handleChangeActivo(e, item.id)} type="checkbox" checked /> : <input onChange={(e) => handleChangeNoActivo(e, item.id)} type="checkbox"/>
+              "is_active": <input onChange={item.is_active ? (e) => handleChangeActivo(e, item.id) : (e) => handleChangeNoActivo(e, item.id)} type="checkbox" checked={item.is_active && true} />
             }])
           ))
         })
@@ -231,7 +230,7 @@ export const ListadoUsuarioComponent = () => {
           "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
           "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`http://51.222.13.17:8081/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
           "rol": item.rol_,
-          "is_active": (item.is_active) ? <input onChange={(e) => handleChangeActivo(e, item.id)} type="checkbox" checked /> : <input onChange={(e) => handleChangeNoActivo(e, item.id)} type="checkbox"/>
+          "is_active": <input onChange={item.is_active ? (e) => handleChangeActivo(e, item.id) : (e) => handleChangeNoActivo(e, item.id)} type="checkbox" checked={item.is_active && true} />
         }])
       ))
     });
