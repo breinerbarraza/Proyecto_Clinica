@@ -11,10 +11,10 @@ function formatMoney(n, c, d, t) {
   
   function calcularComisionFinal(array_, arreglo_de_referidos){
       for(let x in arreglo_de_referidos){
-        if(arreglo_de_referidos[x].comision === ""){
+        if(arreglo_de_referidos[x].comisionEmpleadoInicial === ""){
           continue;
         }
-        array_.push(arreglo_de_referidos[x].comision);
+        array_.push(arreglo_de_referidos[x].comisionEmpleadoInicial);
       }
       let total_comision_final = array_.join(',');
       total_comision_final = total_comision_final.split(',').map(Number);

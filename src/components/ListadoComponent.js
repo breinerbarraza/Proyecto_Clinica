@@ -90,8 +90,8 @@ export const ListadoComponent = () => {
             ordenServicio : item.ordenServicio,
             valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
             comision:
-              (item.finalizado && item.comision !== "")
-                ? "$" + formatMoney(item.comision, 2, ",", ".")
+              (item.finalizado && item.comisionEmpleadoInicial !== "")
+                ? "$" + formatMoney(item.comisionEmpleadoInicial, 2, ",", ".")
                 : "-",
             total: totalComision,
           },
@@ -138,9 +138,9 @@ export const ListadoComponent = () => {
               ordenServicio : item.ordenServicio,
               valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
               comision:
-              (item.finalizado && item.comision !== "")
-                  ? "$" + formatMoney(item.comision, 2, ",", ".")
-                  : "-",
+              (item.finalizado && item.comisionEmpleadoInicial !== "")
+                ? "$" + formatMoney(item.comisionEmpleadoInicial, 2, ",", ".")
+                : "-",
               total: totalComision,
             },
           ])
@@ -244,9 +244,9 @@ export const ListadoComponent = () => {
               ordenServicio : item.ordenServicio,
               valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
               comision:
-              (item.finalizado && item.comision !== "")
-                  ? "$" + formatMoney(item.comision, 2, ",", ".")
-                  : "-",
+              (item.finalizado && item.comisionEmpleadoInicial !== "")
+                ? "$" + formatMoney(item.comisionEmpleadoInicial, 2, ",", ".")
+                : "-",
             },
           ]);
         });
@@ -296,9 +296,9 @@ export const ListadoComponent = () => {
               ordenServicio : item.ordenServicio,
               valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
               comision:
-              (item.finalizado && item.comision !== "")
-                  ? "$" + formatMoney(item.comision, 2, ",", ".")
-                  : "-",
+              (item.finalizado && item.comisionEmpleadoInicial !== "")
+                ? "$" + formatMoney(item.comisionEmpleadoInicial, 2, ",", ".")
+                : "-",
             },
           ]);
         });
@@ -408,9 +408,9 @@ export const ListadoComponent = () => {
                 ),
               ordenServicio : item.ordenServicio,
               comision:
-              (item.finalizado && item.comision !== "")
-                  ? "$" + formatMoney(item.comision, 2, ",", ".")
-                  : "-",
+              (item.finalizado && item.comisionEmpleadoInicial !== "")
+                ? "$" + formatMoney(item.comisionEmpleadoInicial, 2, ",", ".")
+                : "-",
             },
           ]);
         });
