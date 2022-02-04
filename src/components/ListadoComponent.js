@@ -407,6 +407,7 @@ export const ListadoComponent = () => {
                   <b style={{ color: "#02305b" }}>Total comisiones: </b>
                 ),
               ordenServicio : item.ordenServicio,
+              valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
               comision:
               (item.finalizado && item.comisionEmpleadoInicial !== "")
                 ? "$" + formatMoney(item.comisionEmpleadoInicial, 2, ",", ".")
