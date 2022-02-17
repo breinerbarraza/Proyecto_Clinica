@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Modal, ModalBody, ModalFooter, FormGroup, Input, Label, ModalHeader } from 'reactstrap';
+import { Modal, ModalBody, ModalHeader, ModalFooter, } from 'reactstrap';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -7,7 +7,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import API from '../Utils/API';
 import Swal from 'sweetalert2';
-import { textAlign } from '@mui/system';
 import { useParams } from 'react-router-dom';
 
 const arreglo_meses = [
@@ -106,7 +105,6 @@ export const ActualizarMetaModal = () => {
                     document.getElementById("modal").reset();
                     return Swal.fire({
                         icon: 'success',
-                        title: 'Exito!',
                         text: mensaje,
                         position: 'center',
                         timer: 4200
@@ -115,7 +113,6 @@ export const ActualizarMetaModal = () => {
                     const error = resp.error;
                     return Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
                         position: 'center',
                         text: error,
                         timer: 3500
@@ -153,8 +150,6 @@ export const ActualizarMetaModal = () => {
                                         .map(item => {
                                             return <MenuItem >{item.mes} </MenuItem>
                                         })
-                                    
-                                     
                                     }
 
                                     {
