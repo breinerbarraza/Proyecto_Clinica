@@ -123,19 +123,21 @@ export const ReferirComponent = () => {
                                             shrink: true,
                                         }}
                                     />
+
                                     <TextField
-                                        type="date"
-                                        name="fechaNacimiento"
-                                        placeholder="Escribe..."
-                                        label="Fecha de nacimiento"
-                                        className="form-control"
-                                        required
-                                        style={{ marginBottom: "30px" }}
-                                        onChange={handleSelect}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
+                                            type="number"
+                                            name="edad"
+                                            placeholder="Escribe..."
+                                            label="Edad"
+                                            className="form-control"
+                                            required
+                                            style={{ marginBottom: "30px" }}
+                                            onChange={handleSelect}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
+                                   
                                      <TextField
                                             type="text"
                                             name="celular"
@@ -180,8 +182,6 @@ export const ReferirComponent = () => {
                                                 className= "select-document"
                                                 id="demo-simple-select-standard"
                                                 onChange={handleSelect}
-                                                required
-                                                
                                             >
                                                 {
                                                     identificacion.map(data => {
@@ -213,7 +213,6 @@ export const ReferirComponent = () => {
                                             placeholder="Escribe..."
                                             label="Numero de identidad"
                                             className="form-control"
-                                            required
                                             style={{ marginBottom: "33px" }}
                                             onChange={handleSelect}
                                             InputLabelProps={{
@@ -227,7 +226,6 @@ export const ReferirComponent = () => {
                                             placeholder="Escribe..."
                                             label="Email"
                                             className="form-control"
-                                            required
                                             style={{ marginBottom: "30px" }}
                                             onChange={handleSelect}
                                             InputLabelProps={{
