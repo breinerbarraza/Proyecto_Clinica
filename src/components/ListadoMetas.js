@@ -4,7 +4,6 @@ import { HeaderComponent } from './HeaderComponent'
 import { Link } from 'react-router-dom';
 import { MDBDataTable } from 'mdbreact';
 import API from '../Utils/API';
-import Chip from '@mui/material/Chip';
 import Swal from 'sweetalert2';
 
 const arreglo_meses = [
@@ -75,7 +74,6 @@ export const ListadoMetas = () => {
                         Swal.fire(
                             {
                             icon: 'success',
-                            title: 'Exito!',
                             text: "Meta eliminada",
                             showConfirmButton: false,
                             timer: 1500
