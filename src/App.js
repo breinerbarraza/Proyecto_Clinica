@@ -29,6 +29,9 @@ import { ComponentModalStateMetas } from './components/ComponentModalStateMetas'
 import { ActualizarMetaModal } from './components/ActulizarMetaModal';
 import { MetasProgramadas } from './components/MetasProgramadas';
 import { DashboardComponentCanal } from './components/DashboardComponentCanal';
+import { TablaSolicitudes } from './components/TablaSolicitudes';
+import { ActualizarReferido } from './components/ActualizarReferido';
+
 
 function App() {
   return (
@@ -58,6 +61,15 @@ function App() {
                   <LoginComponent />
                 )}
               </Route>
+
+              <Route exact path="/actualizar_referido/:id">
+                {localStorage.getItem('token') !== null ? (
+                  <ActualizarReferido />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+
               <Route exact path="/actualizar_meta/:id">
                 {localStorage.getItem('token') !== null ? (
                   <ActualizarMetaModal />
@@ -129,6 +141,14 @@ function App() {
                 ) : (
                   <LoginComponent />
                 )}
+              </Route>
+
+              <Route exact path="/tabla-solicitudes">
+                  {localStorage.getItem('token') !== null ? (
+                    <TablaSolicitudes />
+                  ): (
+                    <LoginComponent />
+                  )}
               </Route>
 
               <Route exact path="/crear_usuario">
