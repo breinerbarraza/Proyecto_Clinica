@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom'
 import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
+import Swal from 'sweetalert2';
+
 export const ListadoReferidoComponent = () => {
 
   const [data_listado, setData_listado] = useState([]);
@@ -22,13 +24,55 @@ export const ListadoReferidoComponent = () => {
   const [state_superUser, setState_superUser] = useState(false);
   const [id_localStorage, setid_localStorage] = useState("");
   const [arreglo_year, setArreglo_year] = useState([]);
-  const [anio_temporal, setAnioTemporal] = useState([]);
+  const [anio_temporal, setAnioTemporal] = useState("");
+  const [cedula_data, setCedula_data] = useState([]);
+  const [estado_temporal, setEstadoTemporal] = useState("");
+  const [admin_bolean, setAdmin_bolean] = useState(false)
+
+  const borrarReferido = (id) =>{
+      Swal.fire({
+        text: '¿Estas seguro, no podras deshacer los cambios?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, borrarlo'
+    })
+    .then( async(result)=>{
+      if (result.isConfirmed){
+        //Logica para eliminar el referido  
+          await API.delete(`api/referidos/${id}`)
+          .then( (data) => {
+            if(data.status == 204){
+              Swal.fire(
+                {
+                  icon: "success",
+                  text: "Referido eliminado",
+                  showConfirmButton: false,
+                  timer: 1500
+                }
+              )
+              setTimeout(() => {
+                return window.location = "/"
+              }, 2000);
+            }
+          })
+      }else{
+          return Swal.fire({
+              icon: 'error',
+              text: "Me imagino que tu referido sigue salvo",
+              showConfirmButton: false,
+              timer: 1500
+        })
+      }
+    })
+  }
 
   const load = async () => {
     setLoading(true)
     await API.get('api/referidos/')
       .then(resp => {
-        console.log(resp.data)
+        setCedula_data(resp.data)
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -36,7 +80,12 @@ export const ListadoReferidoComponent = () => {
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
-            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />
+            "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />,
+            "accion":
+            <>
+              <button className="btn btn-danger" style={{marginLeft: '4px'}} onClick={ () => borrarReferido(item.id) }><i className="fas fa-trash" style={{fontSize:'10px'}}></i></button>
+              <Link to={`actualizar_referido/${item.id}`}><button className="btn btn-primary" style={{marginLeft: '4px'}}><i className='fas fa-edit' style={{fontSize:'10px'}} title={item.id}></i></button></Link>
+            </>
           }])
         ))
       })
@@ -51,6 +100,7 @@ export const ListadoReferidoComponent = () => {
 
     await API.post('api/referidos/get_referidos/', JSON.stringify(obj))
       .then(resp => {
+        setCedula_data(resp.data)
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -87,24 +137,7 @@ export const ListadoReferidoComponent = () => {
       .catch(console.error);
   }
 
-  const showTable = () => {
-    return (
-      <MDBDataTable
-        responsive
-        hover
-        striped
-        small
-        paginationLabel={["<", ">"]}
-        infoLabel={["Mostrando", "a", "de", "entradas"]}
-        className="tabla-pacientes"
-        bordered
-        entrieslabel={[]}
-        data={data}
-        noRecordsFoundLabel='No se han encontrado registros'
 
-      />
-    )
-  }
   useEffect(() => {
     let id_user = JSON.parse(localStorage.getItem('id_user'));
     let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
@@ -114,6 +147,7 @@ export const ListadoReferidoComponent = () => {
     cargarEstados()
     if (super_user) {
       load()
+      setAdmin_bolean(true)
     } else {
       load_referidos_by_id(id_user)
     }
@@ -138,6 +172,11 @@ export const ListadoReferidoComponent = () => {
               "correo_electronico": item.correo_electronico,
               "celular": item.celular,
               "estadoReferido": (item.estadoReferido !== "") ? <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} /> : <b style={{ color: '#02305b' }}>Total comisiones: </b>,
+              "accion":
+              <>
+                <button className="btn btn-danger" style={{marginLeft: '4px'}} onClick={ () => borrarReferido(item.id) }><i className="fas fa-trash" style={{fontSize:'10px'}}></i></button>
+                <Link to={`actualizar_referido/${item.id}`}><button className="btn btn-primary" style={{marginLeft: '4px'}}><i className='fas fa-edit' style={{fontSize:'10px'}} title={item.id}></i></button></Link>
+              </>
             }]);
           })
         }
@@ -173,6 +212,7 @@ export const ListadoReferidoComponent = () => {
   const handleSelectEstate_admin = async (e) => {
     setData_meses([]);
     const id_estado = e.target.value;
+    setEstadoTemporal(id_estado)
     await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${id_estado}&anio=${anio_temporal}`)
       .then(data => {
         const respuesta = data.data;
@@ -184,7 +224,42 @@ export const ListadoReferidoComponent = () => {
               "numeroIdentificacion": item.numeroIdentificacion,
               "correo_electronico": item.correo_electronico,
               "celular": item.celular,
-              "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />
+              "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />,
+              "accion":
+              <>
+                <button className="btn btn-danger" style={{marginLeft: '4px'}} onClick={ () => borrarReferido(item.id) }><i className="fas fa-trash" style={{fontSize:'10px'}}></i></button>
+                <Link to={`actualizar_referido/${item.id}`}><button className="btn btn-primary" style={{marginLeft: '4px'}}><i className='fas fa-edit' style={{fontSize:'10px'}} title={item.id}></i></button></Link>
+              </>
+            }])
+          ))
+        } else {
+          setData_meses([0]);
+        }
+
+      })
+  }
+
+  const handleSelectCedula = async(e)=>{
+    setData_meses([]);
+    const cedula = e.target.value
+    console.log(cedula)
+    await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${estado_temporal}&anio=${anio_temporal}&name_or_cedula=${cedula}`)
+      .then(data => {
+        const respuesta = data.data;
+        if (respuesta.length > 0) {
+          respuesta.map((item) => (
+            setData_meses(data_meses => [...data_meses, {
+              "id": item.id,
+              "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+              "numeroIdentificacion": item.numeroIdentificacion,
+              "correo_electronico": item.correo_electronico,
+              "celular": item.celular,
+              "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />,
+              "accion":
+              <>
+                <button className="btn btn-danger" style={{marginLeft: '4px'}} onClick={ () => borrarReferido(item.id) }><i className="fas fa-trash" style={{fontSize:'10px'}}></i></button>
+                <Link to={`actualizar_referido/${item.id}`}><button className="btn btn-primary" style={{marginLeft: '4px'}}><i className='fas fa-edit' style={{fontSize:'10px'}} title={item.id}></i></button></Link>
+              </>
             }])
           ))
         } else {
@@ -195,8 +270,9 @@ export const ListadoReferidoComponent = () => {
   }
 
   const handleSelectEstate_rol = async (e) => {
-    setData_meses([]);
     const id_estado = e.target.value;
+    setEstadoTemporal(id_estado)
+    setData_meses([]);
     await API.get(`api/referidos/get_referidos_estado_rol/?id_estado=${id_estado}&mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}`)
       .then(data => {
         const respuesta = data.data;
@@ -224,8 +300,7 @@ export const ListadoReferidoComponent = () => {
     setAnioTemporal(anio)
   }
 
-
-  const data = {
+  const dataAdmin = {
 
     columns: [
       {
@@ -258,10 +333,77 @@ export const ListadoReferidoComponent = () => {
         sort: 'asc',
         width: 150
       },
+
+      {
+        label: 'Accion',
+        field: 'accion',
+        sort: 'asc',
+        width: 100
+      },
+
     ],
     rows: ((data_listado && data_meses.length == 0)) ? data_listado : data_meses
 
   };
+
+
+  const dataRol = {
+
+    columns: [
+      {
+        label: 'Paciente',
+        field: "get_nombreCompleto",
+        sort: 'asc',
+        width: 150,
+      },
+      {
+        label: 'Documento de identidad',
+        field: 'numeroIdentificacion',
+        sort: 'asc',
+        width: 270
+      },
+      {
+        label: 'Correo',
+        field: 'correo_electronico',
+        sort: 'asc',
+        width: 200
+      },
+      {
+        label: 'Celular',
+        field: 'celular',
+        sort: 'asc',
+        width: 100
+      },
+      {
+        label: 'Estado',
+        field: 'estadoReferido',
+        sort: 'asc',
+        width: 150
+      }
+
+    ],
+    rows: ((data_listado && data_meses.length == 0)) ? data_listado : data_meses
+
+  };
+
+  const showTable = () => {
+    return (
+      <MDBDataTable
+        responsive
+        hover
+        striped
+        small
+        paginationLabel={["<", ">"]}
+        infoLabel={["Mostrando", "a", "de", "entradas"]}
+        className="tabla-pacientes"
+        bordered
+        entrieslabel={[]}
+        data={(admin_bolean) ? dataAdmin : dataRol}
+        noRecordsFoundLabel='No se han encontrado registros'
+
+      />
+    )
+  }
 
   return (
     <>
@@ -333,10 +475,36 @@ export const ListadoReferidoComponent = () => {
                     </Select>
                   </FormControl>
                 </div>
+
+                <div className="select-mes">
+                    <FormControl fullWidth  >
+                      <InputLabel shrink id="demo-simple-select-standard-label">Cedula</InputLabel>
+                      <Select
+                        name="name_or_cedula"
+                        label="Cedula"
+                        id="demo-simple-select-standard"
+                        onChange={handleSelectCedula}
+                      >
+                        {
+                          cedula_data.map((item, key) => {
+                            return <MenuItem key={key} value={item.numeroIdentificacion}>{item.numeroIdentificacion}</MenuItem>
+                          })
+
+                        }
+                      </Select>
+                    </FormControl>
+                  </div>
+
+
+
               </div>
             )
           }
 
+
+
+
+          
           {/* Si no es superuser y es por tipo de rol */}
           {
             !state_superUser && (
@@ -401,6 +569,26 @@ export const ListadoReferidoComponent = () => {
                     </Select>
                   </FormControl>
                 </div>
+
+                <div className="select-mes">
+                    <FormControl fullWidth  >
+                      <InputLabel shrink id="demo-simple-select-standard-label">Cedula</InputLabel>
+                      <Select
+                        name="name_or_cedula"
+                        label="Cedula"
+                        id="demo-simple-select-standard"
+                        onChange={handleSelectCedula}
+                      >
+                        {
+                          cedula_data.map((item, key) => {
+                            return <MenuItem key={key} value={item.numeroIdentificacion}>{item.numeroIdentificacion}</MenuItem>
+                          })
+
+                        }
+                      </Select>
+                    </FormControl>
+                  </div>
+
               </div>
             )
           }
@@ -411,6 +599,9 @@ export const ListadoReferidoComponent = () => {
         </div>
       </div>
 
+
+
+      {/* ********************  */}
       {/* MEDIA QUERY */}
 
       <div className='quitar'>
@@ -482,6 +673,9 @@ export const ListadoReferidoComponent = () => {
                       </Select>
                     </FormControl>
                   </div>
+
+
+
                 </div>
               )
             }
