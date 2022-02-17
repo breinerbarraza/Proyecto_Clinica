@@ -156,17 +156,25 @@ export const EstadoComponent = () => {
         if(data_temporal_pendiente.estado_referido == "Operado"){
             const ordenServicio = document.querySelector("#ordenServicio")
             const valor_cancelado = document.querySelector("#valor_cancelado")
-            if(ordenServicio.value != "" && valor_cancelado.value != ""){
+            const observacion_operado = document.querySelector('#observacion_operado')
+
+            if(ordenServicio.value != "" && valor_cancelado.value != "" && observacion_operado.value != ""){
                 data_estado.ordenServicio = ordenServicio.value;
                 data_estado.valor_cancelado = valor_cancelado.value
+                data_estado.observacion_operado = observacion_operado.value
             }
-            if(ordenServicio.value != "" && valor_cancelado.value == ""){
+            if(ordenServicio.value != "" && valor_cancelado.value == "" && observacion_operado.value != ""){
                 return alert("Asegurate de llenar el valor cancelado")
             }
 
-            if(ordenServicio.value == "" && valor_cancelado.value != ""){
+            if(ordenServicio.value == "" && valor_cancelado.value != "" && observacion_operado.value != ""){
                 return alert("Asegurate de llenar la orden de servicio")
             }
+
+            if(ordenServicio.value != "" && valor_cancelado.value != "" && observacion_operado.value == ""){
+                return alert("Asegurate de llenar la observacion")
+            }
+
         }
         API.put('api/referidos/updated_estado/', JSON.stringify(data_estado))
             .then(({ data }) => {
@@ -355,7 +363,6 @@ export const EstadoComponent = () => {
                                     id="ordenServicio"
                                     // value={dataForm.cantidad}
                                     label="N° Orden Servicio"
-                                    required
                                     style={{ marginTop: "10px", width:'230px'}}
                                     onChange={handleInput2}
                                     InputLabelProps={{
@@ -368,7 +375,20 @@ export const EstadoComponent = () => {
                                     id="valor_cancelado"
                                     // value={dataForm.cantidad}
                                     label="Valor cancelado"
-                                    required
+                                    style={{ marginLeft: "10px", marginTop: "10px", width:'230px'}}
+                                    onChange={handleInput2}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+
+                                <TextField
+                                    type="text"
+                                    name="observacion_operado"
+                                    id="observacion_operado"
+                                    // value={dataForm.cantidad}
+                                    label="Observaciones"
+                                    placeholder="Escribe la observacion"
                                     style={{ marginLeft: "10px", marginTop: "10px", width:'230px'}}
                                     onChange={handleInput2}
                                     InputLabelProps={{
@@ -391,6 +411,7 @@ export const EstadoComponent = () => {
                                         return <div>
                                             <p>Orden servicio: <b>{item.ordenServicio}</b>  </p>
                                             <p>Valor cancelado: <b>${formatMoney(item.valor_cancelado, 2, ",", ".")}</b></p>
+                                            <p>Observaciones: <b>{item.observaciones}</b>  </p>
                                         </div>
                                     })
                                  }
