@@ -77,6 +77,15 @@ export const PerfilComponent = () => {
                             </>
                         )
                     }
+                        
+                    {
+                        datos_perfil.super_user || !estadoEmpleado && (
+                            <>
+                                <li><Link to="/tabla-solicitudes"><button className="dropdown-item" type="button"><i class="fas fa-angle-double-right"></i> Solicitudes pendientes</button></Link></li>
+                            </>
+                        )
+                    }
+
                     <li><button onClick={() => cerrarSesion('token', 'id_user', 'nombres', 'apellidos', 'username', 'password', 'super_user')} className="dropdown-item" type="button"><i className="fas fa-times"></i> Cerrar Sesión</button></li>
                 </ul>
             </div>
