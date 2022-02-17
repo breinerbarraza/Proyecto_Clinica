@@ -33,6 +33,9 @@ export const ListadoComponent = () => {
   const [dataEmpleado, setDataEmpleado] = useState([]);
   const [mes_temporal, setMes_temporal] = useState("");
   const [arreglo_referidos_temporal, setArreglo_referidos_temporal] = useState([]);
+  const [cargarIdentificacion, setCargarIdentificacion] = useState([]);
+  const [estado_temporal, setEstadoTemporal] = useState("");
+
 
   const cargarSelect = () => {
     const fecha = new Date();
@@ -59,8 +62,8 @@ export const ListadoComponent = () => {
     await API.get("api/referidos/").then((resp) => {
       const arreglo_referidos = resp.data;
       setArreglo_referidos_temporal(arreglo_referidos)
+      setCargarIdentificacion(arreglo_referidos)
       const filter_arreglo = arreglo_referidos.filter(item => item.finalizado === true)
-      console.log(arreglo_referidos)
       let arreglo = [];
       const totalComision = calcularComisionFinal(arreglo, filter_arreglo);
       setComision(totalComision);
@@ -109,6 +112,7 @@ export const ListadoComponent = () => {
     await API.post("api/referidos/get_referidos/", JSON.stringify(obj)).then(
       (resp) => {
         const arreglo_referidos = resp.data;
+        setCargarIdentificacion(arreglo_referidos)
         let arreglo = [];
         const filter_arreglo = arreglo_referidos.filter(item => item.finalizado === true)
         const totalComision = calcularComisionFinal(arreglo, filter_arreglo);
@@ -150,19 +154,6 @@ export const ListadoComponent = () => {
     setLoading(false);
   };
 
-  //const comprobarUsuarioAsesor = async(id_user)=>{
-  //  await API.get(`api/usuarios/user/comprobar_asesor/?id_user=${id_user}`)
-  //  .then( ({data}) => {
-  //    const resp = data;
-  //    if(resp.msg){
-  //      console.log(resp.msg)
-  //    }else{
-  //      console.log(resp.error)
-  //    }
-  //
-  //  })
-  //}
-
   const showTable = () => {
     return (
       //Mostrando 1 a 10 de 12 entradas
@@ -199,16 +190,17 @@ export const ListadoComponent = () => {
     }
   }, []);
 
-  const handleSelectMonth_admin = (e) => {
+  const handleSelectMonth_admin = async(e) => {
     setData_meses([]);
     setArreglo_referidos_temporal([]);
     const mes = e.target.value;
     setMes_temporal(mes);
-    API.get(
+    await API.get(
       `api/referidos/get_referidos_month/?mes=${mes}&anio=${anio_temporal}`
     ).then((data) => {
       const arreglo_referidos_month = data.data;
       setArreglo_referidos_temporal(arreglo_referidos_month)
+
       const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
       let arreglo = [];
       const totalComision = calcularComisionFinal(
@@ -257,6 +249,7 @@ export const ListadoComponent = () => {
   const handleSelectMonth_rol = async (e) => {
     setData_meses([]);
     const mes = e.target.value;
+    setMes_temporal(mes);
     await API.get(
       `api/referidos/get_referidos_by_month_rol/?mes=${mes}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}`
     ).then((data) => {
@@ -365,15 +358,19 @@ export const ListadoComponent = () => {
     setAnioTemporal(anio);
   };
 
-  const handleFilterEmployee = (e) => {
+  const handleFilterEmployee = async(e) => {
     const id_empleado = e.target.value;
+    setEstadoTemporal(id_empleado)
     setData_meses([]);
     setArreglo_referidos_temporal([])
-    API.get(
+    await API.get(
       `api/referidos/get_referidos_employee/?mes=${mes_temporal}&anio=${anio_temporal}&id_empleado=${id_empleado}`
     ).then((data) => {
       const arreglo_referidos_month = data.data;
+      console.log(arreglo_referidos_month)
+
       setArreglo_referidos_temporal(arreglo_referidos_month)
+
       const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
       let arreglo = [];
       const totalComision = calcularComisionFinal(
@@ -419,7 +416,120 @@ export const ListadoComponent = () => {
     });
   };
 
-  console.log(arreglo_referidos_temporal)
+  const handleSelectCedula = async(e)=>{
+    const cedula = e.target.value;
+    setData_meses([]);
+    setArreglo_referidos_temporal([])
+    await API.get(
+      `api/referidos/get_referidos_employee/?mes=${mes_temporal}&anio=${anio_temporal}&id_empleado=${estado_temporal}&name_or_cedula=${cedula}`
+    ).then((data) => {
+      const arreglo_referidos_month = data.data;
+      setArreglo_referidos_temporal(arreglo_referidos_month)
+
+      const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
+      let arreglo = [];
+      const totalComision = calcularComisionFinal(
+        arreglo,
+        filter_arreglo
+      );
+      setComision(totalComision);
+      if (arreglo_referidos_month.length == 0) {
+        setData_meses([0]);
+      } else {
+        arreglo_referidos_month.map((item) => {
+          setData_meses((data_meses) => [
+            ...data_meses,
+            {
+              id: item.id,
+              get_nombreCompleto: (
+                <Link to={`lista/estado/${item.id}`}>
+                  {item.get_nombreCompleto}
+                </Link>
+              ),
+              numeroIdentificacion: item.numeroIdentificacion,
+              correo_electronico: item.correo_electronico,
+              celular: item.celular,
+              estadoReferido:
+                item.estadoReferido !== "" ? (
+                  <Chip
+                    label={`• ${item.estadoReferido}`}
+                    style={{ backgroundColor: item.color_estado }}
+                  />
+                ) : (
+                  <b style={{ color: "#02305b" }}>Total comisiones: </b>
+                ),
+              ordenServicio : item.ordenServicio,
+              valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
+              comision:
+              (item.finalizado && item.comisionEmpleadoInicial !== "")
+                ? "$" + formatMoney(item.comisionEmpleadoInicial, 2, ",", ".")
+                : "-",
+            },
+          ]);
+        });
+      }
+    });
+  }
+
+  //Filtrar por cedula cuando es rol
+  const handleSelectCedulaRol = async(e)=>{
+    const cedula = e.target.value;
+    setData_meses([]);
+    setArreglo_referidos_temporal([])
+    await API.get(
+      `api/referidos/get_referidos_by_month_rol/?mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}&name_or_cedula=${cedula}`
+    ).then((data) => {
+      const arreglo_referidos_month = data.data;
+      setArreglo_referidos_temporal(arreglo_referidos_month)
+
+      const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
+      let arreglo = [];
+      const totalComision = calcularComisionFinal(
+        arreglo,
+        filter_arreglo
+      );
+      setComision(totalComision);
+      if (arreglo_referidos_month.length == 0) {
+        setData_meses([0]);
+      } else {
+        arreglo_referidos_month.map((item) => {
+          setData_meses((data_meses) => [
+            ...data_meses,
+            {
+              id: item.id,
+              get_nombreCompleto: (
+                <Link to={`lista/estado/${item.id}`}>
+                  {item.get_nombreCompleto}
+                </Link>
+              ),
+              numeroIdentificacion: item.numeroIdentificacion,
+              correo_electronico: item.correo_electronico,
+              celular: item.celular,
+              estadoReferido:
+                item.estadoReferido !== "" ? (
+                  <Chip
+                    label={`• ${item.estadoReferido}`}
+                    style={{ backgroundColor: item.color_estado }}
+                  />
+                ) : (
+                  <b style={{ color: "#02305b" }}>Total comisiones: </b>
+                ),
+              ordenServicio : item.ordenServicio,
+              valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
+              comision:
+              (item.finalizado && item.comisionEmpleadoInicial !== "")
+                ? "$" + formatMoney(item.comisionEmpleadoInicial, 2, ",", ".")
+                : "-",
+            },
+          ]);
+        });
+      }
+    });
+  }
+
+/*   console.log("Data meses", data_meses)
+  console.log("Arreglo referidos temporal", arreglo_referidos_temporal)
+  console.log("Data listado: ", data_listado) */
 
   return (
     <>
@@ -496,6 +606,30 @@ export const ListadoComponent = () => {
                     </Select>
                   </FormControl>
                 </div>
+                
+                <div className="select-mes">
+                  <FormControl fullWidth>
+                    <InputLabel shrink id="demo-simple-select-standard-label">
+                      Cedula
+                    </InputLabel>
+                    <Select
+                      name="name_or_cedula"
+                      label="Cedula"
+                      id="demo-simple-select-standard"
+                      onChange={handleSelectCedula}
+                    >
+                      {cargarIdentificacion.map((item, key) => {
+                        return (
+                          <MenuItem key={key} value={item.numeroIdentificacion}>
+                           {item.numeroIdentificacion}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+
+                <div style={{width: "20%"}}>
                 <ExcelFile element={<Button variant="contained" color="success" class="dw-informe">Descargar informe</Button>} filename="Informe">
                   <ExcelSheet data={arreglo_referidos_temporal} name="Informe de referidos">
                     <ExcelColumn label="Mes" value="mes"/>
@@ -509,9 +643,18 @@ export const ListadoComponent = () => {
                     <ExcelColumn label="Canal" value="canal" />
                   </ExcelSheet>
                 </ExcelFile>
+                </div>
+               
                 
               </div>
           )}
+
+
+
+
+
+
+
 
           {/* Si no es superuser y es por tipo de rol */}
           {!state_superUser && (
@@ -558,6 +701,29 @@ export const ListadoComponent = () => {
                   </Select>
                 </FormControl>
               </div>
+
+              <div className="select-mes">
+                  <FormControl fullWidth>
+                    <InputLabel shrink id="demo-simple-select-standard-label">
+                      Cedula
+                    </InputLabel>
+                    <Select
+                      name="name_or_cedula"
+                      label="Cedula"
+                      id="demo-simple-select-standard"
+                      onChange={handleSelectCedulaRol}
+                    >
+                      {cargarIdentificacion.map((item, key) => {
+                        return (
+                          <MenuItem key={key} value={item.numeroIdentificacion}>
+                           {item.numeroIdentificacion}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+
             </div>
           )}
 
