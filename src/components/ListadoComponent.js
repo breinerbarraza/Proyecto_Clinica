@@ -367,10 +367,7 @@ export const ListadoComponent = () => {
       `api/referidos/get_referidos_employee/?mes=${mes_temporal}&anio=${anio_temporal}&id_empleado=${id_empleado}`
     ).then((data) => {
       const arreglo_referidos_month = data.data;
-      console.log(arreglo_referidos_month)
-
       setArreglo_referidos_temporal(arreglo_referidos_month)
-
       const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
       let arreglo = [];
       const totalComision = calcularComisionFinal(
@@ -526,10 +523,6 @@ export const ListadoComponent = () => {
       }
     });
   }
-
-/*   console.log("Data meses", data_meses)
-  console.log("Arreglo referidos temporal", arreglo_referidos_temporal)
-  console.log("Data listado: ", data_listado) */
 
   return (
     <>
