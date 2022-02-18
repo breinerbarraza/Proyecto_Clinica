@@ -24,7 +24,6 @@ export const ActualizarReferido = () => {
         .then( ({data}) =>{
             const resp = data
             setData_referidos(resp)
-            console.log(resp)
         })
     }
 
@@ -32,7 +31,6 @@ export const ActualizarReferido = () => {
         API.get('api/configuracion/estadoReferido/get_estados/')
         .then( ({data})=>{
             const resp = data
-            console.log(data)
             setData_estados(resp)
         } )
     }
@@ -86,7 +84,6 @@ export const ActualizarReferido = () => {
             }
         })
         .catch(console.error)
-        console.log(data_referidos) 
     }
 
     //Si es admin lo deje actualizar referido, si no lo bloquea
