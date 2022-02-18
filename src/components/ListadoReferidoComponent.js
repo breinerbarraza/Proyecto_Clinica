@@ -485,7 +485,11 @@ export const ListadoReferidoComponent = () => {
                       >
                         {
                           cedula_data.map((item, key) => {
-                            return <MenuItem key={key} value={item.numeroIdentificacion}>{item.numeroIdentificacion}</MenuItem>
+                            if(item.numeroIdentificacion != ""){
+                              return <MenuItem key={key} value={item.numeroIdentificacion}>{
+                                item.numeroIdentificacion
+                              }</MenuItem>
+                            }
                           })
 
                         }
