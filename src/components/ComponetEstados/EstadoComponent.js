@@ -212,8 +212,6 @@ export const EstadoComponent = () => {
             [e.target.name]: e.target.value
         })
     }
-
-    console.log(observacion_operado)
     return (
         <>
             <div className="estados_">
