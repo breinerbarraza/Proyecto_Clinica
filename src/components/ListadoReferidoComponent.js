@@ -160,7 +160,6 @@ export const ListadoReferidoComponent = () => {
     await API.get(`api/referidos/get_referidos_month/?mes=${mes}&anio=${anio_temporal}`)
       .then(data => {
         const arreglo_referidos_month = data.data;
-        console.log(data)
         if (arreglo_referidos_month.length == 0) {
           setData_meses([0]);
         } else {
@@ -242,7 +241,6 @@ export const ListadoReferidoComponent = () => {
   const handleSelectCedula = async(e)=>{
     setData_meses([]);
     const cedula = e.target.value
-    console.log(cedula)
     await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${estado_temporal}&anio=${anio_temporal}&name_or_cedula=${cedula}`)
       .then(data => {
         const respuesta = data.data;
