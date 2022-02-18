@@ -163,18 +163,6 @@ export const EstadoComponent = () => {
                 data_estado.valor_cancelado = valor_cancelado.value
                 data_estado.observacion_operado = observacion_operado.value
             }
-            if(ordenServicio.value != "" && valor_cancelado.value == "" && observacion_operado.value != ""){
-                return alert("Asegurate de llenar el valor cancelado")
-            }
-
-            if(ordenServicio.value == "" && valor_cancelado.value != "" && observacion_operado.value != ""){
-                return alert("Asegurate de llenar la orden de servicio")
-            }
-
-            if(ordenServicio.value != "" && valor_cancelado.value != "" && observacion_operado.value == ""){
-                return alert("Asegurate de llenar la observacion")
-            }
-
         }
         API.put('api/referidos/updated_estado/', JSON.stringify(data_estado))
             .then(({ data }) => {
