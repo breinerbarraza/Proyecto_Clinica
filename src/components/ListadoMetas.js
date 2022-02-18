@@ -50,14 +50,12 @@ export const ListadoMetas = () => {
                                 <Link to={`actualizar_meta/${item.id}`}><button className="btn btn-primary" style={{marginLeft: '4px'}}><i className='fas fa-edit' style={{fontSize:'10px'}} title={item.id}></i></button></Link>
                             </>
                         }])
-                        console.log(data_listado)
                 })
 
             })
     }
 
     const borrarMeta = (id)=>{
-        console.log(id);
         Swal.fire({
             title: 'Estas seguro?',
             text: "Lo puedes cambiar mas adelante!",
