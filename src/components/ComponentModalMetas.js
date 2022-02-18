@@ -41,15 +41,12 @@ export const ComponentModalMetas = () => {
         API.get('api/usuarios/user/grupo_empleado')
             .then(({ data }) => {
                 const resp = data;
-                console.log(resp)
                 setEmpleado(resp)
             })
         API.get('api/usuarios/user/grupo_all')
             .then(({data}) => {
                 const resp = data.ids_empleados
-                console.log(resp)
                 const ids = resp.map(item => item.id)
-                console.log(ids)
                 setArreglo_de_Todos(ids);
             })
     }, [])
@@ -74,7 +71,6 @@ export const ComponentModalMetas = () => {
     //captura y envia los datos a la base de datos
     const enviarMeta = async (e) => {
         e.preventDefault();
-        console.log(dataForm)
         const inputAnio = document.getElementById("anio")
         const fechaActual = new Date().getFullYear();
         if(inputAnio.value < fechaActual){
