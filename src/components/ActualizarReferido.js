@@ -57,9 +57,9 @@ export const ActualizarReferido = () => {
         const nombres = document.getElementById("nombres")
         const apellidos = document.getElementById("apellidos")
         const celular = document.getElementById("celular")
-        const estadoReferido = document.getElementById("estadoReferido")
+        //const estadoReferido = document.getElementById("estadoReferido")
         
-        if(nombres.value == "" || apellidos.value == "" || celular.value == "" || estadoReferido.value == ""){
+        if(nombres.value == "" || apellidos.value == "" || celular.value == ""){
             return alert("Asegura de llenar campos obligatorios")
         }
         await API.put(`api/referidos/updated_referidos/`, JSON.stringify(data_referidos))
@@ -72,9 +72,9 @@ export const ActualizarReferido = () => {
                     position: 'center',
                     timer:1500
                 })
-                setTimeout(() => {
+                /* setTimeout(() => {
                     return window.location = "/actualizar_referido/"+id
-                }, 2000);
+                }, 2000); */
             }else{
                 const error = resp.error;
                 return Swal.fire({
@@ -180,7 +180,10 @@ export const ActualizarReferido = () => {
                         shrink: true,
                     }}
                 />
-                <p>Actualmente se encuentra en estado: <Chip label={`• ${
+                 <p>Actualmente se encuentra en estado: <Chip label={`• ${
+                        data_referidos.estadoReferido
+                }`} style={{ backgroundColor: data_referidos.color_estado }}/></p> 
+               {/*  <p>Actualmente se encuentra en estado: <Chip label={`• ${
                     (data_referidos.estadoReferido == 1)
                     ? "En Gestion"
                     :(data_referidos.estadoReferido == 2)
@@ -195,8 +198,8 @@ export const ActualizarReferido = () => {
                     ? "Descartado"
                     : data_referidos.estadoReferido
 
-                }`} style={{ backgroundColor: "rgb(2, 48, 91)", color: "#fff" }} /></p> 
-                <InputLabel shrink id="demo-simple-select-standard-label">Seleccione el estado</InputLabel>
+                }`} style={{ backgroundColor: "rgb(2, 48, 91)", color: "#fff" }} /></p>  */}
+               {/*  <InputLabel shrink id="demo-simple-select-standard-label">Seleccione el estado</InputLabel>
                     <Select
                         displayEmpty
                             name="estadoReferido"
@@ -211,7 +214,7 @@ export const ActualizarReferido = () => {
                                 })
                             }
 
-                    </Select>
+                    </Select> */}
             </form>
         </div>
 
