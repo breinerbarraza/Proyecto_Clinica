@@ -32,7 +32,6 @@ export const RegistroComponent = () => {
         API.get("api/usuarios/user/" + id)
             .then(item => {
                 const respuesta = item.data;
-                console.log(respuesta)
                 setData_user(respuesta)
             })
     }, [id])
@@ -45,11 +44,9 @@ export const RegistroComponent = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setState_error(false);
-        console.log(registros)
         API.post('api/usuarios/asesor/register/', JSON.stringify(registros))
             .then(item => {
                 const resp = item.data;
-                console.log(resp);
                 if (resp.data) {
                     let error_msg = resp.data
                     return Swal.fire({
