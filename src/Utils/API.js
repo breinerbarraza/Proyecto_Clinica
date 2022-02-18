@@ -4,9 +4,6 @@ const getToken = () => `Token ${localStorage.getItem('token')}`;
 /* Url que se consumira del api rest*/
 const API = axios.create({
   baseURL: "http://51.222.13.17:8081/", //Ip del servidor
-  //baseURL: "http://localhost:8000/", /* IP PUBLICA */
-  //baseURL: "http://192.168.1.2:8000/", /* IP PUBLICA */
-  //baseURL: "http://localhost:8000/", /* LOCALHOST */
   headers: {
     'Content-Type': 'application/json'
   }
