@@ -77,7 +77,6 @@ export const DashboardComponent = () => {
                             + (Math.floor(Math.random() * 255)) + ', 0.8)'
                     }))
                 let agrupacionArray = _.toArray(agrupacion)
-                console.log(agrupacionArray)
                 setPieChartData(agrupacionArray)
                 agrupacionArray.map((el) => (
                     setLabelColors(labelColors => [...labelColors, el.color]),
@@ -124,7 +123,6 @@ export const DashboardComponent = () => {
                                 + (Math.floor(Math.random() * 255)) + ', 0.8)'
                         }))
                     let agrupacionArray = _.toArray(agrupacion)
-                    console.log(agrupacionArray)
                     setPieChartData(agrupacionArray)
                     agrupacionArray.map((el) => (
                         setLabelColors(labelColors => [...labelColors, el.color]),
