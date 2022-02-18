@@ -43,7 +43,6 @@ export const ActualizarMetaModal = () => {
           .then(data => {
             const resp = data.data;
             setEstado(resp)
-            console.log(resp);
           })
           .catch(console.error);
     }
@@ -52,7 +51,6 @@ export const ActualizarMetaModal = () => {
         API.get('api/usuarios/user/grupo_empleado')
             .then(({ data }) => {
                 const resp = data;
-                console.log(resp)
                 setEmpleado(resp)
                 cargarEstados();
             })
@@ -60,7 +58,6 @@ export const ActualizarMetaModal = () => {
         API.get(`api/usuarios/metas/${id}`)
         .then(({data}) => {
             const resp = data;
-            console.log(resp)
             setDataForm(resp)
         })
     }, [])
@@ -86,7 +83,6 @@ export const ActualizarMetaModal = () => {
     //captura los datos que se van a enviar al back
     const actualizarMeta = async (e) => {
         e.preventDefault();
-        console.log(dataForm)
         const inputAnio = document.getElementById("anio")
         const fechaActual = new Date().getFullYear();
         if(inputAnio.value < fechaActual){
