@@ -108,6 +108,7 @@ export const LoginComponent = () => {
                         /><br /><br />
                         <Link to="/email"><i>¿Has olvidado la contraseña?</i></Link>
                         <button type="submit" style={{width: "100%"}} className="btn btn-primary">INICIAR SESIÓN</button>
+                        <Link to="/registro" className='fas fa-arrow-right'> Registro</Link>
                     </form>
 
                 </div>
