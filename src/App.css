@@ -876,7 +876,20 @@ label {
     width: 48%;
     margin-left: 4%;
 }
-button[type="submit"]{
+
+.div_login{
+    display: inline-block;
+}
+
+.fa-arrow-right{
+    margin-top: 15px;
+}
+
+.fa-arrow-left{
+    margin-bottom: 30px;
+}
+
+button[type="submit"], #link_registro{
     border: none;
     background: #02305b;
     font-size: 12px;
@@ -888,6 +901,7 @@ button[type="submit"]{
     float: right;
     margin-top: 30px;
 }
+
 
 /*prequirugico*/
 .contendor-prequi{
