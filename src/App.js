@@ -31,6 +31,7 @@ import { MetasProgramadas } from './components/MetasProgramadas';
 import { DashboardComponentCanal } from './components/DashboardComponentCanal';
 import { TablaSolicitudes } from './components/TablaSolicitudes';
 import { ActualizarReferido } from './components/ActualizarReferido';
+import { Registro } from './components/Registro';
 
 
 function App() {
@@ -51,6 +52,14 @@ function App() {
                 (localStorage.getItem('token') !== null)
                 ? <ListadoComponent />
                 : <RegistroComponent />
+              }
+            </Route>
+
+            <Route exact path="/registro">
+              {
+                (localStorage.getItem('token') !== null)
+                ? <ListadoComponent />
+                : <Registro />
               }
             </Route>
 
