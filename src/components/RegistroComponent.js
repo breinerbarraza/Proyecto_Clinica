@@ -92,7 +92,7 @@ export const RegistroComponent = () => {
             {estadoForm && (
                 <>
 
-
+                    {/* media query */}
                     <div className="div-container-registro">
                         <div className="contenedor-div-registro">
                             <h3 className="h3-registro">
@@ -200,7 +200,6 @@ export const RegistroComponent = () => {
                         </form>
                     </div>
 
-                    {/* media query */}
                     <div className="page-registro">
                         <div className="registro-container">
                             <div className="formulario-registro">
