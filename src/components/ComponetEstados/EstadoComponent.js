@@ -16,7 +16,7 @@ import { formatMoney } from '../../Utils/LogicaFunciones';
 var moment = require('moment')
 
 export const EstadoComponent = () => {
-
+    
     const [data_pendiente, setData_pendiente] = useState({})
     const [data, setData] = useState({})
     const [data_medicos, setData_medicos] = useState([]);
@@ -35,6 +35,7 @@ export const EstadoComponent = () => {
         API.get("api/referidos/" + id)
             .then(item => {
                 setData_pendiente(item.data)
+                comprobarEstado(item.data.estadoReferido)
             })
         
         API.get(`api/referidos/get_observacion_descartado/?id_referido=${id}`)
@@ -57,6 +58,27 @@ export const EstadoComponent = () => {
         })
 
     }, [id]);
+
+    const comprobarEstado = async(item)=>{
+        if(item == "Pre-quirúrgico"){
+            await API.get('api/referidos_cambio_estado/get_data_prequirurgico/?id_referido='+id)
+            .then( data => {
+                const respuesta = data.data;
+                setData(respuesta)
+            })
+        }
+       else if(item == "Programado"){
+            await API.get('api/referidos_cambio_estado/get_data_programado/?id_referido='+id)
+            .then( data => {
+                const respuesta = data.data;
+                setData(respuesta)
+                console.log(respuesta)
+            })
+       }
+           
+       
+    }
+
     
     useEffect(() => {
         const id = localStorage.getItem('id_user')
@@ -79,6 +101,7 @@ export const EstadoComponent = () => {
             .then(data => {
                 setCmbListado(data.data);
             })
+
     }, [data, data_pendiente]);
 
     const handleClickPendiente = async (e) => {
@@ -107,7 +130,7 @@ export const EstadoComponent = () => {
         await API.post('api/referidos_cambio_estado/register-estado-programado/', JSON.stringify(data))
             .then(data => {
                 const resp = data.data;
-                if (resp) {
+                if (resp.mensaje) {
                     return Swal.fire({
                         icon: 'success',
                         text: resp.mensaje,
@@ -115,7 +138,7 @@ export const EstadoComponent = () => {
                 } else {
                     return Swal.fire({
                         icon: 'error',
-                        text: 'Ha ocurrido un error',
+                        text: resp.error,
                     })
                 }
             })
@@ -186,7 +209,7 @@ export const EstadoComponent = () => {
     const handleInput = (e) => {
         setData({
             ...data,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         })
 
     }
@@ -304,6 +327,7 @@ export const EstadoComponent = () => {
                                                 type="date"
                                                 name="fecha"
                                                 label="Próxima gestión"
+                                                
                                                 required
                                                 className="form-control RegistrarReferido"
                                                 style={{ marginBottom: "30px" }}
@@ -572,6 +596,7 @@ export const EstadoComponent = () => {
                                                     name="fecha"
                                                     placeholder="Escribe..."
                                                     label="Fecha"
+                                                    value={data.fecha}
                                                     onChange={handleInput}
                                                     className="form-control RegistrarReferido"
                                                     style={{ marginBottom: "30px" }}
@@ -586,6 +611,7 @@ export const EstadoComponent = () => {
                                                     name="hora"
                                                     placeholder="Escribe..."
                                                     label="Hora"
+                                                    value={data.hora}
                                                     onChange={handleInput}
                                                     className="form-control RegistrarReferido"
                                                     style={{ marginBottom: "30px" }}
@@ -601,6 +627,7 @@ export const EstadoComponent = () => {
                                                     name="direccion"
                                                     placeholder="Escribe..."
                                                     label="Direccion"
+                                                    value={data.direccion}
                                                     onChange={handleInput}
                                                     required
                                                     className="form-control RegistrarReferido"
@@ -612,6 +639,14 @@ export const EstadoComponent = () => {
                                             </div>
 
                                         </div>
+                                        {
+                                            Object.keys(data).length > 0 && (
+                                                <>
+                                                <br />
+                                                <p>Se encuentra asignado con el medico <b>{data.medico_asignado}</b></p>
+                                                </>     
+                                            )
+                                        }
                                         <div className="form-medico">
                                             <FormControl fullWidth >
                                                 <InputLabel shrink id="demo-simple-select-standard-label">Medico</InputLabel>
@@ -619,6 +654,7 @@ export const EstadoComponent = () => {
                                                     name="medico"
                                                     label="Medico"
                                                     id="demo-simple-select-standard"
+                                                   /*  value={data.id_medico} */
                                                     onChange={handleInput}
                                                 >
                                                     {
@@ -723,6 +759,7 @@ export const EstadoComponent = () => {
                                                 name="fecha"
                                                 placeholder="Escribe..."
                                                 label="Fecha"
+                                                value={data.fecha}
                                                 onChange={handleInput}
                                                 required
                                                 className="form-control RegistrarReferido"
@@ -738,6 +775,7 @@ export const EstadoComponent = () => {
                                                 name="hora"
                                                 placeholder="Escribe..."
                                                 label="Hora"
+                                                value={data.hora}
                                                 onChange={handleInput}
                                                 required
                                                 className="form-control RegistrarReferido"
@@ -754,6 +792,7 @@ export const EstadoComponent = () => {
                                                     name="direccion"
                                                     placeholder="Escribe..."
                                                     label="Direccion"
+                                                    value={data.direccion}
                                                     onChange={handleInput}
                                                     required
                                                     className="form-control RegistrarReferido"
