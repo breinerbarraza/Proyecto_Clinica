@@ -16,6 +16,7 @@ import "./listaUsuario.css";
 import { HeaderMovil } from "./HeaderMovil";
 import { Button } from "@mui/material";
 import ExportExcel from 'react-export-excel';
+import { TextField } from '@mui/material';
 
 const ExcelFile = ExportExcel.ExcelFile
 const ExcelSheet = ExportExcel.ExcelSheet 
@@ -474,7 +475,7 @@ export const ListadoComponent = () => {
     setData_meses([]);
     setArreglo_referidos_temporal([])
     await API.get(
-      `api/referidos/get_referidos_by_month_rol/?mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}&name_or_cedula=${cedula}`
+      `api/referidos/get_referidos_by_month_rol/?mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}&name_or_cedula=${cedula}&id_estado=${estado_temporal}`
     ).then((data) => {
       const arreglo_referidos_month = data.data;
       setArreglo_referidos_temporal(arreglo_referidos_month)
@@ -601,25 +602,22 @@ export const ListadoComponent = () => {
                 </div>
                 
                 <div className="select-mes">
-                  <FormControl fullWidth>
-                    <InputLabel shrink id="demo-simple-select-standard-label">
-                      Cedula
-                    </InputLabel>
-                    <Select
-                      name="name_or_cedula"
-                      label="Cedula"
-                      id="demo-simple-select-standard"
-                      onChange={handleSelectCedula}
-                    >
-                      {cargarIdentificacion.map((item, key) => {
-                        return (
-                          <MenuItem key={key} value={item.numeroIdentificacion}>
-                           {item.numeroIdentificacion}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
+                <div style={{marginTop: '-15px'}}>
+                    <FormControl fullWidth>
+                      <TextField
+                              type="text"
+                              name="nombres"
+                              placeholder="Escribe..."
+                              label="Nombres o cédula"
+                              className="form-control"
+                              onChange={handleSelectCedula}
+                              style={{ marginTop: '-20px' }}
+                              InputLabelProps={{
+                                  shrink: true,
+                              }}
+                            />
+                    </FormControl>
+                  </div>
                 </div>
 
                 <div style={{width: "20%"}}>
@@ -696,25 +694,22 @@ export const ListadoComponent = () => {
               </div>
 
               <div className="select-mes">
-                  <FormControl fullWidth>
-                    <InputLabel shrink id="demo-simple-select-standard-label">
-                      Cedula
-                    </InputLabel>
-                    <Select
-                      name="name_or_cedula"
-                      label="Cedula"
-                      id="demo-simple-select-standard"
-                      onChange={handleSelectCedulaRol}
-                    >
-                      {cargarIdentificacion.map((item, key) => {
-                        return (
-                          <MenuItem key={key} value={item.numeroIdentificacion}>
-                           {item.numeroIdentificacion}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
+                <div style={{marginTop: '-15px'}}>
+                    <FormControl fullWidth  >
+                        <TextField
+                                  type="text"
+                                  name="name_or_cedula"
+                                  placeholder="Escribe..."
+                                  label="Nombres o cédula"
+                                  className="form-control"
+                                  onChange={handleSelectCedulaRol}
+                                  style={{ marginTop: '-20px' }}
+                                  InputLabelProps={{
+                                      shrink: true,
+                                  }}
+                              />
+                      </FormControl>
+                    </div>
                 </div>
 
             </div>
