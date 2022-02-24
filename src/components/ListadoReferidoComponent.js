@@ -13,6 +13,8 @@ import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
 import Swal from 'sweetalert2';
+import { TextField } from '@mui/material';
+
 
 export const ListadoReferidoComponent = () => {
 
@@ -25,7 +27,7 @@ export const ListadoReferidoComponent = () => {
   const [id_localStorage, setid_localStorage] = useState("");
   const [arreglo_year, setArreglo_year] = useState([]);
   const [anio_temporal, setAnioTemporal] = useState("");
-  const [cedula_data, setCedula_data] = useState([]);
+  //const [cedula_data, setCedula_data] = useState([]);
   const [estado_temporal, setEstadoTemporal] = useState("");
   const [admin_bolean, setAdmin_bolean] = useState(false)
 
@@ -72,7 +74,7 @@ export const ListadoReferidoComponent = () => {
     setLoading(true)
     await API.get('api/referidos/')
       .then(resp => {
-        setCedula_data(resp.data)
+        //setCedula_data(resp.data)
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -100,7 +102,7 @@ export const ListadoReferidoComponent = () => {
 
     await API.post('api/referidos/get_referidos/', JSON.stringify(obj))
       .then(resp => {
-        setCedula_data(resp.data)
+        //setCedula_data(resp.data)
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
@@ -241,6 +243,7 @@ export const ListadoReferidoComponent = () => {
   const handleSelectCedula = async(e)=>{
     setData_meses([]);
     const cedula = e.target.value
+    console.log(cedula)
     await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${estado_temporal}&anio=${anio_temporal}&name_or_cedula=${cedula}`)
       .then(data => {
         const respuesta = data.data;
@@ -272,6 +275,31 @@ export const ListadoReferidoComponent = () => {
     setEstadoTemporal(id_estado)
     setData_meses([]);
     await API.get(`api/referidos/get_referidos_estado_rol/?id_estado=${id_estado}&mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}`)
+      .then(data => {
+        const respuesta = data.data;
+        if (respuesta.length > 0) {
+          respuesta.map((item) => (
+            setData_meses(data_meses => [...data_meses, {
+              "id": item.id,
+              "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+              "numeroIdentificacion": item.numeroIdentificacion,
+              "correo_electronico": item.correo_electronico,
+              "celular": item.celular,
+              "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />
+            }])
+          ))
+        } else {
+          setData_meses([0]);
+        }
+
+      })
+  }
+
+  //Filtro del nombre o cedula de referidos sin comision
+  const handleSelectCedula_rol = async(e)=>{
+    const cedula = e.target.value;
+    setData_meses([]);
+    await API.get(`api/referidos/get_referidos_estado_rol/?id_estado=${estado_temporal}&mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}&name_or_cedula=${cedula}`)
       .then(data => {
         const respuesta = data.data;
         if (respuesta.length > 0) {
@@ -475,38 +503,29 @@ export const ListadoReferidoComponent = () => {
                 </div>
 
                 <div className="select-mes">
-                    <FormControl fullWidth  >
-                      <InputLabel shrink id="demo-simple-select-standard-label">Cedula</InputLabel>
-                      <Select
-                        name="name_or_cedula"
-                        label="Cedula"
-                        id="demo-simple-select-standard"
-                        onChange={handleSelectCedula}
-                      >
-                        {
-                          cedula_data.map((item, key) => {
-                            if(item.numeroIdentificacion != ""){
-                              return <MenuItem key={key} value={item.numeroIdentificacion}>{
-                                item.numeroIdentificacion
-                              }</MenuItem>
-                            }
-                          })
-
-                        }
-                      </Select>
+                  <div style={{marginTop: '-15px'}}>
+                  <FormControl fullWidth  >
+                      <TextField
+                          type="text"
+                          name="nombres"
+                          placeholder="Escribe..."
+                          label="Nombres o cédula"
+                          className="form-control"
+                          onChange={handleSelectCedula}
+                          style={{ marginTop: '-20px' }}
+                          InputLabelProps={{
+                              shrink: true,
+                          }}
+                        />
                     </FormControl>
                   </div>
-
-
-
+                    
+                  </div>
               </div>
             )
           }
 
 
-
-
-          
           {/* Si no es superuser y es por tipo de rol */}
           {
             !state_superUser && (
@@ -571,26 +590,25 @@ export const ListadoReferidoComponent = () => {
                     </Select>
                   </FormControl>
                 </div>
-
                 <div className="select-mes">
-                    <FormControl fullWidth  >
-                      <InputLabel shrink id="demo-simple-select-standard-label">Cedula</InputLabel>
-                      <Select
-                        name="name_or_cedula"
-                        label="Cedula"
-                        id="demo-simple-select-standard"
-                        onChange={handleSelectCedula}
-                      >
-                        {
-                          cedula_data.map((item, key) => {
-                            return <MenuItem key={key} value={item.numeroIdentificacion}>{item.numeroIdentificacion}</MenuItem>
-                          })
-
-                        }
-                      </Select>
+                  <div style={{marginTop: '-15px'}}>
+                  <FormControl fullWidth  >
+                      <TextField
+                                type="text"
+                                name="nombres"
+                                placeholder="Escribe..."
+                                label="Nombres o cédula"
+                                className="form-control"
+                                onChange={handleSelectCedula_rol}
+                                style={{ marginTop: '-20px' }}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
                     </FormControl>
                   </div>
-
+                    
+                  </div>
               </div>
             )
           }
