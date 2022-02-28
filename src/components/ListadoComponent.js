@@ -199,6 +199,7 @@ export const ListadoComponent = () => {
     await API.get(
       `api/referidos/get_referidos_month/?mes=${mes}&anio=${anio_temporal}`
     ).then((data) => {
+      setData_meses([]);
       const arreglo_referidos_month = data.data;
       setArreglo_referidos_temporal(arreglo_referidos_month)
 
@@ -254,6 +255,7 @@ export const ListadoComponent = () => {
     await API.get(
       `api/referidos/get_referidos_by_month_rol/?mes=${mes}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}`
     ).then((data) => {
+      setData_meses([]);
       const arreglo_referidos_month = data.data;
       const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
       let arreglo = [];
@@ -367,6 +369,7 @@ export const ListadoComponent = () => {
     await API.get(
       `api/referidos/get_referidos_employee/?mes=${mes_temporal}&anio=${anio_temporal}&id_empleado=${id_empleado}`
     ).then((data) => {
+      setData_meses([]);
       const arreglo_referidos_month = data.data;
       setArreglo_referidos_temporal(arreglo_referidos_month)
       const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
@@ -421,6 +424,7 @@ export const ListadoComponent = () => {
     await API.get(
       `api/referidos/get_referidos_employee/?mes=${mes_temporal}&anio=${anio_temporal}&id_empleado=${estado_temporal}&name_or_cedula=${cedula}`
     ).then((data) => {
+      setData_meses([]);
       const arreglo_referidos_month = data.data;
       setArreglo_referidos_temporal(arreglo_referidos_month)
 
@@ -477,6 +481,7 @@ export const ListadoComponent = () => {
     await API.get(
       `api/referidos/get_referidos_by_month_rol/?mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}&name_or_cedula=${cedula}&id_estado=${estado_temporal}`
     ).then((data) => {
+      setData_meses([]);
       const arreglo_referidos_month = data.data;
       setArreglo_referidos_temporal(arreglo_referidos_month)
 
