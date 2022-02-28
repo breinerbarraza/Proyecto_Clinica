@@ -161,6 +161,7 @@ export const ListadoReferidoComponent = () => {
     setMes_temporal(mes)
     await API.get(`api/referidos/get_referidos_month/?mes=${mes}&anio=${anio_temporal}`)
       .then(data => {
+        setData_meses([]);
         const arreglo_referidos_month = data.data;
         if (arreglo_referidos_month.length == 0) {
           setData_meses([0]);
@@ -191,8 +192,8 @@ export const ListadoReferidoComponent = () => {
     setMes_temporal(mes)
     await API.get(`api/referidos/get_referidos_by_month_rol/?mes=${mes}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}`)
       .then(data => {
+        setData_meses([]);
         const arreglo_referidos_month = data.data;
-
         if (arreglo_referidos_month.length == 0) {
           setData_meses([0]);
         } else {
@@ -217,6 +218,7 @@ export const ListadoReferidoComponent = () => {
     await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${id_estado}&anio=${anio_temporal}`)
       .then(data => {
         const respuesta = data.data;
+        setData_meses([]);  
         if (respuesta.length > 0) {
           respuesta.map((item) => (
             setData_meses(data_meses => [...data_meses, {
@@ -243,10 +245,11 @@ export const ListadoReferidoComponent = () => {
   const handleSelectCedula = async(e)=>{
     setData_meses([]);
     const cedula = e.target.value
-    console.log(cedula)
     await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${estado_temporal}&anio=${anio_temporal}&name_or_cedula=${cedula}`)
       .then(data => {
+        setData_meses([]);  
         const respuesta = data.data;
+        console.log(data.data)
         if (respuesta.length > 0) {
           respuesta.map((item) => (
             setData_meses(data_meses => [...data_meses, {
@@ -276,6 +279,7 @@ export const ListadoReferidoComponent = () => {
     setData_meses([]);
     await API.get(`api/referidos/get_referidos_estado_rol/?id_estado=${id_estado}&mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}`)
       .then(data => {
+        setData_meses([])
         const respuesta = data.data;
         if (respuesta.length > 0) {
           respuesta.map((item) => (
@@ -301,6 +305,7 @@ export const ListadoReferidoComponent = () => {
     setData_meses([]);
     await API.get(`api/referidos/get_referidos_estado_rol/?id_estado=${estado_temporal}&mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}&name_or_cedula=${cedula}`)
       .then(data => {
+        setData_meses([]);
         const respuesta = data.data;
         if (respuesta.length > 0) {
           respuesta.map((item) => (
