@@ -79,7 +79,6 @@ export const ReferirComponent = () => {
                 } else {
                     return Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
                         text: resp.error,
                         position: 'center',
                     })
