@@ -14,6 +14,7 @@ import { RegistrarReferidoMedia } from './componentMediaQuery/RegistrarReferidoM
 export const RegistrarReferidoComponent = () => {
 
     const [identificacion, setIdentificacion] = useState([]);
+    const [canal, setCanal] = useState([]);
     const [state_referido, setState_referido] = useState([]);
     const [estadoBoleano, setestadoBoleano] = useState(true);
     const [estadoForm, setEstadoForm] = useState(false);
@@ -26,8 +27,18 @@ export const RegistrarReferidoComponent = () => {
                 setIdentificacion(item)
             })
     }
+
+    const tipoCanal = async()=>{
+        await API.get('api/configuracion/canal/')
+        .then(({data}) => {
+            const item = data;
+            setCanal(item)
+        })
+    }
+
     useEffect(() => {
         tipoIdentificacion()
+        tipoCanal()
     }, []);
 
     const handleChangeState = ()=>{
@@ -110,6 +121,60 @@ export const RegistrarReferidoComponent = () => {
                          }}
                      />
                </div>
+
+               <div className="div-separador">
+                     <TextField
+                     type="text"
+                     name="edad"
+                     placeholder="Escribe..."
+                     label="Edad"
+                     required
+                     className="form-control RegistrarReferido"
+                     style={{marginBottom: "30px"}}
+                     onChange={handleInput}
+                     InputLabelProps={{
+                         shrink: true,
+                     }}
+                     />
+                 </div>
+            
+               <div className="div-separador">
+                     <TextField
+                     type="text"
+                     name="celular"
+                     placeholder="Escribe..."
+                     label="Celular"
+                     required
+                     className="form-control RegistrarReferido"
+                     style={{marginBottom: "30px"}}
+                     onChange={handleInput}
+                     InputLabelProps={{
+                         shrink: true,
+                     }}
+                     />
+                 </div>
+
+                <di className="div-separador">
+                    <FormControl fullWidth className='canal'>
+                        <InputLabel shrink id="demo-simple-select-standard-label">Tipo de canal</InputLabel>
+                        <Select
+                            name="canal"
+                            label="Tipo de Canal"
+                            className= "select-document"
+                            id="demo-simple-select-standard"
+                            onChange={handleInput}
+                            required
+                            
+                        >
+                            {
+                                canal.map(data => {
+                                    return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
+                                })
+                            }
+                        </Select>
+                    </FormControl>
+               </di>
+
                <div className="div-separador-identificacion">
                   
                  <FormControl fullWidth  >
@@ -117,7 +182,6 @@ export const RegistrarReferidoComponent = () => {
                          <Select
                              name="tipoIdentificacion"
                              label="Tipo de Identificacion"
-                             required
                              id="demo-simple-select-standard"
                              className=""
                              style={{ marginBottom: "-4px" }}
@@ -136,13 +200,12 @@ export const RegistrarReferidoComponent = () => {
                          </Select>
                  </FormControl>
                </div>
-                 <div className="div-separador">
+                 <div className="div-separador" style={{ marginTop:'-0.5px' }}>
                  <TextField
                      type="text"
                      name="numeroIdentificacion"
                      placeholder="Escribe..."
-                     label="Numero de identidad"
-                     required
+                     label="N°.Identificacion"
                      className="form-control RegistrarReferido"
                      style={{ marginBottom: "30px" }}
                      onChange={handleInput}
@@ -153,28 +216,15 @@ export const RegistrarReferidoComponent = () => {
                  </div>                                
                 
                  <div className="div-separador">
-                     <TextField
-                         type="date"
-                         name="fechaNacimiento"
-                         placeholder="Escribe..."
-                         label="Fecha de nacimiento"
-                         required
-                         className="form-control RegistrarReferido"
-                         style={{ marginBottom: "30px" }}
-                         onChange={handleInput}
-                         InputLabelProps={{
-                             shrink: true,
-                         }}
-                     />
+                    
                  </div>
  
                  <div className="div-separador">
                      <TextField
                      type="text"
-                     name="celular"
+                     name="telefono"
                      placeholder="Escribe..."
-                     label="Celular"
-                     required
+                     label="Telefono"
                      className="form-control RegistrarReferido"
                      style={{marginBottom: "30px"}}
                      onChange={handleInput}
@@ -205,7 +255,9 @@ export const RegistrarReferidoComponent = () => {
              </form>
          </div>
 
-         {/* Diseño pc */}
+         
+
+         {/* Diseño pc ********************* */}
          <div className="page-registrarefe">
              <div className="registrarefe-container">
                  <div className="formulario-registrarefe">
@@ -241,11 +293,12 @@ export const RegistrarReferidoComponent = () => {
                                  shrink: true,
                              }}
                          />
-                         <TextField
-                             type="date"
-                             name="fechaNacimiento"
+
+                        <TextField
+                             type="text"
+                             name="edad"
                              placeholder="Escribe..."
-                             label="Fecha de nacimiento"
+                             label="Edad"
                              required
                              className="form-control RegistrarReferido"
                              style={{ marginBottom: "30px" }}
@@ -254,15 +307,48 @@ export const RegistrarReferidoComponent = () => {
                                  shrink: true,
                              }}
                          />
+
+                        <TextField
+                             type="text"
+                             name="celular"
+                             placeholder="Escribe..."
+                             label="Celular"
+                             required
+                             className="form-control RegistrarReferido"
+                             style={{ marginBottom: "30px" }}
+                             onChange={handleInput}
+                             InputLabelProps={{
+                                 shrink: true,
+                             }}
+                         />
+
+                        <FormControl fullWidth className='canal'>
+                            <InputLabel shrink id="demo-simple-select-standard-label">Tipo de canal</InputLabel>
+                            <Select
+                                name="canal"
+                                label="Tipo de Canal"
+                                className= "select-document"
+                                id="demo-simple-select-standard"
+                                onChange={handleInput}
+                                required
+                                
+                            >
+                                {
+                                    canal.map(data => {
+                                        return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
+                                    })
+                                }
+                            </Select>
+                        </FormControl>
+                        
                          <div className="_container-referidos">
                              <div className="container-Select-cedula">
                                  <div className="select">
                                      <FormControl fullWidth  >
-                                         <InputLabel shrink id="demo-simple-select-standard-label">Tipo de Documento</InputLabel>
+                                         <InputLabel shrink id="demo-simple-select-standard-label">Tipo de Identificacion</InputLabel>
                                          <Select
                                              name="tipoIdentificacion"
-                                             label="Tipo de Documento"
-                                             required
+                                             label="Tipo de Indentificacion"
                                              id="demo-simple-select-standard"
                                              style={{ marginBottom: "-4px" }}
                                              onChange={handleInput}
@@ -277,10 +363,9 @@ export const RegistrarReferidoComponent = () => {
                                  </div>
                                  <TextField
                                      type="text"
-                                     name="celular"
+                                     name="telefono"
                                      placeholder="Escribe..."
-                                     label="Celular"
-                                     required
+                                     label="Telefono"
                                      className="form-control RegistrarReferido"
                                      style={{marginBottom: "30px"}}
                                      onChange={handleInput}
@@ -294,8 +379,7 @@ export const RegistrarReferidoComponent = () => {
                                      type="text"
                                      name="numeroIdentificacion"
                                      placeholder="Escribe..."
-                                     label="Numero de identidad"
-                                     required
+                                     label="N°.Identificacion"
                                      className="form-control RegistrarReferido"
                                      style={{ marginBottom: "30px" }}
                                      onChange={handleInput}
