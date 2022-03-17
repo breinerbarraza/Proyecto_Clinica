@@ -174,10 +174,10 @@ export const ReferirComponent = () => {
                                 <div className="contenedor-referir">
                                     <div className="documento">
                                         <FormControl fullWidth  >
-                                            <InputLabel shrink id="demo-simple-select-standard-label">Tipo de Documento</InputLabel>
+                                            <InputLabel shrink id="demo-simple-select-standard-label">Tipo de identificacion</InputLabel>
                                             <Select
                                                 name="tipoIdentificacion"
-                                                label="Tipo de Documento"
+                                                label="Tipo de Identificacion"
                                                 className= "select-document"
                                                 id="demo-simple-select-standard"
                                                 onChange={handleSelect}
@@ -210,7 +210,7 @@ export const ReferirComponent = () => {
                                             type="text"
                                             name="numeroIdentificacion"
                                             placeholder="Escribe..."
-                                            label="Numero de identidad"
+                                            label="N°.Identificacion"
                                             className="form-control"
                                             style={{ marginBottom: "33px" }}
                                             onChange={handleSelect}
@@ -285,13 +285,59 @@ export const ReferirComponent = () => {
                                 shrink: true,
                             }}
                         />  
+
+                        <TextField
+                            type="number"
+                            name="edad"
+                            placeholder="Escribe..."
+                            label="Edad"
+                            className="form-control"
+                            required
+                            style={{ marginBottom: "30px" }}
+                            onChange={handleSelect}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                         />
+            
+                    <TextField
+                        type="text"
+                        name="celular"
+                        placeholder="Escribe..."
+                        label="Celular"
+                        className="form-control"
+                        required
+                        style={{ marginBottom: "30px" }}
+                        onChange={handleSelect}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    <FormControl fullWidth className='canal'>
+                        <InputLabel shrink id="demo-simple-select-standard-label">Tipo de canal</InputLabel>
+                        <Select
+                            name="canal"
+                            label="Tipo de Canal"
+                            className= "select-document"
+                            id="demo-simple-select-standard"
+                            onChange={handleSelect}
+                            required
+                            
+                        >
+                            {
+                                canal.map(data => {
+                                    return <MenuItem key={data.id} value={data.id}>{data.descripcion}</MenuItem>
+                                })
+                            }
+                        </Select>
+                    </FormControl>
                         
                     <div className='div-separador-identificacion'>
                         <FormControl fullWidth  >
                                 <InputLabel shrink id="demo-simple-select-standard-label">Tipo de identificacion</InputLabel>
                                 <Select
                                     name="tipoIdentificacion"
-                                    label="Tipo de Documento"
+                                    label="Tipo de Indentificacion"
                                     className= "select-document"
                                     id="demo-simple-select-standard"
                                     onChange={handleSelect}
@@ -311,7 +357,6 @@ export const ReferirComponent = () => {
                                     placeholder="Escribe..."
                                     label="N°.Identificacion"
                                     className="form-control"
-                                    required
                                     style={{ marginBottom: "33px" }}
                                     onChange={handleSelect}
                                     InputLabelProps={{
@@ -319,26 +364,12 @@ export const ReferirComponent = () => {
                                     }}
                             />
                         
-                        <TextField
-                                type="date"
-                                name="fechaNacimiento"
-                                placeholder="Escribe..."
-                                label="Fecha de nacimiento"
-                                className="form-control"
-                                required
-                                style={{ marginBottom: "30px" }}
-                                onChange={handleSelect}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
                             <TextField
                                 type="text"
-                                name="celular"
+                                name="telefono"
                                 placeholder="Escribe..."
-                                label="Celular"
+                                label="Telefono"
                                 className="form-control"
-                                required
                                 style={{ marginBottom: "30px" }}
                                 onChange={handleSelect}
                                 InputLabelProps={{
