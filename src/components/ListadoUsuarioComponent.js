@@ -22,6 +22,16 @@ export const ListadoUsuarioComponent = () => {
   const [group, setGroup] = useState([]);
   const [mes_temporal, setMes_temporal] = useState("")
 
+  useEffect(() => {
+    cargarGrupos()
+    let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+    if (super_user) {
+      load()
+    } else {
+      window.location = "/";
+    }
+  }, []);
+
   const load = async () => {
     setLoading(true)
     await API.get('api/usuarios/user/')
@@ -128,7 +138,6 @@ export const ListadoUsuarioComponent = () => {
       <MDBDataTable
         hover
         responsive
-        hover
         striped
         small
         paginationLabel={["<", ">"]}
@@ -148,18 +157,6 @@ export const ListadoUsuarioComponent = () => {
                 setGroup(data)
         })
   }
-
-  useEffect(() => {
-    cargarGrupos()
-    let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
-    if (super_user) {
-      load()
-    } else {
-      window.location = "/";
-    }
-  }, []);
-
-
 
   const handleSelectMonth = async (e) => {
     setData_meses([]);
