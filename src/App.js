@@ -32,6 +32,7 @@ import { DashboardComponentCanal } from './components/DashboardComponentCanal';
 import { TablaSolicitudes } from './components/TablaSolicitudes';
 import { ActualizarReferido } from './components/ActualizarReferido';
 import { Registro } from './components/Registro';
+import { DashboardEstado } from './components/DashboardEstado';
 
 
 function App() {
@@ -116,6 +117,14 @@ function App() {
               <Route exact path="/dashboard">
                 {localStorage.getItem('token') !== null ? (
                   <DashboardComponent />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+
+              <Route exact path="/dashboard/:estado">
+                {localStorage.getItem('token') !== null ? (
+                  <DashboardEstado />
                 ) : (
                   <LoginComponent />
                 )}
