@@ -24,7 +24,6 @@ export const Registro = () => {
 
     const handleSubmit = (e)=>{
         e.preventDefault()
-        console.log(registros)
         setState_error(false)
         API.post('api/usuarios/asesor/register/', JSON.stringify(registros))
         .then( item => {
@@ -33,7 +32,6 @@ export const Registro = () => {
                 let error_msg = resp.data
                 return Swal.fire({
                     icon: 'error',
-                    title: 'Ha ocurrido el siguiente error!',
                     text: error_msg,
                     position: 'center',
                 });
@@ -64,25 +62,31 @@ export const Registro = () => {
     }
 
   return (
-    <div className="page-registro">
-    <div className="registro-container">
-        <div className="formulario-registro">
-            <form onSubmit={handleSubmit}>
+
+
+    <>
+    {/* media query */}
+    <div className="div-container-registro">
+        <div className="contenedor-div-registro">
+            <h3 className="h3-registro">
                 <img alt="clinica" className="logo_clinica-registro" src={logo_clinica} />
-                <br />
-                <TextField
-                    type="text"
-                    name="first_name"
-                    placeholder="Escribe..."
-                    label="Nombre"
-                    required
-                    className="form-control"
-                    style={{ marginBottom: "30px" }}
-                    onChange={handleInputChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                />
+            </h3>
+        </div>
+        <form onSubmit={handleSubmit} className="form-registro-responsive">
+            <TextField
+                type="text"
+                name="first_name"
+                placeholder="Escribe..."
+                label="Nombre"
+                required
+                className="form-control"
+                style={{ marginBottom: "30px" }}
+                onChange={handleInputChange}
+                InputLabelProps={{
+                    shrink: true,
+                }}
+            />
+            <div className="div-separador">
                 <TextField
                     type="text"
                     name="last_name"
@@ -96,6 +100,9 @@ export const Registro = () => {
                         shrink: true,
                     }}
                 />
+            </div>
+
+            <div className="div-separador">
                 <TextField
                     type="email"
                     name="email"
@@ -109,6 +116,24 @@ export const Registro = () => {
                         shrink: true,
                     }}
                 />
+            </div>
+
+            <div className="div-separador">
+                <TextField
+                    type="text"
+                    name="daviplata"
+                    placeholder="Escribe..."
+                    label="Nro Daviplata"
+                    required
+                    className="form-control RegistrarReferido"
+                    style={{ marginBottom: "30px" }}
+                    onChange={handleInputChange}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                />
+            </div>
+            <div className="div-separador">
                 <TextField
                     type="text"
                     name="username"
@@ -122,6 +147,8 @@ export const Registro = () => {
                         shrink: true,
                     }}
                 />
+            </div>
+            <div className="div-separador">
                 <TextField
                     type="password"
                     name="password"
@@ -135,6 +162,8 @@ export const Registro = () => {
                         shrink: true,
                     }}
                 />
+            </div>
+            <div className="div-separador">
                 <TextField
                     type="password"
                     name="password2"
@@ -148,23 +177,137 @@ export const Registro = () => {
                         shrink: true,
                     }}
                 />
-                {
-                    state_error && (
-                        <p style={{ marginTop: "7px", backgroundColor: "rgba(255,0,0,0.7)", color: "#fff", paddingLeft: "10px" }}>{msg_error}</p>
-                    )
-                }
+            </div>
+            {
+                state_error && (
+                    <p style={{ marginTop: "7px", backgroundColor: "rgba(255,0,0,0.7)", color: "#fff", paddingLeft: "10px" }}>{msg_error}</p>
+                )
+            }
+            <div className="form-submit">
+                <button type="submit" className="btn btn-primary btn-referir">Registrarse</button>
+            </div>
+        </form>
+    </div>
+                    
 
-                <button type="submit" className="btn btn-primary">REGISTRARSE</button>
-                <Link to="/login" className='fas fa-arrow-left'> Atras</Link>
-            </form>
-        </div>
-        <div className="container-logo-registro">
-            <div className="logo-registro">
-                <img alt="clinica" src={liberate} />
+        {/* ESCRITORIO **************************************** */}
+        <div className="page-registro">
+        <div className="registro-container">
+            <div className="formulario-registro">
+                <form onSubmit={handleSubmit}>
+                    <img alt="clinica" className="logo_clinica-registro" src={logo_clinica} />
+                    <br />
+                    <TextField
+                        type="text"
+                        name="first_name"
+                        placeholder="Escribe..."
+                        label="Nombre"
+                        required
+                        className="form-control"
+                        style={{ marginBottom: "30px" }}
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    <TextField
+                        type="text"
+                        name="last_name"
+                        placeholder="Escribe..."
+                        label="Apellidos"
+                        required
+                        className="form-control RegistrarReferido"
+                        style={{ marginBottom: "30px" }}
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+
+                    <TextField
+                        type="text"
+                        name="daviplata"
+                        placeholder="Escribe..."
+                        label="Nro Daviplata"
+                        required
+                        className="form-control RegistrarReferido"
+                        style={{ marginBottom: "30px" }}
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    <TextField
+                        type="email"
+                        name="email"
+                        placeholder="Escribe..."
+                        label="E-mail"
+                        required
+                        className="form-control RegistrarReferido"
+                        style={{ marginBottom: "30px" }}
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    <TextField
+                        type="text"
+                        name="username"
+                        placeholder="Escribe..."
+                        label="Usuario"
+                        required
+                        className="form-control RegistrarReferido"
+                        style={{ marginBottom: "30px" }}
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    <TextField
+                        type="password"
+                        name="password"
+                        placeholder="Escribe..."
+                        label="Contraseña"
+                        required
+                        className="form-control RegistrarReferido"
+                        style={{ marginBottom: "30px" }}
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    <TextField
+                        type="password"
+                        name="password2"
+                        placeholder="Escribe..."
+                        label="Confirmar Contraseña"
+                        required
+                        className="form-control RegistrarReferido"
+                        style={{ marginBottom: "30px" }}
+                        onChange={handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    {
+                        state_error && (
+                            <p style={{ marginTop: "7px", backgroundColor: "rgba(255,0,0,0.7)", color: "#fff", paddingLeft: "10px" }}>{msg_error}</p>
+                        )
+                    }
+
+                    <button type="submit" className="btn btn-primary">REGISTRARSE</button>
+                    <Link to="/login" className='fas fa-arrow-left'> Atras</Link>
+                </form>
+            </div>
+            <div className="container-logo-registro">
+                <div className="logo-registro">
+                    <img alt="clinica" src={liberate} />
+                </div>
             </div>
         </div>
     </div>
-</div>
+    </>
+   
 
   )
 }
