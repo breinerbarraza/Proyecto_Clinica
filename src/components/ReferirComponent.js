@@ -20,8 +20,7 @@ export const ReferirComponent = () => {
     const [canal, setCanal] = useState([]);
     const [select_state, setSelect_state] = useState({});
     const [storage, setstorage] = useState({});
-    const [imagen1, setImagen1] = useState(estado1);
-    const [imagen2, setImagen2] = useState(estado2);
+    const [estado_influencer, setEstado_influencer] = useState(false)
 
 
     useEffect(() => {
@@ -48,20 +47,13 @@ export const ReferirComponent = () => {
         setstorage(objeto);
     }, []);
 
-    const changeState1 = ()=>{
-        setImagen1(true);
-    }
-
-    const changeState2 = ()=>{
-        setImagen2(true);
-    }
-
     const handleSelect = (e) => {
         setSelect_state({
             ...select_state,
             [e.target.name]: e.target.value
         })
     }
+    console.log(estado_influencer)
     const enviarDatos = async (e) => {
         e.preventDefault();
         select_state.id_user = storage.id_user
@@ -151,14 +143,40 @@ export const ReferirComponent = () => {
                                             }}
                                         />
 
+                                        {
+                                            estado_influencer && (
+                                                <TextField
+                                                type="text"
+                                                name="nombre_influencer"
+                                                placeholder="Escribe..."
+                                                label="Nombre influencer"
+                                                className="form-control"
+                                                style={{ marginBottom: "30px" }}
+                                                onChange={handleSelect}
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                                />
+                                            )
+                                        }
+
                                         <FormControl fullWidth className='canal'>
                                             <InputLabel shrink id="demo-simple-select-standard-label">Tipo de canal</InputLabel>
                                             <Select
                                                 name="canal"
                                                 label="Tipo de Canal"
-                                                className= "select-document"
+                                                className= "select-document canal_"
                                                 id="demo-simple-select-standard"
-                                                onChange={handleSelect}
+                                                onChange={(e,e2)=>{
+                                                    console.log(e2.props.children)
+                                                    if(e2.props.children == "canal2"){
+                                                        setEstado_influencer(true)
+                                                    }else{
+                                                        delete select_state.nombre_influencer
+                                                        setEstado_influencer(false)
+                                                    }
+                                                    handleSelect(e)
+                                                }}
                                                 required
                                                 
                                             >
@@ -169,6 +187,7 @@ export const ReferirComponent = () => {
                                                 }
                                             </Select>
                                         </FormControl>
+
                                 </div>
 
                                 <div className="contenedor-referir">
