@@ -51,7 +51,6 @@ export const RegistroComponent = () => {
                     let error_msg = resp.data
                     return Swal.fire({
                         icon: 'error',
-                        title: 'Ha ocurrido el siguiente error!',
                         text: error_msg,
                         position: 'center',
                     });
@@ -66,7 +65,7 @@ export const RegistroComponent = () => {
                         text: mensaje,
                         timer: 2500
                     });
-                    setTimeout(() => {
+                    return setTimeout(() => {
                         window.location = "/";
                     }, 2000);
                 }
@@ -119,6 +118,21 @@ export const RegistroComponent = () => {
                                     name="last_name"
                                     placeholder="Escribe..."
                                     label="Apellidos"
+                                    required
+                                    className="form-control RegistrarReferido"
+                                    style={{ marginBottom: "30px" }}
+                                    onChange={handleInputChange}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            </div>
+                            <div className="div-separador">
+                                <TextField
+                                    type="text"
+                                    name="daviplata"
+                                    placeholder="Escribe..."
+                                    label="Nro Daviplata"
                                     required
                                     className="form-control RegistrarReferido"
                                     style={{ marginBottom: "30px" }}
@@ -200,6 +214,8 @@ export const RegistroComponent = () => {
                         </form>
                     </div>
 
+
+                    {/* Escritorio  */}
                     <div className="page-registro">
                         <div className="registro-container">
                             <div className="formulario-registro">
@@ -225,6 +241,20 @@ export const RegistroComponent = () => {
                                         name="last_name"
                                         placeholder="Escribe..."
                                         label="Apellidos"
+                                        required
+                                        className="form-control RegistrarReferido"
+                                        style={{ marginBottom: "30px" }}
+                                        onChange={handleInputChange}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+
+                                    <TextField
+                                        type="text"
+                                        name="daviplata"
+                                        placeholder="Escribe..."
+                                        label="Nro Daviplata"
                                         required
                                         className="form-control RegistrarReferido"
                                         style={{ marginBottom: "30px" }}
