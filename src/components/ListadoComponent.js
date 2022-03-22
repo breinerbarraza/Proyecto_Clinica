@@ -23,20 +23,40 @@ const ExcelSheet = ExportExcel.ExcelSheet
 const ExcelColumn = ExportExcel.ExcelColumn 
 
 export const ListadoComponent = () => {
-  const [data_listado, setData_listado] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [data_meses, setData_meses] = useState([]);
-  const [comision, setComision] = useState([]);
-  const [state_superUser, setState_superUser] = useState(false);
-  const [id_localStorage, setid_localStorage] = useState("");
-  const [arreglo_year, setArreglo_year] = useState([]);
-  const [anio_temporal, setAnioTemporal] = useState([]);
-  const [dataEmpleado, setDataEmpleado] = useState([]);
-  const [mes_temporal, setMes_temporal] = useState("");
-  const [arreglo_referidos_temporal, setArreglo_referidos_temporal] = useState([]);
-  const [cargarIdentificacion, setCargarIdentificacion] = useState([]);
-  const [estado_temporal, setEstadoTemporal] = useState("");
+  const [data_listado, setData_listado] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [data_meses, setData_meses] = useState([])
+  const [comision, setComision] = useState([])
+  const [state_superUser, setState_superUser] = useState(false)
+  const [id_localStorage, setid_localStorage] = useState("")
+  const [arreglo_year, setArreglo_year] = useState([])
+  const [anio_temporal, setAnioTemporal] = useState([])
+  const [dataEmpleado, setDataEmpleado] = useState([])
+  const [mes_temporal, setMes_temporal] = useState("")
+  const [arreglo_referidos_temporal, setArreglo_referidos_temporal] = useState([])
+  const [estado_temporal, setEstadoTemporal] = useState("")
+  const [estadoEmpleado, setEstadoEmpleado] = useState(false)
+  const [cmb_listado, setCmb_listado] = useState([])
+  const [id_estadoTemporal, setId_estadoTemporal] = useState("")
 
+  useEffect(() => {
+    let id_user = JSON.parse(localStorage.getItem("id_user"));
+    let super_user = JSON.parse(localStorage.getItem("super_user"))
+      ? JSON.parse(localStorage.getItem("super_user"))
+      : "";
+    setState_superUser(super_user);
+    setid_localStorage(id_user);
+    cargarEmpleados();
+    cargarSelect();
+    if (super_user) {
+      load();
+    } else {
+      //comprobarUsuarioAsesor(id_user);
+      load_referidos_by_id(id_user);
+      comprobarEmpleado(id_user)
+      cargarEstados()
+    }
+  }, []);
 
   const cargarSelect = () => {
     const fecha = new Date();
@@ -52,18 +72,39 @@ export const ListadoComponent = () => {
   };
 
   const cargarEmpleados = async () => {
-    await API.get("api/usuarios/user/grupo_empleado").then((resp) => {
+    await API.get("api/usuarios/user/grupo_empleado_asesor").then((resp) => {
       const respuesta = resp.data;
       setDataEmpleado(respuesta);
     });
   };
+
+  const cargarEstados = async () => {
+    await API.get('api/configuracion/estadoReferido/')
+      .then(data => {
+        const resp = data.data;
+        setCmb_listado(resp)
+      })
+      .catch(console.error);
+  }
+
+  const comprobarEmpleado = async(id)=>{
+    await API.get(`api/referidos/comprobar_empleado/?id_empleado=${id}`)
+    .then(data => {
+        const respuesta = data.data;
+        if (respuesta.error) {
+            setEstadoEmpleado(true);
+        } else {
+            //Si entra aca es porque el rol es empleado
+            setEstadoEmpleado(false);
+        }
+    })
+  }
 
   const load = async () => {
     setLoading(true);
     await API.get("api/referidos/").then((resp) => {
       const arreglo_referidos = resp.data;
       setArreglo_referidos_temporal(arreglo_referidos)
-      setCargarIdentificacion(arreglo_referidos)
       const filter_arreglo = arreglo_referidos.filter(item => item.finalizado === true)
       let arreglo = [];
       const totalComision = calcularComisionFinal(arreglo, filter_arreglo);
@@ -75,7 +116,7 @@ export const ListadoComponent = () => {
           {
             id: item.id,
             get_nombreCompleto: (
-              <Link to={`lista/estado/${item.id}`}>
+              <Link to={`/lista/estado/${item.id}/`}>
                 {item.get_nombreCompleto}
               </Link>
             ),
@@ -113,7 +154,6 @@ export const ListadoComponent = () => {
     await API.post("api/referidos/get_referidos/", JSON.stringify(obj)).then(
       (resp) => {
         const arreglo_referidos = resp.data;
-        setCargarIdentificacion(arreglo_referidos)
         let arreglo = [];
         const filter_arreglo = arreglo_referidos.filter(item => item.finalizado === true)
         const totalComision = calcularComisionFinal(arreglo, filter_arreglo);
@@ -124,7 +164,7 @@ export const ListadoComponent = () => {
             {
               id: item.id,
               get_nombreCompleto: (
-                <Link to={`lista/estado/${item.id}`}>
+                <Link to={`/lista/estado/${item.id}/`}>
                   {item.get_nombreCompleto}
                 </Link>
               ),
@@ -174,23 +214,6 @@ export const ListadoComponent = () => {
     );
   };
 
-  useEffect(() => {
-    let id_user = JSON.parse(localStorage.getItem("id_user"));
-    let super_user = JSON.parse(localStorage.getItem("super_user"))
-      ? JSON.parse(localStorage.getItem("super_user"))
-      : "";
-    setState_superUser(super_user);
-    setid_localStorage(id_user);
-    cargarEmpleados();
-    cargarSelect();
-    if (super_user) {
-      load();
-    } else {
-      //comprobarUsuarioAsesor(id_user);
-      load_referidos_by_id(id_user);
-    }
-  }, []);
-
   const handleSelectMonth_admin = async(e) => {
     setData_meses([]);
     setArreglo_referidos_temporal([]);
@@ -219,7 +242,7 @@ export const ListadoComponent = () => {
             {
               id: item.id,
               get_nombreCompleto: (
-                <Link to={`lista/estado/${item.id}`}>
+                <Link to={`/lista/estado/${item.id}/`}>
                   {item.get_nombreCompleto}
                 </Link>
               ),
@@ -273,7 +296,7 @@ export const ListadoComponent = () => {
             {
               id: item.id,
               get_nombreCompleto: (
-                <Link to={`lista/estado/${item.id}`}>
+                <Link to={`/lista/estado/${item.id}/`}>
                   {item.get_nombreCompleto}
                 </Link>
               ),
@@ -301,6 +324,60 @@ export const ListadoComponent = () => {
       }
     });
   };
+
+  const handleSelectEstate_rol = async(e)=>{
+    setData_meses([]);
+    const id_estado = e.target.value
+    setId_estadoTemporal(id_estado)
+    await API.get(
+      `api/referidos/get_referidos_by_month_rol/?mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}&id_estado=${id_estado}`
+    ).then((data) => {
+      setData_meses([]);
+      const arreglo_referidos_month = data.data;
+      const filter_arreglo = arreglo_referidos_month.filter(item => item.finalizado === true)
+      let arreglo = [];
+      const totalComision = calcularComisionFinal(
+        arreglo,
+        filter_arreglo
+      );
+      setComision(totalComision);
+      if (arreglo_referidos_month.length == 0) {
+        setData_meses([0]);
+      } else {
+        arreglo_referidos_month.map((item) => {
+          setData_meses((data_meses) => [
+            ...data_meses,
+            {
+              id: item.id,
+              get_nombreCompleto: (
+                <Link to={`/lista/estado/${item.id}/`}>
+                  {item.get_nombreCompleto}
+                </Link>
+              ),
+              numeroIdentificacion: item.numeroIdentificacion,
+              correo_electronico: item.correo_electronico,
+              celular: item.celular,
+              estadoReferido:
+                item.estadoReferido !== "" ? (
+                  <Chip
+                    label={`• ${item.estadoReferido}`}
+                    style={{ backgroundColor: item.color_estado }}
+                  />
+                ) : (
+                  <b style={{ color: "#02305b" }}>Total comisiones: </b>
+                ),
+              ordenServicio : item.ordenServicio,
+              valor_cancelado: (item.valor_cancelado ) ? "$" + formatMoney(item.valor_cancelado, 2, ",", ".") : "",
+              comision:
+              (item.finalizado && item.comisionEmpleadoInicial !== "")
+                ? "$" + formatMoney(item.comisionEmpleadoInicial, 2, ",", ".")
+                : "-",
+            },
+          ]);
+        });
+      }
+    });
+  }
 
   const data = {
     columns: [
@@ -388,7 +465,7 @@ export const ListadoComponent = () => {
             {
               id: item.id,
               get_nombreCompleto: (
-                <Link to={`lista/estado/${item.id}`}>
+                <Link to={`/lista/estado/${item.id}/`}>
                   {item.get_nombreCompleto}
                 </Link>
               ),
@@ -444,7 +521,7 @@ export const ListadoComponent = () => {
             {
               id: item.id,
               get_nombreCompleto: (
-                <Link to={`lista/estado/${item.id}`}>
+                <Link to={`/lista/estado/${item.id}/`}>
                   {item.get_nombreCompleto}
                 </Link>
               ),
@@ -479,7 +556,7 @@ export const ListadoComponent = () => {
     setData_meses([]);
     setArreglo_referidos_temporal([])
     await API.get(
-      `api/referidos/get_referidos_by_month_rol/?mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}&name_or_cedula=${cedula}&id_estado=${estado_temporal}`
+      `api/referidos/get_referidos_by_month_rol/?mes=${mes_temporal}&id_usuario_logeado=${id_localStorage}&anio=${anio_temporal}&name_or_cedula=${cedula}&id_estado=${id_estadoTemporal}`
     ).then((data) => {
       setData_meses([]);
       const arreglo_referidos_month = data.data;
@@ -501,7 +578,7 @@ export const ListadoComponent = () => {
             {
               id: item.id,
               get_nombreCompleto: (
-                <Link to={`lista/estado/${item.id}`}>
+                <Link to={`/lista/estado/${item.id}/`}>
                   {item.get_nombreCompleto}
                 </Link>
               ),
@@ -590,8 +667,8 @@ export const ListadoComponent = () => {
                       Empleados
                     </InputLabel>
                     <Select
-                      name="mes"
-                      label="Mes"
+                      name="id_empleado"
+                      label="Empleado"
                       id="demo-simple-select-standard"
                       onChange={handleFilterEmployee}
                     >
@@ -630,12 +707,16 @@ export const ListadoComponent = () => {
                   <ExcelSheet data={arreglo_referidos_temporal} name="Informe de referidos">
                     <ExcelColumn label="Mes" value="mes"/>
                     <ExcelColumn label="Referido" value="get_nombreCompleto"/>
+                    <ExcelColumn label="Estado" value="estadoReferido"/>
                     <ExcelColumn label="Fecha de ingreso" value="fecha_ingreso" />
                     <ExcelColumn label="Fecha de operado" value="fecha_operado" />
-                    <ExcelColumn label="Referido por" value="referido_por" />
-                    <ExcelColumn label="Cargo" value="cargo" />
+                    <ExcelColumn label="Empleado Referido" value="usuarioRegistro" />
+                    <ExcelColumn label="NroDaviplata Empleado" value="daviplata" />
+                    <ExcelColumn label="Asesor Referido" value="empleadoInicial" />
+                    <ExcelColumn label="Comision Asesor" value="comisionEmpleadoInicial" />
+                    <ExcelColumn label="Cargo del asesor" value="cargo" />
                     <ExcelColumn label="Valor cancelado" value="valor_cancelado" />
-                    <ExcelColumn label="Asesor" value="asesor" />
+                    <ExcelColumn label="LLevo a operado" value="asesor" />
                     <ExcelColumn label="Canal" value="canal" />
                   </ExcelSheet>
                 </ExcelFile>
@@ -698,6 +779,29 @@ export const ListadoComponent = () => {
                 </FormControl>
               </div>
 
+              {
+                !estadoEmpleado && (
+                  <div className="select-mes">
+                  <FormControl fullWidth  >
+                    <InputLabel shrink id="demo-simple-select-standard-label">Estado</InputLabel>
+                    <Select
+                      name="estado"
+                      label="Estado"
+                      id="demo-simple-select-standard"
+                      onChange={handleSelectEstate_rol}
+                    >
+                      {
+                        cmb_listado.map((item, key) => {
+                          return <MenuItem key={key} value={item.id}>{item.descripcion}</MenuItem>
+                        })
+
+                      }
+                    </Select>
+                  </FormControl>
+                </div>
+                )
+              }
+
               <div className="select-mes">
                 <div style={{marginTop: '-15px'}}>
                     <FormControl fullWidth  >
@@ -734,7 +838,7 @@ export const ListadoComponent = () => {
       
       
       {/* ******************* responsive design************************** */}
-      {/*Listado responsivo*/}
+      {/*Listado responsivo para el administrador*/}
 
       <div className="listado_referido_responsive">
         <div style={{ padding: "50px", width: "100%" }}>
