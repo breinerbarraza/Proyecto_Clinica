@@ -18,7 +18,14 @@ export const RegistrarReferidoComponent = () => {
     const [state_referido, setState_referido] = useState([]);
     const [estadoBoleano, setestadoBoleano] = useState(true);
     const [estadoForm, setEstadoForm] = useState(false);
+    const [estado_influencer, setEstado_influencer] = useState(false)
     const {id} = useParams();
+
+    useEffect(() => {
+        tipoIdentificacion()
+        tipoCanal()
+    }, []);
+
 
     const tipoIdentificacion = async()=>{
        await API.get('api/configuracion/tipoIdentificacion')
@@ -35,11 +42,6 @@ export const RegistrarReferidoComponent = () => {
             setCanal(item)
         })
     }
-
-    useEffect(() => {
-        tipoIdentificacion()
-        tipoCanal()
-    }, []);
 
     const handleChangeState = ()=>{
         setestadoBoleano(false);
@@ -62,7 +64,6 @@ export const RegistrarReferidoComponent = () => {
                 if (resp.mensaje) {
                     return Swal.fire({
                         icon: 'success',
-                        title: 'Exito!',
                         text: resp.mensaje,
                         showConfirmButton: false,
                         timer: 1500
@@ -70,7 +71,6 @@ export const RegistrarReferidoComponent = () => {
                 } else {
                     return Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
                         text: resp.error,
                         position: 'center',
                     })
@@ -153,6 +153,24 @@ export const RegistrarReferidoComponent = () => {
                      }}
                      />
                  </div>
+                 {
+                    estado_influencer && (
+                       <div className="div-separador">
+                            <TextField
+                                type="text"
+                                name="nombre_influencer"
+                                placeholder="Escribe..."
+                                label="Nombre influencer"
+                                className="form-control"
+                                style={{ marginBottom: "30px" }}
+                                onChange={handleInput}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                       </div>
+                    )
+                }
 
                 <di className="div-separador">
                     <FormControl fullWidth className='canal'>
@@ -162,7 +180,15 @@ export const RegistrarReferidoComponent = () => {
                             label="Tipo de Canal"
                             className= "select-document"
                             id="demo-simple-select-standard"
-                            onChange={handleInput}
+                            onChange={(e,e2)=>{
+                                if(e2.props.children == "REDES"){
+                                    setEstado_influencer(true)
+                                }else{
+                                    delete state_referido.nombre_influencer
+                                    setEstado_influencer(false)
+                                }
+                                handleInput(e)
+                            }}
                             required
                             
                         >
@@ -322,6 +348,23 @@ export const RegistrarReferidoComponent = () => {
                              }}
                          />
 
+                        {
+                            estado_influencer && (
+                                <TextField
+                                type="text"
+                                name="nombre_influencer"
+                                placeholder="Escribe..."
+                                label="Nombre influencer"
+                                className="form-control"
+                                style={{ marginBottom: "30px" }}
+                                onChange={handleInput}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                />
+                            )
+                        }
+
                         <FormControl fullWidth className='canal'>
                             <InputLabel shrink id="demo-simple-select-standard-label">Tipo de canal</InputLabel>
                             <Select
@@ -329,7 +372,15 @@ export const RegistrarReferidoComponent = () => {
                                 label="Tipo de Canal"
                                 className= "select-document"
                                 id="demo-simple-select-standard"
-                                onChange={handleInput}
+                                onChange={(e,e2)=>{
+                                    if(e2.props.children == "REDES"){
+                                        setEstado_influencer(true)
+                                    }else{
+                                        delete state_referido.nombre_influencer
+                                        setEstado_influencer(false)
+                                    }
+                                    handleInput(e)
+                                }}
                                 required
                                 
                             >
