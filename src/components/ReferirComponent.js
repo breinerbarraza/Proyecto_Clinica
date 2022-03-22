@@ -53,7 +53,6 @@ export const ReferirComponent = () => {
             [e.target.name]: e.target.value
         })
     }
-    console.log(estado_influencer)
     const enviarDatos = async (e) => {
         e.preventDefault();
         select_state.id_user = storage.id_user
@@ -168,8 +167,7 @@ export const ReferirComponent = () => {
                                                 className= "select-document canal_"
                                                 id="demo-simple-select-standard"
                                                 onChange={(e,e2)=>{
-                                                    console.log(e2.props.children)
-                                                    if(e2.props.children == "canal2"){
+                                                    if(e2.props.children == "REDES"){
                                                         setEstado_influencer(true)
                                                     }else{
                                                         delete select_state.nombre_influencer
@@ -332,6 +330,23 @@ export const ReferirComponent = () => {
                             shrink: true,
                         }}
                     />
+
+                    {
+                        estado_influencer && (
+                            <TextField
+                            type="text"
+                            name="nombre_influencer"
+                            placeholder="Escribe..."
+                            label="Nombre influencer"
+                            className="form-control"
+                            style={{ marginBottom: "30px" }}
+                            onChange={handleSelect}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            />
+                        )
+                    }
                     <FormControl fullWidth className='canal'>
                         <InputLabel shrink id="demo-simple-select-standard-label">Tipo de canal</InputLabel>
                         <Select
@@ -339,7 +354,15 @@ export const ReferirComponent = () => {
                             label="Tipo de Canal"
                             className= "select-document"
                             id="demo-simple-select-standard"
-                            onChange={handleSelect}
+                            onChange={(e,e2)=>{
+                                if(e2.props.children == "REDES"){
+                                    setEstado_influencer(true)
+                                }else{
+                                    delete select_state.nombre_influencer
+                                    setEstado_influencer(false)
+                                }
+                                handleSelect(e)
+                            }}
                             required
                             
                         >
