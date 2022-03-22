@@ -59,6 +59,33 @@ export const EstadoComponent = () => {
 
     }, [id]);
 
+    useEffect(() => {
+        const id = localStorage.getItem('id_user')
+
+        API.get(`api/referidos/comprobar_empleado/?id_empleado=${id}`)
+            .then(data => {
+                const respuesta = data.data;
+                if (respuesta.error) {
+                    console.log(respuesta.error)
+                    setEstadoEmpleado(true);
+                } else {
+                    //Si entra aca es porque el rol es empleado
+                    console.log(respuesta.msj)
+                    setEstadoEmpleado(false);
+                }
+            })
+
+        API.get("api/usuarios/user/grupo_medico")
+            .then(data => {
+                setData_medicos(data.data)
+            })
+        API.get("api/configuracion/estadoReferido/")
+            .then(data => {
+                setCmbListado(data.data);
+            })
+
+    }, [data, data_pendiente]);
+
     const comprobarEstado = async(item)=>{
         if(item == "Pre-quirúrgico"){
             await API.get('api/referidos_cambio_estado/get_data_prequirurgico/?id_referido='+id)
@@ -78,31 +105,6 @@ export const EstadoComponent = () => {
            
        
     }
-
-    
-    useEffect(() => {
-        const id = localStorage.getItem('id_user')
-
-        API.get(`api/referidos/comprobar_empleado/?id_empleado=${id}`)
-            .then(data => {
-                const respuesta = data.data;
-                if (respuesta.msg) {
-                    setEstadoEmpleado(true);
-                } else {
-                    setEstadoEmpleado(false);
-                }
-            })
-
-        API.get("api/usuarios/user/grupo_medico")
-            .then(data => {
-                setData_medicos(data.data)
-            })
-        API.get("api/configuracion/estadoReferido/")
-            .then(data => {
-                setCmbListado(data.data);
-            })
-
-    }, [data, data_pendiente]);
 
     const handleClickPendiente = async (e) => {
         e.preventDefault();
