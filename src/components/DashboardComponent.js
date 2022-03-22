@@ -21,12 +21,29 @@ export const DashboardComponent = () => {
     const [tiposFormulario, setTiposFormulario] = useState([])
     const [cantidades, setCantidades] = useState([])
     const [data_meses, setData_meses] = useState([])
-    const [usuarios_, setUsuarios_employe] = useState([]);
-    const [datosCambioEstado, setDatosCambioEstado] = useState([]);
     const [total_referidos, setTotal_referidos] = useState({});
     const [total_referidos_first, setTotal_referidos_first] = useState("");
     const [anio_temporal, setAnio_temporal] = useState("");
     const [arreglo_year, setArreglo_year] = useState([]);
+
+    useEffect(() => {
+        API.get('api/referidos/get_count_referidos_total/')
+            .then(data => {
+                const totalReferido = data.data;
+                setTotal_referidos_first(totalReferido);
+            })
+    }, []);
+
+    useEffect(() => {
+        let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+        if (!super_user) {
+            return window.location = "/";
+        }
+        load()
+        cargarSelect()
+
+    }, []);
+
 
     const cargarSelect = ()=>{
         const fecha = new Date();
@@ -41,22 +58,6 @@ export const DashboardComponent = () => {
         setArreglo_year(arreglo)
     }
 
-    /* const filter_cambio_estado = async (mes) => {
-        await API.get(`api/referidos/dashboard_app/?mes=${mes}`)
-            .then(response => {
-                const resp = response.data;
-                setDatosCambioEstado(resp)
-            })
-    }
-
-    const cargarUsuarios = async () => {
-        await API.get("api/usuarios/user/grupo_empleado/")
-            .then(response => {
-                const empleados = response.data;
-                setUsuarios_employe(empleados)
-            })
-    }
- */
     const cargarTotalReferidos = async (mes) => {
         await API.get(`api/referidos/get_count_referidos/?mes=${mes}`)
             .then(resp => {
@@ -151,23 +152,6 @@ export const DashboardComponent = () => {
             })
     }
 
-    useEffect(async() => {
-        await API.get('api/referidos/get_count_referidos_total/')
-            .then(data => {
-                const totalReferido = data.data;
-                setTotal_referidos_first(totalReferido);
-            })
-    }, []);
-
-    useEffect(() => {
-        let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
-        if (!super_user) {
-            return window.location = "/";
-        }
-        load()
-        cargarSelect()
-
-    }, []);
 
     return (
         <>
@@ -231,7 +215,7 @@ export const DashboardComponent = () => {
                                             <tbody>
                                                 {pieChartData.map((dato, key) => (
                                                     <tr key={key}>
-                                                        <td>{dato.estado}</td>
+                                                        <td><Link to={`/dashboard/${dato.estado}/`}>{dato.estado}</Link></td>
                                                         <td>{dato.valor}</td>
                                                     </tr>
 
