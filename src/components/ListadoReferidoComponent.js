@@ -18,18 +18,43 @@ import { TextField } from '@mui/material';
 
 export const ListadoReferidoComponent = () => {
 
-  const [data_listado, setData_listado] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [cmb_listado, setCmb_listado] = useState([]);
-  const [data_meses, setData_meses] = useState([]);
-  const [mes_temporal, setMes_temporal] = useState("");
-  const [state_superUser, setState_superUser] = useState(false);
-  const [id_localStorage, setid_localStorage] = useState("");
-  const [arreglo_year, setArreglo_year] = useState([]);
-  const [anio_temporal, setAnioTemporal] = useState("");
+  const [data_listado, setData_listado] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [cmb_listado, setCmb_listado] = useState([])
+  const [data_meses, setData_meses] = useState([])
+  const [mes_temporal, setMes_temporal] = useState("")
+  const [state_superUser, setState_superUser] = useState(false)
+  const [id_localStorage, setid_localStorage] = useState("")
+  const [arreglo_year, setArreglo_year] = useState([])
+  const [anio_temporal, setAnioTemporal] = useState("")
   //const [cedula_data, setCedula_data] = useState([]);
-  const [estado_temporal, setEstadoTemporal] = useState("");
+  const [estado_temporal, setEstadoTemporal] = useState("")
+  const [estado_user_temporal, setEstado_userTemporal] = useState("")
   const [admin_bolean, setAdmin_bolean] = useState(false)
+  const [dataEmpleado, setDataEmpleado] = useState([])
+
+  useEffect(() => {
+    let id_user = JSON.parse(localStorage.getItem('id_user'))
+    let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+    setState_superUser(super_user)
+    setid_localStorage(id_user)
+    cargarSelect()
+    cargarEstados()
+    cargarEmpleados()
+    if (super_user) {
+      load()
+      setAdmin_bolean(true)
+    } else {
+      load_referidos_by_id(id_user)
+    }
+  }, []);
+
+  const cargarEmpleados = async () => {
+    await API.get("api/usuarios/user/grupo_empleado_asesor").then((resp) => {
+      const respuesta = resp.data;
+      setDataEmpleado(respuesta);
+    });
+  };
 
   const borrarReferido = (id) =>{
       Swal.fire({
@@ -78,7 +103,7 @@ export const ListadoReferidoComponent = () => {
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
-            "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+            "get_nombreCompleto": <Link to={`/lista/estado/${item.id}/`}>{item.get_nombreCompleto}</Link>,
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
@@ -106,7 +131,7 @@ export const ListadoReferidoComponent = () => {
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
-            "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+            "get_nombreCompleto": <Link to={`/lista/estado/${item.id}/`}>{item.get_nombreCompleto}</Link>,
             "numeroIdentificacion": item.numeroIdentificacion,
             "correo_electronico": item.correo_electronico,
             "celular": item.celular,
@@ -140,20 +165,7 @@ export const ListadoReferidoComponent = () => {
   }
 
 
-  useEffect(() => {
-    let id_user = JSON.parse(localStorage.getItem('id_user'));
-    let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
-    setState_superUser(super_user)
-    setid_localStorage(id_user)
-    cargarSelect()
-    cargarEstados()
-    if (super_user) {
-      load()
-      setAdmin_bolean(true)
-    } else {
-      load_referidos_by_id(id_user)
-    }
-  }, []);
+  
 
   const handleSelectMonth_admin = async (e) => {
     setData_meses([]);
@@ -169,7 +181,7 @@ export const ListadoReferidoComponent = () => {
           arreglo_referidos_month.map((item) => {
             setData_meses(data_meses => [...data_meses, {
               "id": item.id,
-              "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+              "get_nombreCompleto": <Link to={`/lista/estado/${item.id}/`}>{item.get_nombreCompleto}</Link>,
               "numeroIdentificacion": item.numeroIdentificacion,
               "correo_electronico": item.correo_electronico,
               "celular": item.celular,
@@ -200,7 +212,7 @@ export const ListadoReferidoComponent = () => {
           arreglo_referidos_month.map((item) => {
             setData_meses(data_meses => [...data_meses, {
               "id": item.id,
-              "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+              "get_nombreCompleto": <Link to={`/lista/estado/${item.id}/`}>{item.get_nombreCompleto}</Link>,
               "numeroIdentificacion": item.numeroIdentificacion,
               "correo_electronico": item.correo_electronico,
               "celular": item.celular,
@@ -223,7 +235,7 @@ export const ListadoReferidoComponent = () => {
           respuesta.map((item) => (
             setData_meses(data_meses => [...data_meses, {
               "id": item.id,
-              "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+              "get_nombreCompleto": <Link to={`/lista/estado/${item.id}/`}>{item.get_nombreCompleto}</Link>,
               "numeroIdentificacion": item.numeroIdentificacion,
               "correo_electronico": item.correo_electronico,
               "celular": item.celular,
@@ -242,10 +254,11 @@ export const ListadoReferidoComponent = () => {
       })
   }
 
-  const handleSelectCedula = async(e)=>{
+  const handleSelectUserAdmin = async(e)=>{
     setData_meses([]);
-    const cedula = e.target.value
-    await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${estado_temporal}&anio=${anio_temporal}&name_or_cedula=${cedula}`)
+    const users = e.target.value
+    setEstado_userTemporal(users)
+    await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${estado_temporal}&anio=${anio_temporal}&id_users=${users}`)
       .then(data => {
         setData_meses([]);  
         const respuesta = data.data;
@@ -254,7 +267,39 @@ export const ListadoReferidoComponent = () => {
           respuesta.map((item) => (
             setData_meses(data_meses => [...data_meses, {
               "id": item.id,
-              "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+              "get_nombreCompleto": <Link to={`/lista/estado/${item.id}/`}>{item.get_nombreCompleto}</Link>,
+              "numeroIdentificacion": item.numeroIdentificacion,
+              "correo_electronico": item.correo_electronico,
+              "celular": item.celular,
+              "estadoReferido": <Chip label={`• ${item.estadoReferido}`} style={{ backgroundColor: item.color_estado }} />,
+              "accion":
+              <>
+                <button className="btn btn-danger" style={{marginLeft: '4px'}} onClick={ () => borrarReferido(item.id) }><i className="fas fa-trash" style={{fontSize:'10px'}}></i></button>
+                <Link to={`actualizar_referido/${item.id}`}><button className="btn btn-primary" style={{marginLeft: '4px'}}><i className='fas fa-edit' style={{fontSize:'10px'}} title={item.id}></i></button></Link>
+              </>
+            }])
+          ))
+        } else {
+          setData_meses([0]);
+        }
+
+      })
+    
+  }
+
+  const handleSelectCedula = async(e)=>{
+    setData_meses([]);
+    const cedula = e.target.value
+    await API.get(`api/referidos/get_referidos_estado/?mes=${mes_temporal}&id_estado=${estado_temporal}&anio=${anio_temporal}&id_users=${estado_user_temporal}&name_or_cedula=${cedula}`)
+      .then(data => {
+        setData_meses([]);  
+        const respuesta = data.data;
+        console.log(data.data)
+        if (respuesta.length > 0) {
+          respuesta.map((item) => (
+            setData_meses(data_meses => [...data_meses, {
+              "id": item.id,
+              "get_nombreCompleto": <Link to={`/lista/estado/${item.id}/`}>{item.get_nombreCompleto}</Link>,
               "numeroIdentificacion": item.numeroIdentificacion,
               "correo_electronico": item.correo_electronico,
               "celular": item.celular,
@@ -285,7 +330,7 @@ export const ListadoReferidoComponent = () => {
           respuesta.map((item) => (
             setData_meses(data_meses => [...data_meses, {
               "id": item.id,
-              "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+              "get_nombreCompleto": <Link to={`/lista/estado/${item.id}/`}>{item.get_nombreCompleto}</Link>,
               "numeroIdentificacion": item.numeroIdentificacion,
               "correo_electronico": item.correo_electronico,
               "celular": item.celular,
@@ -311,7 +356,7 @@ export const ListadoReferidoComponent = () => {
           respuesta.map((item) => (
             setData_meses(data_meses => [...data_meses, {
               "id": item.id,
-              "get_nombreCompleto": <Link to={`lista/estado/${item.id}`}>{item.get_nombreCompleto}</Link>,
+              "get_nombreCompleto": <Link to={`/lista/estado/${item.id}/`}>{item.get_nombreCompleto}</Link>,
               "numeroIdentificacion": item.numeroIdentificacion,
               "correo_electronico": item.correo_electronico,
               "celular": item.celular,
@@ -503,6 +548,26 @@ export const ListadoReferidoComponent = () => {
                         })
 
                       }
+                    </Select>
+                  </FormControl>
+                </div>
+
+                <div className="select-mes">
+                  <FormControl fullWidth  >
+                    <InputLabel shrink id="demo-simple-select-standard-label">Empleados/Asesores</InputLabel>
+                    <Select
+                      name="estado"
+                      label="Estado"
+                      id="demo-simple-select-standard"
+                      onChange={handleSelectUserAdmin}
+                    >
+                      {dataEmpleado.map((item, key) => {
+                        return (
+                          <MenuItem key={key} value={item.id}>
+                            {item.first_name} {item.last_name}
+                          </MenuItem>
+                        );
+                      })}
                     </Select>
                   </FormControl>
                 </div>
