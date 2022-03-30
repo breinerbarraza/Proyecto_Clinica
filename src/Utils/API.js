@@ -2,8 +2,12 @@ import axios from "axios";
 const getToken = () => `Token ${localStorage.getItem('token')}`;
 
 /* Url que se consumira del api rest*/
+//https://femto.live/
 const API = axios.create({
-  baseURL: "http://51.222.13.17:8081/", //Ip del servidor
+  baseURL: "https://app.femto.live/",
+  //baseURL: "http://51.222.13.17:8081/", //Ip del servidor
+  //baseURL: "http://localhost:8000/", //locahost
+  //baseURL: "http://172.16.15.122:8000/", //locahost
   headers: {
     'Content-Type': 'application/json'
   }
