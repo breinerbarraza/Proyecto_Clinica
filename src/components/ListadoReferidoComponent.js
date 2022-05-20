@@ -13,6 +13,7 @@ import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
 import Swal from 'sweetalert2';
+import CircularProgress from '@mui/material/CircularProgress';
 import { TextField } from '@mui/material';
 
 
@@ -32,6 +33,8 @@ export const ListadoReferidoComponent = () => {
   const [estado_user_temporal, setEstado_userTemporal] = useState("")
   const [admin_bolean, setAdmin_bolean] = useState(false)
   const [dataEmpleado, setDataEmpleado] = useState([])
+
+  const [spinner, setSpinner] = useState(true)
 
   useEffect(() => {
     let id_user = JSON.parse(localStorage.getItem('id_user'))
@@ -116,6 +119,7 @@ export const ListadoReferidoComponent = () => {
           }])
         ))
       })
+    setSpinner(false)
     setLoading(false)
   }
 
@@ -139,6 +143,7 @@ export const ListadoReferidoComponent = () => {
           }])
         ))
       })
+    setSpinner(false)
     setLoading(false)
   }
   
@@ -491,7 +496,7 @@ export const ListadoReferidoComponent = () => {
           <h3 className="h3-Lista">Listado de referidos</h3>
 
           {
-            state_superUser && (
+            (state_superUser) && (
               <div style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -593,6 +598,7 @@ export const ListadoReferidoComponent = () => {
                   </div>
               </div>
             )
+           
           }
 
 
@@ -680,6 +686,12 @@ export const ListadoReferidoComponent = () => {
                     
                   </div>
               </div>
+            )
+          }
+
+          { 
+            spinner && (
+              <CircularProgress />
             )
           }
 
@@ -817,6 +829,14 @@ export const ListadoReferidoComponent = () => {
                 </div>
               )
             }
+
+          { 
+            spinner && (
+              <CircularProgress />
+            )
+          }
+
+
             <div className="tabla-listas">
               {!loading && showTable()}
             </div>

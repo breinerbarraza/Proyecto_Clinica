@@ -17,6 +17,8 @@ import { HeaderMovil } from "./HeaderMovil";
 import { Button } from "@mui/material";
 import ExportExcel from 'react-export-excel';
 import { TextField } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const ExcelFile = ExportExcel.ExcelFile
 const ExcelSheet = ExportExcel.ExcelSheet 
@@ -38,6 +40,7 @@ export const ListadoComponent = () => {
   const [estadoEmpleado, setEstadoEmpleado] = useState(false)
   const [cmb_listado, setCmb_listado] = useState([])
   const [id_estadoTemporal, setId_estadoTemporal] = useState("")
+  const [spinner, setSpinner] = useState(true)
 
   useEffect(() => {
     let id_user = JSON.parse(localStorage.getItem("id_user"));
@@ -143,6 +146,7 @@ export const ListadoComponent = () => {
         ])
       );
     });
+    setSpinner(false)
     setLoading(false);
   };
 
@@ -192,6 +196,7 @@ export const ListadoComponent = () => {
         );
       }
     );
+    setSpinner(false)
     setLoading(false);
   };
 
@@ -824,16 +829,27 @@ export const ListadoComponent = () => {
             </div>
           )}
 
+          { 
+            spinner && (
+              <CircularProgress />
+            )
+          }
+
           <div className="tabla-lista">{!loading && showTable()}</div>
         </div>
-        <div className="div-comision">
-          <p className="p-comision">
-            <b>Total de comisión: </b>
-            <b style={{ color: "#000", fontWeight: "bold" }}>
-              ${formatMoney(comision, 2, ",", ".")}
-            </b>
-          </p>
-        </div>
+       
+       {
+         !spinner && (
+          <div className="div-comision">
+            <p className="p-comision">
+              <b>Total de comisión: </b>
+              <b style={{ color: "#000", fontWeight: "bold" }}>
+                ${formatMoney(comision, 2, ",", ".")}
+              </b>
+            </p>
+          </div>
+         )
+       }
       </div>
       
       
@@ -972,6 +988,12 @@ export const ListadoComponent = () => {
                 </div>
               </div>
             )}
+
+          { 
+            spinner && (
+              <CircularProgress />
+            )
+          }
 
             <div className="tabla-lista">{!loading && showTable()}</div>
           </div>
