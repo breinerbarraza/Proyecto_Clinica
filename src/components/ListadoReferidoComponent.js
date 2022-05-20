@@ -691,7 +691,14 @@ export const ListadoReferidoComponent = () => {
 
           { 
             spinner && (
-              <CircularProgress />
+              <div style={{
+                marginTop: '30px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <CircularProgress />
+              </div>
             )
           }
 
@@ -830,9 +837,16 @@ export const ListadoReferidoComponent = () => {
               )
             }
 
-          { 
+            { 
             spinner && (
-              <CircularProgress />
+              <div style={{
+                marginTop: '30px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <CircularProgress />
+              </div>
             )
           }
 
