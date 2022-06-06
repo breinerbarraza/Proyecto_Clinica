@@ -10,6 +10,7 @@ import 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
 import API from "../Utils/API";
 import meses_map from '../Utils/Objmeses';
+import CircularProgress from '@mui/material/CircularProgress';
 
 var _ = require('lodash')
 
@@ -23,6 +24,8 @@ export const DashboardComponentCanal = () => {
     const [total_referidos_first, setTotal_referidos_first] = useState("");
     const [anio_temporal, setAnio_temporal] = useState("");
     const [arreglo_year, setArreglo_year] = useState([]);
+
+    const [spinner, setSpinner] = useState(true)
 
     const cargarSelect = ()=>{
         const fecha = new Date();
@@ -64,6 +67,7 @@ export const DashboardComponentCanal = () => {
                     setCantidades(cantidades => [...cantidades, el.valor])
                 ))
             }).catch(console.error)
+            setSpinner(false)
     }
 
     const data = {
@@ -128,7 +132,9 @@ export const DashboardComponentCanal = () => {
                         setCantidades(cantidades => [...cantidades, el.valor])
                     ))
                 }
-            })
+            }).catch(console.error)
+
+            setSpinner(false)
     }
 
     useEffect(async() => {
@@ -219,6 +225,18 @@ export const DashboardComponentCanal = () => {
                                             </tbody>
                                         </table>
                                     </div>
+                                    {
+                                     spinner && (
+                                        <div style={{
+                                            marginTop: '30px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                        <CircularProgress />
+                                        </div>
+                                        )
+                                    }
                                     <div className="grafica" style={{ width: "40%", marginTop: "-80px" }}>
                                         <Doughnut classname="gra" data={data} />
                                     </div>
