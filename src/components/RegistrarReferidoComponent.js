@@ -210,7 +210,7 @@ export const RegistrarReferidoComponent = () => {
                              label="Tipo de Identificacion"
                              id="demo-simple-select-standard"
                              className=""
-                             style={{ marginBottom: "-4px" }}
+                             style={{ marginBottom: "-4px"}}
                              onChange={handleInput}
                              options={
                                 identificacion.map(data => {
@@ -443,7 +443,6 @@ export const RegistrarReferidoComponent = () => {
                                      name="correo_electronico"
                                      placeholder="Escribe..."
                                      label="Email"
-                                     required
                                      className="form-control RegistrarReferido"
                                      style={{ marginBottom: "30px" }}
                                      onChange={handleInput}
