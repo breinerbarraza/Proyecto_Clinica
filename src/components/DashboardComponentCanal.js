@@ -28,6 +28,20 @@ export const DashboardComponentCanal = () => {
     const [spinner, setSpinner] = useState(true)
 
     const cargarSelect = ()=>{
+        API.get('api/referidos/obtener_meses')
+        .then(data => {
+            const arreglo = []
+            for(let x of data.data){
+                const obj = {
+                    valor : x
+                }
+                arreglo.push(obj)
+            }
+            setArreglo_year(arreglo)
+        })
+    }
+
+    /* const cargarSelect = ()=>{
         const fecha = new Date();
         const anio_actual = fecha.getFullYear()
         const arreglo = []
@@ -38,7 +52,7 @@ export const DashboardComponentCanal = () => {
           arreglo.push(obj)
         }
         setArreglo_year(arreglo)
-    }
+    } */
 
     const cargarTotalReferidos = async (mes) => {
         await API.get(`api/referidos/get_count_referidos/?mes=${mes}`)
