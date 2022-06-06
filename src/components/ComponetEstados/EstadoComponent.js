@@ -266,7 +266,8 @@ export const EstadoComponent = () => {
                         </div>
                         <p><b>C.C: </b>{data_pendiente.numeroIdentificacion}</p>
                         <p><b>Correo: </b>{data_pendiente.correo_electronico}</p>
-                        <p><b>Referido por: </b>{(data_pendiente.usuarioRegistro) ? data_pendiente.usuarioRegistro : data_pendiente.empleadoInicial} </p>
+                        {/* <p><b>Referido por: </b>{(data_pendiente.usuarioRegistro) ? data_pendiente.usuarioRegistro : data_pendiente.empleadoInicial} </p> */}
+                        <p><b>Referido a: </b>{ data_pendiente.empleadoInicial} </p>
                     </div>
                     {
                         data_temporal_pendiente.estado_referido === "Pendiente" && (
