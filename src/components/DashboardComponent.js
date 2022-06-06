@@ -12,6 +12,8 @@ import API from "../Utils/API";
 import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
+import CircularProgress from '@mui/material/CircularProgress';
+
 var _ = require('lodash')
 
 
@@ -26,6 +28,8 @@ export const DashboardComponent = () => {
     const [anio_temporal, setAnio_temporal] = useState("");
     const [arreglo_year, setArreglo_year] = useState([]);
 
+    const [spinner, setSpinner] = useState(true)
+
     useEffect(() => {
         API.get('api/referidos/get_count_referidos_total/')
             .then(data => {
@@ -33,6 +37,13 @@ export const DashboardComponent = () => {
                 setTotal_referidos_first(totalReferido);
             })
     }, []);
+
+    useEffect(()=>{
+        API.get('api/referidos/obtener_meses')
+        .then(data => {
+            console.log(data.data)
+        })
+    }, [])
 
     useEffect(() => {
         let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
@@ -44,8 +55,22 @@ export const DashboardComponent = () => {
 
     }, []);
 
-
     const cargarSelect = ()=>{
+        API.get('api/referidos/obtener_meses')
+        .then(data => {
+            const arreglo = []
+            for(let x of data.data){
+                const obj = {
+                    valor : x
+                }
+                arreglo.push(obj)
+            }
+            setArreglo_year(arreglo)
+        })
+    }
+
+
+   /*  const cargarSelect = ()=>{
         const fecha = new Date();
         const anio_actual = fecha.getFullYear()
         const arreglo = []
@@ -56,7 +81,8 @@ export const DashboardComponent = () => {
           arreglo.push(obj)
         }
         setArreglo_year(arreglo)
-    }
+    } */
+
 
     const cargarTotalReferidos = async (mes) => {
         await API.get(`api/referidos/get_count_referidos/?mes=${mes}`)
@@ -85,6 +111,8 @@ export const DashboardComponent = () => {
                     setCantidades(cantidades => [...cantidades, el.valor])
                 ))
             }).catch(console.error)
+
+            setSpinner(false)
     }
 
     const data = {
@@ -149,7 +177,9 @@ export const DashboardComponent = () => {
                         setCantidades(cantidades => [...cantidades, el.valor])
                     ))
                 }
-            })
+            }).catch(error => console.error(error))
+
+            setSpinner(false)
     }
 
 
@@ -222,7 +252,21 @@ export const DashboardComponent = () => {
                                                 ))}
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </div> 
+
+                                    {
+                                     spinner && (
+                                        <div style={{
+                                            marginTop: '30px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                        <CircularProgress />
+                                        </div>
+                                        )
+                                    }
+
                                     <div className="grafica" style={{ width: "40%", marginTop: "-80px" }}>
                                         <Doughnut classname="gra" data={data} />
                                     </div>
@@ -308,6 +352,20 @@ export const DashboardComponent = () => {
                                     </div>
                                 )
                             }
+
+                           {
+                                 spinner && (
+                                    <div style={{
+                                        marginTop: '30px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                      }}>
+                                        <CircularProgress />
+                                      </div>
+                                )
+                            }
+
                             <div className="grafica" style={{ width: "100%", marginTop: "30px" }}>
                                 <Doughnut classname="gra" data={data} />
                             </div>
