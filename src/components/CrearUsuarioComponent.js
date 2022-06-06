@@ -61,7 +61,6 @@ export const CrearUsuarioComponent = () => {
                 const error = resp.error;
                 return Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
                     position: 'center',
                     text: error,
                     timer: 3500
@@ -70,11 +69,6 @@ export const CrearUsuarioComponent = () => {
         })
         .catch(console.error)
     }
-  /*   if(spinner){
-        return (
-            <Loading />
-        )
-    }else{ */
         
     return (
         <>
