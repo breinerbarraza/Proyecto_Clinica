@@ -751,10 +751,6 @@ label {
     border-bottom-left-radius: 12px;
 }
 
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-    font-size: 20px !important;
-}
-
 .formulario-email1 button[type="submit"]{
     width: 100%;
     font-size: 15px;
@@ -1834,8 +1830,8 @@ button[type="submit"], #link_registro{
         margin-left: 60px;
     }
     /* nombre de los select */
-    .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
+    .MuiInputBase-input{
         font-size: 17px !important;
-        margin-bottom: 10px;
+        margin-bottom: 10px !important;
     }
 }
