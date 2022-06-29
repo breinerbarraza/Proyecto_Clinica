@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { HeaderComponent } from "./HeaderComponent";
 import { PerfilComponent } from "./perfil/PerfilComponent";
 import 'chart.js/auto';
-import { Chart, Doughnut } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import API from "../Utils/API";
 import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
@@ -27,6 +27,7 @@ export const DashboardComponent = () => {
     const [total_referidos_first, setTotal_referidos_first] = useState("");
     const [anio_temporal, setAnio_temporal] = useState("");
     const [arreglo_year, setArreglo_year] = useState([]);
+    const [arreglo_month, setArreglo_month] = useState([]);
 
     const [spinner, setSpinner] = useState(true)
 
@@ -38,25 +39,92 @@ export const DashboardComponent = () => {
             })
     }, []);
 
-    useEffect(()=>{
-        API.get('api/referidos/obtener_meses')
-        .then(data => {
-            console.log(data.data)
-        })
-    }, [])
-
     useEffect(() => {
         let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
         if (!super_user) {
             return window.location = "/";
         }
         load()
-        cargarSelect()
+        cargarSelectAnio()
+        cargarSelectMes()
 
     }, []);
 
-    const cargarSelect = ()=>{
+    const cargarSelectMes = ()=>{
         API.get('api/referidos/obtener_meses')
+        .then(data => {
+            let filtro = []
+            for(let x of data.data){
+                const obj = {}
+                if(x === 0){
+                    obj.id = x
+                    obj.mes = "Todos los meses"
+                }
+                if(x === 1){
+                    obj.id = x
+                    obj.mes = "Enero"
+                }
+                if(x === 2){
+                    obj.id = x
+                    obj.mes = "Febrero"
+                }
+                if(x === 3){
+                    obj.id = x
+                    obj.mes = "Marzo"
+                }
+
+                if(x === 4){
+                    obj.id = x
+                    obj.mes = "Abril"
+                }
+
+                if(x === 5){
+                    obj.id = x
+                    obj.mes = "Mayo"
+                }
+
+                if(x === 6){
+                    obj.id = x
+                    obj.mes = "Junio"
+                }
+
+                if(x === 7){
+                    obj.id = x
+                    obj.mes = "Julio"
+                }
+
+                if(x === 8){
+                    obj.id = x
+                    obj.mes = "Agosto"
+                }
+
+                if(x === 9){
+                    obj.id = x
+                    obj.mes = "Septiembre"
+                }
+
+                if(x === 10){
+                    obj.id = x
+                    obj.mes = "Octubre"
+                }
+
+                if(x === 11){
+                    obj.id = x
+                    obj.mes = "Noviembre"
+                }
+
+                if(x === 12){
+                    obj.id = x
+                    obj.mes = "Diciembre"
+                }
+                filtro.push(obj)
+            }
+            setArreglo_month(filtro)
+        })
+    }
+
+    const cargarSelectAnio = ()=>{
+        API.get('api/referidos/obtener_anio')
         .then(data => {
             const arreglo = []
             for(let x of data.data){
@@ -68,20 +136,6 @@ export const DashboardComponent = () => {
             setArreglo_year(arreglo)
         })
     }
-
-
-   /*  const cargarSelect = ()=>{
-        const fecha = new Date();
-        const anio_actual = fecha.getFullYear()
-        const arreglo = []
-        for(let x = anio_actual; x >= 1900; x--){
-          const obj = {
-            valor: x
-          }
-          arreglo.push(obj)
-        }
-        setArreglo_year(arreglo)
-    } */
 
 
     const cargarTotalReferidos = async (mes) => {
@@ -221,7 +275,7 @@ export const DashboardComponent = () => {
                                     onChange={handleSelectMonth}
                                 >
                                     {
-                                        meses_map.map((item, key) => {
+                                        arreglo_month.map((item, key) => {
                                             return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
                                         })
                                     }
@@ -318,7 +372,7 @@ export const DashboardComponent = () => {
                                         onChange={handleSelectMonth}
                                     >
                                         {
-                                            meses_map.map((item, key) => {
+                                            arreglo_month.map((item, key) => {
                                                 return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
                                             })
                                         }
