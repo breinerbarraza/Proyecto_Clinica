@@ -21,7 +21,7 @@ import { ListadoUsuarioComponent } from './components/ListadoUsuarioComponent';
 import { CambioContraseña } from './components/perfil/CambioContraseña';
 import { Dashboard2Component } from './components/Dashboard2Component';
 import { RegistrarReferidoMedia } from './components/componentMediaQuery/RegistrarReferidoMedia';
-import './App.css'
+
 import { HeaderMovil } from './components/HeaderMovil';
 import { ComponentModalMetas } from './components/ComponentModalMetas';
 import { ListadoMetas } from './components/ListadoMetas';

@@ -46,7 +46,7 @@ p{
     opacity: 10 !important;    
 }
 
-.css-1kty9di-MuiFormLabel-root-MuiInputLabel-root {
+.MuiFormControl-root label{
     background-color:#fff !important;
     padding: 0 5px !important;
 }
@@ -148,7 +148,7 @@ a {
     width: 50%;
 }
 
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+.MuiOutlinedInput-notchedOutline {
     border-color: #6b8dd6 !important;
 }
 
@@ -352,7 +352,7 @@ a {
     margin-left: 4%;
     margin-top: 10px;
 }
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
+.MuiSelect-select {
     min-height: 0% !important;
 }
 
