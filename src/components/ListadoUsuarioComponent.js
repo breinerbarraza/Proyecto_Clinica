@@ -13,6 +13,7 @@ import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
 import Swal from 'sweetalert2';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const ListadoUsuarioComponent = () => {
 
@@ -21,12 +22,13 @@ export const ListadoUsuarioComponent = () => {
   const [data_meses, setData_meses] = useState([]);
   const [group, setGroup] = useState([]);
   const [mes_temporal, setMes_temporal] = useState("")
+  const [spinner, setSpinner] = useState(true)
 
   useEffect(() => {
     cargarGrupos()
     let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
     if (super_user) {
-      load()
+        load()
     } else {
       window.location = "/";
     }
@@ -42,6 +44,7 @@ export const ListadoUsuarioComponent = () => {
             "nombre_completo": item.nombre_completo,
             "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
             "correo_electronico": item.email,
+            "numero_daviplata":  (item.numeroDaviplata) ? item.numeroDaviplata : "-",
             "referidos": (item.total_referidos) ? item.total_referidos : 0,
             "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`https://app.femto.live/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
             "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`https://app.femto.live/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
@@ -50,6 +53,7 @@ export const ListadoUsuarioComponent = () => {
           }])
         ))
       })
+    setSpinner(false)
     setLoading(false)
   }
 
@@ -173,6 +177,7 @@ export const ListadoUsuarioComponent = () => {
                   "nombre_completo": item.nombre_completo,
                   "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
                   "correo_electronico": item.email,
+                  "numero_daviplata": (item.numeroDaviplata) ? item.numeroDaviplata : "-",
                   "referidos": (item.total_referidos) ? item.total_referidos : 0,
                   "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`https://app.femto.live/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
                   "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`https://app.femto.live/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
@@ -197,6 +202,7 @@ export const ListadoUsuarioComponent = () => {
               "nombre_completo": item.nombre_completo,
               "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
               "correo_electronico": item.email,
+              "numero_daviplata":  (item.numeroDaviplata) ? item.numeroDaviplata : "-",
               "referidos": (item.total_referidos) ? item.total_referidos : 0,
               "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`https://app.femto.live/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
               "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`https://app.femto.live/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
@@ -223,6 +229,7 @@ export const ListadoUsuarioComponent = () => {
           "nombre_completo": item.nombre_completo,
           "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
           "correo_electronico": item.email,
+          "numero_daviplata":  (item.numeroDaviplata) ? item.numeroDaviplata : "-",
           "referidos": (item.total_referidos) ? item.total_referidos : 0,
           "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`https://app.femto.live/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
           "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`https://app.femto.live/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
@@ -254,6 +261,14 @@ export const ListadoUsuarioComponent = () => {
         sort: 'asc',
         width: 200
       },
+
+      {
+        label: 'Daviplata',
+        field: 'numero_daviplata',
+        sort: 'asc',
+        width: 200
+      },
+
       {
         label: 'Referidos',
         field: 'referidos',
@@ -346,6 +361,20 @@ export const ListadoUsuarioComponent = () => {
               </Link>
             </div>
           </div>
+          
+          { 
+            spinner && (
+              <div style={{
+                marginTop: '30px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <CircularProgress />
+              </div>
+            )
+          }
+
           <div className="tabla-lista">
             {!loading && showTable()}
           </div>
@@ -405,6 +434,20 @@ export const ListadoUsuarioComponent = () => {
                 </Link>
               </div>
             </div>
+            
+          { 
+            spinner && (
+              <div style={{
+                marginTop: '30px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <CircularProgress />
+              </div>
+            )
+          }
+
             <div className="tabla-lista">
               {!loading && showTable()}
             </div>
