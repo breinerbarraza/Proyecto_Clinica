@@ -9,7 +9,6 @@ import { PerfilComponent } from "./perfil/PerfilComponent";
 import 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
 import API from "../Utils/API";
-import meses_map from '../Utils/Objmeses';
 import CircularProgress from '@mui/material/CircularProgress';
 
 var _ = require('lodash')
@@ -24,11 +23,31 @@ export const DashboardComponentCanal = () => {
     const [total_referidos_first, setTotal_referidos_first] = useState("");
     const [anio_temporal, setAnio_temporal] = useState("");
     const [arreglo_year, setArreglo_year] = useState([]);
+    const [arreglo_month, setArreglo_month] = useState([]);
 
     const [spinner, setSpinner] = useState(true)
 
+    useEffect(async() => {
+        await API.get('api/referidos/get_count_referidos_total/')
+            .then(data => {
+                const totalReferido = data.data;
+                setTotal_referidos_first(totalReferido);
+            })
+    }, []);
+
+    useEffect(() => {
+        let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+        if (!super_user) {
+            return window.location = "/";
+        }
+        load()
+        cargarSelect()
+        cargarSelectMes()
+
+    }, []);
+
     const cargarSelect = ()=>{
-        API.get('api/referidos/obtener_meses')
+        API.get('api/referidos/obtener_anio')
         .then(data => {
             const arreglo = []
             for(let x of data.data){
@@ -41,18 +60,78 @@ export const DashboardComponentCanal = () => {
         })
     }
 
-    /* const cargarSelect = ()=>{
-        const fecha = new Date();
-        const anio_actual = fecha.getFullYear()
-        const arreglo = []
-        for(let x = anio_actual; x >= 1900; x--){
-          const obj = {
-            valor: x
-          }
-          arreglo.push(obj)
-        }
-        setArreglo_year(arreglo)
-    } */
+    const cargarSelectMes = ()=>{
+        API.get('api/referidos/obtener_meses')
+        .then(data => {
+            let filtro = []
+            for(let x of data.data){
+                const obj = {}
+                if(x === 0){
+                    obj.id = x
+                    obj.mes = "Todos los meses"
+                }
+                if(x === 1){
+                    obj.id = x
+                    obj.mes = "Enero"
+                }
+                if(x === 2){
+                    obj.id = x
+                    obj.mes = "Febrero"
+                }
+                if(x === 3){
+                    obj.id = x
+                    obj.mes = "Marzo"
+                }
+
+                if(x === 4){
+                    obj.id = x
+                    obj.mes = "Abril"
+                }
+
+                if(x === 5){
+                    obj.id = x
+                    obj.mes = "Mayo"
+                }
+
+                if(x === 6){
+                    obj.id = x
+                    obj.mes = "Junio"
+                }
+
+                if(x === 7){
+                    obj.id = x
+                    obj.mes = "Julio"
+                }
+
+                if(x === 8){
+                    obj.id = x
+                    obj.mes = "Agosto"
+                }
+
+                if(x === 9){
+                    obj.id = x
+                    obj.mes = "Septiembre"
+                }
+
+                if(x === 10){
+                    obj.id = x
+                    obj.mes = "Octubre"
+                }
+
+                if(x === 11){
+                    obj.id = x
+                    obj.mes = "Noviembre"
+                }
+
+                if(x === 12){
+                    obj.id = x
+                    obj.mes = "Diciembre"
+                }
+                filtro.push(obj)
+            }
+            setArreglo_month(filtro)
+        })
+    }
 
     const cargarTotalReferidos = async (mes) => {
         await API.get(`api/referidos/get_count_referidos/?mes=${mes}`)
@@ -151,24 +230,6 @@ export const DashboardComponentCanal = () => {
             setSpinner(false)
     }
 
-    useEffect(async() => {
-        await API.get('api/referidos/get_count_referidos_total/')
-            .then(data => {
-                const totalReferido = data.data;
-                setTotal_referidos_first(totalReferido);
-            })
-    }, []);
-
-    useEffect(() => {
-        let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
-        if (!super_user) {
-            return window.location = "/";
-        }
-        load()
-        cargarSelect()
-
-    }, []);
-
     return (
         <>
             <div className="dash">
@@ -207,7 +268,7 @@ export const DashboardComponentCanal = () => {
                                     onChange={handleSelectMonth}
                                 >
                                     {
-                                        meses_map.map((item, key) => {
+                                        arreglo_month.map((item, key) => {
                                             return <MenuItem key={key} value={item.id}>{item.mes}</MenuItem>
                                         })
                                     }
