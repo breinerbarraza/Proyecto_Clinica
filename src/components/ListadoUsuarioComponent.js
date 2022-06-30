@@ -6,6 +6,7 @@ import API from '../Utils/API';
 import { PerfilComponent } from './perfil/PerfilComponent';
 import { Link } from 'react-router-dom'
 import InputLabel from '@mui/material/InputLabel';
+import { TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -23,6 +24,7 @@ export const ListadoUsuarioComponent = () => {
   const [group, setGroup] = useState([]);
   const [mes_temporal, setMes_temporal] = useState("")
   const [spinner, setSpinner] = useState(true)
+  const [data_grupo, setDataGrupo] = useState("")
 
   useEffect(() => {
     cargarGrupos()
@@ -220,6 +222,7 @@ export const ListadoUsuarioComponent = () => {
     setData_meses([]);
     setData_listado([]);
     const id_grupo = e.target.value;
+    setDataGrupo(id_grupo)
     await API.get(`api/usuarios/user/tipo_rol/?grupo=${id_grupo}&mes=${mes_temporal}`)
     .then( resp => {
       const respuesta = resp.data;
@@ -239,6 +242,33 @@ export const ListadoUsuarioComponent = () => {
       ))
     });
   }
+
+  const handleSelectCedula = async(e)=>{
+    setData_meses([]);
+    setData_listado([]);
+    const cedula_or_name = e.target.value;
+    await API.get(`api/usuarios/user/tipo_rol/?grupo=${data_grupo}&mes=${mes_temporal}&name_or_cedula=${cedula_or_name}`)
+    .then( resp => {
+      const respuesta = resp.data;
+      respuesta.map((item) => (
+        setData_listado(data_listado => [...data_listado, {
+          "id": item.id,
+          "nombre_completo": item.nombre_completo,
+          "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
+          "correo_electronico": item.email,
+          "numero_daviplata":  (item.numeroDaviplata) ? item.numeroDaviplata : "-",
+          "referidos": (item.total_referidos) ? item.total_referidos : 0,
+          "QR_Paciente": (item.codigoqr_referidos == "") ? "" : <a href={`https://app.femto.live/media/uploads/${item.codigoqr_referidos}.png`}><span title="QR Paciente"><i className="fas fa-qrcode" ></i></span></a>,
+          "QR_Asesor": (item.codigoqr_asesor == "") ? "" : <a href={`https://app.femto.live/media/uploads/${item.codigoqr_asesor}.png`}><span title="QR Asesor"><i className="fas fa-qrcode" ></i></span></a>,
+          "rol": item.rol_,
+          "is_active": <input onChange={item.is_active ? (e) => handleChangeActivo(e, item.id) : (e) => handleChangeNoActivo(e, item.id)} type="checkbox" checked={item.is_active && true} />
+        }])
+      ))
+    });
+  }
+
+
+
 
   const data = {
 
@@ -348,6 +378,25 @@ export const ListadoUsuarioComponent = () => {
                     }
                   </Select>
                 </FormControl>
+              </div>
+
+              <div className="select-mes" style={{marginLeft:'10px'}}>
+                <div style={{marginTop: '-36px'}}>
+                    <FormControl fullWidth  >
+                        <TextField
+                            type="text"
+                            name="nombres"
+                            placeholder="Escribe..."
+                            label="Nombres o cédula"
+                            className="form-control"
+                            onChange={handleSelectCedula}
+                            style={{ marginTop: '-20px' }}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                          />
+                      </FormControl>
+                  </div>
               </div>
 
             <div style={{ flex: 5 }}>
