@@ -57,7 +57,10 @@ export const PerfilComponent = () => {
                     <li><Link to="/datos_perfil"><button className="dropdown-item" type="button"><i className="fas fa-user"></i> Perfil</button></Link></li>
                     {
                         !estadoEmpleado && datos_perfil.superuser == "" && (
-                            <li><Link to="/metas_programadas"><button className="dropdown-item" type="button"><i className="fas fa-chart-line"></i>Metas programadas</button></Link></li>
+                            <>
+                                <li><Link to="/metas_programadas"><button className="dropdown-item" type="button"><i className="fas fa-chart-line"></i>Metas programadas</button></Link></li>
+                                <li><Link to="/mi_progeso"><button className="dropdown-item" type="button"><i className="fa fa-bar-chart-o"></i>Progreso</button></Link></li>
+                            </>   
                         )
                     }
 
