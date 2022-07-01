@@ -29,7 +29,6 @@ export const DashboardEstado = () => {
     setLoading(true);
     await API.get("api/referidos/?estado="+estado_referido).then((resp) => {
       const arreglo_referidos = resp.data;
-      console.log(arreglo_referidos)
       setArreglo_referidos_temporal(arreglo_referidos)
       const filter_arreglo = arreglo_referidos.filter(item => item.finalizado === true)
       let arreglo = [];
