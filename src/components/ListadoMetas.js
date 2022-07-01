@@ -24,6 +24,15 @@ export const ListadoMetas = () => {
 
     const [data_listado, setData_listado] = useState([])
 
+    useEffect(() => {
+        let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
+        if(super_user){
+            Metas();
+        }else{
+            window.location='/'
+        }
+    }, [])
+
     const Metas = async () => {
         await API.get('api/usuarios/metas/')
             .then(resp => {
@@ -40,7 +49,7 @@ export const ListadoMetas = () => {
                                 return item.mes
                             }),       
                         "tipoMeta":item.tipoMeta,
-                        "estado":item.nombre_estado,
+                        //"estado":item.nombre_estado,
                         "empleado":item.empleado,
                         "anio": item.anio,
                         "cantidad": item.cantidad,
@@ -94,17 +103,6 @@ export const ListadoMetas = () => {
         })
        
     }
-
-    useEffect(() => {
-        let super_user = (JSON.parse(localStorage.getItem("super_user"))) ? JSON.parse(localStorage.getItem("super_user")) : "";
-        if(super_user){
-            Metas();
-        }else{
-            window.location='/'
-        }
-        
-    }, [])
-
 
     const showTable = () => {
         return (
