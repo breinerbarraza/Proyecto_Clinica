@@ -4,40 +4,65 @@ import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import API from '../Utils/API';
 import Swal from 'sweetalert2';
 
-const arreglo_meses = [
-    { "valor": 1, "mes": "Enero" },
-    { "valor": 2, "mes": "Febrero" },
-    { "valor": 3, "mes": "Marzo" },
-    { "valor": 4, "mes": "Abril" },
-    { "valor": 5, "mes": "Mayo" },
-    { "valor": 6, "mes": "Junio" },
-    { "valor": 7, "mes": "Julio" },
-    { "valor": 8, "mes": "Agosto" },
-    { "valor": 9, "mes": "Septiembre" },
-    { "valor": 10, "mes": "Octubre" },
-    { "valor": 11, "mes": "Noviembre" },
-    { "valor": 12, "mes": "Diciembre" },
-]
+import Select from 'react-select';
+
+import makeAnimated from 'react-select/animated';
+const animatedComponents = makeAnimated();
+
+// const arreglo_meses = [
+//     { "valor": 1, "mes": "Enero" },
+//     { "valor": 2, "mes": "Febrero" },
+//     { "valor": 3, "mes": "Marzo" },
+//     { "valor": 4, "mes": "Abril" },
+//     { "valor": 5, "mes": "Mayo" },
+//     { "valor": 6, "mes": "Junio" },
+//     { "valor": 7, "mes": "Julio" },
+//     { "valor": 8, "mes": "Agosto" },
+//     { "valor": 9, "mes": "Septiembre" },
+//     { "valor": 10, "mes": "Octubre" },
+//     { "valor": 11, "mes": "Noviembre" },
+//     { "valor": 12, "mes": "Diciembre" },
+// ]
+
+const dataMeses = [
+    { value: 1 , label: 'Enero' },
+    { value: 2 , label: 'Febrero' },
+    { value: 3, label: "Marzo" },
+    { value: 4, label: "Abril" },
+    { value: 5, label: "Mayo" },
+    { value: 6, label: "Junio" },
+    { value: 7, label: "Julio" },
+    { value: 8, label: "Agosto" },
+    { value: 9, label: "Septiembre" },
+    { value: 10, label: "Octubre" },
+    { value: 11, label: "Noviembre" },
+    { value: 12, label: "Diciembre" },
+  ];
 
 const arreglo_metas = [
-    { "valor": 'referidos', "metas": "Número de referido" },
-    { "valor": 'gestiones', "metas": "Gestiones" },
-    { "valor": 'operaciones', "metas": "Operaciones" },
+    { value: 'referidos', label: "Número de referido" },
+    { value: 'gestiones', label: "Gestiones" },
+    { value: 'operaciones', label: "Operaciones" },
 ]
 
 export const ComponentModalMetas = () => {
     const [metas_Modal, setMetas_Modal] = useState(true);
-    const [dataForm, setDataForm] = useState({})
+    //const [dataForm, setDataForm] = useState({})
     const [empleado, setEmpleado] = useState([])
-    const [arreglo_de_Todos, setArreglo_de_Todos] = useState([])
+    //const [arreglo_de_Todos, setArreglo_de_Todos] = useState([])
+    const [cantidad, setCantidad] = useState("")
+    const [anio, setAnio] = useState("")
+    const [meses, setMeses] = useState([])
+    const [tipoMeta, setTipoMeta] = useState("")
+    const [empleados, setEmpleados] = useState([])
+
 
     useEffect(() => {
         cargarEmpleados()
-        cargarAllUser()
+        //cargarAllUser()
     }, [])
 
     useEffect(() => {
@@ -47,36 +72,51 @@ export const ComponentModalMetas = () => {
         }
     }, []);
 
+    const formatearEmpleado = (data)=>{
+        const arr = []
+        data.forEach((d1)=> {
+            const obj = {
+                value : d1.id,
+                label : d1.first_name + " " + d1.last_name
+            }
+            arr.push(obj)
+        })
+        return arr
+    }
+
     const cargarEmpleados = async()=>{
         await API.get('api/usuarios/user/grupo_empleado')
         .then(({ data }) => {
             const resp = data;
-            setEmpleado(resp)
+            const formateado = formatearEmpleado(resp)
+            setEmpleado(formateado)
 
         }).catch(console.error)
     }
 
-    const cargarAllUser = async()=>{
-        await API.get('api/usuarios/user/grupo_all')
-        .then(({data}) => {
-            const resp = data.ids_empleados
-            const ids = resp.map(item => item.id)
-            setArreglo_de_Todos(ids);
+    // const cargarAllUser = async()=>{
+    //     await API.get('api/usuarios/user/grupo_all')
+    //     .then(({data}) => {
+    //         const resp = data.ids_empleados
+    //         const ids = resp.map(item => item.id)
+    //         setArreglo_de_Todos(ids);
 
-        }).catch(console.error)
-    }
+    //     }).catch(console.error)
+    // }
 
     const cerrarModal = () => {
         setMetas_Modal(false);
         return window.location = "/listado_meta";
     }
-    const handleInputChange = (e) => {
-        setDataForm({
-            ...dataForm,
-            [e.target.name]: e.target.value
-        });
+    
+    const mapearDatos = (datos)=>{
+        const arr = []
+        datos.forEach((d1) => {
+            arr.push(d1.value)
+        })
+        return arr
     }
-
+    
     const enviarMeta = async (e) => {
         e.preventDefault();
         const inputAnio = document.getElementById("anio")
@@ -89,6 +129,16 @@ export const ComponentModalMetas = () => {
             });
         } 
         else{
+            const dataForm = {
+                cantidad,
+                anio,
+                meses,
+                tipoMeta,
+                empleados
+
+            }
+            console.log(dataForm)
+           
             await API.post('api/usuarios/metas/create_metas/', JSON.stringify(dataForm))
             .then(({ data }) => {
                 const resp = data
@@ -123,84 +173,71 @@ export const ComponentModalMetas = () => {
                 <div className="body_modal">
                     <form onSubmit={enviarMeta} id='modal'>
                         <FormControl fullWidth id='modal' >
-                            <FormControl fullWidth >
-                                <InputLabel shrink id="demo-simple-select-standard-label">Seleccione Mes</InputLabel>
-                                <Select
-                                    name="mes"
-                                    required
-                                    label="mes"
-                                    id="demo-simple-select-standard"
-                                    onChange={handleInputChange}
-                                >
-                                    {
-                                        arreglo_meses.map((item, key) => {
-                                            return <MenuItem key={key} value={item.valor} >{item.mes}</MenuItem>
-                                        })
-                                    }
-
-                                </Select>
-                            </FormControl>
                             <TextField
-                                id="anio"
-                                type="number"
-                                name="anio"
-                                label="Año"
-                                required
-                                className="form-control RegistrarReferido"
-                                style={{ marginBottom: "50px" }}
-                                onChange={handleInputChange}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
+                                    type="number"
+                                    name="cantidad"
+                                    label="Cantidad"
+                                    required
+                                    className="form-control RegistrarReferido"
+                                    style={{ marginBottom: "50px" }}
+                                    onChange={(e)=> setCantidad(e.target.value)}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            <TextField
+                                    id="anio"
+                                    type="number"
+                                    name="anio"
+                                    label="Año"
+                                    required
+                                    className="form-control RegistrarReferido"
+                                    style={{ marginBottom: "50px" }}
+                                    onChange={(e)=> setAnio(e.target.value)}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            <FormControl fullWidth >
+                                <label style={{marginTop:'11px', marginBottom: '5px'}} >Meses</label>
+                                <Select
+                                    closeMenuOnSelect={false}
+                                    components={animatedComponents}
+                                    isMulti
+                                    name='mes'W
+                                    required
+                                    options={dataMeses}
+                                    onChange={(e)=> setMeses(mapearDatos(e))
+                                    }
+                                />
+                            </FormControl>
+                           
 
                             <FormControl fullWidth >
-                                <InputLabel shrink id="demo-simple-select-standard-label">Tipo de Metas</InputLabel>
-                                <Select
+                                <label style={{marginTop:'11px', marginBottom: '5px'}} >Tipo de meta</label>
+                                 <Select
                                     name="tipoMeta"
                                     required
                                     label="metas"
                                     id="demo-simple-select-standard"
-                                    onChange={handleInputChange}
-                                >
-                                    {
-                                        arreglo_metas.map((item, key) => {
-                                            return <MenuItem key={key} value={item.valor} >{item.metas}</MenuItem>
-                                        })
-                                    }
-
-                                </Select>
+                                    onChange={(e)=> setTipoMeta(e.value)}
+                                    options={arreglo_metas} 
+                                />
                             </FormControl>
-                            <TextField
-                                type="number"
-                                name="cantidad"
-                                label="Cantidad"
-                                required
-                                className="form-control RegistrarReferido"
-                                style={{ marginBottom: "50px" }}
-                                onChange={handleInputChange}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
+                            
                             <FormControl fullWidth >
-                                <InputLabel shrink id="demo-simple-select-standard-label">Empleados</InputLabel>
+                                <label style={{marginTop:'11px', marginBottom: '5px'}} >Empleados</label>
                                 <Select
                                     name="empleados"
                                     required
-                                    label="empleados"
                                     id="demo-simple-select-standard"
-                                    onChange={handleInputChange}
-                                    displayEmpty
-                                >
-                                    <MenuItem value={arreglo_de_Todos}>Todos los empleados</MenuItem>
-                                    {
-                                        empleado.map((item, key) => {
-                                            return <MenuItem key={key} value={item.id} >{item.first_name} {item.last_name}</MenuItem>
-                                        })
-                                    }
-
-                                </Select>
+                                    label="empleados"
+                                    closeMenuOnSelect={false}
+                                    components={animatedComponents}
+                                    isMulti
+                                    onChange={(e)=> setEmpleados(mapearDatos(e))}
+                                    options={empleado} 
+                                />
                             </FormControl>
                         </FormControl>
                     </form>
