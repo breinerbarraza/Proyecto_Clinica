@@ -33,6 +33,7 @@ import { TablaSolicitudes } from './components/TablaSolicitudes';
 import { ActualizarReferido } from './components/ActualizarReferido';
 import { Registro } from './components/Registro';
 import { DashboardEstado } from './components/DashboardEstado';
+import { DatosRealComponent } from './components/DatosRealComponent';
 
 
 function App() {
@@ -98,6 +99,14 @@ function App() {
               <Route exact path="/metas_programadas">
                 {localStorage.getItem('token') !== null ? (
                   <MetasProgramadas />
+                ) : (
+                  <LoginComponent />
+                )}
+              </Route>
+
+              <Route exact path="/mi_progeso">
+                {localStorage.getItem('token') !== null ? (
+                  <DatosRealComponent />
                 ) : (
                   <LoginComponent />
                 )}
