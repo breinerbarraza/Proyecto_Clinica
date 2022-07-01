@@ -89,7 +89,7 @@ a {
 .header{
     background: #10305b;
     float: left;
-    height: 128vh;
+    height: 125vh;
 }
 .header .nav-header{
     width: 147px;
@@ -610,10 +610,12 @@ label {
 /*Listado*/
 
 .lista-container{
+    margin-left: 10px;
     align-items: center;
     justify-content: center;
     padding:12vh 10vh 0vh 30vh;
 }
+
 .h3-Lista{
     color: #02305b;
     margin-bottom: 15px;
