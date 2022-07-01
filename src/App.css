@@ -285,6 +285,7 @@ a {
 }
 .RegistrarReferido {
     padding: 2px !important;
+    margin-bottom: 30px !important;
 }
 
 .form-control input{
