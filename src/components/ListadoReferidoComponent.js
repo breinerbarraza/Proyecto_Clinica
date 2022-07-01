@@ -267,7 +267,6 @@ export const ListadoReferidoComponent = () => {
       .then(data => {
         setData_meses([]);  
         const respuesta = data.data;
-        console.log(data.data)
         if (respuesta.length > 0) {
           respuesta.map((item) => (
             setData_meses(data_meses => [...data_meses, {
@@ -299,7 +298,6 @@ export const ListadoReferidoComponent = () => {
       .then(data => {
         setData_meses([]);  
         const respuesta = data.data;
-        console.log(data.data)
         if (respuesta.length > 0) {
           respuesta.map((item) => (
             setData_meses(data_meses => [...data_meses, {
