@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { HeaderComponent } from "./HeaderComponent";
 import { PerfilComponent } from "./perfil/PerfilComponent";
 import 'chart.js/auto';
-import { Line, Bar } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import meses_map from '../Utils/Objmeses';
 import { PerfilComponentSinNombre } from './perfil/Perfil_sin_nombre';
 import { HeaderMovil } from './HeaderMovil';
