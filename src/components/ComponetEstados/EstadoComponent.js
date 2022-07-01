@@ -66,11 +66,9 @@ export const EstadoComponent = () => {
             .then(data => {
                 const respuesta = data.data;
                 if (respuesta.error) {
-                    console.log(respuesta.error)
                     setEstadoEmpleado(true);
                 } else {
                     //Si entra aca es porque el rol es empleado
-                    console.log(respuesta.msj)
                     setEstadoEmpleado(false);
                 }
             })
@@ -99,7 +97,6 @@ export const EstadoComponent = () => {
             .then( data => {
                 const respuesta = data.data;
                 setData(respuesta)
-                console.log(respuesta)
             })
        }
            
