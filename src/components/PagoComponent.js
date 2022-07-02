@@ -8,12 +8,15 @@ import Swal from 'sweetalert2';
 
 import API from '../Utils/API';
 
+var moment = require('moment')
 
 export const PagoComponent = () => {
     const { id } = useParams()
     const [pago_modal, setPagoModal] = useState(true);
     const [numero_pacientes, setNumeroPacientes] = useState("")
     const [valor_total, setValorTotal] = useState("")
+    const [fechaConsignacion, setFechaConsignacion] = useState("")
+    const [today, setToday] = useState(new Date())
 
     const cerrarModal = () => {
         setPagoModal(false);
@@ -22,17 +25,15 @@ export const PagoComponent = () => {
 
     const handleSubmit = async(e)=>{
         e.preventDefault()
-        console.log("Entro aca")
         const obj = {
             id,
             numero_pacientes,
-            valor_total
+            valor_total,
+            fecha_consignacion: fechaConsignacion,
         }    
-        console.log(obj)
         await API.post('api/usuarios/pagos/add_pagos/', JSON.stringify(obj))
         .then(({data})=>{
             const resp = data;
-            console.log(resp)
             if(resp.data){
                 const mensaje = resp.data
                 return Swal.fire({
@@ -95,6 +96,25 @@ export const PagoComponent = () => {
                                 }}
                             />
                             </FormControl>
+
+                            <FormControl fullWidth>
+                                <TextField
+                                InputProps={{inputProps: { max: moment(today).format('YYYY-MM-DD')} }}
+                                id="fecha_consignacion"
+                                type="date"
+                                name="fecha_consignacion"
+                                label="Fecha de consignacion"
+                                required
+                                className="form-control RegistrarReferido"
+                                style={{ marginBottom: "50px" }}
+                                onChange={(e)=> setFechaConsignacion(e.target.value)}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            </FormControl>
+
+
                         </FormControl>
                     </form>
                 </div>
