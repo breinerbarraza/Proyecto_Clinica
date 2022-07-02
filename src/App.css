@@ -1028,7 +1028,7 @@ button[type="submit"], #link_registro{
     background-color: #6b8dd6;
     color: #fff;
     border: none;
-    padding: 12px;
+    padding: auto;
     border-radius: 5px;
     letter-spacing: 1px;
     margin-bottom: 10px;
@@ -1098,6 +1098,13 @@ button[type="submit"], #link_registro{
 }
 .datosMedia{
     display: none;
+}
+
+/* media query para el button de descargar informe*/
+@media screen and (min-width: 400px) and (max-width: 1247px){
+    .dw-informe{
+        padding: 10px;
+    }
 }
 
 /* media query del perfil */
