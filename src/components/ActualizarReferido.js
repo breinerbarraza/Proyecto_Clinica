@@ -177,41 +177,9 @@ export const ActualizarReferido = () => {
                         shrink: true,
                     }}
                 />
-                 <p>Actualmente se encuentra en estado: <Chip label={`• ${
+                 <p style={{marginTop:'14px', marginLeft:'5px'}}>Actualmente se encuentra en estado: <Chip label={`• ${
                         data_referidos.estadoReferido
                 }`} style={{ backgroundColor: data_referidos.color_estado }}/></p> 
-               {/*  <p>Actualmente se encuentra en estado: <Chip label={`• ${
-                    (data_referidos.estadoReferido == 1)
-                    ? "En Gestion"
-                    :(data_referidos.estadoReferido == 2)
-                    ? "Operado"
-                    :(data_referidos.estadoReferido == 3)
-                    ? "Pre-quirúrgico"
-                    :(data_referidos.estadoReferido == 4)
-                    ? "Pendiente"
-                    :(data_referidos.estadoReferido == 5)
-                    ? "Programado"
-                    : (data_referidos.estadoReferido == 6)
-                    ? "Descartado"
-                    : data_referidos.estadoReferido
-
-                }`} style={{ backgroundColor: "rgb(2, 48, 91)", color: "#fff" }} /></p>  */}
-               {/*  <InputLabel shrink id="demo-simple-select-standard-label">Seleccione el estado</InputLabel>
-                    <Select
-                        displayEmpty
-                            name="estadoReferido"
-                            required
-                            label="estadoReferido"
-                            id="estadoReferido"
-                            onChange={handleInputChange}
-                        >
-                            {
-                                data_estados.map((item, key) => {
-                                    return <MenuItem key={key} value={item.codigo} >{item.descripcion}</MenuItem>
-                                })
-                            }
-
-                    </Select> */}
             </form>
         </div>
 
