@@ -137,12 +137,12 @@ export const ListadoMetas = () => {
                 sort: 'asc',
                 width: 270
             },
-            {
-                label: 'Estado',
-                field: 'estado',
-                sort: 'asc',
-                width: 200
-            },
+            // {
+            //     label: 'Estado',
+            //     field: 'estado',
+            //     sort: 'asc',
+            //     width: 200
+            // },
             {
                 label: 'Mes',
                 field: 'mes',
