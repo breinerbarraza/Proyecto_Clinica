@@ -30,7 +30,7 @@ const load = async()=>{
                 "nombre_completo": item.fk_user.nombre_completo,
                 "numero_pacientes": item.numero_pacientes,
                 "valor_total": "$" + formatMoney(item.valor_total, 2, ",", "."),
-                "fecha_consignacion": item.fecha_creacion,
+                "fecha_consignacion": item.fecha_consignacion,
             }])
         ))
     }) 
