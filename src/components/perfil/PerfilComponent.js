@@ -67,8 +67,9 @@ export const PerfilComponent = () => {
                     {
                         datos_perfil.superuser && (
                             <>
-                            <li><Link to="/crear_usuario"><button className="dropdown-item" type="button"><i className="fas fa-user-plus"></i> Crear usuario</button></Link></li>
+                            <li><Link to="/crear_usuario"><button className="dropdown-item" type="button"><i className="fas fa-user-plus"></i> Crear Usuario</button></Link></li>
                             <li><Link to="/listado_usuario"><button className="dropdown-item" type="button"><i className="fas fa-list-ul"></i> Listado Usuario</button></Link></li>
+                            <li><Link to="/listado_usuarios_pagos"><button className="dropdown-item" type="button"><i class="fas fa-money-bill"></i> Usuarios Pagados</button></Link></li>
                             <li><Link to="/"><button className="dropdown-item" type="button"><i className="fas fa-list-ul"></i> Listado Referidos</button></Link></li>
                             <li><Link to="/listado"><button className="dropdown-item" type="button"><i className="fas fa-list-ul"></i> Listado Comision</button></Link></li>
                             <li><Link to="/listado_meta"><button className="dropdown-item" type="button"><i className="fas fa-list-ul"></i> Listado Metas</button></Link></li>
