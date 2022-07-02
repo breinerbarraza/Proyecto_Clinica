@@ -43,7 +43,7 @@ export const ListadoUsuarioComponent = () => {
         resp.data.map((item) => (
           setData_listado(data_listado => [...data_listado, {
             "id": item.id,
-            "nombre_completo": item.nombre_completo,
+            "nombre_completo": (item.numeroDaviplata) ? <Link to={`/pago/${item.id}/`}>{item.nombre_completo}</Link> : item.nombre_completo,
             "numeroIdentificacion": (item.numeroIdentificacion) ? item.numeroIdentificacion : "Aun no cuenta con identificacion",
             "correo_electronico": item.email,
             "numero_daviplata":  (item.numeroDaviplata) ? item.numeroDaviplata : "-",
