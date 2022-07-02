@@ -61,8 +61,13 @@ export const EstadoComponent = () => {
 
     useEffect(() => {
         const id = localStorage.getItem('id_user')
+        comprobarEmpleado(id)
+        cargarGrupoMedico()
+        estadoReferido()
+    }, [data, data_pendiente]);
 
-        API.get(`api/referidos/comprobar_empleado/?id_empleado=${id}`)
+    const comprobarEmpleado = async(id)=>{
+        await API.get(`api/referidos/comprobar_empleado/?id_empleado=${id}`)
             .then(data => {
                 const respuesta = data.data;
                 if (respuesta.error) {
@@ -72,17 +77,21 @@ export const EstadoComponent = () => {
                     setEstadoEmpleado(false);
                 }
             })
+    }
 
-        API.get("api/usuarios/user/grupo_medico")
-            .then(data => {
-                setData_medicos(data.data)
-            })
-        API.get("api/configuracion/estadoReferido/")
-            .then(data => {
-                setCmbListado(data.data);
-            })
+    const cargarGrupoMedico = async(id)=>{
+        await API.get("api/usuarios/user/grupo_medico")
+        .then(data => {
+            setData_medicos(data.data)
+        })
+    }
 
-    }, [data, data_pendiente]);
+    const estadoReferido = async()=>{
+        await API.get("api/configuracion/estadoReferido/")
+        .then(data => {
+            setCmbListado(data.data);
+        })
+    }
 
     const comprobarEstado = async(item)=>{
         if(item == "Pre-quirúrgico"){
@@ -100,7 +109,6 @@ export const EstadoComponent = () => {
             })
        }
            
-       
     }
 
     const handleClickPendiente = async (e) => {
