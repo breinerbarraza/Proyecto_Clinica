@@ -34,6 +34,8 @@ import { ActualizarReferido } from './components/ActualizarReferido';
 import { Registro } from './components/Registro';
 import { DashboardEstado } from './components/DashboardEstado';
 import { DatosRealComponent } from './components/DatosRealComponent';
+import { PagoComponent } from './components/PagoComponent';
+import { ListadoUsuariosPagados } from './components/ListadoUsuariosPagados'
 
 
 function App() {
@@ -236,6 +238,22 @@ function App() {
                 )}
               </Route>
 
+              <Route exact path="/pago/:id">
+                {localStorage.getItem('token') !== null ?(
+                  <PagoComponent/>
+                ) : (
+                  <LoginComponent/>
+                )}
+              </Route>
+
+              <Route exact path="/listado_usuarios_pagos">
+                {localStorage.getItem('token') !== null ?(
+                  <ListadoUsuariosPagados/>
+                ) : (
+                  <LoginComponent/>
+                )}
+              </Route>
+
               <Route exact path="/headermedia">
                 {localStorage.getItem('token') !== null ?(
                   <HeaderMovil/>
@@ -243,6 +261,8 @@ function App() {
                   <LoginComponent/>
                 )}
               </Route>
+
+          
               <Redirect to="/"/>
         </Switch> 
       </Router>   
